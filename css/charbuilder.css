@@ -1,19 +1,110 @@
-﻿/* Mantém a cara do 5etools (quase tudo vem do CSS global) */
-#cb__page {
-	padding-top: 16px;
-	padding-bottom: 24px;
+﻿/* esconde omnisearch só nesta página */
+body[data-page="charbuilder"] #navbar input[placeholder="Search everywhere..."],
+body[data-page="charbuilder"] #navbar .omnisearch__wrp-input,
+body[data-page="charbuilder"] #navbar .omnisearch__wrp {
+	display: none !important;
 }
 
-.cb__title {
-	margin: 0 0 12px 0;
+.cb__controls {
+	display: grid;
+	grid-template-columns: 190px 1fr;
+	gap: 12px;
+	padding: 10px 8px 8px 8px;
+	border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 
-.cb__root {
-	min-height: 60vh;
+.cb__tabs {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
 }
 
-.cb__empty {
-	opacity: 0.8;
-	padding: 12px;
+.cb__tabs .ve-btn {
+	text-align: left;
+	padding: 8px 10px;
+}
+
+.cb__tabs .ve-btn[disabled] {
+	opacity: 0.45;
+	cursor: not-allowed;
+}
+
+.cb__controls-rhs {
+	display: flex;
+	align-items: flex-start;
+	padding-top: 2px;
+}
+
+.cb__toggle input { transform: translateY(1px); }
+
+.cb__topbar {
+	gap: 8px;
+	padding: 10px 8px;
+	border-bottom: 1px solid rgba(255,255,255,0.08);
+	flex-wrap: wrap;
+}
+
+.cb__input-name { width: 320px; min-width: 220px; }
+.cb__input-level { width: 90px; }
+.cb__topbar-actions { gap: 8px; flex-wrap: wrap; }
+
+/* Aviso SRD */
+.cb__notice {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 10px;
+	margin: 8px 8px 0 8px;
 	border-radius: 6px;
+	border: 1px solid rgba(255,255,255,0.12);
+	background: rgba(255,255,255,0.05);
+	font-size: 12px;
 }
+
+.cb__notice .glyphicon {
+	opacity: 0.9;
+}
+
+.cb__notice--hidden {
+	display: none;
+}
+
+.cb__chips {
+	padding: 8px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	border-bottom: 1px solid rgba(255,255,255,0.08);
+	min-height: 36px;
+}
+
+.cb__chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 5px 9px;
+	border-radius: 999px;
+	background: rgba(255,255,255,0.06);
+	border: 1px solid rgba(255,255,255,0.08);
+	font-size: 12px;
+	line-height: 1;
+}
+.cb__chip b { font-weight: 600; }
+
+#cb__list .cb__row {
+	cursor: pointer;
+	padding: 10px 10px;
+	border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+#cb__list .cb__row:hover { background: rgba(255,255,255,0.04); }
+#cb__list .cb__row--active {
+	outline: 1px solid rgba(255,255,255,0.20);
+	background: rgba(255,255,255,0.05);
+}
+
+.cb__row-top { display: flex; align-items: baseline; gap: 8px; }
+.cb__row-name { font-weight: 600; }
+.cb__row-meta { margin-left: auto; opacity: 0.8; font-size: 12px; }
+
+.cb__preview { padding: 8px; }
+.cb__feat-title { margin: 10px 0 6px 0; font-weight: 600; }
