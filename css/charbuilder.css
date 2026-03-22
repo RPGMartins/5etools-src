@@ -1,0 +1,19 @@
+﻿/* Mantém a cara do 5etools (quase tudo vem do CSS global) */
+#cb__page {
+	padding-top: 16px;
+	padding-bottom: 24px;
+}
+
+.cb__title {
+	margin: 0 0 12px 0;
+}
+
+.cb__root {
+	min-height: 60vh;
+}
+
+.cb__empty {
+	opacity: 0.8;
+	padding: 12px;
+	border-radius: 6px;
+}
