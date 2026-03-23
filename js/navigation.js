@@ -86,6 +86,7 @@ class NavBar {
 		this._addElement_divider({keyPath: [NavBar._CAT_PLAYER]});
 		this._addElement_li({keyPath: [NavBar._CAT_PLAYER], page: "charbuilder.html", aText: "Character Builder"});
 		this._addElement_li({keyPath: [NavBar._CAT_PLAYER], page: "charmanage.html", aText: "Character Manager"});
+		this._addElement_li({keyPath: [NavBar._CAT_PLAYER], page: "charsheet.html", aText: "Character Sheet"});
 		this._addElement_li({keyPath: [NavBar._CAT_PLAYER], page: "statgen.html", aText: "Stat Generator"});
 		this._addElement_divider({keyPath: [NavBar._CAT_PLAYER]});
 		this._addElement_li({keyPath: [NavBar._CAT_PLAYER], page: "lifegen.html", aText: "This Is Your Life"});
