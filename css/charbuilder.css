@@ -36,6 +36,7 @@ body[data-page="charbuilder"] #navbar .omnisearch__wrp {
 	gap: 10px;
 	align-items: flex-start;
 	padding-top: 2px;
+	min-width: 0;
 }
 
 .cb__controls-row {
@@ -45,6 +46,12 @@ body[data-page="charbuilder"] #navbar .omnisearch__wrp {
 	align-items: center;
 }
 
+.cb__wrp-filter-pills {
+	width: 100%;
+	min-width: 0;
+}
+
+/* SRD toggle */
 .cb__toggle input { transform: translateY(1px); }
 
 .cb__topbar {
@@ -55,7 +62,6 @@ body[data-page="charbuilder"] #navbar .omnisearch__wrp {
 }
 
 .cb__input-name { width: 320px; min-width: 220px; }
-.cb__input-level { width: 90px; }
 .cb__topbar-actions { gap: 8px; flex-wrap: wrap; }
 
 /* Aviso SRD */
@@ -113,62 +119,3 @@ body[data-page="charbuilder"] #navbar .omnisearch__wrp {
 
 .cb__preview { padding: 8px; }
 .cb__feat-title { margin: 10px 0 6px 0; font-weight: 600; }
-
-/* Popover (Sources) */
-.cb__pop {
-	position: absolute;
-	z-index: 60;
-	top: 52px;
-	left: 210px;
-
-	min-width: 420px;
-	max-width: 520px;
-	max-height: 70vh;
-	overflow: auto;
-
-	background: rgba(20,20,20,0.98);
-	border: 1px solid rgba(255,255,255,0.15);
-	border-radius: 6px;
-	padding: 10px;
-
-	box-shadow: 0 10px 30px rgba(0,0,0,0.55);
-}
-
-.cb__pop--hidden { display: none; }
-
-.cb__pop-title {
-	font-weight: 600;
-	margin-bottom: 8px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 8px;
-}
-
-.cb__pop-actions {
-	display: flex;
-	gap: 8px;
-	align-items: center;
-	flex-wrap: wrap;
-}
-
-.cb__src-list {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
-	gap: 6px 10px;
-}
-
-.cb__src-item {
-	display: flex;
-	gap: 6px;
-	align-items: center;
-	font-size: 12px;
-}
-
-.cb__src-item input {
-	transform: translateY(1px);
-}
-
-.cb__src-search {
-	margin-bottom: 8px;
-}

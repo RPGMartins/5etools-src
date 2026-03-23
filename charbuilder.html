@@ -53,14 +53,17 @@
 							<span class="ve-ml-1">SRD only</span>
 						</label>
 
+						<!-- ✅ Filtro padrão 5etools (FilterBox/SourceFilter) -->
 						<div class="cb__controls-row">
-							<button class="ve-btn ve-btn-default ve-btn-xs" id="cb__btn_sources" title="Filtrar por livro/fonte">
-								Sources
+							<button class="ve-btn ve-btn-default ve-btn-xs" id="cb__btn_filter_open" title="Filter">
+								<span class="glyphicon glyphicon-filter"></span>
+							</button>
+							<button class="ve-btn ve-btn-default ve-btn-xs" id="cb__btn_filter_reset" title="Reset Filters">
+								<span class="glyphicon glyphicon-refresh"></span>
 							</button>
 						</div>
 
-						<!-- popover de sources -->
-						<div class="cb__pop cb__pop--hidden" id="cb__pop_sources"></div>
+						<div id="cb__wrp_filter_pills" class="cb__wrp-filter-pills"></div>
 					</div>
 				</div>
 
@@ -71,7 +74,6 @@
 			<div id="contentwrapper" class="view-col">
 				<div class="cb__topbar ve-flex ve-flex-v-center">
 					<input id="cb__name" class="ve-form-control input-sm cb__input-name" placeholder="Character name">
-					<input id="cb__level" type="number" min="1" max="20" value="1" class="ve-form-control input-sm cb__input-level" title="Level">
 
 					<div class="ve-ml-auto ve-flex ve-flex-v-center cb__topbar-actions">
 						<button class="ve-btn ve-btn-primary ve-btn-xs" id="cb__btn_create">Create Character</button>
@@ -91,7 +93,7 @@
 
 				<div class="cb__preview">
 					<table class="ve-w-100 ve-stats" id="cb__preview_tbl">
-						<tr><td class="initial-message initial-message--med" id="cb__preview_msg">Selecione algo na lista para ver detalhes aqui.</td></tr>
+						<tr><td class="initial-message initial-message--med">Selecione algo na lista para ver detalhes aqui.</td></tr>
 					</table>
 				</div>
 			</div>
@@ -100,7 +102,7 @@
 	</div>
 </div>
 
-<!-- scripts suficientes p/ Renderer + DataUtil + MiscUtil + localforage -->
+<!-- base -->
 <script type="text/javascript" defer src="js/parser.js"></script>
 <script type="text/javascript" defer src="js/utils.js"></script>
 <script type="text/javascript" defer src="js/utils-ui.js"></script>
@@ -108,11 +110,18 @@
 
 <script type="module" src="js/utils-config.js"></script>
 
+<!-- renderer -->
 <script type="text/javascript" defer src="js/render.js"></script>
 <script type="text/javascript" defer src="js/render-dice.js"></script>
 <script type="text/javascript" defer src="js/render-markdown.js"></script>
 <script type="module" src="js/shim-esmodules.js"></script>
 
+<!-- ✅ Hist + Brew/Prerelease + Filters padrão -->
+<script type="text/javascript" defer src="js/hist.js"></script>
+<script type="module" src="js/utils-brew.js"></script>
+<script type="module" src="js/filter.js"></script>
+
+<!-- app -->
 <script type="module" src="js/charbuilder.js"></script>
 </body>
 </html>
