@@ -1,7 +1,7 @@
-﻿/* global Renderer, localforage, VetoolsConfig, Parser, MiscUtil, DataUtil */
+﻿/* global Renderer, localforage, MiscUtil, DataUtil */
 "use strict";
 
-const CB_STORAGE_KEY = "rpgmartins_cb_active_v5";
+const CB_STORAGE_KEY = "rpgmartins_cb_active_v6";
 const CB_DB_NAME = "rpgmartins_5etools";
 const CB_DB_STORE = "characters_v1";
 
@@ -20,8 +20,15 @@ const toast = (msg, type = "info") => {
 
 class CharacterBuilderApp {
 	constructor () {
-		this._state = loadState() || {
-			meta: { name: "", level: 1, isSrdOnly: true, activeTab: "species" },
+		const st = loadState() || {
+			meta: {
+				name: "",
+				level: 1,
+				isSrdOnly: true,
+				activeTab: "species",
+				// sources selecionadas; vazio = todas
+				sources: [],
+			},
 			choice: {
 				species: null,      // {name, source}
 				subrace: null,      // {name, source, isLineage?, versionName?}
@@ -32,11 +39,15 @@ class CharacterBuilderApp {
 			},
 		};
 
+		// migração (se vier de versões antigas)
+		st.meta.sources = Array.isArray(st.meta.sources) ? st.meta.sources : [];
+
+		this._state = st;
+
 		this._data = {
 			races: null,
 			classes: null,
 			subclasses: null,
-			classFeatures: null,
 			subclassFeatures: null,
 			backgrounds: null,
 			feats: null,
@@ -46,6 +57,8 @@ class CharacterBuilderApp {
 		this._speciesVm = [];
 
 		this._subclassFeatureByUid = new Map(); // uid -> subclassFeature object
+
+		this._allSources = []; // string[]
 
 		this._els = {};
 		this._listVm = [];
@@ -60,6 +73,8 @@ class CharacterBuilderApp {
 
 		this._renderPreviewDefault("Carregando dados...");
 		await this._pLoadAllData();
+
+		this._allSources = this._collectAllSources();
 
 		this._syncTabDisables();
 		this._renderAll();
@@ -81,6 +96,9 @@ class CharacterBuilderApp {
 		this._els.btnReset = document.getElementById("cb__btn_reset");
 
 		this._els.noticeSrd = document.getElementById("cb__notice_srd");
+
+		this._els.btnSources = document.getElementById("cb__btn_sources");
+		this._els.popSources = document.getElementById("cb__pop_sources");
 	}
 
 	_bindEvents () {
@@ -138,6 +156,18 @@ class CharacterBuilderApp {
 			if (!row) return;
 			this._onClickListItem(Number(row.dataset.cbIx));
 		});
+
+		// Sources popover
+		this._els.btnSources.addEventListener("click", (evt) => {
+			evt.stopPropagation();
+			this._toggleSourcesPop();
+		});
+
+		this._els.popSources.addEventListener("click", (evt) => {
+			evt.stopPropagation();
+		});
+
+		document.addEventListener("click", () => this._hideSourcesPop());
 	}
 
 	_updateSrdNotice () {
@@ -168,13 +198,141 @@ class CharacterBuilderApp {
 
 	_raceKey (name, source) { return `${name}||${source}`; }
 
+	_isSourceAllowed (source) {
+		const sel = this._state.meta.sources || [];
+		if (!sel.length) return true; // all
+		return sel.includes(source);
+	}
+
+	_collectAllSources () {
+		const set = new Set();
+
+		const add = (src) => { if (src) set.add(src); };
+
+		// races + subraces
+		for (const grp of this._raceGroups.values()) {
+			add(grp.baseEnt?.source);
+			(grp.subEnts || []).forEach(r => add(r.source));
+		}
+
+		// classes + subclasses + feats + backgrounds
+		(this._data.classes || []).forEach(c => add(c.source));
+		(this._data.subclasses || []).forEach(sc => add(sc.source));
+		(this._data.backgrounds || []).forEach(b => add(b.source));
+		(this._data.feats || []).forEach(f => add(f.source));
+
+		return [...set].sort((a, b) => a.localeCompare(b));
+	}
+
+	_toggleSourcesPop () {
+		if (!this._els.popSources) return;
+
+		const isHidden = this._els.popSources.classList.contains("cb__pop--hidden");
+		if (!isHidden) return this._hideSourcesPop();
+
+		this._renderSourcesPop();
+		this._els.popSources.classList.remove("cb__pop--hidden");
+	}
+
+	_hideSourcesPop () {
+		if (!this._els.popSources) return;
+		this._els.popSources.classList.add("cb__pop--hidden");
+	}
+
+	_renderSourcesPop () {
+		const selected = new Set(this._state.meta.sources || []);
+		const isAll = selected.size === 0;
+
+		this._els.popSources.innerHTML = `
+			<div class="cb__pop-title">
+				<span>Sources</span>
+				<div class="cb__pop-actions">
+					<button class="ve-btn ve-btn-default ve-btn-xxs" id="cb__src_close">Close</button>
+				</div>
+			</div>
+
+			<input class="ve-form-control input-sm cb__src-search" id="cb__src_search" placeholder="Filter sources...">
+
+			<div class="cb__src-item">
+				<input type="checkbox" id="cb__src_all" ${isAll ? "checked" : ""}>
+				<label for="cb__src_all"><b>All sources</b></label>
+			</div>
+
+			<hr class="ve-hr">
+
+			<div class="cb__src-list" id="cb__src_list">
+				${this._allSources.map(src => `
+					<div class="cb__src-item" data-src-row="1" data-src="${this._escapeAttr(src)}">
+						<input type="checkbox" data-src="${this._escapeAttr(src)}" ${selected.has(src) ? "checked" : ""}>
+						<span>${this._escape(src)}</span>
+					</div>
+				`).join("")}
+			</div>
+		`;
+
+		const btnClose = this._els.popSources.querySelector("#cb__src_close");
+		const cbAll = this._els.popSources.querySelector("#cb__src_all");
+		const srcList = this._els.popSources.querySelector("#cb__src_list");
+		const srcSearch = this._els.popSources.querySelector("#cb__src_search");
+
+		btnClose.addEventListener("click", (e) => {
+			e.stopPropagation();
+			this._hideSourcesPop();
+		});
+
+		cbAll.addEventListener("change", () => {
+			if (cbAll.checked) {
+				this._state.meta.sources = []; // all
+			} else {
+				// se desmarcar "All", mantém vazio até o usuário marcar algo
+				this._state.meta.sources = [];
+			}
+			saveState(this._state);
+			this._syncTabDisables();
+			this._renderAll();
+		});
+
+		srcList.addEventListener("change", (evt) => {
+			const cb = evt.target.closest("input[type='checkbox'][data-src]");
+			if (!cb) return;
+
+			const src = cb.dataset.src;
+			const set = new Set(this._state.meta.sources || []);
+
+			// se "All" estava ativo (array vazio), vira seleção explícita
+			if (set.size === 0 && !cbAll.checked) {
+				// nada
+			}
+
+			if (cb.checked) set.add(src);
+			else set.delete(src);
+
+			this._state.meta.sources = [...set].sort((a, b) => a.localeCompare(b));
+
+			// se voltou a ficar vazio, significa "All"
+			cbAll.checked = this._state.meta.sources.length === 0;
+
+			saveState(this._state);
+			this._syncTabDisables();
+			this._renderAll();
+		});
+
+		srcSearch.addEventListener("input", () => {
+			const q = (srcSearch.value || "").trim().toLowerCase();
+			[...srcList.querySelectorAll("[data-src-row]")].forEach(row => {
+				const src = (row.dataset.src || "").toLowerCase();
+				row.style.display = (!q || src.includes(q)) ? "" : "none";
+			});
+		});
+	}
+
 	async _pLoadAllData () {
-		// ---------------- races (base + subraces 2014)
+		// races
 		const racesJson = await fetch("data/races.json").then(r => r.json());
 		this._data.races = normArr(racesJson.race);
 
 		for (const r of this._data.races) {
-			// Subrace 2014: {raceName, raceSource}
+			// subrace 2014: {raceName, raceSource}
 			if (r.raceName && r.name) {
 				const parentName = r.raceName;
 				const parentSource = r.raceSource || r.source;
@@ -204,37 +362,33 @@ class CharacterBuilderApp {
 			.sort((a, b) => (a.name.localeCompare(b.name) || a.source.localeCompare(b.source)))
 			.map(grp => ({ _kind: "species", name: grp.name, source: grp.source, _grpKey: this._raceKey(grp.name, grp.source), _ent: grp.baseEnt }));
 
-		// ---------------- backgrounds
+		// backgrounds
 		const bgsJson = await fetch("data/backgrounds.json").then(r => r.json());
 		this._data.backgrounds = normArr(bgsJson.background);
 
-		// ---------------- feats
+		// feats
 		const featsJson = await fetch("data/feats.json").then(r => r.json());
 		this._data.feats = normArr(featsJson.feat);
 
-		// ---------------- classes (+ subclasses + features)
+		// classes/subclasses/features
 		const clsIndex = await fetch("data/class/index.json").then(r => r.json());
 		const clsFiles = Object.values(clsIndex);
 		const clsDatas = await Promise.all(clsFiles.map(fn => fetch(`data/class/${fn}`).then(r => r.json())));
 
 		const classes = [];
 		const subclasses = [];
-		const classFeatures = [];
 		const subclassFeatures = [];
 
 		clsDatas.forEach(d => {
 			normArr(d.class).forEach(it => classes.push(it));
 			normArr(d.subclass).forEach(it => subclasses.push(it));
-			normArr(d.classFeature).forEach(it => classFeatures.push(it));
 			normArr(d.subclassFeature).forEach(it => subclassFeatures.push(it));
 		});
 
 		this._data.classes = classes;
 		this._data.subclasses = subclasses;
-		this._data.classFeatures = classFeatures;
 		this._data.subclassFeatures = subclassFeatures;
 
-		// lookup de subclassFeature por UID (pra trocar UIDs por objetos antes de renderizar)
 		this._subclassFeatureByUid = new Map();
 		for (const f of subclassFeatures) {
 			try {
@@ -244,15 +398,7 @@ class CharacterBuilderApp {
 		}
 	}
 
-	_renderAll () {
-		this._renderList();
-		this._renderChips();
-		this._updateSrdNotice();
-	}
-
-	_getTabKey () { return this._state.meta.activeTab; }
-
-	// ---------- XPHB “lineages” (subrace-like)
+	// ---------- XPHB “lineages”
 	_getLineagesFromXphb (baseEnt) {
 		if (!baseEnt || baseEnt.source !== "XPHB") return [];
 		const vers = normArr(baseEnt._versions);
@@ -262,62 +408,28 @@ class CharacterBuilderApp {
 		return vers
 			.filter(v => (v.source || baseEnt.source) === baseEnt.source && (v.name || "").startsWith(prefix))
 			.map(v => {
-				let nm = v.name.slice(prefix.length).trim();         // "Drow Lineage"
-				nm = nm.replace(/\bLineage\b/i, "").trim();          // "Drow"
+				let nm = v.name.slice(prefix.length).trim();
+				nm = nm.replace(/\bLineage\b/i, "").trim();
 				nm = nm.replace(/^\s*;\s*/g, "").trim();
-				return {
-					__isLineage: true,
-					name: nm || v.name,
-					source: baseEnt.source,
-					_versionName: v.name,
-				};
+				return { __isLineage: true, name: nm || v.name, source: baseEnt.source, _versionName: v.name };
 			});
 	}
 
-	_applyXphbVersionToBase (baseEnt, versionName, displayName) {
-		const ver = normArr(baseEnt._versions).find(v => v.name === versionName);
-		if (!ver) return baseEnt;
-
-		const cpy = MiscUtil.copyFast(baseEnt);
-		cpy._displayName = displayName ? `${baseEnt.name} (${displayName})` : baseEnt.name;
-
-		// aplica replaceArr em entries (suficiente p/ preview)
-		const mods = ver?._mod?.entries;
-		const arrMods = mods == null ? [] : (Array.isArray(mods) ? mods : [mods]);
-
-		for (const m of arrMods) {
-			if (m?.mode !== "replaceArr") continue;
-			const toReplace = m.replace;
-			const items = m.items;
-			if (!toReplace || !items || !Array.isArray(cpy.entries)) continue;
-
-			const ix = cpy.entries.findIndex(it => it?.name === toReplace);
-			if (~ix) cpy.entries.splice(ix, 1, items);
-		}
-
-		// sobrescreve alguns campos úteis, se existirem
-		["darkvision", "additionalSpells", "resist", "speed", "skillProficiencies"].forEach(k => {
-			if (ver[k] != null) cpy[k] = MiscUtil.copyFast(ver[k]);
-		});
-
-		return cpy;
-	}
-
-	_getSubracesFor (species) {
+	_getSubracesRaw (species) {
 		const grp = this._raceGroups.get(this._raceKey(species.name, species.source));
 		if (!grp) return [];
 
+		// PHB: subraces separadas
 		if (grp.subEnts?.length) return grp.subEnts.sort((a, b) => a.name.localeCompare(b.name));
 
-		// XPHB: não tem subrace separada → usa “lineages”
+		// XPHB: lineages
 		return this._getLineagesFromXphb(grp.baseEnt);
 	}
 
-	_getSubclassesFor (cls) {
+	_getSubclassesRaw (cls) {
 		let out = this._data.subclasses
 			.filter(sc => sc.className === cls.name && sc.classSource === cls.source);
 
-		// fallback: XPHB class tentando casar com PHB subclasses
 		if (!out.length && cls.source === "XPHB") {
 			out = this._data.subclasses.filter(sc => sc.className === cls.name && sc.classSource === "PHB");
 		}
@@ -325,17 +437,43 @@ class CharacterBuilderApp {
 		return out.sort((a, b) => a.name.localeCompare(b.name));
 	}
 
-	_syncTabDisables () {
+	_getAvailableSubraces () {
 		const sp = this._state.choice.species;
-		const subraces = sp ? this._getSubracesFor(sp) : [];
-		this._setTabDisabled("subrace", !subraces.length);
+		if (!sp) return [];
 
+		let subs = this._getSubracesRaw(sp)
+			.filter(s => this._isSourceAllowed(s.source));
+
+		if (this._state.meta.isSrdOnly) {
+			subs = subs.filter(s => s.__isLineage ? true : isSrdish(s));
+		}
+
+		return subs;
+	}
+
+	_getAvailableSubclasses () {
 		const cl = this._state.choice.cls;
-		const subclasses = cl ? this._getSubclassesFor(cl) : [];
-		this._setTabDisabled("subclass", !subclasses.length);
+		if (!cl) return [];
 
-		if (this._state.meta.activeTab === "subrace" && !subraces.length) this._goTab("species");
-		if (this._state.meta.activeTab === "subclass" && !subclasses.length) this._goTab("class");
+		let subs = this._getSubclassesRaw(cl)
+			.filter(sc => this._isSourceAllowed(sc.source));
+
+		if (this._state.meta.isSrdOnly) {
+			subs = subs.filter(sc => isSrdish(sc));
+		}
+
+		return subs;
+	}
+
+	_syncTabDisables () {
+		const subraces = this._getAvailableSubraces();
+		this._setTabDisabled("subrace", subraces.length === 0);
+
+		const subclasses = this._getAvailableSubclasses();
+		this._setTabDisabled("subclass", subclasses.length === 0);
+
+		if (this._state.meta.activeTab === "subrace" && subraces.length === 0) this._goTab("species");
+		if (this._state.meta.activeTab === "subclass" && subclasses.length === 0) this._goTab("class");
 	}
 
 	_goTab (tabKey) {
@@ -346,46 +484,57 @@ class CharacterBuilderApp {
 		this._renderPreviewDefault();
 	}
 
+	_renderAll () {
+		this._renderList();
+		this._renderChips();
+		this._updateSrdNotice();
+	}
+
+	_getTabKey () { return this._state.meta.activeTab; }
+
 	_getFilteredListForActiveTab () {
 		const tab = this._getTabKey();
 		const isSrdOnly = !!this._state.meta.isSrdOnly;
 
 		if (tab === "species") {
-			if (!isSrdOnly) return this._speciesVm;
-			return this._speciesVm.filter(it => isSrdish(it._ent));
+			let list = this._speciesVm.filter(it => this._isSourceAllowed(it.source));
+			if (isSrdOnly) list = list.filter(it => isSrdish(it._ent));
+			return list;
 		}
 
 		if (tab === "subrace") {
-			const sp = this._state.choice.species;
-			const subs = sp ? this._getSubracesFor(sp) : [];
-			const list = subs.map(r => ({ _kind: "subrace", name: r.name, source: r.source, _ent: r }));
-			return isSrdOnly
-				? list.filter(it => it._ent.__isLineage ? true : isSrdish(it._ent))
-				: list;
+			const list = this._getAvailableSubraces()
+				.map(r => ({ _kind: "subrace", name: r.name, source: r.source, _ent: r }));
+			return list;
 		}
 
 		if (tab === "class") {
-			const list = (isSrdOnly ? this._data.classes.filter(isSrdish) : this._data.classes)
+			let list = this._data.classes
+				.filter(c => this._isSourceAllowed(c.source))
 				.map(c => ({ _kind: "class", name: c.name, source: c.source, _ent: c }));
+			if (isSrdOnly) list = list.filter(it => isSrdish(it._ent));
 			return list;
 		}
 
 		if (tab === "subclass") {
-			const cl = this._state.choice.cls;
-			const subs = cl ? this._getSubclassesFor(cl) : [];
-			const list = subs.map(sc => ({ _kind: "subclass", name: sc.name, source: sc.source, _ent: sc }));
-			return isSrdOnly ? list.filter(it => isSrdish(it._ent)) : list;
+			const list = this._getAvailableSubclasses()
+				.map(sc => ({ _kind: "subclass", name: sc.name, source: sc.source, _ent: sc }));
+			return list;
 		}
 
 		if (tab === "background") {
-			const list = (isSrdOnly ? this._data.backgrounds.filter(isSrdish) : this._data.backgrounds)
+			let list = this._data.backgrounds
+				.filter(b => this._isSourceAllowed(b.source))
 				.map(b => ({ _kind: "background", name: b.name, source: b.source, _ent: b }));
+			if (isSrdOnly) list = list.filter(it => isSrdish(it._ent));
 			return list;
 		}
 
 		if (tab === "feats") {
-			const list = (isSrdOnly ? this._data.feats.filter(isSrdish) : this._data.feats)
+			let list = this._data.feats
+				.filter(f => this._isSourceAllowed(f.source))
 				.map(f => ({ _kind: "feat", name: f.name, source: f.source, _ent: f }));
+			if (isSrdOnly) list = list.filter(it => isSrdish(it._ent));
 			return list;
 		}
 
@@ -428,8 +577,8 @@ class CharacterBuilderApp {
 
 	_getEmptyMessage () {
 		const tab = this._getTabKey();
-		if (tab === "subrace") return "Selecione uma Species primeiro (ou ela não tem subrace/lineage).";
-		if (tab === "subclass") return "Selecione uma Class primeiro.";
+		if (tab === "subrace") return "Selecione uma Species primeiro (ou filtre SRD/Sources).";
+		if (tab === "subclass") return "Selecione uma Class primeiro (ou filtre SRD/Sources).";
 		return "Nada encontrado.";
 	}
 
@@ -471,7 +620,7 @@ class CharacterBuilderApp {
 			saveState(this._state);
 			this._syncTabDisables();
 			this._renderAll();
-			return this._renderPreviewSpecies();
+			return this._renderPreviewEntity(it._ent, `${it.name} (${it.source})`);
 		}
 
 		if (tab === "subrace") {
@@ -492,7 +641,7 @@ class CharacterBuilderApp {
 
 			saveState(this._state);
 			this._renderAll();
-			return this._renderPreviewSpecies();
+			return this._renderPreviewEntity(it._ent.__isLineage ? {name: it.name, source: it.source, entries: []} : it._ent, `${it.name} (${it.source})`);
 		}
 
 		if (tab === "class") {
@@ -584,57 +733,6 @@ class CharacterBuilderApp {
 		this._els.previewTbl.innerHTML = `<tr><td class="initial-message initial-message--med">${this._escape(msg)}</td></tr>`;
 	}
 
-	_getSelectedSpeciesBaseEnt () {
-		const sp = this._state.choice.species;
-		if (!sp) return null;
-		const grp = this._raceGroups.get(this._raceKey(sp.name, sp.source));
-		return grp?.baseEnt || null;
-	}
-
-	_getSelectedSubraceEnt (baseEnt) {
-		const sr = this._state.choice.subrace;
-		if (!sr || !baseEnt) return null;
-
-		if (sr.isLineage && sr.versionName) {
-			return this._applyXphbVersionToBase(baseEnt, sr.versionName, sr.name);
-		}
-
-		const grp = this._raceGroups.get(this._raceKey(baseEnt.name, baseEnt.source));
-		return grp?.subEnts?.find(it => it.name === sr.name && it.source === sr.source) || null;
-	}
-
-	_renderPreviewSpecies () {
-		const baseEnt = this._getSelectedSpeciesBaseEnt();
-		if (!baseEnt) return this._renderPreviewDefault();
-
-		const subEnt = this._getSelectedSubraceEnt(baseEnt);
-
-		// lineage XPHB (já aplicado)
-		if (subEnt && this._state.choice.subrace?.isLineage) {
-			return this._renderPreviewEntity(subEnt, subEnt._displayName || `${subEnt.name} (${subEnt.source})`);
-		}
-
-		// subrace 2014: concatena base + sub
-		if (subEnt) {
-			const renderer = Renderer.get();
-			const title = `${baseEnt.name} (${baseEnt.source}) — ${subEnt.name} (${subEnt.source})`;
-			const entries = [
-				...(baseEnt.entries || []),
-				{type: "hr"},
-				...(subEnt.entries || []),
-			].filter(Boolean);
-
-			const body = renderer.render({type: "entries", entries});
-			this._els.previewTbl.innerHTML = `
-				<tr><td><div class="ve-h3 ve-mt-0 ve-mb-2">${this._escape(title)}</div></td></tr>
-				<tr><td>${body}</td></tr>
-			`;
-			return;
-		}
-
-		return this._renderPreviewEntity(baseEnt, `${baseEnt.name} (${baseEnt.source})`);
-	}
-
 	_renderPreviewClass (clsEnt) {
 		try {
 			const cpy = MiscUtil.copyFast(clsEnt);
@@ -661,12 +759,7 @@ class CharacterBuilderApp {
 					const found = this._subclassFeatureByUid.get(uid);
 					if (found) return MiscUtil.copyFast(found);
 
-					try {
-						const u = DataUtil.class.unpackUidSubclassFeature(uid);
-						return {type: "entries", name: u.name, source: u.source, level: u.level, entries: ["(Feature não carregada.)"]};
-					} catch {
-						return {type: "entries", name: uid, entries: ["(Feature não carregada.)"]};
-					}
+					return {type: "entries", name: uid, entries: ["(Feature não carregada.)"]};
 				}).filter(Boolean);
 			});
 		}
@@ -730,6 +823,8 @@ class CharacterBuilderApp {
 			.replace(/"/g, "&quot;")
 			.replace(/'/g, "&#039;");
 	}
+
+	_escapeAttr (str) { return this._escape(str).replace(/"/g, "&quot;"); }
 }
 
 window.addEventListener("load", async () => {
