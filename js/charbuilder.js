@@ -1,9 +1,9 @@
-﻿/* global Renderer, localforage, MiscUtil, DataUtil, Parser, BrewUtil2, PrereleaseUtil, FilterBox, SourceFilter, FILTER_BOX_EVNT_VALCHANGE */
+﻿/* global Renderer, localforage, MiscUtil, DataUtil, BrewUtil2, PrereleaseUtil, FilterBox, SourceFilter, FILTER_BOX_EVNT_VALCHANGE */
 "use strict";
 
-const CB_STORAGE_KEY = "rpgmartins_cb_active_v10";
-const CB_DB_NAME = "rpgmartins_5etools";
-const CB_DB_STORE = "characters_v1";
+const CB_STORAGE_KEY = "rpgmartins_cb_active_v11";
+const DB_NAME = "rpgmartins_5etools";
+const DB_STORE = "characters_v1";
 
 const isSrdish = (ent) => !!(ent?.srd || ent?.basicRules || ent?.srd52 || ent?.basicRules2024);
 const normArr = (it) => it == null ? [] : (Array.isArray(it) ? it : [it]);
@@ -14,23 +14,21 @@ const loadState = () => { try { const raw = localStorage.getItem(CB_STORAGE_KEY)
 const getUid = () => { try { return crypto.randomUUID(); } catch { return `cb_${Date.now()}_${Math.random().toString(16).slice(2)}`; } };
 
 const toast = (msg, type = "info") => {
-	if (window.JqueryUtil?.doToast) return JqueryUtil.doToast({content: msg, type});
+	if (window.JqueryUtil?.doToast) return window.JqueryUtil.doToast({content: msg, type});
 	alert(msg);
 };
 
 class CharacterBuilderApp {
 	constructor () {
-		this._state = loadState() || {
-			meta: { name: "", isSrdOnly: true, activeTab: "species" },
-			choice: {
-				species: null,   // {name, source}
-				subrace: null,   // {name, source, isLineage?, versionName?}
-				cls: null,       // {name, source}
-				subclass: null,  // {name, source}
-				background: null,// {name, source}
-				feats: [],       // [{name, source}]
-			},
+		const st = loadState() || {
+			meta: { name: "", isSrdOnly: true, activeTab: "species", editId: null },
+			choice: { species: null, subrace: null, cls: null, subclass: null, background: null, feats: [] },
 		};
+
+		st.meta = st.meta || {};
+		st.meta.editId = st.meta.editId || null;
+
+		this._state = st;
 
 		this._data = {
 			races: [],
@@ -42,20 +40,20 @@ class CharacterBuilderApp {
 			feats: [],
 		};
 
-		this._raceGroups = new Map(); // key => {name, source, baseEnt, subEnts[]}
+		this._raceGroups = new Map();
 		this._speciesVm = [];
 
 		this._classFeatureByUid = new Map();
 		this._subclassFeatureByUid = new Map();
 
-		// ✅ filtros padrão 5etools
+		// filtros padrão 5etools
 		this._sourceFilter = null;
 		this._filterBox = null;
 
 		this._els = {};
 		this._listVm = [];
 
-		this._db = localforage.createInstance({ name: CB_DB_NAME, storeName: CB_DB_STORE });
+		this._db = localforage.createInstance({ name: DB_NAME, storeName: DB_STORE });
 	}
 
 	async pInit () {
@@ -65,7 +63,6 @@ class CharacterBuilderApp {
 
 		this._renderPreviewDefault("Carregando dados...");
 		await this._pLoadAllData();
-
 		await this._pInitFilters5etools();
 
 		this._syncTabDisables();
@@ -83,12 +80,12 @@ class CharacterBuilderApp {
 
 		this._els.previewTbl = document.getElementById("cb__preview_tbl");
 
-		this._els.btnCreate = document.getElementById("cb__btn_create");
+		this._els.btnSaveNew = document.getElementById("cb__btn_save_new");
+		this._els.btnUpdate = document.getElementById("cb__btn_update");
 		this._els.btnReset = document.getElementById("cb__btn_reset");
 
 		this._els.noticeSrd = document.getElementById("cb__notice_srd");
 
-		// 5etools filter box controls
 		this._els.btnFilterOpen = document.getElementById("cb__btn_filter_open");
 		this._els.btnFilterReset = document.getElementById("cb__btn_filter_reset");
 		this._els.wrpFilterPills = document.getElementById("cb__wrp_filter_pills");
@@ -125,16 +122,12 @@ class CharacterBuilderApp {
 			location.reload();
 		});
 
-		this._els.btnCreate.addEventListener("click", async () => {
-			const name = (this._state.meta.name || "").trim();
-			if (!name) return toast("Dê um nome ao personagem antes de salvar.", "warning");
+		this._els.btnSaveNew.addEventListener("click", async () => {
+			await this._pSaveAsNew();
+		});
 
-			const id = getUid();
-			const now = Date.now();
-			const record = { id, name, createdAt: now, updatedAt: now, state: this._state };
-
-			await this._db.setItem(id, record);
-			toast(`Character "${name}" salvo no browser!`, "success");
+		this._els.btnUpdate.addEventListener("click", async () => {
+			await this._pUpdateExisting();
 		});
 
 		this._els.list.addEventListener("click", (evt) => {
@@ -149,11 +142,17 @@ class CharacterBuilderApp {
 		this._els.noticeSrd.classList.toggle("cb__notice--hidden", !this._state.meta.isSrdOnly);
 	}
 
+	_updateSaveButtons () {
+		const hasEditId = !!this._state.meta.editId;
+		this._els.btnUpdate.disabled = !hasEditId;
+	}
+
 	_syncControlsFromState () {
 		this._els.name.value = this._state.meta.name || "";
 		this._els.toggleSrd.checked = !!this._state.meta.isSrdOnly;
 		this._syncTabs();
 		this._updateSrdNotice();
+		this._updateSaveButtons();
 	}
 
 	_syncTabs () {
@@ -169,24 +168,15 @@ class CharacterBuilderApp {
 		btn.disabled = !!isDisabled;
 	}
 
-	_raceKey (name, source) { return `${name}||${source}`; }
-
-	_uidToPrettyName (uidStr) {
-		const parts = String(uidStr || "").split("|").map(s => s.trim()).filter(Boolean);
-		return parts[0] || uidStr;
-	}
-
 	// =========================
-	// Data loading
+	// Data + Brew/Prerelease
 	// =========================
 	async _pLoadAllData () {
-		// init brew + prerelease (igual o site)
 		await Promise.allSettled([
 			PrereleaseUtil?.pInit?.(),
 			BrewUtil2?.pInit?.(),
 		]);
 
-		// core JSONs
 		const racesJson = await fetch("data/races.json").then(r => r.json());
 		this._data.races = normArr(racesJson.race);
 
@@ -196,7 +186,6 @@ class CharacterBuilderApp {
 		const featsJson = await fetch("data/feats.json").then(r => r.json());
 		this._data.feats = normArr(featsJson.feat);
 
-		// classes bundle
 		const clsIndex = await fetch("data/class/index.json").then(r => r.json());
 		const clsFiles = Object.values(clsIndex);
 		const clsDatas = await Promise.all(clsFiles.map(fn => fetch(`data/class/${fn}`).then(r => r.json())));
@@ -218,10 +207,8 @@ class CharacterBuilderApp {
 		this._data.classFeatures = classFeatures;
 		this._data.subclassFeatures = subclassFeatures;
 
-		// ✅ merge prerelease + brew (processado com _copy etc)
 		await this._pMergeBrewAndPrerelease();
 
-		// rebuild views/lookups
 		this._rebuildRaceGroups();
 		this._rebuildFeatureLookups();
 	}
@@ -234,35 +221,25 @@ class CharacterBuilderApp {
 			this._data.subclasses.push(...normArr(obj.subclass));
 			this._data.backgrounds.push(...normArr(obj.background));
 			this._data.feats.push(...normArr(obj.feat));
-
 			this._data.classFeatures.push(...normArr(obj.classFeature));
 			this._data.subclassFeatures.push(...normArr(obj.subclassFeature));
 		};
 
 		try {
-			if (PrereleaseUtil?.pGetBrewProcessed) {
-				const pre = await PrereleaseUtil.pGetBrewProcessed();
-				merge(pre);
-			}
-		} catch (e) {
-			console.warn("[charbuilder] prerelease merge failed:", e);
-		}
+			if (PrereleaseUtil?.pGetBrewProcessed) merge(await PrereleaseUtil.pGetBrewProcessed());
+		} catch (e) { console.warn("[charbuilder] prerelease merge failed:", e); }
 
 		try {
-			if (BrewUtil2?.pGetBrewProcessed) {
-				const brew = await BrewUtil2.pGetBrewProcessed();
-				merge(brew);
-			}
-		} catch (e) {
-			console.warn("[charbuilder] brew merge failed:", e);
-		}
+			if (BrewUtil2?.pGetBrewProcessed) merge(await BrewUtil2.pGetBrewProcessed());
+		} catch (e) { console.warn("[charbuilder] brew merge failed:", e); }
 	}
+
+	_raceKey (name, source) { return `${name}||${source}`; }
 
 	_rebuildRaceGroups () {
 		this._raceGroups = new Map();
 
 		for (const r of this._data.races) {
-			// Subrace 2014: {raceName, raceSource}
 			if (r.raceName && r.name) {
 				const parentName = r.raceName;
 				const parentSource = r.raceSource || r.source;
@@ -296,18 +273,12 @@ class CharacterBuilderApp {
 	_rebuildFeatureLookups () {
 		this._classFeatureByUid = new Map();
 		for (const f of this._data.classFeatures) {
-			try {
-				const uid = DataUtil.class.packUidClassFeature(f);
-				this._classFeatureByUid.set(uid, f);
-			} catch (e) {}
+			try { this._classFeatureByUid.set(DataUtil.class.packUidClassFeature(f), f); } catch {}
 		}
 
 		this._subclassFeatureByUid = new Map();
 		for (const f of this._data.subclassFeatures) {
-			try {
-				const uid = DataUtil.class.packUidSubclassFeature(f);
-				this._subclassFeatureByUid.set(uid, f);
-			} catch (e) {}
+			try { this._subclassFeatureByUid.set(DataUtil.class.packUidSubclassFeature(f), f); } catch {}
 		}
 	}
 
@@ -315,7 +286,6 @@ class CharacterBuilderApp {
 	// ✅ 5etools FilterBox/SourceFilter
 	// =========================
 	async _pInitFilters5etools () {
-		// Build source list from currently loaded data
 		const srcSet = new Set();
 		const addSrc = (it) => { if (it?.source) srcSet.add(it.source); };
 
@@ -325,10 +295,9 @@ class CharacterBuilderApp {
 		this._data.backgrounds.forEach(addSrc);
 		this._data.feats.forEach(addSrc);
 
-		this._sourceFilter = new SourceFilter(); // default header "Source"
+		this._sourceFilter = new SourceFilter();
 		this._sourceFilter.addItem([...srcSet]);
 
-		// FilterBox expects 5etools element wrappers via e_({ele})
 		const btnOpen = e_({ ele: this._els.btnFilterOpen });
 		const btnReset = e_({ ele: this._els.btnFilterReset });
 		const wrpMiniPills = e_({ ele: this._els.wrpFilterPills });
@@ -354,14 +323,10 @@ class CharacterBuilderApp {
 	}
 
 	_isAllowedByFilters (ent) {
-		// SRD-only local do builder
 		if (this._state.meta.isSrdOnly && !isSrdish(ent)) return false;
-
-		// SourceFilter padrão do 5etools
 		if (!this._filterBox || !this._sourceFilter) return true;
-		const vals = this._filterBox.getValues();
 
-		// inclui “other sources”/“reference sources” se existirem
+		const vals = this._filterBox.getValues();
 		const srcVal = SourceFilter.getCompleteFilterSources
 			? SourceFilter.getCompleteFilterSources(ent)
 			: ent.source;
@@ -370,13 +335,12 @@ class CharacterBuilderApp {
 	}
 
 	// =========================
-	// Subrace/Lineage helpers
+	// UI list plumbing
 	// =========================
 	_getLineagesFromXphb (baseEnt) {
 		if (!baseEnt || baseEnt.source !== "XPHB") return [];
 		const vers = normArr(baseEnt._versions);
 		if (!vers.length) return [];
-
 		const prefix = `${baseEnt.name};`;
 		return vers
 			.filter(v => (v.source || baseEnt.source) === baseEnt.source && (v.name || "").startsWith(prefix))
@@ -384,12 +348,7 @@ class CharacterBuilderApp {
 				let nm = v.name.slice(prefix.length).trim();
 				nm = nm.replace(/\bLineage\b/i, "").trim();
 				nm = nm.replace(/^\s*;\s*/g, "").trim();
-				return {
-					__isLineage: true,
-					name: nm || v.name,
-					source: baseEnt.source,
-					_versionName: v.name,
-				};
+				return { __isLineage: true, name: nm || v.name, source: baseEnt.source, _versionName: v.name };
 			});
 	}
 
@@ -431,6 +390,7 @@ class CharacterBuilderApp {
 		this._renderList();
 		this._renderChips();
 		this._updateSrdNotice();
+		this._updateSaveButtons();
 	}
 
 	_getTabKey () { return this._state.meta.activeTab; }
@@ -438,39 +398,34 @@ class CharacterBuilderApp {
 	_getFilteredListForActiveTab () {
 		const tab = this._getTabKey();
 
-		if (tab === "species") {
-			return this._speciesVm.filter(it => this._isAllowedByFilters(it._ent));
-		}
+		if (tab === "species") return this._speciesVm.filter(it => this._isAllowedByFilters(it._ent));
 
 		if (tab === "subrace") {
 			const sp = this._state.choice.species;
 			if (!sp) return [];
-			const subs = this._getSubracesRaw(sp).filter(sr => this._isAllowedByFilters(sr));
-			return subs.map(r => ({ _kind: "subrace", name: r.name, source: r.source, _ent: r }));
+			return this._getSubracesRaw(sp).filter(sr => this._isAllowedByFilters(sr))
+				.map(r => ({ _kind: "subrace", name: r.name, source: r.source, _ent: r }));
 		}
 
 		if (tab === "class") {
-			return this._data.classes
-				.filter(c => this._isAllowedByFilters(c))
+			return this._data.classes.filter(c => this._isAllowedByFilters(c))
 				.map(c => ({ _kind: "class", name: c.name, source: c.source, _ent: c }));
 		}
 
 		if (tab === "subclass") {
 			const cl = this._state.choice.cls;
 			if (!cl) return [];
-			const subs = this._getSubclassesRaw(cl).filter(sc => this._isAllowedByFilters(sc));
-			return subs.map(sc => ({ _kind: "subclass", name: sc.name, source: sc.source, _ent: sc }));
+			return this._getSubclassesRaw(cl).filter(sc => this._isAllowedByFilters(sc))
+				.map(sc => ({ _kind: "subclass", name: sc.name, source: sc.source, _ent: sc }));
 		}
 
 		if (tab === "background") {
-			return this._data.backgrounds
-				.filter(b => this._isAllowedByFilters(b))
+			return this._data.backgrounds.filter(b => this._isAllowedByFilters(b))
 				.map(b => ({ _kind: "background", name: b.name, source: b.source, _ent: b }));
 		}
 
 		if (tab === "feats") {
-			return this._data.feats
-				.filter(f => this._isAllowedByFilters(f))
+			return this._data.feats.filter(f => this._isAllowedByFilters(f))
 				.map(f => ({ _kind: "feat", name: f.name, source: f.source, _ent: f }));
 		}
 
@@ -484,14 +439,13 @@ class CharacterBuilderApp {
 		if (!items.length) {
 			const empty = document.createElement("div");
 			empty.className = "cb__row";
-			empty.textContent = this._getEmptyMessage();
+			empty.textContent = "Nada encontrado.";
 			this._els.list.appendChild(empty);
 			this._listVm = [];
 			return;
 		}
 
 		const tab = this._getTabKey();
-
 		items.forEach((it, ix) => {
 			const row = document.createElement("div");
 			row.className = "cb__row";
@@ -504,30 +458,20 @@ class CharacterBuilderApp {
 					<div class="cb__row-meta">${this._escape(it.source || "")}</div>
 				</div>
 			`;
-
 			this._els.list.appendChild(row);
 		});
 
 		this._listVm = items;
 	}
 
-	_getEmptyMessage () {
-		const tab = this._getTabKey();
-		if (tab === "subrace") return "Sem subraces com os filtros atuais (SRD/Source Filter).";
-		if (tab === "subclass") return "Sem subclasses com os filtros atuais (SRD/Source Filter).";
-		return "Nada encontrado.";
-	}
-
 	_isRowActive (tab, it) {
 		const ch = this._state.choice;
-
 		if (tab === "species") return ch.species && ch.species.name === it.name && ch.species.source === it.source;
 		if (tab === "subrace") return ch.subrace && ch.subrace.name === it.name && ch.subrace.source === it.source;
 		if (tab === "class") return ch.cls && ch.cls.name === it.name && ch.cls.source === it.source;
 		if (tab === "subclass") return ch.subclass && ch.subclass.name === it.name && ch.subclass.source === it.source;
 		if (tab === "background") return ch.background && ch.background.name === it.name && ch.background.source === it.source;
 		if (tab === "feats") return ch.feats.some(f => f.name === it.name && f.source === it.source);
-
 		return false;
 	}
 
@@ -539,6 +483,16 @@ class CharacterBuilderApp {
 		const ch = this._state.choice;
 
 		const clearPreview = () => this._renderPreviewDefault();
+
+		const toggleSingle = (field) => {
+			const cur = ch[field];
+			const isSame = cur && cur.name === it.name && cur.source === it.source;
+			if (isSame) ch[field] = null;
+			else ch[field] = {name: it.name, source: it.source};
+			saveState(this._state);
+			this._renderAll();
+			return isSame ? clearPreview() : this._renderPreviewEntity(it._ent, `${it.name} (${it.source})`);
+		};
 
 		if (tab === "species") {
 			const isSame = ch.species && ch.species.name === it.name && ch.species.source === it.source;
@@ -558,19 +512,7 @@ class CharacterBuilderApp {
 			return this._renderPreviewEntity(it._ent, `${it.name} (${it.source})`);
 		}
 
-		if (tab === "subrace") {
-			const isSame = ch.subrace && ch.subrace.name === it.name && ch.subrace.source === it.source;
-			if (isSame) {
-				ch.subrace = null;
-				saveState(this._state);
-				this._renderAll();
-				return clearPreview();
-			}
-			ch.subrace = {name: it.name, source: it.source};
-			saveState(this._state);
-			this._renderAll();
-			return this._renderPreviewEntity(it._ent, `${it.name} (${it.source})`);
-		}
+		if (tab === "subrace") return toggleSingle("subrace");
 
 		if (tab === "class") {
 			const isSame = ch.cls && ch.cls.name === it.name && ch.cls.source === it.source;
@@ -591,7 +533,8 @@ class CharacterBuilderApp {
 		}
 
 		if (tab === "subclass") {
-			const isSame = ch.subclass && ch.subclass.name === it.name && ch.subclass.source === it.source;
+			const cur = ch.subclass;
+			const isSame = cur && cur.name === it.name && cur.source === it.source;
 			if (isSame) {
 				ch.subclass = null;
 				saveState(this._state);
@@ -604,19 +547,7 @@ class CharacterBuilderApp {
 			return this._renderPreviewSubclass(it._ent);
 		}
 
-		if (tab === "background") {
-			const isSame = ch.background && ch.background.name === it.name && ch.background.source === it.source;
-			if (isSame) {
-				ch.background = null;
-				saveState(this._state);
-				this._renderAll();
-				return clearPreview();
-			}
-			ch.background = {name: it.name, source: it.source};
-			saveState(this._state);
-			this._renderAll();
-			return this._renderPreviewEntity(it._ent, `${it.name} (${it.source})`);
-		}
+		if (tab === "background") return toggleSingle("background");
 
 		if (tab === "feats") {
 			const feats = ch.feats;
@@ -635,17 +566,10 @@ class CharacterBuilderApp {
 		const pushChip = (label, value) => value ? chips.push(`<span class="cb__chip"><b>${this._escape(label)}:</b> ${this._escape(value)}</span>`) : null;
 
 		if (this._state.meta.name) pushChip("Name", this._state.meta.name);
+		if (this._state.meta.editId) pushChip("Editing", this._state.meta.editId);
 
-		if (ch.species) {
-			let sp = `${ch.species.name} (${ch.species.source})`;
-			if (ch.subrace) sp += ` — ${ch.subrace.name} (${ch.subrace.source})`;
-			pushChip("Species", sp);
-		}
-		if (ch.cls) {
-			let cl = `${ch.cls.name} (${ch.cls.source})`;
-			if (ch.subclass) cl += ` — ${ch.subclass.name} (${ch.subclass.source})`;
-			pushChip("Class", cl);
-		}
+		if (ch.species) pushChip("Species", `${ch.species.name} (${ch.species.source})${ch.subrace ? ` — ${ch.subrace.name} (${ch.subrace.source})` : ""}`);
+		if (ch.cls) pushChip("Class", `${ch.cls.name} (${ch.cls.source})${ch.subclass ? ` — ${ch.subclass.name} (${ch.subclass.source})` : ""}`);
 		if (ch.background) pushChip("Background", `${ch.background.name} (${ch.background.source})`);
 		if (ch.feats?.length) pushChip("Feats", String(ch.feats.length));
 
@@ -760,9 +684,67 @@ class CharacterBuilderApp {
 		return String(str ?? "")
 			.replace(/&/g, "&amp;")
 			.replace(/</g, "&lt;")
-			.replace(/>/g, "&gt;")
+			.replace(/>/g, "&lt;")
 			.replace(/"/g, "&quot;")
 			.replace(/'/g, "&#039;");
+	}
+
+	// =========================
+	// SAVE/UPDATE
+	// =========================
+	async _pSaveAsNew () {
+		const name = (this._state.meta.name || "").trim();
+		if (!name) return toast("Dê um nome ao personagem antes de salvar.", "warning");
+
+		const id = getUid();
+		const now = Date.now();
+
+		// “vira” o record atual
+		this._state.meta.editId = id;
+		saveState(this._state);
+		this._updateSaveButtons();
+		this._renderChips();
+
+		const record = {
+			id,
+			name,
+			createdAt: now,
+			updatedAt: now,
+			state: this._cloneState(),
+		};
+
+		await this._db.setItem(id, record);
+		toast(`Salvo como novo: "${name}"`, "success");
+	}
+
+	async _pUpdateExisting () {
+		const name = (this._state.meta.name || "").trim();
+		if (!name) return toast("Dê um nome ao personagem antes de salvar.", "warning");
+
+		const id = this._state.meta.editId;
+		if (!id) return toast("Nenhum personagem carregado para atualizar. Use Save as New.", "warning");
+
+		const now = Date.now();
+		const existing = await this._db.getItem(id);
+
+		const createdAt = existing?.createdAt || now;
+
+		const record = {
+			id,
+			name,
+			createdAt,
+			updatedAt: now,
+			state: this._cloneState(),
+		};
+
+		await this._db.setItem(id, record);
+		toast(`Atualizado: "${name}"`, "success");
+	}
+
+	_cloneState () {
+		// evita referenciar objetos “vivos” do app
+		try { return MiscUtil.copyFast(this._state); }
+		catch { return JSON.parse(JSON.stringify(this._state)); }
 	}
 }
 

@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+	<title>Character Manager - 5etools</title>
+
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/charmanage.css">
+
+	<script type="text/javascript" src="sw-injector.js"></script>
+	<script blocking="render" type="module" src="js/styleswitch.js"></script>
+	<script type="text/javascript" src="js/navigation.js"></script>
+	<script type="module" src="js/browsercheck.js"></script>
+</head>
+
+<body data-page="charmanage">
+<div class="overlay-noise no-print"></div>
+
+<div class="viewport-wrapper">
+	<header class="hidden-xs hidden-sm page__header">
+		<div class="container">
+			<h1 class="page__title">Character Manager</h1>
+			<p class="page__subtitle">Gerencie personagens salvos no seu navegador.</p>
+		</div>
+	</header>
+
+	<nav class="container page__nav" id="navigation">
+		<ul class="nav nav-pills page__nav-inner" id="navbar"></ul>
+	</nav>
+
+	<div class="view-col-group--cancer ve-h-100 mh-0">
+		<div class="container view-col-wrapper view-col-wrapper--cancer">
+			<div class="view-col ve-w-100">
+
+				<div class="cm__top ve-flex ve-flex-v-center">
+					<input id="cm__search" class="ve-form-control input-sm cm__search" placeholder="Search characters...">
+
+					<div class="ve-ml-auto ve-flex ve-flex-v-center cm__top-actions">
+						<button class="ve-btn ve-btn-primary ve-btn-xs" id="cm__btn_new">New Character</button>
+						<button class="ve-btn ve-btn-default ve-btn-xs" id="cm__btn_refresh">Refresh</button>
+					</div>
+				</div>
+
+				<div class="cm__meta-bar ve-flex ve-flex-v-center">
+					<div id="cm__count" class="ve-muted"></div>
+					<div class="ve-ml-auto ve-muted cm__hint">
+						Salvo localmente (não sobe pra internet).
+					</div>
+				</div>
+
+				<div id="cm__list" class="cm__list"></div>
+
+				<div id="cm__empty" class="initial-message initial-message--med cm__empty ve-hidden">
+					Nenhum personagem salvo ainda. Clique em <b>New Character</b>.
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- scripts base -->
+<script type="text/javascript" defer src="js/parser.js"></script>
+<script type="text/javascript" defer src="js/utils.js"></script>
+<script type="text/javascript" defer src="js/utils-ui.js"></script>
+<script type="text/javascript" defer src="lib/localforage.js"></script>
+
+<script type="module" src="js/charmanage.js"></script>
+</body>
+</html>

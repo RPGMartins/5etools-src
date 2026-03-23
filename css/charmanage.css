@@ -1,0 +1,125 @@
+﻿/* esconde omnisearch só nesta página (se aparecer) */
+body[data-page="charmanage"] #navbar input[placeholder="Search everywhere..."],
+body[data-page="charmanage"] #navbar .omnisearch__wrp-input,
+body[data-page="charmanage"] #navbar .omnisearch__wrp {
+	display: none !important;
+}
+
+.cm__top {
+	padding: 10px 8px;
+	border-bottom: 1px solid rgba(255,255,255,0.08);
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.cm__search {
+	width: 360px;
+	min-width: 220px;
+}
+
+.cm__top-actions {
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.cm__meta-bar {
+	padding: 8px;
+	border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.cm__hint {
+	font-size: 12px;
+}
+
+.cm__list {
+	padding: 10px 8px;
+	display: grid;
+	gap: 10px;
+}
+
+.cm__empty {
+	margin: 16px 8px;
+}
+
+.cm__card {
+	border: 1px solid rgba(255,255,255,0.12);
+	border-radius: 8px;
+	background: rgba(255,255,255,0.03);
+	padding: 10px;
+}
+
+.cm__card-hdr {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.cm__name {
+	font-weight: 700;
+	font-size: 16px;
+	line-height: 1.1;
+}
+
+.cm__dates {
+	font-size: 12px;
+	opacity: 0.8;
+	margin-top: 2px;
+}
+
+.cm__actions {
+	margin-left: auto;
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.cm__chips {
+	margin-top: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+}
+
+.cm__chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 5px 9px;
+	border-radius: 999px;
+	background: rgba(255,255,255,0.05);
+	border: 1px solid rgba(255,255,255,0.10);
+	font-size: 12px;
+	line-height: 1;
+}
+
+.cm__chip b {
+	font-weight: 600;
+}
+
+.cm__details {
+	margin-top: 10px;
+}
+
+.cm__details summary {
+	cursor: pointer;
+	opacity: 0.9;
+}
+
+.cm__pre {
+	margin-top: 8px;
+	padding: 10px;
+	border-radius: 6px;
+	border: 1px solid rgba(255,255,255,0.12);
+	background: rgba(0,0,0,0.25);
+	overflow: auto;
+	max-height: 40vh;
+	font-size: 12px;
+}
+
+.cm__btn-row {
+	margin-top: 8px;
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+}
