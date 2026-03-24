@@ -173,8 +173,20 @@ function renderEntriesLite (entries, ctx) {
 	}
 
 	if (entries.type === "entries") {
-		const name = entries.name ? `<div class="gpl-feat-block-title">${esc(strip5eTags(entries.name))}</div>` : "";
-		return `${name}${renderEntriesLite(entries.entries, ctx)}`;
+		// se tiver name, vira um bloco colapsável
+		if (entries.name) {
+			const title = esc(strip5eTags(entries.name));
+			const body = renderEntriesLite(entries.entries, ctx);
+			return `
+      <details class="gpl-entry" open>
+        <summary>${title}</summary>
+        <div class="gpl-entry-body">${body}</div>
+      </details>
+    `;
+		}
+
+		// sem name, só renderiza o conteúdo
+		return renderEntriesLite(entries.entries, ctx);
 	}
 
 	if (entries.type === "list") {
@@ -524,12 +536,12 @@ function drawSkillsTriple (rec, lvl, pb) {
 }
 
 /* Full features pages (entries) */
-function renderFeatureSection (id, title, innerHtml) {
+function renderFeatureSection (id, title, innerHtml, isOpen = true) {
 	return `
-    <div class="gpl-feat-section" id="${esc(id)}">
-      <div class="gpl-feat-title">${esc(title)}</div>
-      ${innerHtml || `<div class="gpl-feat-p">(none)</div>`}
-    </div>
+    <details class="gpl-sec" id="${esc(id)}" ${isOpen ? "open" : ""}>
+      <summary>${esc(title)}</summary>
+      <div class="gpl-sec-body">${innerHtml || `<div class="gpl-feat-p">(none)</div>`}</div>
+    </details>
   `;
 }
 function renderFeatureToc (items) {
@@ -581,23 +593,32 @@ function renderFeaturesPages (data) {
 
 	const featsHtml = (feats || []).map(ft => {
 		const body = ft.entries ? renderEntriesLite(ft.entries, ctx) : "";
-		return wrapBlock(
-			`<div class="gpl-feat-block-title">Feat: ${esc(ft.name)} (${esc(ft.source || "")})</div>${body}`
-		);
+		return `
+    <details class="gpl-item" open>
+      <summary>Feat: ${esc(ft.name)} (${esc(ft.source || "")})</summary>
+      <div class="gpl-item-body">${body || `<div class="gpl-feat-p">(none)</div>`}</div>
+    </details>
+  `;
 	}).join("");
 
 	const classHtml = (classFeatures || []).map(f => {
 		const body = f.entries ? renderEntriesLite(f.entries, ctx) : "";
-		return wrapBlock(
-			`<div class="gpl-feat-block-title">${esc(f.name)} (lvl ${esc(String(f.level))})</div>${body}`
-		);
+		return `
+    <details class="gpl-item" open>
+      <summary>${esc(f.name)} (lvl ${esc(String(f.level))})</summary>
+      <div class="gpl-item-body">${body || `<div class="gpl-feat-p">(none)</div>`}</div>
+    </details>
+  `;
 	}).join("");
 
 	const subclassHtml = (subclassFeatures || []).map(f => {
 		const body = f.entries ? renderEntriesLite(f.entries, ctx) : "";
-		return wrapBlock(
-			`<div class="gpl-feat-block-title">${esc(f.name)} (lvl ${esc(String(f.level))})</div>${body}`
-		);
+		return `
+    <details class="gpl-item" open>
+      <summary>${esc(f.name)} (lvl ${esc(String(f.level))})</summary>
+      <div class="gpl-item-body">${body || `<div class="gpl-feat-p">(none)</div>`}</div>
+    </details>
+  `;
 	}).join("");
 
 	const raceCount = race?.entries ? countNamedEntrySections(race.entries) : 0;
@@ -644,6 +665,13 @@ function renderFeaturesPages (data) {
 	parts.push(`</div>`);
 	return parts.join("");
 }
+
+function setAllDetailsOpen (isOpen) {
+	document.querySelectorAll("details").forEach(d => { d.open = !!isOpen; });
+}
+
+window.addEventListener("beforeprint", () => setAllDetailsOpen(true));
+
 /* =========================
    Main
    ========================= */
@@ -763,7 +791,9 @@ async function main () {
 
 	document.getElementById("gpl_sheet").innerHTML = htmlParts.join("\n");
 
-	if (auto) setTimeout(() => window.print(), 50);
-}
+	if (auto) {
+		setAllDetailsOpen(true);
+		setTimeout(() => window.print(), 50);
+	}}
 
 main();

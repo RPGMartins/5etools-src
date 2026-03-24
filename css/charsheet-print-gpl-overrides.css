@@ -274,3 +274,106 @@ html, body {
 @media print {
 	.gpl-feat-toc { display: none !important; }
 }
+/* =========================
+   Collapsible sections/items for print page
+   ========================= */
+
+.gpl-sec, .gpl-item, .gpl-entry {
+	border: 1px solid #000;
+	border-radius: 4px;
+	margin: 6px 0;
+	padding: 0;
+	break-inside: avoid;
+	page-break-inside: avoid;
+}
+
+.gpl-sec > summary,
+.gpl-item > summary,
+.gpl-entry > summary {
+	cursor: pointer;
+	list-style: none;
+	padding: 6px 8px;
+	font-weight: 800;
+	font-size: 12px;
+	border-bottom: 1px solid #000;
+}
+
+.gpl-sec > summary::-webkit-details-marker,
+.gpl-item > summary::-webkit-details-marker,
+.gpl-entry > summary::-webkit-details-marker {
+	display: none;
+}
+
+.gpl-sec > summary::before,
+.gpl-item > summary::before,
+.gpl-entry > summary::before {
+	content: "▾ ";
+	font-weight: 800;
+}
+
+.gpl-sec:not([open]) > summary::before,
+.gpl-item:not([open]) > summary::before,
+.gpl-entry:not([open]) > summary::before {
+	content: "▸ ";
+}
+
+.gpl-sec-body,
+.gpl-item-body,
+.gpl-entry-body {
+	padding: 6px 8px;
+}
+
+/* manter tabelas/listas o mais “inteiras” possível */
+.gpl-feat-table,
+.gpl-feat-ul,
+.gpl-feat-quote,
+.gpl-feat-block {
+	break-inside: avoid;
+	page-break-inside: avoid;
+}
+/* =========================
+   Zebra (xadrez) print-friendly
+   ========================= */
+
+/* Tenta imprimir cores quando o usuário habilita "Background graphics" */
+html, body{
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+}
+
+/* Base: tudo branco */
+.gpl-sec, .gpl-item, .gpl-entry{
+	background: #fff;
+}
+
+/* Faz o <summary> herdar o fundo do bloco */
+.gpl-sec > summary,
+.gpl-item > summary,
+.gpl-entry > summary{
+	background: transparent;
+}
+
+/* Zebra por nível:
+   - dentro de cada seção (Race/Class/etc): alterna os itens (gpl-item e gpl-entry)
+   - dentro de cada item: alterna sub-entries (gpl-entry)
+*/
+.gpl-sec-body > details.gpl-item:nth-of-type(even),
+.gpl-sec-body > details.gpl-entry:nth-of-type(even),
+.gpl-item-body > details.gpl-entry:nth-of-type(even),
+.gpl-entry-body > details.gpl-entry:nth-of-type(even){
+	background: #f2f2f2;         /* xadrez */
+	border-left: 6px solid #ddd; /* print-friendly (borda sempre imprime) */
+}
+
+/* Opcional: zebra também nas linhas de listas (quando existirem) */
+.gpl-entry-body .gpl-feat-ul li:nth-child(even),
+.gpl-item-body  .gpl-feat-ul li:nth-child(even){
+	background: #f7f7f7;
+}
+
+/* Evitar quebra no meio desses blocos no print */
+.gpl-sec, .gpl-item, .gpl-entry,
+.gpl-feat-ul, .gpl-feat-table, .gpl-feat-quote{
+	break-inside: avoid;
+	page-break-inside: avoid;
+}
