@@ -344,6 +344,8 @@ class SheetApp {
 		rec.sheet.profsText = rec.sheet.profsText ?? "";
 		rec.sheet.langText = rec.sheet.langText ?? "";
 		rec.sheet.notes = rec.sheet.notes ?? "";
+		rec.sheet.ui = rec.sheet.ui || {};
+		rec.sheet.ui.featureOpen = rec.sheet.ui.featureOpen || {};
 
 		this._rec = rec;
 
@@ -751,6 +753,14 @@ class SheetApp {
 		const lvl = opts.forceLevel ?? (this._rec.sheet.level || 1);
 		const openAll = !!opts.forceOpenAll;
 
+		// Persistência de colapso
+		this._rec.sheet.ui = this._rec.sheet.ui || {};
+		this._rec.sheet.ui.featureOpen = this._rec.sheet.ui.featureOpen || {};
+		const openMap = this._rec.sheet.ui.featureOpen;
+
+		const isPrinting = document.body.classList.contains("cs--printing") || document.body.classList.contains("cs--print-full");
+		const getOpen = (k, def = true) => openAll ? true : (openMap[k] ?? def);
+
 		const r = Renderer.get();
 		const choice = this._rec.state?.choice || {};
 
@@ -765,98 +775,128 @@ class SheetApp {
 		const classEnt = this._rules?.classEnt;
 		const subclassEnt = this._rules?.subclassEnt;
 
-		const cfAll = (this._rules?.classFeatures || [])
-			.filter(f => Number(f.level) <= lvl)
-			.sort((a,b) => (a.level - b.level) || a.name.localeCompare(b.name));
+		const norm = (s) => String(s ?? "").trim().toLowerCase();
 
-		const scfAll = (this._rules?.subclassFeatures || [])
-			.filter(f => Number(f.level) <= lvl)
-			.filter(f => {
-				if (!subclassEnt) return false;
-				return (f.subclassShortName && (f.subclassShortName === subclassEnt.shortName || f.subclassShortName === subclassEnt.subclassShortName))
-					|| (f.subclassName && f.subclassName === subclassEnt.name)
-					|| (f.subclassSource && subclassEnt.source && f.subclassSource === subclassEnt.source);
-			})
-			.sort((a,b) => (a.level - b.level) || a.name.localeCompare(b.name));
+		const isSubclassFeatureForSelected = (f) => {
+			if (!subclassEnt) return false;
 
-		const renderEntityEntries = (ent) => {
+			const tName = norm(subclassEnt.name);
+			const tShort = norm(subclassEnt.shortName || subclassEnt.subclassShortName || subclassEnt.name);
+			const tSrc = norm(subclassEnt.source);
+
+			const fShort = norm(f.subclassShortName);
+			const fName = norm(f.subclassName);
+			const fSrc = norm(f.subclassSource);
+
+			const srcOk = (!f.subclassSource) || (!subclassEnt.source) || (fSrc === tSrc);
+			const nameOk = fName && (fName === tName);
+			const shortOk = fShort && (fShort === tShort || fShort === tName || tName.includes(fShort) || fShort.includes(tShort));
+
+			return srcOk && (nameOk || shortOk);
+		};
+
+		const cfAny = (this._rules?.classFeatures || []).slice().sort((a, b) => (a.level - b.level) || a.name.localeCompare(b.name));
+		const cfAtLvl = cfAny.filter(f => Number(f.level) <= lvl);
+
+		const scfAny = (this._rules?.subclassFeatures || []).filter(isSubclassFeatureForSelected).slice()
+			.sort((a, b) => (a.level - b.level) || a.name.localeCompare(b.name));
+		const scfAtLvl = scfAny.filter(f => Number(f.level) <= lvl);
+
+		const mkKey = (...parts) => parts.map(p => String(p ?? "").replace(/\s+/g, " ").trim()).join("|");
+
+		const renderFeat = (f, keyPrefix) => {
+			const fKey = mkKey(keyPrefix, f.source || "", f.level, f.name);
+			const inner = f.entries ? r.render({type: "entries", entries: f.entries}) : `<div class="cs__hint">(No entries)</div>`;
+			return `
+			<details class="cs__feat" data-fkey="${esc(fKey)}" ${getOpen(fKey, false) ? "open" : ""}>
+				<summary>${esc(f.name)} <span class="cs__feat-meta">• lvl ${esc(String(f.level))}</span></summary>
+				<div class="ve-mt-2">${inner}</div>
+			</details>
+		`;
+		};
+
+		const renderEntity = (ent, label, keyPrefix) => {
 			if (!ent) return `<div class="cs__hint">(none)</div>`;
-			const body = ent.entries ? r.render({type:"entries", entries: ent.entries}) : `<div class="cs__hint">(No entries)</div>`;
+			const k = mkKey(keyPrefix, ent.source || "", ent.name || label || "entity");
+			const body = ent.entries ? r.render({type: "entries", entries: ent.entries}) : `<div class="cs__hint">(No entries)</div>`;
 			return `
-				<details ${openAll ? "open" : ""}>
-					<summary>${esc(ent.name)} <span class="cs__feat-meta">• ${esc(ent.source || "")}</span></summary>
-					<div class="ve-mt-2">${body}</div>
-				</details>
-			`;
+			<details class="cs__feat" data-fkey="${esc(k)}" ${getOpen(k, true) ? "open" : ""}>
+				<summary>${esc(label ?? ent.name)} <span class="cs__feat-meta">• ${esc(ent.source || "")}</span></summary>
+				<div class="ve-mt-2">${body}</div>
+			</details>
+		`;
 		};
 
-		const renderFeat = (f) => {
-			const inner = f.entries ? r.render({type:"entries", entries: f.entries}) : `<div class="cs__hint">(No entries)</div>`;
+		const renderSection = (id, title, innerHtml) => {
+			const k = `sec:${id}`;
 			return `
-				<details ${openAll ? "open" : ""}>
-					<summary>${esc(f.name)} <span class="cs__feat-meta">• lvl ${esc(String(f.level))}</span></summary>
-					<div class="ve-mt-2">${inner}</div>
-				</details>
-			`;
+			<details class="cs__sec" id="cs_${esc(id)}" data-fkey="${esc(k)}" ${getOpen(k, true) ? "open" : ""}>
+				<summary>${esc(title)}</summary>
+				<div class="cs__sec-body">${innerHtml}</div>
+			</details>
+		`;
 		};
 
-		// ✅ Sumário (tópicos)
-		const toc = [
-			{ id: "race", title: "Race" },
-			{ id: "subrace", title: "Subrace" },
-			{ id: "class", title: "Class" },
-			{ id: "subclass", title: "Subclass" },
-			{ id: "background", title: "Background" },
-			{ id: "feats", title: "Feats" },
-		];
+		const sections = [];
 
-		const blocks = [];
-		blocks.push(`
-			<div class="cs__toc">
-				<div class="cs__hint"><b>Topics</b></div>
-				<ul>
-					${toc.map(t => `<li><a href="#cs_${esc(t.id)}">${esc(t.title)}</a></li>`).join("")}
-				</ul>
-			</div>
-		`);
+		sections.push({ id: "race", title: "Race", html: renderEntity(race, race?.name ?? "Race", "ent:race") });
+		if (subrace) sections.push({ id: "subrace", title: "Subrace", html: renderEntity(subrace, `${subrace.name} (Subrace)`, "ent:subrace") });
 
-		// Race
-		blocks.push(`<div id="cs_race" class="ve-h4 ve-mt-2">Race</div>`);
-		blocks.push(renderEntityEntries(race));
+		sections.push({
+			id: "class",
+			title: `Class (showing up to level ${lvl})`,
+			html: classEnt
+				? (cfAtLvl.length ? cfAtLvl.map(f => renderFeat(f, "cf")).join("") : `<div class="cs__hint">(No class features found.)</div>`)
+				: `<div class="cs__hint">(none)</div>`,
+		});
 
-		// Subrace
-		blocks.push(`<div id="cs_subrace" class="ve-h4 ve-mt-2">Subrace</div>`);
-		blocks.push(subrace ? renderEntityEntries(subrace) : `<div class="cs__hint">(none)</div>`);
-
-		// Class
-		blocks.push(`<div id="cs_class" class="ve-h4 ve-mt-2">Class <span class="cs__feat-meta">• showing up to level ${esc(String(lvl))}</span></div>`);
-		if (!classEnt) {
-			blocks.push(`<div class="cs__hint">(none)</div>`);
-		} else {
-			blocks.push(cfAll.length ? cfAll.map(renderFeat).join("") : `<div class="cs__hint">(No class features found.)</div>`);
+		let subclassHtml = `<div class="cs__hint">(none)</div>`;
+		if (subclassEnt) {
+			const intro = renderEntity(subclassEnt, `Subclass: ${subclassEnt.name}`, "ent:subclass");
+			if (scfAtLvl.length) subclassHtml = `${intro}${scfAtLvl.map(f => renderFeat(f, "scf")).join("")}`;
+			else if (scfAny.length) {
+				const minLvl = Math.min(...scfAny.map(it => Number(it.level)).filter(Number.isFinite));
+				subclassHtml = `${intro}<div class="cs__hint">(No subclass features at this level. Starts at level ${isFinite(minLvl) ? minLvl : 3}.)</div>`;
+			} else subclassHtml = `${intro}<div class="cs__hint">(No subclass features found.)</div>`;
 		}
+		sections.push({ id: "subclass", title: "Subclass", html: subclassHtml });
 
-		// Subclass
-		blocks.push(`<div id="cs_subclass" class="ve-h4 ve-mt-2">Subclass</div>`);
-		if (!subclassEnt) {
-			blocks.push(`<div class="cs__hint">(none)</div>`);
-		} else {
-			blocks.push(scfAll.length ? scfAll.map(renderFeat).join("") : `<div class="cs__hint">(No subclass features found.)</div>`);
-		}
+		sections.push({
+			id: "background",
+			title: "Background",
+			html: bg ? renderEntity(bg, `Background: ${bg.name}`, "ent:bg") : `<div class="cs__hint">(none)</div>`,
+		});
 
-		// Background
-		blocks.push(`<div id="cs_background" class="ve-h4 ve-mt-2">Background</div>`);
-		blocks.push(bg ? renderEntityEntries(bg) : `<div class="cs__hint">(none)</div>`);
+		sections.push({
+			id: "feats",
+			title: "Feats",
+			html: feats.length
+				? feats.map(ft => renderEntity(ft, `Feat: ${ft.name}`, "ent:feat")).join("")
+				: `<div class="cs__hint">(none)</div>`,
+		});
 
-		// Feats
-		blocks.push(`<div id="cs_feats" class="ve-h4 ve-mt-2">Feats</div>`);
-		if (!feats.length) {
-			blocks.push(`<div class="cs__hint">(none)</div>`);
-		} else {
-			for (const ft of feats) blocks.push(renderEntityEntries({ ...ft, name: `Feat: ${ft.name}` }));
-		}
+		const toc = `
+		<div class="cs__toc">
+			<div class="cs__hint"><b>Topics</b></div>
+			<ul>
+				${sections.map(s => `<li><a href="#cs_${esc(s.id)}">${esc(s.id === "class" ? "Class" : s.id === "subclass" ? "Subclass" : s.id[0].toUpperCase() + s.id.slice(1))}</a></li>`).join("")}
+			</ul>
+		</div>
+	`;
 
-		this._els.features.innerHTML = blocks.join("");
+		this._els.features.innerHTML = [
+			toc,
+			...sections.map(s => renderSection(s.id, s.title, s.html)),
+		].join("");
+
+		// salva estado open/close quando usuário mexe
+		this._els.features.querySelectorAll("details[data-fkey]").forEach(det => {
+			det.addEventListener("toggle", () => {
+				if (isPrinting) return;
+				openMap[det.dataset.fkey] = det.open;
+				this._pSaveDebounced();
+			});
+		});
 	}
 
 	async _pSaveRec () {
