@@ -42,18 +42,51 @@ const profBonusFromLevel = (lvl) => 2 + Math.floor((Math.max(1, lvl) - 1) / 4);
 const chk = (isOn) => isOn ? "&#9745;" : "&#9744;"; // ☑/☐
 
 /* =========================
-   Races: Size/Speed helpers
+   Fetch caches
    ========================= */
 let __RACES_CACHE = null;
+let __BGS_CACHE = null;
+let __FEATS_CACHE = null;
+let __CLASS_INDEX_CACHE = null;
 
 async function pLoadRaces () {
 	if (__RACES_CACHE) return __RACES_CACHE;
-
 	const json = await fetch("data/races.json").then(r => r.json());
 	__RACES_CACHE = Array.isArray(json.race) ? json.race : [];
 	return __RACES_CACHE;
 }
 
+async function pLoadBackgrounds () {
+	if (__BGS_CACHE) return __BGS_CACHE;
+	const json = await fetch("data/backgrounds.json").then(r => r.json());
+	__BGS_CACHE = Array.isArray(json.background) ? json.background : [];
+	return __BGS_CACHE;
+}
+
+async function pLoadFeats () {
+	if (__FEATS_CACHE) return __FEATS_CACHE;
+	const json = await fetch("data/feats.json").then(r => r.json());
+	__FEATS_CACHE = Array.isArray(json.feat) ? json.feat : [];
+	return __FEATS_CACHE;
+}
+
+async function pLoadClassIndex () {
+	if (__CLASS_INDEX_CACHE) return __CLASS_INDEX_CACHE;
+	__CLASS_INDEX_CACHE = await fetch("data/class/index.json").then(r => r.json());
+	return __CLASS_INDEX_CACHE;
+}
+
+async function pLoadClassFileByName (className) {
+	if (!className) return null;
+	const idx = await pLoadClassIndex();
+	const fn = idx[String(className).toLowerCase()];
+	if (!fn) return null;
+	return fetch(`data/class/${fn}`).then(r => r.json());
+}
+
+/* =========================
+   Races: base/sub + size/speed
+   ========================= */
 function findRaceBase (races, name, source) {
 	if (!name) return null;
 	return races.find(r => r.name === name && r.source === source && !r.raceName)
@@ -78,9 +111,7 @@ function findSubrace (races, baseName, baseSource, subName, subSource) {
 function fmtSize (size) {
 	const code = Array.isArray(size) ? size[0] : size;
 	if (!code) return "";
-	try {
-		if (typeof Parser !== "undefined" && Parser.sizeAbvToFull) return Parser.sizeAbvToFull(code);
-	} catch {}
+	try { if (Parser?.sizeAbvToFull) return Parser.sizeAbvToFull(code); } catch {}
 	const map = {T:"Tiny", S:"Small", M:"Medium", L:"Large", H:"Huge", G:"Gargantuan"};
 	return map[code] || String(code);
 }
@@ -93,102 +124,245 @@ function fmtSpeed (speed) {
 		const parts = [];
 		const walk = speed.walk ?? speed.speed;
 		if (typeof walk === "number") parts.push(String(walk));
-
 		for (const [k, v] of Object.entries(speed)) {
 			if (k === "walk" || k === "speed" || k === "note") continue;
 			if (typeof v === "number") parts.push(`${k} ${v}`);
 		}
 		return parts.join(", ");
 	}
-
 	return String(speed);
 }
 
+/* =========================
+   Entries "lite renderer" (no Renderer)
+   - strips {@...} tags
+   - supports common entry types: string, entries, list, item, table, quote/inset
+   ========================= */
+function strip5eTags (s) {
+	if (!s) return "";
+	let out = String(s);
+
+	// replace {@tag content|...} -> content (first segment)
+	out = out.replace(/\{@([a-zA-Z]+)\s([^}]+)\}/g, (_, tag, body) => {
+		const main = String(body).split("|")[0];
+		// some tags: {@b text} {@i text}
+		return main;
+	});
+
+	// remove remaining braces
+	out = out.replace(/[{}]/g, "");
+	return out;
+}
+
+function renderEntriesLite (entries, ctx) {
+	if (entries == null) return "";
+	if (typeof entries === "string") return `<div class="gpl-feat-p">${esc(strip5eTags(entries))}</div>`;
+
+	if (Array.isArray(entries)) return entries.map(it => renderEntriesLite(it, ctx)).join("");
+
+	if (typeof entries !== "object") return "";
+
+	// deref common ref nodes
+	if (entries.type === "refClassFeature" && entries.classFeature && ctx?.classFeatureMap) {
+		const ref = ctx.classFeatureMap.get(String(entries.classFeature).toLowerCase());
+		if (ref) return renderEntriesLite(ref.entries, ctx);
+	}
+	if (entries.type === "refSubclassFeature" && entries.subclassFeature && ctx?.subclassFeatureMap) {
+		const ref = ctx.subclassFeatureMap.get(String(entries.subclassFeature).toLowerCase());
+		if (ref) return renderEntriesLite(ref.entries, ctx);
+	}
+
+	if (entries.type === "entries") {
+		const name = entries.name ? `<div class="gpl-feat-block-title">${esc(strip5eTags(entries.name))}</div>` : "";
+		return `${name}${renderEntriesLite(entries.entries, ctx)}`;
+	}
+
+	if (entries.type === "list") {
+		const items = (entries.items || []).map(it => {
+			if (typeof it === "string") return `<li>${esc(strip5eTags(it))}</li>`;
+			if (it?.type === "item") {
+				const nm = it.name ? `<b>${esc(strip5eTags(it.name))}.</b> ` : "";
+				const body = it.entry ? strip5eTags(it.entry) : "";
+				const extra = it.entries ? renderEntriesLite(it.entries, ctx) : "";
+				return `<li>${nm}${esc(body)}${extra ? `<div>${extra}</div>` : ""}</li>`;
+			}
+			return `<li>${renderEntriesLite(it, ctx)}</li>`;
+		}).join("");
+		return `<ul class="gpl-feat-ul">${items}</ul>`;
+	}
+
+	if (entries.type === "item") {
+		const nm = entries.name ? `<div class="gpl-feat-block-title">${esc(strip5eTags(entries.name))}</div>` : "";
+		const body = entries.entry ? `<div class="gpl-feat-p">${esc(strip5eTags(entries.entry))}</div>` : "";
+		const extra = entries.entries ? renderEntriesLite(entries.entries, ctx) : "";
+		return `${nm}${body}${extra}`;
+	}
+
+	if (entries.type === "table") {
+		const caption = entries.caption ? `<div class="gpl-feat-block-title">${esc(strip5eTags(entries.caption))}</div>` : "";
+		const colLabels = entries.colLabels || [];
+		const rows = entries.rows || [];
+
+		const head = colLabels.length
+			? `<tr>${colLabels.map(c => `<th>${esc(strip5eTags(c))}</th>`).join("")}</tr>`
+			: "";
+
+		const bodyRows = rows.map(row => {
+			const cells = (Array.isArray(row) ? row : [row]).map(c => `<td>${esc(strip5eTags(c))}</td>`).join("");
+			return `<tr>${cells}</tr>`;
+		}).join("");
+
+		return `${caption}<table class="gpl-feat-table">${head}${bodyRows}</table>`;
+	}
+
+	if (entries.type === "quote" || entries.type === "inset") {
+		return `<div class="gpl-feat-quote">${renderEntriesLite(entries.entries, ctx)}</div>`;
+	}
+
+	// fallback: try nested entries
+	if (entries.entries) return renderEntriesLite(entries.entries, ctx);
+
+	return "";
+}
+
+/* Build maps to deref refClassFeature/refSubclassFeature */
+function buildFeatureRefMaps (classFile) {
+	const classFeatureMap = new Map();
+	const subclassFeatureMap = new Map();
+
+	const cfs = Array.isArray(classFile?.classFeature) ? classFile.classFeature : [];
+	const scfs = Array.isArray(classFile?.subclassFeature) ? classFile.subclassFeature : [];
+
+	for (const f of cfs) {
+		const key = `${f.name}|${f.className}|${f.classSource}|${f.level}${f.source ? `|${f.source}` : ""}`.toLowerCase();
+		classFeatureMap.set(key, f);
+	}
+
+	for (const f of scfs) {
+		const key = `${f.name}|${f.className}|${f.classSource}|${f.subclassShortName || f.subclassName || ""}|${f.subclassSource || ""}|${f.level}`.toLowerCase();
+		subclassFeatureMap.set(key, f);
+	}
+
+	return { classFeatureMap, subclassFeatureMap };
+}
+
+/* subclass feature filter */
+function isSubclassFeatureMatch (f, subclassEnt, scChoice) {
+	if (!f || (!subclassEnt && !scChoice)) return false;
+
+	const norm = s => String(s || "").trim().toLowerCase();
+	const selName = norm(subclassEnt?.name ?? scChoice?.name);
+	const selShort = norm(subclassEnt?.shortName ?? subclassEnt?.subclassShortName ?? scChoice?.name);
+	const selSource = norm(subclassEnt?.source ?? scChoice?.source);
+
+	const fShort = norm(f.subclassShortName);
+	const fName = norm(f.subclassName);
+	const fSource = norm(f.subclassSource);
+
+	const srcOk = !f.subclassSource || !selSource || fSource === selSource;
+	const nameOk = fName && fName === selName;
+	const shortOk = fShort && (fShort === selShort || fShort === selName || selName.includes(fShort) || fShort.includes(selShort));
+
+	return srcOk && (nameOk || shortOk);
+}
+
+function findSubclassEnt (classFile, clsChoice, scChoice) {
+	if (!classFile?.subclass || !clsChoice || !scChoice) return null;
+	return classFile.subclass.find(sc =>
+		sc.name === scChoice.name
+		&& sc.source === scChoice.source
+		&& sc.className === clsChoice.name
+	) || classFile.subclass.find(sc =>
+		sc.name === scChoice.name
+		&& sc.className === clsChoice.name
+	);
+}
+
+/* =========================
+   Print blocks
+   ========================= */
 function getParams () {
 	const u = new URL(location.href);
 	return {
 		id: u.searchParams.get("id"),
 		lvl: u.searchParams.get("lvl"),
 		auto: u.searchParams.get("auto") === "1",
+		features: u.searchParams.get("features") === "1",
 	};
 }
 
-/* =========================
-   Blocks
-   ========================= */
 function nameTable (name) {
 	return `
-		<table class="tableBox">
-			<tr class="tableValueBox"><td>${esc(name)}</td></tr>
-			<tr><td class="label">Name</td></tr>
-		</table>
-	`;
+    <table class="tableBox">
+      <tr class="tableValueBox"><td>${esc(name)}</td></tr>
+      <tr><td class="label">Name</td></tr>
+    </table>
+  `;
 }
 
 function introBlock (meta) {
-	// ✅ Languages removido do cabeçalho
 	return `
-		<table class="tableBox">
-			<tr class="tableValueBox">
-				<td class="oneThird">${esc(meta.classLevel)}</td>
-				<td class="oneThird">${esc(meta.background)}</td>
-				<td class="oneThird">${esc(meta.playerName)}</td>
-			</tr>
-			<tr>
-				<td class="label">Class &amp; Level</td>
-				<td class="label">Background</td>
-				<td class="label">Player Name</td>
-			</tr>
-		</table>
+    <table class="tableBox">
+      <tr class="tableValueBox">
+        <td class="oneThird">${esc(meta.classLevel)}</td>
+        <td class="oneThird">${esc(meta.background)}</td>
+        <td class="oneThird">${esc(meta.playerName)}</td>
+      </tr>
+      <tr>
+        <td class="label">Class &amp; Level</td>
+        <td class="label">Background</td>
+        <td class="label">Player Name</td>
+      </tr>
+    </table>
 
-		<table class="tableBox">
-			<tr class="tableValueBox">
-				<td class="oneThird">${esc(meta.race)}</td>
-				<td class="oneThird">${esc(meta.alignment)}</td>
-				<td class="oneThird">${esc(meta.experience)}</td>
-			</tr>
-			<tr>
-				<td class="label">Race</td>
-				<td class="label">Alignment</td>
-				<td class="label">Experience</td>
-			</tr>
-		</table>
+    <table class="tableBox">
+      <tr class="tableValueBox">
+        <td class="oneThird">${esc(meta.race)}</td>
+        <td class="oneThird">${esc(meta.alignment)}</td>
+        <td class="oneThird">${esc(meta.experience)}</td>
+      </tr>
+      <tr>
+        <td class="label">Race</td>
+        <td class="label">Alignment</td>
+        <td class="label">Experience</td>
+      </tr>
+    </table>
 
-		<table class="tableBox">
-			<tr class="tableValueBox">
-				<td>${esc(meta.size)}</td>
-			</tr>
-			<tr>
-				<td class="label">Size</td>
-			</tr>
-		</table>
-	`;
+    <table class="tableBox">
+      <tr class="tableValueBox">
+        <td>${esc(meta.size)}</td>
+      </tr>
+      <tr>
+        <td class="label">Size</td>
+      </tr>
+    </table>
+  `;
 }
 
 function combatStats (pb, dexMod, speed) {
 	return `
-		<div class="header">Combat Stats</div>
-		<table class="tableBox">
-			<tr class="tableValueBox">
-				<td class="oneEight">+${pb}</td>
-				<td class="oneEight"></td>
-				<td class="oneEight">${fmtMod(dexMod)}</td>
-				<td class="oneEight"></td>
-				<td class="oneEight"></td>
-				<td class="oneEight">${esc(speed || "")}</td>
-				<td class="oneEight"></td>
-			</tr>
-			<tr>
-				<td class="label">Prof. Bonus</td>
-				<td class="label">Inspiration</td>
-				<td class="label">Initiative</td>
-				<td class="label">HD</td>
-				<td class="label">HP</td>
-				<td class="label">Spd</td>
-				<td class="label">AC</td>
-			</tr>
-		</table>
-	`;
+    <div class="header">Combat Stats</div>
+    <table class="tableBox">
+      <tr class="tableValueBox">
+        <td class="oneEight">+${pb}</td>
+        <td class="oneEight"></td>
+        <td class="oneEight">${fmtMod(dexMod)}</td>
+        <td class="oneEight"></td>
+        <td class="oneEight"></td>
+        <td class="oneEight">${esc(speed || "")}</td>
+        <td class="oneEight"></td>
+      </tr>
+      <tr>
+        <td class="label">Prof. Bonus</td>
+        <td class="label">Inspiration</td>
+        <td class="label">Initiative</td>
+        <td class="label">HD</td>
+        <td class="label">HP</td>
+        <td class="label">Spd</td>
+        <td class="label">AC</td>
+      </tr>
+    </table>
+  `;
 }
 
 function abilityAndSaves (ab, saveProfs, pb) {
@@ -210,24 +384,24 @@ function abilityAndSaves (ab, saveProfs, pb) {
 		const nameTxt = (ABIL_LABEL[k] || k).toUpperCase();
 
 		return `
-			<td class="gpl-abil-card">
-				<div class="gpl-abil-card-inner">
-					<div class="gpl-abil-save">${x}</div>
-					<div class="gpl-abil-saveval">${esc(saveTxt)}</div>
-					<div class="gpl-abil-mod">${esc(modTxt)}</div>
-					<div class="gpl-abil-name">${esc(nameTxt)}</div>
-					<div class="gpl-abil-score">${esc(scoreTxt)}</div>
-				</div>
-			</td>
-		`;
+      <td class="gpl-abil-card">
+        <div class="gpl-abil-card-inner">
+          <div class="gpl-abil-save">${x}</div>
+          <div class="gpl-abil-saveval">${esc(saveTxt)}</div>
+          <div class="gpl-abil-mod">${esc(modTxt)}</div>
+          <div class="gpl-abil-name">${esc(nameTxt)}</div>
+          <div class="gpl-abil-score">${esc(scoreTxt)}</div>
+        </div>
+      </td>
+    `;
 	}).join("");
 
 	return `
-		<div class="header">ABILITY SCORES &amp; SAVING THROWS</div>
-		<table class="gpl-abil-grid">
-			<tr>${cells}</tr>
-		</table>
-	`;
+    <div class="header">ABILITY SCORES &amp; SAVING THROWS</div>
+    <table class="gpl-abil-grid">
+      <tr>${cells}</tr>
+    </table>
+  `;
 }
 
 function skillsBlock (ab, skillProfs, pb) {
@@ -250,22 +424,22 @@ function skillsBlock (ab, skillProfs, pb) {
 		const rows = arr.map(sk => {
 			const total = mods[sk.abil] + (skillProfs?.[sk.key] ? pb : 0);
 			return `
-				<tr>
-					<td class="gpl-skill-col-chk">${chk(!!skillProfs?.[sk.key])}</td>
-					<td class="gpl-skill-col-mod">${esc(fmtMod(total))}</td>
-					<td>${esc(sk.name)}</td>
-				</tr>
-			`;
+        <tr>
+          <td class="gpl-skill-col-chk">${chk(!!skillProfs?.[sk.key])}</td>
+          <td class="gpl-skill-col-mod">${esc(fmtMod(total))}</td>
+          <td>${esc(sk.name)}</td>
+        </tr>
+      `;
 		}).join("");
 
 		const table = `
-			<table class="gpl-skill-group ${alt ? "gpl-skill-group--alt" : ""}">
-				<tr class="gpl-skill-group-hdr">
-					<td colspan="3">${esc(abilLabel[abil])} skills</td>
-				</tr>
-				${rows}
-			</table>
-		`;
+      <table class="gpl-skill-group ${alt ? "gpl-skill-group--alt" : ""}">
+        <tr class="gpl-skill-group-hdr">
+          <td colspan="3">${esc(abilLabel[abil])} skills</td>
+        </tr>
+        ${rows}
+      </table>
+    `;
 
 		alt = !alt;
 		return table;
@@ -275,90 +449,133 @@ function skillsBlock (ab, skillProfs, pb) {
 
 	const passivePerception = 10 + mods.wis + (skillProfs?.perception ? pb : 0);
 	blocks.push(`
-		<table class="gpl-skill-group gpl-skill-passive">
-			<tr class="gpl-skill-group-hdr">
-				<td colspan="3">PASSIVE</td>
-			</tr>
-			<tr>
-				<td class="gpl-skill-col-chk"></td>
-				<td class="gpl-skill-col-mod">${esc(String(passivePerception))}</td>
-				<td>Passive Perception (WIS)</td>
-			</tr>
-		</table>
-	`);
+    <table class="gpl-skill-group gpl-skill-passive">
+      <tr class="gpl-skill-group-hdr">
+        <td colspan="3">PASSIVE</td>
+      </tr>
+      <tr>
+        <td class="gpl-skill-col-chk"></td>
+        <td class="gpl-skill-col-mod">${esc(String(passivePerception))}</td>
+        <td>Passive Perception (WIS)</td>
+      </tr>
+    </table>
+  `);
 
 	return blocks.join("");
-}
-
-function featuresLines (rec, lvl) {
-	const choice = rec.state?.choice || {};
-	const cls = choice.cls?.name ? `${choice.cls.name}` : "";
-	const sub = choice.subclass?.name ? ` / ${choice.subclass.name}` : "";
-	const race = choice.species?.name ? `${choice.species.name}` : "";
-	const bg = choice.background?.name ? `${choice.background.name}` : "";
-
-	const profs = (rec.sheet?.profsText || "").trim().split("\n").filter(Boolean);
-	const langs = (rec.sheet?.langText || "").trim().split("\n").filter(Boolean);
-
-	const feats = (choice.feats || []).map(f => f?.name).filter(Boolean);
-
-	const lines = [];
-	if (cls || sub) lines.push({label:"Class", description:`${cls}${sub} (lvl ${lvl})`});
-	if (race) lines.push({label:"Race", description: race});
-	if (bg) lines.push({label:"Background", description: bg});
-	if (feats.length) lines.push({label:"Feats", description: feats.join(", ")});
-	if (profs.length) lines.push({label:"Proficiencies", description: profs.join(" | ")});
-	if (langs.length) lines.push({label:"Languages", description: langs.join(" | ")});
-	if ((rec.sheet?.notes || "").trim()) lines.push({label:"Notes", description: rec.sheet.notes.trim()});
-
-	return lines;
 }
 
 function drawSkillsTriple (rec, lvl, pb) {
 	const ab = rec.sheet?.abilities || {str:10,dex:10,con:10,int:10,wis:10,cha:10};
 	const skillProfs = rec.sheet?.skillProfs || {};
 
-	const mid = featuresLines(rec, lvl)
-		.map(it => `<tr><td><b>${esc(it.label)}</b>: ${esc(it.description)}</td></tr>`)
-		.join("");
+	const profs = (rec.sheet?.profsText || "").trim().split("\n").filter(Boolean).join(" | ");
+	const langs = (rec.sheet?.langText || "").trim().split("\n").filter(Boolean).join(" | ");
+	const notes = (rec.sheet?.notes || "").trim();
 
-	// ✅ Current Stats: remove HD e Experience (fica HP/AC + Death Saves)
+	const choice = rec.state?.choice || {};
+	const cls = choice.cls?.name ? `${choice.cls.name}` : "";
+	const sub = choice.subclass?.name ? ` / ${choice.subclass.name}` : "";
+	const race = choice.species?.name ? `${choice.species.name}` : "";
+	const bg = choice.background?.name ? `${choice.background.name}` : "";
+	const feats = (choice.feats || []).map(f => f?.name).filter(Boolean).join(", ");
+
+	const midTop = `
+    <tr><td><b>Class</b>: ${esc(`${cls}${sub} (lvl ${lvl})`)}</td></tr>
+    <tr><td><b>Race</b>: ${esc(race || "—")}</td></tr>
+    <tr><td><b>Background</b>: ${esc(bg || "—")}</td></tr>
+    <tr><td><b>Feats</b>: ${esc(feats || "—")}</td></tr>
+    <tr><td><b>Proficiencies</b>: ${esc(profs || "—")}</td></tr>
+    <tr><td><b>Languages</b>: ${esc(langs || "—")}</td></tr>
+    ${notes ? `<tr><td><b>Notes</b>: ${esc(notes)}</td></tr>` : ""}
+  `;
+
 	return `
-		<table>
-			<tr>
-				<td><div class="header">Skills</div></td>
-				<td style="width:100%" class="header">Proficiencies, Abilities &amp; Features</td>
-				<td><div class="header">Current Stats</div></td>
-			</tr>
-			<tr>
-				<td valign="top">${skillsBlock(ab, skillProfs, pb)}</td>
-				<td valign="top"><table>${mid || "<tr><td></td></tr>"}</table></td>
-				<td valign="top">
-					<table>
-						<tr class="tableValueBox"><td></td></tr>
-						<tr><td class="label">HP</td></tr>
+    <table>
+      <tr>
+        <td><div class="header">Skills</div></td>
+        <td style="width:100%" class="header">Proficiencies &amp; Basics</td>
+        <td><div class="header">Current Stats</div></td>
+      </tr>
+      <tr>
+        <td valign="top">${skillsBlock(ab, skillProfs, pb)}</td>
+        <td valign="top"><table>${midTop}</table></td>
+        <td valign="top">
+          <table>
+            <tr class="tableValueBox"><td></td></tr>
+            <tr><td class="label">HP</td></tr>
 
-						<tr class="tableValueBox"><td></td></tr>
-						<tr><td class="label">AC</td></tr>
+            <tr class="tableValueBox"><td></td></tr>
+            <tr><td class="label">AC</td></tr>
 
-						<tr class="tableValueBox">
-							<td>
-								<table>
-									<tr><td class="small">Success:</td><td>&#9723;&#9723;&#9723;</td></tr>
-									<tr><td class="small">Failures:</td><td>&#9723;&#9723;&#9723;</td></tr>
-								</table>
-							</td>
-						</tr>
-						<tr><td class="label">Death Saves</td></tr>
-					</table>
-				</td>
-			</tr>
-		</table>
-	`;
+            <tr class="tableValueBox">
+              <td>
+                <table>
+                  <tr><td class="small">Success:</td><td>&#9723;&#9723;&#9723;</td></tr>
+                  <tr><td class="small">Failures:</td><td>&#9723;&#9723;&#9723;</td></tr>
+                </table>
+              </td>
+            </tr>
+            <tr><td class="label">Death Saves</td></tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  `;
 }
 
+/* Full features pages (entries) */
+function renderFeatureSection (title, innerHtml) {
+	return `
+    <div class="gpl-feat-section">
+      <div class="gpl-feat-title">${esc(title)}</div>
+      ${innerHtml || `<div class="gpl-feat-p">(none)</div>`}
+    </div>
+  `;
+}
+
+function renderFeaturesPages (data) {
+	const {race, subrace, bg, feats, classFeatures, subclassFeatures, ctx, lvl} = data;
+
+	const raceHtml = race ? renderEntriesLite(race.entries, ctx) : "";
+	const subraceHtml = subrace ? renderEntriesLite(subrace.entries, ctx) : "";
+	const bgHtml = bg ? renderEntriesLite(bg.entries, ctx) : "";
+
+	const featsHtml = (feats || []).map(ft => {
+		const body = ft.entries ? renderEntriesLite(ft.entries, ctx) : "";
+		return `<div class="gpl-feat-block-title">Feat: ${esc(ft.name)} (${esc(ft.source || "")})</div>${body}`;
+	}).join("");
+
+	const classHtml = (classFeatures || []).map(f => {
+		const body = f.entries ? renderEntriesLite(f.entries, ctx) : "";
+		return `<div class="gpl-feat-block-title">${esc(f.name)} (lvl ${esc(String(f.level))})</div>${body}`;
+	}).join("");
+
+	const subclassHtml = (subclassFeatures || []).map(f => {
+		const body = f.entries ? renderEntriesLite(f.entries, ctx) : "";
+		return `<div class="gpl-feat-block-title">${esc(f.name)} (lvl ${esc(String(f.level))})</div>${body}`;
+	}).join("");
+
+	const parts = [];
+	parts.push(`<div class="page-break"></div>`);
+	parts.push(`<div class="gpl-feat-wrap">`);
+	parts.push(`<div class="header">FEATURES (UP TO LEVEL ${esc(String(lvl))})</div>`);
+
+	parts.push(renderFeatureSection("Race", raceHtml));
+	if (subrace) parts.push(renderFeatureSection("Subrace", subraceHtml));
+	parts.push(renderFeatureSection("Class", classHtml));
+	parts.push(renderFeatureSection("Subclass", subclassHtml));
+	parts.push(renderFeatureSection("Background", bgHtml));
+	parts.push(renderFeatureSection("Feats", featsHtml));
+
+	parts.push(`</div>`);
+	return parts.join("");
+}
+
+/* =========================
+   Main
+   ========================= */
 async function main () {
-	const {id, lvl: lvlRaw, auto} = getParams();
+	const {id, lvl: lvlRaw, auto, features} = getParams();
 	if (!id) {
 		document.getElementById("gpl_sheet").innerHTML = "<b>Missing ?id=</b>";
 		return;
@@ -376,29 +593,21 @@ async function main () {
 	rec.sheet.saveProfs = rec.sheet.saveProfs || {};
 	rec.sheet.skillProfs = rec.sheet.skillProfs || {};
 
-	// ✅ lvl primeiro
 	const lvl = Number(lvlRaw) || Number(rec.sheet.level) || 1;
 	const pb = profBonusFromLevel(lvl);
 
-	// ✅ choice UMA vez, antes de usar
 	const choice = rec.state?.choice || {};
 
-	// ✅ size/speed da raça/subraça
-	let sizeStr = "";
-	let speedStr = "";
-	try {
-		const races = await pLoadRaces();
-		const sp = choice.species; // {name, source}
-		const sr = choice.subrace; // {name, source}
+	// size/speed from race
+	const races = await pLoadRaces();
+	const sp = choice.species;
+	const sr = choice.subrace;
 
-		const baseRace = sp ? findRaceBase(races, sp.name, sp.source) : null;
-		const subRace = (sp && sr) ? findSubrace(races, sp.name, sp.source, sr.name, sr.source) : null;
+	const baseRace = sp ? findRaceBase(races, sp.name, sp.source) : null;
+	const subRace = (sp && sr) ? findSubrace(races, sp.name, sp.source, sr.name, sr.source) : null;
 
-		sizeStr = fmtSize(subRace?.size ?? baseRace?.size);
-		speedStr = fmtSpeed(subRace?.speed ?? baseRace?.speed);
-	} catch {
-		// fallback: vazio
-	}
+	const sizeStr = fmtSize(subRace?.size ?? baseRace?.size);
+	const speedStr = fmtSpeed(subRace?.speed ?? baseRace?.speed);
 
 	const dexMod = modFromScore(rec.sheet.abilities.dex);
 
@@ -406,24 +615,80 @@ async function main () {
 	const raceStr = `${choice.species?.name || "—"}${choice.subrace?.name ? ` (${choice.subrace.name})` : ""}`;
 	const bgStr = choice.background?.name || "—";
 
-	const html = [
-		`<div class="center title">Character Sheet</div>`,
-		nameTable(rec.name || rec.state?.meta?.name || "Unnamed"),
-		introBlock({
-			classLevel,
-			background: bgStr,
-			playerName: "",
-			race: raceStr,
-			alignment: "",
-			experience: "",
-			size: sizeStr,
-		}),
-		combatStats(pb, dexMod, speedStr),
-		abilityAndSaves(rec.sheet.abilities, rec.sheet.saveProfs, pb),
-		drawSkillsTriple(rec, lvl, pb),
-	].join("\n");
+	const htmlParts = [];
 
-	document.getElementById("gpl_sheet").innerHTML = html;
+	htmlParts.push(`<div class="center title">Character Sheet</div>`);
+	htmlParts.push(nameTable(rec.name || rec.state?.meta?.name || "Unnamed"));
+	htmlParts.push(introBlock({
+		classLevel,
+		background: bgStr,
+		playerName: "",
+		race: raceStr,
+		alignment: "",
+		experience: "",
+		size: sizeStr,
+	}));
+	htmlParts.push(combatStats(pb, dexMod, speedStr));
+	htmlParts.push(abilityAndSaves(rec.sheet.abilities, rec.sheet.saveProfs, pb));
+	htmlParts.push(drawSkillsTriple(rec, lvl, pb));
+
+	// FULL FEATURES (entries), grouped
+	if (features) {
+		// background & feats entities
+		const bgs = await pLoadBackgrounds();
+		const featsAll = await pLoadFeats();
+
+		const bgEnt = choice.background
+			? (bgs.find(b => b.name === choice.background.name && b.source === choice.background.source) || bgs.find(b => b.name === choice.background.name))
+			: null;
+
+		const featEnts = (Array.isArray(choice.feats) ? choice.feats : [])
+			.map(f => featsAll.find(x => x.name === f.name && x.source === f.source) || featsAll.find(x => x.name === f.name))
+			.filter(Boolean);
+
+		// class/subclass features
+		let classFeatures = [];
+		let subclassFeatures = [];
+		let ctx = {};
+
+		if (choice.cls?.name) {
+			const classFile = await pLoadClassFileByName(choice.cls.name);
+			if (classFile) {
+				const maps = buildFeatureRefMaps(classFile);
+				ctx = { ...maps };
+
+				const cfs = Array.isArray(classFile.classFeature) ? classFile.classFeature : [];
+				classFeatures = cfs
+					.filter(f => f.className === choice.cls.name)
+					.filter(f => !choice.cls.source || f.classSource === choice.cls.source)
+					.filter(f => Number(f.level) <= lvl)
+					.sort((a,b)=> (a.level - b.level) || a.name.localeCompare(b.name));
+
+				const scfs = Array.isArray(classFile.subclassFeature) ? classFile.subclassFeature : [];
+				const subclassEnt = findSubclassEnt(classFile, choice.cls, choice.subclass);
+
+				subclassFeatures = scfs
+					.filter(f => f.className === choice.cls.name)
+					.filter(f => !choice.cls.source || f.classSource === choice.cls.source)
+					.filter(f => Number(f.level) <= lvl)
+					.filter(f => isSubclassFeatureMatch(f, subclassEnt, choice.subclass))
+					.sort((a,b)=> (a.level - b.level) || a.name.localeCompare(b.name));
+			}
+		}
+
+		htmlParts.push(renderFeaturesPages({
+			race: baseRace,
+			subrace: subRace,
+			bg: bgEnt,
+			feats: featEnts,
+			classFeatures,
+			subclassFeatures,
+			ctx,
+			lvl,
+		}));
+	}
+
+	document.getElementById("gpl_sheet").innerHTML = htmlParts.join("\n");
 
 	if (auto) setTimeout(() => window.print(), 50);
 }
