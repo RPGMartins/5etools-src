@@ -28,9 +28,7 @@ body[data-page="charsheet"] #navbar .omnisearch__wrp {
 .cs__meta { font-size: 12px; opacity: 0.85; }
 .cs__meta--rhs { margin-left: auto; text-align: right; }
 
-.cs__sheet {
-	padding: 12px 8px 20px 8px;
-}
+.cs__sheet { padding: 12px 8px 20px 8px; }
 
 .cs__hdr {
 	display: flex;
@@ -110,6 +108,11 @@ body[data-page="charsheet"] #navbar .omnisearch__wrp {
 	background: rgba(0,0,0,0.16);
 }
 
+.cs__row--pickable {
+	border-color: rgba(255,255,255,0.18);
+	background: rgba(255,255,255,0.04);
+}
+
 .cs__row-name { font-weight: 700; min-width: 160px; }
 .cs__row-meta { opacity: 0.8; font-size: 12px; }
 .cs__row-val { margin-left: auto; font-weight: 800; }
@@ -123,7 +126,7 @@ body[data-page="charsheet"] #navbar .omnisearch__wrp {
 .cs__lbl2 { display: flex; flex-direction: column; gap: 4px; }
 .cs__ta { resize: vertical; }
 
-.cs__hint { margin-top: 8px; font-size: 12px; opacity: 0.8; }
+.cs__hint { margin: 6px 0 8px 0; font-size: 12px; opacity: 0.8; }
 
 .cs__features details {
 	border: 1px solid rgba(255,255,255,0.10);
@@ -135,30 +138,18 @@ body[data-page="charsheet"] #navbar .omnisearch__wrp {
 .cs__features summary { cursor: pointer; font-weight: 800; }
 .cs__features .cs__feat-meta { font-size: 12px; opacity: 0.8; margin-left: 6px; font-weight: 400; }
 
+.cs__toc{
+	border:1px solid rgba(255,255,255,0.10);
+	border-radius:10px;
+	padding:10px;
+	background: rgba(0,0,0,0.16);
+	margin-bottom: 10px;
+}
+.cs__toc ul{ margin: 6px 0 0 0; padding-left: 18px; }
+.cs__toc a{ text-decoration: underline; }
+
 @media (max-width: 980px) {
 	.cs__layout { grid-template-columns: 1fr; }
 	.cs__abilities { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 	.cs__ta-row { grid-template-columns: 1fr; }
-}
-
-/* PRINT */
-@media print {
-	.no-print { display: none !important; }
-
-	/* força fundo branco para imprimir bonito */
-	body, .viewport-wrapper, .cs__sheet {
-		background: #fff !important;
-		color: #000 !important;
-	}
-
-	.cs__hdr, .cs__box, .cs__ab, .cs__row, .cs__features details {
-		background: #fff !important;
-		border-color: #bbb !important;
-	}
-
-	.cs__layout { grid-template-columns: 1fr; }
-	.cs__abilities { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-
-	/* abre tudo no print full */
-	body.cs--print-full .cs__features details { page-break-inside: avoid; }
 }

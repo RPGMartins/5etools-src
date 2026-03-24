@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/charsheet.css">
+	<link rel="stylesheet" href="css/charsheet-print.css" media="print">
 
 	<script type="text/javascript" src="sw-injector.js"></script>
 	<script blocking="render" type="module" src="js/styleswitch.js"></script>
@@ -100,6 +101,7 @@
 
 							<div class="cs__box">
 								<div class="cs__box-title">Skills</div>
+								<div class="cs__hint" id="cs__skills_hint"></div>
 								<div class="cs__grid" id="cs__skills"></div>
 							</div>
 
@@ -119,7 +121,7 @@
 								</div>
 
 								<div class="cs__hint">
-									Dica: por enquanto esses campos são “manual”. Depois dá pra auto-popular via JSON de class/race/background.
+									Auto-populado (se estiver vazio) a partir de Race/Class/Background. Você pode editar manualmente.
 								</div>
 							</div>
 						</div>
@@ -157,11 +159,11 @@
 <script type="text/javascript" defer src="js/render-markdown.js"></script>
 <script type="module" src="js/shim-esmodules.js"></script>
 
-<!-- brew/prerelease (compatível com import do 5etools) -->
+<!-- brew/prerelease -->
 <script type="text/javascript" defer src="js/hist.js"></script>
 <script type="module" src="js/utils-brew.js"></script>
 
 <!-- app -->
-<script type="module" src="js/charsheet.js"></script>
+<script type="module" src="js/charsheet.js?v=20260323a"></script>
 </body>
 </html>

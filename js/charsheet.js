@@ -29,6 +29,9 @@ const SKILLS = [
 	{key:"survival", name:"Survival", abil:"wis"},
 ];
 
+const SKILL_KEY_TO_NAME = new Map(SKILLS.map(s => [s.key, s.name]));
+const SKILL_NAME_TO_KEY = new Map(SKILLS.map(s => [s.name.toLowerCase(), s.key]));
+
 const esc = (s) => String(s ?? "")
 	.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
 
@@ -55,13 +58,75 @@ function debounce (fn, ms = 250) {
 	};
 }
 
-// Deref helpers for refClassFeature/refSubclassFeature inside entries
-function uidParseLevel (parts) {
-	for (let i = parts.length - 1; i >= 0; i--) {
-		const n = Number(parts[i]);
-		if (Number.isFinite(n)) return n;
+function normArr (x) { return x == null ? [] : (Array.isArray(x) ? x : [x]); }
+
+function anyTrue (obj) {
+	if (!obj) return false;
+	return Object.values(obj).some(Boolean);
+}
+
+function uniqLines (arr) {
+	const set = new Set();
+	for (const s of arr) {
+		const t = String(s || "").trim();
+		if (t) set.add(t);
 	}
-	return null;
+	return [...set];
+}
+
+function parseLangProf (lp) {
+	const fixed = [];
+	const choose = [];
+
+	for (const it of normArr(lp)) {
+		if (!it || typeof it !== "object") continue;
+		for (const [k, v] of Object.entries(it)) {
+			if (v === true) fixed.push(k);
+			else if (typeof v === "number" && v > 0) choose.push(`Choose ${v} (${k})`);
+		}
+	}
+	return { fixed, choose };
+}
+
+function parseSkillProf (sp) {
+	const fixed = [];
+	let choose = null;
+
+	for (const it of normArr(sp)) {
+		if (!it || typeof it !== "object") continue;
+
+		if (it.choose?.from && it.choose?.count != null) {
+			const from = it.choose.from.map(s => String(s));
+			const count = Number(it.choose.count);
+			if (Number.isFinite(count)) choose = { count, from };
+			continue;
+		}
+
+		for (const [k, v] of Object.entries(it)) {
+			if (v === true) fixed.push(k);
+		}
+	}
+
+	return { fixed, choose };
+}
+
+function parseStartingProfs (obj) {
+	const out = { armor: [], weapons: [], tools: [] };
+	if (!obj) return out;
+
+	const sp = obj.startingProficiencies || obj;
+
+	const addArr = (dst, x) => normArr(x).forEach(v => { if (v) dst.push(String(v)); });
+
+	addArr(out.armor, sp.armor);
+	addArr(out.weapons, sp.weapons);
+	addArr(out.tools, sp.tools);
+
+	if (obj.armorProficiencies) addArr(out.armor, Object.keys(obj.armorProficiencies).filter(k => obj.armorProficiencies[k] === true));
+	if (obj.weaponProficiencies) addArr(out.weapons, Object.keys(obj.weaponProficiencies).filter(k => obj.weaponProficiencies[k] === true));
+	if (obj.toolProficiencies) addArr(out.tools, Object.keys(obj.toolProficiencies).filter(k => obj.toolProficiencies[k] === true));
+
+	return out;
 }
 
 class SheetApp {
@@ -86,6 +151,7 @@ class SheetApp {
 			abilities: document.getElementById("cs__abilities"),
 			saves: document.getElementById("cs__saves"),
 			skills: document.getElementById("cs__skills"),
+			skillsHint: document.getElementById("cs__skills_hint"),
 
 			taProfs: document.getElementById("cs__ta_profs"),
 			taLang: document.getElementById("cs__ta_lang"),
@@ -95,11 +161,23 @@ class SheetApp {
 		};
 
 		this._chars = [];
-		this._rec = null;         // record atual
-		this._rules = null;       // dados carregados (class/subclass/features)
-		this._ui = { printFull: false };
+		this._rec = null;
 
+		this._data = {
+			races: [],
+			backgrounds: [],
+			feats: [],
+		};
+
+		this._rules = null;
+
+		this._ui = { printFull: false };
 		this._pSaveDebounced = debounce(() => this._pSaveRec(), 300);
+
+		this._pickableSkills = new Set();
+		this._chooseSkillInfo = null;
+
+		this._brewClassCache = null; // cache de class/subclass/features (brew+prerelease)
 	}
 
 	async pInit () {
@@ -108,13 +186,14 @@ class SheetApp {
 			BrewUtil2?.pInit?.(),
 		]);
 
+		await this._pLoadCommonData();
 		await this._pLoadCharList();
 		this._bind();
 
 		const idFromUrl = getParam("id");
 		const idLast = localStorage.getItem(LS_LAST_CHAR);
-
 		const pick = idFromUrl || idLast || (this._chars[0]?.id ?? null);
+
 		if (pick) {
 			this._els.selChar.value = pick;
 			await this._pLoadCharacter(pick);
@@ -135,6 +214,8 @@ class SheetApp {
 			this._rec.sheet.level = Number(this._els.selLevel.value) || 1;
 			this._pSaveDebounced();
 			this._renderDerived();
+			this._renderSaves();
+			this._renderSkills();
 			this._renderFeatures();
 		});
 
@@ -156,44 +237,59 @@ class SheetApp {
 			this._pSaveDebounced();
 		});
 
-		this._els.btnManager.addEventListener("click", () => {
-			location.href = "charmanage.html";
-		});
+		this._els.btnManager.addEventListener("click", () => location.href = "charmanage.html");
 
-		this._els.btnPrint.addEventListener("click", () => window.print());
+		this._els.btnPrint.addEventListener("click", () => this._doPrintCurrent());
 
 		this._els.btnPrintFull.addEventListener("click", async () => {
 			if (!this._rec) return;
-			const old = { lvl: this._rec.sheet.level };
 
 			this._ui.printFull = true;
 			document.body.classList.add("cs--print-full");
 
-			// renderiza como lvl 20 só para o print
 			this._renderFeatures({forceLevel: 20, forceOpenAll: true});
+			this._openAllDetails(true);
+			document.body.classList.add("cs--printing");
+			window.print();
 
 			const onAfter = () => {
 				window.removeEventListener("afterprint", onAfter);
 				this._ui.printFull = false;
 				document.body.classList.remove("cs--print-full");
-				this._renderFeatures(); // volta ao normal
+				document.body.classList.remove("cs--printing");
+				this._openAllDetails(false);
+				this._renderFeatures();
 			};
-
 			window.addEventListener("afterprint", onAfter);
-			window.print();
 
-			// fallback (caso afterprint não dispare em alguns browsers)
 			setTimeout(() => {
-				if (this._ui.printFull) {
-					this._ui.printFull = false;
-					document.body.classList.remove("cs--print-full");
-					this._renderFeatures();
-				}
-			}, 1500);
-
-			// não alteramos o level salvo
-			this._rec.sheet.level = old.lvl;
+				if (this._ui.printFull) onAfter();
+			}, 1600);
 		});
+	}
+
+	_doPrintCurrent () {
+		if (!this._rec) return;
+
+		this._openAllDetails(true);
+		document.body.classList.add("cs--printing");
+		window.print();
+
+		const onAfter = () => {
+			window.removeEventListener("afterprint", onAfter);
+			document.body.classList.remove("cs--printing");
+			this._openAllDetails(false);
+		};
+		window.addEventListener("afterprint", onAfter);
+
+		setTimeout(() => {
+			if (document.body.classList.contains("cs--printing")) onAfter();
+		}, 1600);
+	}
+
+	_openAllDetails (isOpen) {
+		const dets = this._els.features.querySelectorAll("details");
+		dets.forEach(d => { d.open = !!isOpen; });
 	}
 
 	async _pLoadCharList () {
@@ -214,13 +310,32 @@ class SheetApp {
 			: `<option value="">(no characters saved)</option>`;
 	}
 
+	async _pLoadCommonData () {
+		const racesJson = await fetch("data/races.json").then(r => r.json());
+		const bgsJson = await fetch("data/backgrounds.json").then(r => r.json());
+		const featsJson = await fetch("data/feats.json").then(r => r.json());
+
+		this._data.races = normArr(racesJson.race);
+		this._data.backgrounds = normArr(bgsJson.background);
+		this._data.feats = normArr(featsJson.feat);
+
+		const merge = (obj) => {
+			if (!obj) return;
+			this._data.races.push(...normArr(obj.race));
+			this._data.backgrounds.push(...normArr(obj.background));
+			this._data.feats.push(...normArr(obj.feat));
+		};
+
+		try { if (PrereleaseUtil?.pGetBrewProcessed) merge(await PrereleaseUtil.pGetBrewProcessed()); } catch {}
+		try { if (BrewUtil2?.pGetBrewProcessed) merge(await BrewUtil2.pGetBrewProcessed()); } catch {}
+	}
+
 	async _pLoadCharacter (id) {
 		const rec = await this._db.getItem(id);
 		if (!rec) return;
 
 		localStorage.setItem(LS_LAST_CHAR, id);
 
-		// sheet state “editável” separado do builder
 		rec.sheet = rec.sheet || this._getDefaultSheet();
 		rec.sheet.level = Number(rec.sheet.level) || 1;
 		rec.sheet.abilities = rec.sheet.abilities || this._getDefaultSheet().abilities;
@@ -232,11 +347,11 @@ class SheetApp {
 
 		this._rec = rec;
 
-		// carrega dados de regras pro personagem (class/subclass/features)
 		this._rules = await this._pLoadRulesForRec(rec);
 
-		// tenta auto-preencher saving throws se vier da class JSON (opcional)
 		this._maybeAutoFillSaveProfs();
+		this._computeSkillChoiceInfo();
+		this._autoPopulateTextAreasAndFixedSkills();
 
 		this._els.selLevel.value = String(rec.sheet.level);
 		this._els.taProfs.value = rec.sheet.profsText;
@@ -250,7 +365,6 @@ class SheetApp {
 		this._renderSkills();
 		this._renderFeatures();
 
-		// salva caso tenhamos preenchido defaults
 		await this._pSaveRec();
 	}
 
@@ -258,8 +372,8 @@ class SheetApp {
 		return {
 			level: 1,
 			abilities: {str:10, dex:10, con:10, int:10, wis:10, cha:10},
-			saveProfs: {},     // {str:true,...}
-			skillProfs: {},    // {acrobatics:true,...}
+			saveProfs: {},
+			skillProfs: {},
 			profsText: "",
 			langText: "",
 			notes: "",
@@ -324,7 +438,6 @@ class SheetApp {
 				this._rec.sheet.abilities[k] = Math.max(1, Math.min(30, Math.floor(val)));
 				this._pSaveDebounced();
 
-				// atualiza mod e tudo derivado
 				const modEl = this._els.abilities.querySelector(`[data-ab-mod="${CSS.escape(k)}"]`);
 				if (modEl) modEl.textContent = fmtMod(modFromScore(this._rec.sheet.abilities[k]));
 				this._renderDerived();
@@ -385,17 +498,28 @@ class SheetApp {
 		const ab = this._rec.sheet.abilities;
 		const sp = this._rec.sheet.skillProfs || {};
 
+		if (this._chooseSkillInfo) {
+			const fromNames = this._chooseSkillInfo.from.map(k => SKILL_KEY_TO_NAME.get(k) || k).join(", ");
+			this._els.skillsHint.textContent = `Class skill options: choose ${this._chooseSkillInfo.count} from: ${fromNames}`;
+		} else if (this._pickableSkills.size) {
+			const fromNames = [...this._pickableSkills].map(k => SKILL_KEY_TO_NAME.get(k) || k).join(", ");
+			this._els.skillsHint.textContent = `Class skill options: ${fromNames}`;
+		} else {
+			this._els.skillsHint.textContent = "";
+		}
+
 		this._els.skills.innerHTML = SKILLS.map(sk => {
 			const mod = modFromScore(ab[sk.abil]);
 			const isProf = !!sp[sk.key];
 			const total = mod + (isProf ? pb : 0);
+			const isPickable = this._pickableSkills.has(sk.key);
 
 			return `
-				<div class="cs__row">
+				<div class="cs__row ${isPickable ? "cs__row--pickable" : ""}">
 					<label style="display:flex; align-items:center; gap:8px; margin:0;">
 						<input type="checkbox" data-skill="${esc(sk.key)}" ${isProf ? "checked" : ""}>
 						<span class="cs__row-name">${esc(sk.name)}</span>
-						<span class="cs__row-meta">(${esc(ABIL_LABEL[sk.abil])} ${esc(fmtMod(mod))})</span>
+						<span class="cs__row-meta">(${esc(ABIL_LABEL[sk.abil])} ${esc(fmtMod(mod))})${isPickable ? " • pick" : ""}</span>
 					</label>
 					<div class="cs__row-val">${esc(fmtMod(total))}</div>
 				</div>
@@ -413,90 +537,191 @@ class SheetApp {
 		});
 	}
 
-	async _pLoadRulesForRec (rec) {
-		const choice = rec?.state?.choice || {};
-		const clsChoice = choice.cls;
-		const scChoice = choice.subclass;
-
-		// 1) tenta achar class/subclass no brew/prerelease, se existirem
-		const brew = await this._pGetBrewMerged();
-		const clsFromBrew = clsChoice ? (brew.class || []).find(c => c.name === clsChoice.name && c.source === clsChoice.source) : null;
-		const scFromBrew = scChoice ? (brew.subclass || []).find(s => s.name === scChoice.name && s.source === scChoice.source && s.className === clsChoice?.name) : null;
-
-		// 2) carrega arquivo padrão do 5etools pelo nome da classe (index.json)
-		let fileJson = null;
-		if (clsChoice && !clsFromBrew) {
-			fileJson = await this._pLoadClassFileByName(clsChoice.name);
-		}
-
-		const classEnt =
-			clsFromBrew
-			|| (fileJson?.class || []).find(c => c.name === clsChoice?.name && c.source === clsChoice?.source)
-			|| (fileJson?.class || []).find(c => c.name === clsChoice?.name);
-
-		const subclassEnt =
-			scFromBrew
-			|| (fileJson?.subclass || []).find(s => s.name === scChoice?.name && s.source === scChoice?.source && s.className === clsChoice?.name && s.classSource === clsChoice?.source)
-			|| (fileJson?.subclass || []).find(s => s.name === scChoice?.name && s.className === clsChoice?.name);
-
-		// features: filtra direto pelos objetos classFeature/subclassFeature do arquivo
-		const classFeatures = [
-			...(fileJson?.classFeature || []),
-			...(brew.classFeature || []),
-		].filter(f => f.className === clsChoice?.name && f.classSource === clsChoice?.source);
-
-		const subclassFeatures = [
-			...(fileJson?.subclassFeature || []),
-			...(brew.subclassFeature || []),
-		].filter(f => f.className === clsChoice?.name && f.classSource === clsChoice?.source);
-
-		// index por UID “string”
-		const mapCf = new Map();
-		const mapScf = new Map();
-
-		for (const f of classFeatures) {
-			// uid típico: "Name|Class|Source|Level|Source"
-			const uid = `${f.name}|${f.className}|${f.classSource}|${f.level}${f.source ? `|${f.source}` : ""}`;
-			mapCf.set(uid, f);
-		}
-
-		for (const f of subclassFeatures) {
-			// uid típico: "Name|Class|ClassSource|SubclassShort|SubclassSource|Level"
-			const uid = `${f.name}|${f.className}|${f.classSource}|${f.subclassShortName || f.subclassName || ""}|${f.subclassSource || ""}|${f.level}`;
-			mapScf.set(uid, f);
-		}
-
-		return { classEnt, subclassEnt, classFeatures, subclassFeatures, mapCf, mapScf };
+	// ======================
+	// Auto-popular profs/lang + fixed skills
+	// ======================
+	_findRaceBase (name, source) {
+		return this._data.races.find(r => r.name === name && r.source === source && !r.raceName)
+			|| this._data.races.find(r => r.name === name && r.source === source);
 	}
 
-	async _pGetBrewMerged () {
-		// une prerelease + brew
+	_findSubrace (raceName, raceSource, subName, subSource) {
+		return this._data.races.find(r =>
+			r.name === subName
+			&& r.source === subSource
+			&& (r.raceName === raceName)
+			&& ((r.raceSource || r.source) === raceSource)
+		);
+	}
+
+	_findBackground (name, source) {
+		return this._data.backgrounds.find(b => b.name === name && b.source === source)
+			|| this._data.backgrounds.find(b => b.name === name);
+	}
+
+	_findFeat (name, source) {
+		return this._data.feats.find(f => f.name === name && f.source === source)
+			|| this._data.feats.find(f => f.name === name);
+	}
+
+	_computeSkillChoiceInfo () {
+		this._pickableSkills = new Set();
+		this._chooseSkillInfo = null;
+
+		const clsEnt = this._rules?.classEnt;
+		if (!clsEnt) return;
+
+		const sp = clsEnt.startingProficiencies?.skills || clsEnt.skillProficiencies || clsEnt.skills;
+		const parsed = parseSkillProf(sp);
+
+		for (const nm of parsed.fixed) {
+			const k = SKILL_NAME_TO_KEY.get(String(nm).toLowerCase());
+			if (k) this._pickableSkills.add(k);
+		}
+
+		if (parsed.choose?.from?.length) {
+			const fromKeys = parsed.choose.from
+				.map(n => SKILL_NAME_TO_KEY.get(String(n).toLowerCase()))
+				.filter(Boolean);
+			fromKeys.forEach(k => this._pickableSkills.add(k));
+			this._chooseSkillInfo = { count: parsed.choose.count, from: fromKeys };
+		}
+	}
+
+	_autoPopulateTextAreasAndFixedSkills () {
+		if (!this._rec) return;
+
+		const choice = this._rec.state?.choice || {};
+		const race = choice.species ? this._findRaceBase(choice.species.name, choice.species.source) : null;
+		const subrace = (choice.species && choice.subrace)
+			? this._findSubrace(choice.species.name, choice.species.source, choice.subrace.name, choice.subrace.source)
+			: null;
+		const bg = choice.background ? this._findBackground(choice.background.name, choice.background.source) : null;
+
+		const profLines = [];
+		const langLines = [];
+
+		const pushProfs = (label, obj) => {
+			const p = parseStartingProfs(obj);
+			if (p.armor.length) profLines.push(`${label} Armor: ${p.armor.join(", ")}`);
+			if (p.weapons.length) profLines.push(`${label} Weapons: ${p.weapons.join(", ")}`);
+			if (p.tools.length) profLines.push(`${label} Tools: ${p.tools.join(", ")}`);
+		};
+
+		if (race) pushProfs("Race", race);
+		if (subrace) pushProfs("Subrace", subrace);
+		if (this._rules?.classEnt) pushProfs("Class", this._rules.classEnt);
+		if (bg) pushProfs("Background", bg);
+
+		const addLang = (label, lp) => {
+			const {fixed, choose} = parseLangProf(lp);
+			if (fixed.length) langLines.push(`${label}: ${fixed.join(", ")}`);
+			choose.forEach(c => langLines.push(`${label}: ${c}`));
+		};
+
+		if (race?.languageProficiencies) addLang("Race", race.languageProficiencies);
+		if (subrace?.languageProficiencies) addLang("Subrace", subrace.languageProficiencies);
+		if (bg?.languageProficiencies) addLang("Background", bg.languageProficiencies);
+
+		if (!String(this._rec.sheet.profsText || "").trim() && profLines.length) {
+			this._rec.sheet.profsText = uniqLines(profLines).join("\n");
+		}
+		if (!String(this._rec.sheet.langText || "").trim() && langLines.length) {
+			this._rec.sheet.langText = uniqLines(langLines).join("\n");
+		}
+
+		if (!anyTrue(this._rec.sheet.skillProfs)) {
+			const applyFixedSkillsFrom = (sp) => {
+				const {fixed} = parseSkillProf(sp);
+				for (const nm of fixed) {
+					const k = SKILL_NAME_TO_KEY.get(String(nm).toLowerCase());
+					if (k) this._rec.sheet.skillProfs[k] = true;
+				}
+			};
+
+			if (race?.skillProficiencies) applyFixedSkillsFrom(race.skillProficiencies);
+			if (subrace?.skillProficiencies) applyFixedSkillsFrom(subrace.skillProficiencies);
+			if (bg?.skillProficiencies) applyFixedSkillsFrom(bg.skillProficiencies);
+		}
+
+		this._els.taProfs.value = this._rec.sheet.profsText || "";
+		this._els.taLang.value = this._rec.sheet.langText || "";
+	}
+
+	// ======================
+	// Rules loading: class/subclass/features (core + prerelease + brew)
+	// ======================
+	async _pGetBrewClassCache () {
+		if (this._brewClassCache) return this._brewClassCache;
+
 		const out = { class: [], subclass: [], classFeature: [], subclassFeature: [] };
 
 		try {
 			if (PrereleaseUtil?.pGetBrewProcessed) {
 				const pre = await PrereleaseUtil.pGetBrewProcessed();
-				(out.class ||= []).push(...(pre?.class || []));
-				(out.subclass ||= []).push(...(pre?.subclass || []));
-				(out.classFeature ||= []).push(...(pre?.classFeature || []));
-				(out.subclassFeature ||= []).push(...(pre?.subclassFeature || []));
+				out.class.push(...normArr(pre?.class));
+				out.subclass.push(...normArr(pre?.subclass));
+				out.classFeature.push(...normArr(pre?.classFeature));
+				out.subclassFeature.push(...normArr(pre?.subclassFeature));
 			}
 		} catch {}
 
 		try {
 			if (BrewUtil2?.pGetBrewProcessed) {
 				const br = await BrewUtil2.pGetBrewProcessed();
-				(out.class ||= []).push(...(br?.class || []));
-				(out.subclass ||= []).push(...(br?.subclass || []));
-				(out.classFeature ||= []).push(...(br?.classFeature || []));
-				(out.subclassFeature ||= []).push(...(br?.subclassFeature || []));
+				out.class.push(...normArr(br?.class));
+				out.subclass.push(...normArr(br?.subclass));
+				out.classFeature.push(...normArr(br?.classFeature));
+				out.subclassFeature.push(...normArr(br?.subclassFeature));
 			}
 		} catch {}
 
+		this._brewClassCache = out;
 		return out;
 	}
 
+	async _pLoadRulesForRec (rec) {
+		const choice = rec?.state?.choice || {};
+		const clsChoice = choice.cls;
+		const scChoice = choice.subclass;
+		const brew = await this._pGetBrewClassCache();
+
+		let fileJson = null;
+		if (clsChoice) fileJson = await this._pLoadClassFileByName(clsChoice.name);
+
+		const classEnt =
+			(brew.class || []).find(c => c.name === clsChoice?.name && c.source === clsChoice?.source)
+			|| (fileJson?.class || []).find(c => c.name === clsChoice?.name && c.source === clsChoice?.source)
+			|| (brew.class || []).find(c => c.name === clsChoice?.name)
+			|| (fileJson?.class || []).find(c => c.name === clsChoice?.name);
+
+		const subclassEnt =
+			(brew.subclass || []).find(s => s.name === scChoice?.name && s.source === scChoice?.source && s.className === clsChoice?.name)
+			|| (fileJson?.subclass || []).find(s => s.name === scChoice?.name && s.source === scChoice?.source && s.className === clsChoice?.name)
+			|| (brew.subclass || []).find(s => s.name === scChoice?.name && s.className === clsChoice?.name)
+			|| (fileJson?.subclass || []).find(s => s.name === scChoice?.name && s.className === clsChoice?.name);
+
+		const classFeatures = [
+			...normArr(fileJson?.classFeature),
+			...normArr(brew.classFeature),
+		].filter(f =>
+			f?.className === clsChoice?.name
+			&& (!clsChoice?.source || f?.classSource === clsChoice.source)
+		);
+
+		const subclassFeatures = [
+			...normArr(fileJson?.subclassFeature),
+			...normArr(brew.subclassFeature),
+		].filter(f =>
+			f?.className === clsChoice?.name
+			&& (!clsChoice?.source || f?.classSource === clsChoice.source)
+		);
+
+		return { classEnt, subclassEnt, classFeatures, subclassFeatures };
+	}
+
 	async _pLoadClassFileByName (className) {
+		if (!className) return null;
 		const idx = await fetch("data/class/index.json").then(r => r.json());
 		const key = String(className || "").toLowerCase();
 		const fn = idx[key];
@@ -505,11 +730,10 @@ class SheetApp {
 	}
 
 	_maybeAutoFillSaveProfs () {
-		// se o usuário já mexeu, não sobrescreve
 		const hasAny = Object.values(this._rec.sheet.saveProfs || {}).some(Boolean);
 		if (hasAny) return;
 
-		const profArr = this._rules?.classEnt?.proficiency; // wiki diz que existe em algumas classes :contentReference[oaicite:4]{index=4}
+		const profArr = this._rules?.classEnt?.proficiency;
 		if (!Array.isArray(profArr) || !profArr.length) return;
 
 		const set = {};
@@ -520,124 +744,116 @@ class SheetApp {
 		this._rec.sheet.saveProfs = set;
 	}
 
-	_derefEntries (entries) {
-		// resolve refClassFeature/refSubclassFeature “na raça” (sem depender de internals)
-		const walk = (node) => {
-			if (node == null) return node;
-			if (typeof node === "string") return node;
-			if (Array.isArray(node)) return node.map(walk);
-
-			if (node.type === "refClassFeature" && node.classFeature) {
-				const cf = this._findClassFeatureFromRef(node.classFeature);
-				if (!cf) return { type: "entries", name: "(Feature)", entries: ["(Missing refClassFeature.)"] };
-				return { type: "entries", name: cf.name, entries: walk(cf.entries || []) };
-			}
-
-			if (node.type === "refSubclassFeature" && node.subclassFeature) {
-				const scf = this._findSubclassFeatureFromRef(node.subclassFeature);
-				if (!scf) return { type: "entries", name: "(Feature)", entries: ["(Missing refSubclassFeature.)"] };
-				return { type: "entries", name: scf.name, entries: walk(scf.entries || []) };
-			}
-
-			const out = {...node};
-			for (const k of Object.keys(out)) out[k] = walk(out[k]);
-			return out;
-		};
-
-		return walk(entries);
-	}
-
-	_findClassFeatureFromRef (refStr) {
-		// ex: "Replicate Magic Item|Artificer|EFA|2|EFA"
-		const parts = String(refStr).split("|").map(s => s.trim());
-		const name = parts[0];
-		const className = parts[1];
-		const classSource = parts[2];
-		const lvl = uidParseLevel(parts);
-
-		const list = this._rules?.classFeatures || [];
-		return list.find(f => f.name === name && f.className === className && f.classSource === classSource && (lvl == null || f.level === lvl))
-			|| list.find(f => f.name === name && f.className === className && f.classSource === classSource);
-	}
-
-	_findSubclassFeatureFromRef (refStr) {
-		// ex: "Guardian|Artificer|TCE|Armorer|TCE|15"
-		const parts = String(refStr).split("|").map(s => s.trim());
-		const name = parts[0];
-		const className = parts[1];
-		const classSource = parts[2];
-		const subShort = parts[3];
-		const subSource = parts[4];
-		const lvl = uidParseLevel(parts);
-
-		const list = this._rules?.subclassFeatures || [];
-		return list.find(f =>
-			f.name === name
-			&& f.className === className
-			&& f.classSource === classSource
-			&& (f.subclassShortName === subShort || f.subclassName === subShort)
-			&& (f.subclassSource === subSource)
-			&& (lvl == null || f.level === lvl)
-		) || list.find(f =>
-			f.name === name
-			&& f.className === className
-			&& f.classSource === classSource
-			&& (f.subclassShortName === subShort || f.subclassName === subShort)
-		);
-	}
-
+	// ======================
+	// Features: agrupadas e ordenadas por tópico
+	// ======================
 	_renderFeatures (opts = {}) {
-		if (!this._rules) {
-			this._els.features.innerHTML = `<div class="initial-message initial-message--med">No class data.</div>`;
-			return;
-		}
-
 		const lvl = opts.forceLevel ?? (this._rec.sheet.level || 1);
 		const openAll = !!opts.forceOpenAll;
 
 		const r = Renderer.get();
+		const choice = this._rec.state?.choice || {};
 
-		const classEnt = this._rules.classEnt;
-		const subclassEnt = this._rules.subclassEnt;
+		const race = choice.species ? this._findRaceBase(choice.species.name, choice.species.source) : null;
+		const subrace = (choice.species && choice.subrace)
+			? this._findSubrace(choice.species.name, choice.species.source, choice.subrace.name, choice.subrace.source)
+			: null;
 
-		const cf = (this._rules.classFeatures || [])
+		const bg = choice.background ? this._findBackground(choice.background.name, choice.background.source) : null;
+		const feats = normArr(choice.feats).map(f => this._findFeat(f.name, f.source)).filter(Boolean);
+
+		const classEnt = this._rules?.classEnt;
+		const subclassEnt = this._rules?.subclassEnt;
+
+		const cfAll = (this._rules?.classFeatures || [])
 			.filter(f => Number(f.level) <= lvl)
 			.sort((a,b) => (a.level - b.level) || a.name.localeCompare(b.name));
 
-		const scf = (this._rules.subclassFeatures || [])
-			.filter(f => !!subclassEnt && (f.subclassShortName === subclassEnt.shortName || f.subclassShortName === subclassEnt.subclassShortName || f.subclassName === subclassEnt.name))
+		const scfAll = (this._rules?.subclassFeatures || [])
 			.filter(f => Number(f.level) <= lvl)
+			.filter(f => {
+				if (!subclassEnt) return false;
+				return (f.subclassShortName && (f.subclassShortName === subclassEnt.shortName || f.subclassShortName === subclassEnt.subclassShortName))
+					|| (f.subclassName && f.subclassName === subclassEnt.name)
+					|| (f.subclassSource && subclassEnt.source && f.subclassSource === subclassEnt.source);
+			})
 			.sort((a,b) => (a.level - b.level) || a.name.localeCompare(b.name));
 
-		const blocks = [];
-
-		if (classEnt) blocks.push(`<div class="cs__hint"><b>Class:</b> ${esc(classEnt.name)} (${esc(classEnt.source)}) • Showing up to level ${esc(String(lvl))}</div>`);
-		if (subclassEnt) blocks.push(`<div class="cs__hint"><b>Subclass:</b> ${esc(subclassEnt.name)} (${esc(subclassEnt.source)})</div>`);
+		const renderEntityEntries = (ent) => {
+			if (!ent) return `<div class="cs__hint">(none)</div>`;
+			const body = ent.entries ? r.render({type:"entries", entries: ent.entries}) : `<div class="cs__hint">(No entries)</div>`;
+			return `
+				<details ${openAll ? "open" : ""}>
+					<summary>${esc(ent.name)} <span class="cs__feat-meta">• ${esc(ent.source || "")}</span></summary>
+					<div class="ve-mt-2">${body}</div>
+				</details>
+			`;
+		};
 
 		const renderFeat = (f) => {
-			const entries = this._derefEntries(f.entries || []);
-			const inner = entries?.length ? r.render({type:"entries", entries}) : `<div class="cs__hint">(No entries)</div>`;
-
+			const inner = f.entries ? r.render({type:"entries", entries: f.entries}) : `<div class="cs__hint">(No entries)</div>`;
 			return `
-				<details class="cs__feature" ${openAll ? "open" : ""}>
+				<details ${openAll ? "open" : ""}>
 					<summary>${esc(f.name)} <span class="cs__feat-meta">• lvl ${esc(String(f.level))}</span></summary>
 					<div class="ve-mt-2">${inner}</div>
 				</details>
 			`;
 		};
 
-		if (cf.length) {
-			blocks.push(`<div class="ve-h4 ve-mt-2">Class Features</div>`);
-			blocks.push(cf.map(renderFeat).join(""));
+		// ✅ Sumário (tópicos)
+		const toc = [
+			{ id: "race", title: "Race" },
+			{ id: "subrace", title: "Subrace" },
+			{ id: "class", title: "Class" },
+			{ id: "subclass", title: "Subclass" },
+			{ id: "background", title: "Background" },
+			{ id: "feats", title: "Feats" },
+		];
+
+		const blocks = [];
+		blocks.push(`
+			<div class="cs__toc">
+				<div class="cs__hint"><b>Topics</b></div>
+				<ul>
+					${toc.map(t => `<li><a href="#cs_${esc(t.id)}">${esc(t.title)}</a></li>`).join("")}
+				</ul>
+			</div>
+		`);
+
+		// Race
+		blocks.push(`<div id="cs_race" class="ve-h4 ve-mt-2">Race</div>`);
+		blocks.push(renderEntityEntries(race));
+
+		// Subrace
+		blocks.push(`<div id="cs_subrace" class="ve-h4 ve-mt-2">Subrace</div>`);
+		blocks.push(subrace ? renderEntityEntries(subrace) : `<div class="cs__hint">(none)</div>`);
+
+		// Class
+		blocks.push(`<div id="cs_class" class="ve-h4 ve-mt-2">Class <span class="cs__feat-meta">• showing up to level ${esc(String(lvl))}</span></div>`);
+		if (!classEnt) {
+			blocks.push(`<div class="cs__hint">(none)</div>`);
+		} else {
+			blocks.push(cfAll.length ? cfAll.map(renderFeat).join("") : `<div class="cs__hint">(No class features found.)</div>`);
 		}
 
-		if (subclassEnt) {
-			blocks.push(`<div class="ve-h4 ve-mt-2">Subclass Features</div>`);
-			blocks.push(scf.length ? scf.map(renderFeat).join("") : `<div class="cs__hint">(No subclass features found for this selection.)</div>`);
+		// Subclass
+		blocks.push(`<div id="cs_subclass" class="ve-h4 ve-mt-2">Subclass</div>`);
+		if (!subclassEnt) {
+			blocks.push(`<div class="cs__hint">(none)</div>`);
+		} else {
+			blocks.push(scfAll.length ? scfAll.map(renderFeat).join("") : `<div class="cs__hint">(No subclass features found.)</div>`);
 		}
 
-		if (!cf.length && !scf.length) {
-			blocks.push(`<div class="initial-message initial-message--med">No features to show (missing class selection or data).</div>`);
+		// Background
+		blocks.push(`<div id="cs_background" class="ve-h4 ve-mt-2">Background</div>`);
+		blocks.push(bg ? renderEntityEntries(bg) : `<div class="cs__hint">(none)</div>`);
+
+		// Feats
+		blocks.push(`<div id="cs_feats" class="ve-h4 ve-mt-2">Feats</div>`);
+		if (!feats.length) {
+			blocks.push(`<div class="cs__hint">(none)</div>`);
+		} else {
+			for (const ft of feats) blocks.push(renderEntityEntries({ ...ft, name: `Feat: ${ft.name}` }));
 		}
 
 		this._els.features.innerHTML = blocks.join("");
@@ -647,17 +863,15 @@ class SheetApp {
 		if (!this._rec) return;
 
 		this._rec.updatedAt = Date.now();
-
 		await this._db.setItem(this._rec.id, {
 			id: this._rec.id,
 			name: this._rec.name,
 			createdAt: this._rec.createdAt,
 			updatedAt: this._rec.updatedAt,
 			state: this._rec.state,
-			sheet: this._rec.sheet, // ✅ novo bloco
+			sheet: this._rec.sheet,
 		});
 
-		// Atualiza RHS timestamp
 		this._els.metaRhs.textContent = `Saved locally • Updated: ${new Date(this._rec.updatedAt).toLocaleString()}`;
 	}
 }
