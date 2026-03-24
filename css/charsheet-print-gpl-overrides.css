@@ -1,2 +1,154 @@
 ﻿@page { size: A4; margin: 8mm; }
 body { width: 210mm; height: 297mm; padding: 0; }
+/* --- Skills agrupadas por atributo (print) --- */
+.gpl-skill-group{
+	border: 1px solid #bbb;
+	border-radius: 4px;
+	margin: 6px 0;
+	overflow: hidden;
+}
+
+.gpl-skill-group--alt{
+	background: #f3f3f3;
+}
+
+.gpl-skill-group-hdr{
+	font-weight: 700;
+	font-size: 11px;
+	padding: 4px 6px;
+	border-bottom: 1px solid #bbb;
+	background: #fff;
+}
+
+.gpl-skill-group--alt .gpl-skill-group-hdr{
+	background: #f3f3f3;
+}
+
+.gpl-skill-row{
+	display: grid;
+	grid-template-columns: 14px 42px 1fr;
+	gap: 6px;
+	padding: 3px 6px;
+	font-size: 10.5px;
+	border-bottom: 1px solid #ddd;
+}
+
+.gpl-skill-row:last-child{
+	border-bottom: 0;
+}
+
+.gpl-skill-name{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.gpl-skill-mod{
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+}
+/* Forçar tentativa de imprimir cores/fundos */
+html, body {
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+}
+
+/* Skills agrupadas por atributo (usando tabelas, estilo template) */
+.gpl-skill-group {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 6px 0;
+	border: 1px solid #bbb;
+}
+
+.gpl-skill-group td {
+	padding: 2px 4px;
+	font-size: 10.5px;
+	vertical-align: top;
+}
+
+.gpl-skill-group-hdr td {
+	font-weight: 700;
+	font-size: 11px;
+	border-bottom: 1px solid #bbb;
+}
+
+.gpl-skill-col-chk { width: 14px; }
+.gpl-skill-col-mod {
+	width: 42px;
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+}
+
+.gpl-skill-group--alt td {
+	background: #f2f2f2;
+}
+
+/* Passive block */
+.gpl-skill-passive td {
+	font-weight: 700;
+}
+/* --- Ability+Save cards (print) --- */
+.gpl-abil-grid {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 6px;
+	margin-top: 6px;
+}
+
+.gpl-abil-card {
+	border: 1px solid #000;
+	width: 16.5%;
+	height: 78px;
+	padding: 0;
+}
+
+.gpl-abil-card-inner {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	font-family: "Old Standard TT", serif;
+}
+
+.gpl-abil-mod {
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 1;
+	padding-top: 6px;
+}
+
+.gpl-abil-save {
+	position: absolute;
+	left: 8px;
+	top: 10px;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.gpl-abil-saveval {
+	position: absolute;
+	right: 8px;
+	top: 10px;
+	font-size: 12px;
+	font-weight: 700;
+}
+
+.gpl-abil-name {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 22px;
+	font-size: 16px;
+	font-weight: 700;
+	letter-spacing: 0.5px;
+}
+
+.gpl-abil-score {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 4px;
+	font-size: 16px;
+	font-weight: 700;
+}

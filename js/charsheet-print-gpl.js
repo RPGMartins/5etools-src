@@ -130,25 +130,37 @@ function abilityAndSaves (ab, saveProfs, pb) {
 	const mods = {};
 	for (const k of ABILS) mods[k] = modFromScore(ab[k]);
 
-	const save = {};
-	for (const k of ABILS) save[k] = mods[k] + (saveProfs?.[k] ? pb : 0);
+	const saves = {};
+	for (const k of ABILS) {
+		const isProf = !!saveProfs?.[k];
+		saves[k] = mods[k] + (isProf ? pb : 0);
+	}
+
+	const cells = ABILS.map(k => {
+		const isProf = !!saveProfs?.[k];
+		const x = isProf ? "X" : "o"; // visual mais “tabelinha”; pode trocar por "X" e "" se quiser
+		const modTxt = fmtMod(mods[k]);
+		const saveTxt = fmtMod(saves[k]);
+		const scoreTxt = String(ab[k] ?? 10);
+		const nameTxt = (ABIL_LABEL[k] || k).toUpperCase();
+
+		return `
+      <td class="gpl-abil-card">
+        <div class="gpl-abil-card-inner">
+          <div class="gpl-abil-save">${x}</div>
+          <div class="gpl-abil-saveval">${esc(saveTxt)}</div>
+          <div class="gpl-abil-mod">${esc(modTxt)}</div>
+          <div class="gpl-abil-name">${esc(nameTxt)}</div>
+          <div class="gpl-abil-score">${esc(scoreTxt)}</div>
+        </div>
+      </td>
+    `;
+	}).join("");
 
 	return `
-    <table class="tableBox">
-      <tr>
-        <td colspan="6"><div class="header">Ability Scores</div></td>
-        <td colspan="6"><div class="header">Saving Throws</div></td>
-      </tr>
-
-      <tr class="tableValueBox">
-        ${ABILS.map(k => `<td class="one12th">${esc(String(ab[k] ?? 10))} (${esc(fmtMod(mods[k]))})</td>`).join("")}
-        ${ABILS.map(k => `<td class="one12th">${esc(fmtMod(save[k]))}</td>`).join("")}
-      </tr>
-
-      <tr>
-        ${ABILS.map(k => `<td class="label">${esc(ABIL_LABEL[k])}</td>`).join("")}
-        ${ABILS.map(k => `<td class="label"><div class="inline smallWidth">${chk(!!saveProfs?.[k])}</div> ${esc(ABIL_LABEL[k])}</td>`).join("")}
-      </tr>
+    <div class="header">ABILITY SCORES &amp; SAVING THROWS</div>
+    <table class="gpl-abil-grid">
+      <tr>${cells}</tr>
     </table>
   `;
 }
@@ -157,23 +169,62 @@ function skillsBlock (ab, skillProfs, pb) {
 	const mods = {};
 	for (const k of ABILS) mods[k] = modFromScore(ab[k]);
 
-	const rows = SKILLS.map(sk => {
-		const total = mods[sk.abil] + (skillProfs?.[sk.key] ? pb : 0);
-		return `<tr>
-      <td>${chk(!!skillProfs?.[sk.key])}</td>
-      <td>${esc(fmtMod(total))}</td>
-      <td class="small">${esc(sk.name)} (${esc(sk.abil)})</td>
-    </tr>`;
-	}).join("");
+	const groupsOrder = ["str", "dex", "con", "int", "wis", "cha"];
+	const abilLabel = {str:"STR", dex:"DEX", con:"CON", int:"INT", wis:"WIS", cha:"CHA"};
+
+	const groups = new Map(groupsOrder.map(k => [k, []]));
+	for (const sk of SKILLS) {
+		if (groups.has(sk.abil)) groups.get(sk.abil).push(sk);
+	}
+	for (const k of groupsOrder) groups.get(k).sort((a,b)=>a.name.localeCompare(b.name));
+
+	let alt = false;
+
+	const renderGroup = (abil) => {
+		const arr = groups.get(abil) || [];
+		if (!arr.length) return "";
+
+		const rows = arr.map(sk => {
+			const total = mods[sk.abil] + (skillProfs?.[sk.key] ? pb : 0);
+			return `
+        <tr>
+          <td class="gpl-skill-col-chk">${chk(!!skillProfs?.[sk.key])}</td>
+          <td class="gpl-skill-col-mod">${esc(fmtMod(total))}</td>
+          <td>${esc(sk.name)}</td>
+        </tr>
+      `;
+		}).join("");
+
+		const table = `
+      <table class="gpl-skill-group ${alt ? "gpl-skill-group--alt" : ""}">
+        <tr class="gpl-skill-group-hdr">
+          <td colspan="3">${esc(abilLabel[abil])} skills</td>
+        </tr>
+        ${rows}
+      </table>
+    `;
+
+		alt = !alt;
+		return table;
+	};
+
+	const blocks = groupsOrder.map(renderGroup).filter(Boolean);
 
 	const passivePerception = 10 + mods.wis + (skillProfs?.perception ? pb : 0);
-
-	return `
-    <table class="tableBox">
-      ${rows}
-      <tr><td></td><td>${esc(String(passivePerception))}</td><td class="small">Passive Perception (wis)</td></tr>
+	blocks.push(`
+    <table class="gpl-skill-group gpl-skill-passive">
+      <tr class="gpl-skill-group-hdr">
+        <td colspan="3">PASSIVE</td>
+      </tr>
+      <tr>
+        <td class="gpl-skill-col-chk"></td>
+        <td class="gpl-skill-col-mod">${esc(String(passivePerception))}</td>
+        <td>Passive Perception (WIS)</td>
+      </tr>
     </table>
-  `;
+  `);
+
+	return blocks.join("");
 }
 
 function featuresLines (rec, lvl) {
