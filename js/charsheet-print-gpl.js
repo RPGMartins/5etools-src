@@ -524,17 +524,28 @@ function drawSkillsTriple (rec, lvl, pb) {
 }
 
 /* Full features pages (entries) */
-function renderFeatureSection (title, innerHtml) {
+function renderFeatureSection (id, title, innerHtml) {
 	return `
-    <div class="gpl-feat-section">
+    <div class="gpl-feat-section" id="${esc(id)}">
       <div class="gpl-feat-title">${esc(title)}</div>
       ${innerHtml || `<div class="gpl-feat-p">(none)</div>`}
     </div>
   `;
 }
-
+function renderFeatureToc (items) {
+	return `
+    <div class="gpl-feat-toc">
+      <div class="gpl-feat-toc-title">Contents</div>
+      <ul>
+        ${items.map(it => `<li><a href="#${esc(it.id)}">${esc(it.title)}</a></li>`).join("")}
+      </ul>
+    </div>
+  `;
+}
 function renderFeaturesPages (data) {
 	const {race, subrace, bg, feats, classFeatures, subclassFeatures, ctx, lvl} = data;
+
+	const wrapBlock = (html) => `<div class="gpl-feat-block">${html}</div>`;
 
 	const raceHtml = race ? renderEntriesLite(race.entries, ctx) : "";
 	const subraceHtml = subrace ? renderEntriesLite(subrace.entries, ctx) : "";
@@ -542,35 +553,61 @@ function renderFeaturesPages (data) {
 
 	const featsHtml = (feats || []).map(ft => {
 		const body = ft.entries ? renderEntriesLite(ft.entries, ctx) : "";
-		return `<div class="gpl-feat-block-title">Feat: ${esc(ft.name)} (${esc(ft.source || "")})</div>${body}`;
+		return wrapBlock(
+			`<div class="gpl-feat-block-title">Feat: ${esc(ft.name)} (${esc(ft.source || "")})</div>${body}`
+		);
 	}).join("");
 
 	const classHtml = (classFeatures || []).map(f => {
 		const body = f.entries ? renderEntriesLite(f.entries, ctx) : "";
-		return `<div class="gpl-feat-block-title">${esc(f.name)} (lvl ${esc(String(f.level))})</div>${body}`;
+		return wrapBlock(
+			`<div class="gpl-feat-block-title">${esc(f.name)} (lvl ${esc(String(f.level))})</div>${body}`
+		);
 	}).join("");
 
 	const subclassHtml = (subclassFeatures || []).map(f => {
 		const body = f.entries ? renderEntriesLite(f.entries, ctx) : "";
-		return `<div class="gpl-feat-block-title">${esc(f.name)} (lvl ${esc(String(f.level))})</div>${body}`;
+		return wrapBlock(
+			`<div class="gpl-feat-block-title">${esc(f.name)} (lvl ${esc(String(f.level))})</div>${body}`
+		);
 	}).join("");
 
+	// ✅ TOC items
+	const tocItems = [
+		{ id: "feat_race", title: "Race" },
+		...(subrace ? [{ id: "feat_subrace", title: "Subrace" }] : []),
+		{ id: "feat_background", title: "Background" },
+		{ id: "feat_feats", title: "Feats" },
+		{ id: "feat_class", title: "Class" },
+		{ id: "feat_subclass", title: "Subclass" },
+	];
+
 	const parts = [];
+
+	// começa páginas de features numa nova página
 	parts.push(`<div class="page-break"></div>`);
-	parts.push(`<div class="gpl-feat-wrap">`);
+	parts.push(`<div class="gpl-feat-wrap gpl-feat-wrap--compact">`);
 	parts.push(`<div class="header">FEATURES (UP TO LEVEL ${esc(String(lvl))})</div>`);
 
-	parts.push(renderFeatureSection("Race", raceHtml));
-	if (subrace) parts.push(renderFeatureSection("Subrace", subraceHtml));
-	parts.push(renderFeatureSection("Class", classHtml));
-	parts.push(renderFeatureSection("Subclass", subclassHtml));
-	parts.push(renderFeatureSection("Background", bgHtml));
-	parts.push(renderFeatureSection("Feats", featsHtml));
+	// ✅ TOC no topo
+	parts.push(renderFeatureToc(tocItems));
+
+	// raça/subraça/background/feats
+	parts.push(renderFeatureSection("feat_race", "Race", raceHtml));
+	if (subrace) parts.push(renderFeatureSection("feat_subrace", "Subrace", subraceHtml));
+	parts.push(renderFeatureSection("feat_background", "Background", bgHtml));
+	parts.push(renderFeatureSection("feat_feats", "Feats", featsHtml));
+
+	// ✅ quebra antes da classe
+	parts.push(`<div class="page-break"></div>`);
+
+	// classe/subclasse
+	parts.push(renderFeatureSection("feat_class", "Class", classHtml));
+	parts.push(renderFeatureSection("feat_subclass", "Subclass", subclassHtml));
 
 	parts.push(`</div>`);
 	return parts.join("");
 }
-
 /* =========================
    Main
    ========================= */

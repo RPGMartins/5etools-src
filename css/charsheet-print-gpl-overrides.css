@@ -174,3 +174,100 @@ html, body {
 .gpl-feat-table { border-collapse: collapse; margin: 6px 0; width: 100%; }
 .gpl-feat-table td, .gpl-feat-table th { border: 1px solid #000; padding: 3px 5px; font-size: 10px; vertical-align: top; }
 .gpl-feat-quote { border-left: 3px solid #000; padding-left: 8px; margin: 6px 0; }
+/* Evitar quebras feias no meio de blocos */
+.gpl-feat-section,
+.gpl-feat-block,
+.gpl-feat-quote,
+.gpl-feat-ul,
+.gpl-feat-table {
+	break-inside: avoid;
+	page-break-inside: avoid;
+}
+
+/* Cada feature (title + corpo) como um bloco “indivisível” quando possível */
+.gpl-feat-block {
+	margin-bottom: 8px;
+}
+
+/* Tabelas: tenta manter linhas juntas */
+.gpl-feat-table tr,
+.gpl-feat-table td,
+.gpl-feat-table th {
+	break-inside: avoid;
+	page-break-inside: avoid;
+}
+/* =========================
+   Features: TOC + Compact Mode
+   ========================= */
+
+/* Sumário */
+.gpl-feat-toc{
+	border: 1px solid #000;
+	padding: 6px 8px;
+	margin: 8px 0 10px 0;
+}
+
+.gpl-feat-toc-title{
+	font-weight: 800;
+	font-size: 12px;
+	margin-bottom: 4px;
+}
+
+.gpl-feat-toc ul{
+	margin: 0;
+	padding-left: 16px;
+}
+
+.gpl-feat-toc li{
+	margin: 1px 0;
+	font-size: 11px;
+}
+
+/* Compact mode (aplica só nas páginas de features) */
+.gpl-feat-wrap--compact .header{
+	font-size: 12px;
+	margin: 6px 0;
+}
+
+.gpl-feat-wrap--compact .gpl-feat-title{
+	font-size: 13px;
+	margin-bottom: 4px;
+	padding-bottom: 1px;
+}
+
+.gpl-feat-wrap--compact .gpl-feat-block-title{
+	font-size: 11px;
+	margin: 6px 0 2px 0;
+}
+
+.gpl-feat-wrap--compact .gpl-feat-p{
+	font-size: 10.5px;
+	margin: 1px 0;
+	line-height: 1.15;
+}
+
+.gpl-feat-wrap--compact .gpl-feat-ul{
+	margin: 1px 0 5px 16px;
+}
+
+.gpl-feat-wrap--compact .gpl-feat-ul li{
+	font-size: 10.5px;
+	margin: 1px 0;
+	line-height: 1.15;
+}
+
+.gpl-feat-wrap--compact .gpl-feat-table td,
+.gpl-feat-wrap--compact .gpl-feat-table th{
+	font-size: 10px;
+	padding: 2px 4px;
+}
+
+/* Tenta evitar quebra feia dentro de um bloco de feature */
+.gpl-feat-section,
+.gpl-feat-block,
+.gpl-feat-quote,
+.gpl-feat-ul,
+.gpl-feat-table{
+	break-inside: avoid;
+	page-break-inside: avoid;
+}

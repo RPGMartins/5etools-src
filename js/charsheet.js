@@ -285,12 +285,18 @@ class SheetApp {
 		// Print
 		this._els.btnPrint.addEventListener("click", () => {
 			const lvl = this._rec?.sheet?.level || 1;
-			window.open(`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}&lvl=${encodeURIComponent(lvl)}`, "_blank");
+			window.open(
+				`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}&lvl=${encodeURIComponent(lvl)}&features=1`,
+				"_blank"
+			);
 		});
 
-		// Print Full (lvl 20, auto print)
+		// Print Full
 		this._els.btnPrintFull.addEventListener("click", () => {
-			window.open(`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}&lvl=20&auto=1`, "_blank");
+			window.open(
+				`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}&lvl=20&features=1&auto=1`,
+				"_blank"
+			);
 		});
 
 		const onAfter = () => {
