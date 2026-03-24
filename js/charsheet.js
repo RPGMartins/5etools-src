@@ -250,7 +250,16 @@ class SheetApp {
 			this._renderFeatures({forceLevel: 20, forceOpenAll: true});
 			this._openAllDetails(true);
 			document.body.classList.add("cs--printing");
-			window.print();
+			// Print
+			this._els.btnPrint.addEventListener("click", () => {
+				const lvl = this._rec?.sheet?.level || 1;
+				window.open(`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}&lvl=${encodeURIComponent(lvl)}`, "_blank");
+			});
+
+			// Print Full (lvl 20, auto print)
+			this._els.btnPrintFull.addEventListener("click", () => {
+				window.open(`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}&lvl=20&auto=1`, "_blank");
+			});;
 
 			const onAfter = () => {
 				window.removeEventListener("afterprint", onAfter);
@@ -273,7 +282,16 @@ class SheetApp {
 
 		this._openAllDetails(true);
 		document.body.classList.add("cs--printing");
-		window.print();
+		// Print
+		this._els.btnPrint.addEventListener("click", () => {
+			const lvl = this._rec?.sheet?.level || 1;
+			window.open(`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}&lvl=${encodeURIComponent(lvl)}`, "_blank");
+		});
+
+		// Print Full (lvl 20, auto print)
+		this._els.btnPrintFull.addEventListener("click", () => {
+			window.open(`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}&lvl=20&auto=1`, "_blank");
+		});
 
 		const onAfter = () => {
 			window.removeEventListener("afterprint", onAfter);
@@ -500,34 +518,69 @@ class SheetApp {
 		const ab = this._rec.sheet.abilities;
 		const sp = this._rec.sheet.skillProfs || {};
 
+		// hint "choose N from ..."
 		if (this._chooseSkillInfo) {
 			const fromNames = this._chooseSkillInfo.from.map(k => SKILL_KEY_TO_NAME.get(k) || k).join(", ");
-			this._els.skillsHint.textContent = `Class skill options: choose ${this._chooseSkillInfo.count} from: ${fromNames}`;
+			if (this._els.skillsHint) this._els.skillsHint.textContent = `Class skill options: choose ${this._chooseSkillInfo.count} from: ${fromNames}`;
 		} else if (this._pickableSkills.size) {
 			const fromNames = [...this._pickableSkills].map(k => SKILL_KEY_TO_NAME.get(k) || k).join(", ");
-			this._els.skillsHint.textContent = `Class skill options: ${fromNames}`;
+			if (this._els.skillsHint) this._els.skillsHint.textContent = `Class skill options: ${fromNames}`;
 		} else {
-			this._els.skillsHint.textContent = "";
+			if (this._els.skillsHint) this._els.skillsHint.textContent = "";
 		}
 
-		this._els.skills.innerHTML = SKILLS.map(sk => {
+		// agrupa por atributo
+		const groupsOrder = ["str", "dex", "con", "int", "wis", "cha"];
+		const groups = new Map(groupsOrder.map(k => [k, []]));
+
+		for (const sk of SKILLS) {
+			groups.get(sk.abil)?.push(sk);
+		}
+
+		// render helper
+		const renderRow = (sk) => {
 			const mod = modFromScore(ab[sk.abil]);
 			const isProf = !!sp[sk.key];
 			const total = mod + (isProf ? pb : 0);
 			const isPickable = this._pickableSkills.has(sk.key);
 
 			return `
-				<div class="cs__row ${isPickable ? "cs__row--pickable" : ""}">
-					<label style="display:flex; align-items:center; gap:8px; margin:0;">
-						<input type="checkbox" data-skill="${esc(sk.key)}" ${isProf ? "checked" : ""}>
-						<span class="cs__row-name">${esc(sk.name)}</span>
-						<span class="cs__row-meta">(${esc(ABIL_LABEL[sk.abil])} ${esc(fmtMod(mod))})${isPickable ? " • pick" : ""}</span>
-					</label>
-					<div class="cs__row-val">${esc(fmtMod(total))}</div>
-				</div>
-			`;
-		}).join("");
+			<div class="cs__row ${isPickable ? "cs__row--pickable" : ""}">
+				<label style="display:flex; align-items:center; gap:8px; margin:0;">
+					<input type="checkbox" data-skill="${esc(sk.key)}" ${isProf ? "checked" : ""}>
+					<span class="cs__row-name">${esc(sk.name)}</span>
+					<span class="cs__row-meta">(${esc(ABIL_LABEL[sk.abil])} ${esc(fmtMod(mod))})${isPickable ? " • pick" : ""}</span>
+				</label>
+				<div class="cs__row-val">${esc(fmtMod(total))}</div>
+			</div>
+		`;
+		};
 
+		const blocks = [];
+		let alt = false;
+
+		for (const abil of groupsOrder) {
+			const arr = groups.get(abil) || [];
+			if (!arr.length) continue;
+
+			// ordena dentro do grupo por nome
+			arr.sort((a, b) => a.name.localeCompare(b.name));
+
+			blocks.push(`
+			<div class="cs__skills-group ${alt ? "cs__skills-group--alt" : ""}">
+				<div class="cs__skills-group-hdr">
+					${esc(ABIL_LABEL[abil])} <span>skills</span>
+				</div>
+				${arr.map(renderRow).join("")}
+			</div>
+		`);
+
+			alt = !alt;
+		}
+
+		this._els.skills.innerHTML = blocks.join("");
+
+		// bind checkboxes
 		this._els.skills.querySelectorAll("[data-skill]").forEach(cb => {
 			cb.addEventListener("change", () => {
 				const k = cb.dataset.skill;

@@ -1,0 +1,128 @@
+﻿/* Derived from dungeontiger/d_d_characterSheets_5e public/css/character.css (GPL-3.0).
+   Original: https://github.com/dungeontiger/d_d_characterSheets_5e
+   License: GPL-3.0 (see /third_party/dungeontiger_d_d_characterSheets_5e_LICENSE.txt)
+*/
+
+body {
+	width:8.5in;
+	height:11in;
+	padding:10px
+}
+.center {
+	text-align:center
+}
+.title {
+	font-size:36pt;
+	font-family: 'UnifrakturMaguntia', cursive;
+	white-space: nowrap
+}
+.small {
+	text-transform: uppercase;
+	font-size:8pt;
+	white-space: nowrap;
+}
+.medium {
+	text-transform: uppercase;
+	font-size:10pt;
+	white-space: nowrap;
+	font-weight: bold;
+	padding-right: 20px
+}
+.label {
+	text-transform: uppercase;
+	font-size:8pt;
+	border-top: 1px solid black;
+	white-space: nowrap
+}
+.tableBox {
+	width:100%
+}
+.tableValueBox {
+	height:1.25em
+}
+.oneThird {
+	width:33%
+}
+.oneQuarter {
+	width:25%
+}
+
+.oneFifth {
+	width:20%
+}
+
+.one12th {
+	width:8.4%
+}
+.oneEight{
+	width: 12.5%
+}
+.header {
+	text-align:center;
+	font-size:14pt;
+	text-transform: uppercase;
+	padding-top:10px;
+	white-space: nowrap;
+	font-weight: bold;
+}
+.larger {
+	font-size: 10pt
+}
+.bottomBorder {
+	border-bottom:1px solid black
+}
+.smallWidth {
+	width: 0.1in
+}
+.mediumWidth {
+	width:0.25in
+}
+.underline {
+	border-bottom:solid black 1px
+}
+.inline {
+	display:inline-block
+}
+.newPage {
+	page-break-before: always;
+}
+/* Intended to show where page breaks will occur */
+@media screen {
+	.screenDivider {
+		border-top:dashed black 1px
+	}
+}
+
+.spellbook {
+	font-size: 8pt;
+}
+
+.spellbookBox {
+	border: 1px solid black;
+	padding: 3px
+}
+
+.spellbookTitle {
+	text-align:center;
+	font-weight: bold;
+	text-transform: uppercase;
+	padding-bottom: 10px
+
+}
+
+.spellbookLabel {
+	font-weight: bold
+}
+
+table {
+	page-break-inside:auto
+}
+
+tr {
+	page-break-inside:avoid;
+	page-break-after:auto
+}
+
+.mediumRightPadding {
+	padding-right:10px
+}
