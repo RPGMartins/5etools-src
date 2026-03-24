@@ -271,3 +271,6 @@ html, body {
 	break-inside: avoid;
 	page-break-inside: avoid;
 }
+@media print {
+	.gpl-feat-toc { display: none !important; }
+}

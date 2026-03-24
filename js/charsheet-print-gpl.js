@@ -533,15 +533,43 @@ function renderFeatureSection (id, title, innerHtml) {
   `;
 }
 function renderFeatureToc (items) {
+	const fmt = (it) => {
+		const n = Number(it.count ?? 0);
+		const suffix = Number.isFinite(n) ? ` (${n})` : "";
+		return `<li><a href="#${esc(it.id)}">${esc(it.title)}${esc(suffix)}</a></li>`;
+	};
+
 	return `
     <div class="gpl-feat-toc">
       <div class="gpl-feat-toc-title">Contents</div>
       <ul>
-        ${items.map(it => `<li><a href="#${esc(it.id)}">${esc(it.title)}</a></li>`).join("")}
+        ${items.map(fmt).join("")}
       </ul>
     </div>
   `;
 }
+
+function countNamedEntrySections (entries) {
+	const set = new Set();
+
+	const walk = (node, depth = 0) => {
+		if (node == null || depth > 4) return;
+		if (typeof node === "string") return;
+
+		if (Array.isArray(node)) return node.forEach(n => walk(n, depth));
+
+		if (typeof node === "object") {
+			if (node.name && typeof node.name === "string") set.add(node.name);
+			if (node.entries) walk(node.entries, depth + 1);
+			if (node.items) walk(node.items, depth + 1);
+			// tables/rows não têm "name" normalmente, mas deixa como está
+		}
+	};
+
+	walk(entries, 0);
+	return set.size;
+}
+
 function renderFeaturesPages (data) {
 	const {race, subrace, bg, feats, classFeatures, subclassFeatures, ctx, lvl} = data;
 
@@ -572,14 +600,22 @@ function renderFeaturesPages (data) {
 		);
 	}).join("");
 
+	const raceCount = race?.entries ? countNamedEntrySections(race.entries) : 0;
+	const subraceCount = subrace?.entries ? countNamedEntrySections(subrace.entries) : 0;
+	const bgCount = bg?.entries ? countNamedEntrySections(bg.entries) : 0;
+
+	const featsCount = (feats || []).length;
+	const classCount = (classFeatures || []).length;
+	const subclassCount = (subclassFeatures || []).length;
+
 	// ✅ TOC items
 	const tocItems = [
-		{ id: "feat_race", title: "Race" },
-		...(subrace ? [{ id: "feat_subrace", title: "Subrace" }] : []),
-		{ id: "feat_background", title: "Background" },
-		{ id: "feat_feats", title: "Feats" },
-		{ id: "feat_class", title: "Class" },
-		{ id: "feat_subclass", title: "Subclass" },
+		{ id: "feat_race", title: "Race", count: raceCount },
+		...(subrace ? [{ id: "feat_subrace", title: "Subrace", count: subraceCount }] : []),
+		{ id: "feat_background", title: "Background", count: bgCount },
+		{ id: "feat_feats", title: "Feats", count: featsCount },
+		{ id: "feat_class", title: "Class", count: classCount },
+		{ id: "feat_subclass", title: "Subclass", count: subclassCount },
 	];
 
 	const parts = [];
