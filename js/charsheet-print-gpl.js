@@ -9,27 +9,26 @@ const DB_NAME = "rpgmartins_5etools";
 const DB_STORE = "characters_v1";
 
 const ABILS = ["str", "dex", "con", "int", "wis", "cha"];
-const ABIL_LABEL = { str: "Str", dex: "Dex", con: "Con", int: "Int", wis: "Wis", cha: "Cha" };
 
 const SKILLS = [
-	{ key: "acrobatics", name: "Acrobatics", abil: "dex" },
-	{ key: "animalHandling", name: "Animal Handling", abil: "wis" },
-	{ key: "arcana", name: "Arcana", abil: "int" },
-	{ key: "athletics", name: "Athletics", abil: "str" },
-	{ key: "deception", name: "Deception", abil: "cha" },
-	{ key: "history", name: "History", abil: "int" },
-	{ key: "insight", name: "Insight", abil: "wis" },
-	{ key: "intimidation", name: "Intimidation", abil: "cha" },
-	{ key: "investigation", name: "Investigation", abil: "int" },
-	{ key: "medicine", name: "Medicine", abil: "wis" },
-	{ key: "nature", name: "Nature", abil: "int" },
-	{ key: "perception", name: "Perception", abil: "wis" },
-	{ key: "performance", name: "Performance", abil: "cha" },
-	{ key: "persuasion", name: "Persuasion", abil: "cha" },
-	{ key: "religion", name: "Religion", abil: "int" },
-	{ key: "sleightOfHand", name: "Sleight of Hand", abil: "dex" },
-	{ key: "stealth", name: "Stealth", abil: "dex" },
-	{ key: "survival", name: "Survival", abil: "wis" },
+	{ key: "acrobatics", abil: "dex" },
+	{ key: "animalHandling", abil: "wis" },
+	{ key: "arcana", abil: "int" },
+	{ key: "athletics", abil: "str" },
+	{ key: "deception", abil: "cha" },
+	{ key: "history", abil: "int" },
+	{ key: "insight", abil: "wis" },
+	{ key: "intimidation", abil: "cha" },
+	{ key: "investigation", abil: "int" },
+	{ key: "medicine", abil: "wis" },
+	{ key: "nature", abil: "int" },
+	{ key: "perception", abil: "wis" },
+	{ key: "performance", abil: "cha" },
+	{ key: "persuasion", abil: "cha" },
+	{ key: "religion", abil: "int" },
+	{ key: "sleightOfHand", abil: "dex" },
+	{ key: "stealth", abil: "dex" },
+	{ key: "survival", abil: "wis" },
 ];
 
 const esc = (s) =>
@@ -47,16 +46,174 @@ const chk = (isOn) => (isOn ? "&#9745;" : "&#9744;"); // ☑/☐
 const NBSP = "&nbsp;";
 
 /* =========================
-   Params
+   i18n (UI PT-BR)
+   ========================= */
+let LANG = "ptbr";
+
+const I18N = {
+	en: {
+		charSheet: "Character Sheet",
+		name: "Name",
+		classLevel: "Class & Level",
+		background: "Background",
+		playerName: "Player Name",
+		race: "Race",
+		subrace: "Subrace",
+		alignment: "Alignment",
+		experience: "Experience",
+		size: "Size",
+		combatStats: "Combat Stats",
+		profBonus: "Prof. Bonus",
+		inspiration: "Inspiration",
+		initiative: "Initiative",
+		hd: "HD",
+		hp: "HP",
+		spd: "Spd",
+		ac: "AC",
+		abilitySaves: "ABILITY SCORES & SAVING THROWS",
+		skills: "Skills",
+		profsBasics: "Proficiencies & Basics",
+		currentStats: "Current Stats",
+		deathSaves: "Death Saves",
+		success: "Success",
+		failures: "Failures",
+		passivePerception: "Passive Perception",
+		contents: "Contents",
+		featuresUpTo: (lvl) => `FEATURES (UP TO LEVEL ${lvl})`,
+		lvlShort: "lvl",
+		skillsWord: "skills",
+		feats: "Feats",
+		class: "Class",
+		subclass: "Subclass",
+		proficiencies: "Proficiencies",
+		languages: "Languages",
+		notes: "Notes",
+		featPrefix: "Feat",
+		missingCfRef: "(Missing class feature ref.)",
+		missingScfRef: "(Missing subclass feature ref.)",
+	},
+	ptbr: {
+		charSheet: "Ficha de Personagem",
+		name: "Nome",
+		classLevel: "Classe e Nível",
+		background: "Antecedente",
+		playerName: "Nome do Jogador",
+		race: "Raça",
+		subrace: "Sub-raça",
+		alignment: "Tendência",
+		experience: "Experiência",
+		size: "Tamanho",
+		combatStats: "Combate",
+		profBonus: "Bônus de Prof.",
+		inspiration: "Inspiração",
+		initiative: "Iniciativa",
+		hd: "DV",
+		hp: "PV",
+		spd: "Desl.",
+		ac: "CA",
+		abilitySaves: "ATRIBUTOS & TESTES DE RESISTÊNCIA",
+		skills: "Perícias",
+		profsBasics: "Proficiências e Básico",
+		currentStats: "Status",
+		deathSaves: "Testes contra a Morte",
+		success: "Sucessos",
+		failures: "Falhas",
+		passivePerception: "Percepção Passiva",
+		contents: "Sumário",
+		featuresUpTo: (lvl) => `HABILIDADES (ATÉ O NÍVEL ${lvl})`,
+		lvlShort: "nív.",
+		skillsWord: "perícias",
+		feats: "Talentos",
+		class: "Classe",
+		subclass: "Subclasse",
+		proficiencies: "Proficiências",
+		languages: "Idiomas",
+		notes: "Anotações",
+		featPrefix: "Talento",
+		missingCfRef: "(Referência de feature de classe ausente.)",
+		missingScfRef: "(Referência de feature de subclasse ausente.)",
+	},
+};
+
+const ABIL_ABV_BY_LANG = {
+	en: { str: "STR", dex: "DEX", con: "CON", int: "INT", wis: "WIS", cha: "CHA" },
+	ptbr: { str: "FOR", dex: "DES", con: "CON", int: "INT", wis: "SAB", cha: "CAR" },
+};
+
+const SKILL_NAMES_BY_LANG = {
+	en: {
+		acrobatics: "Acrobatics",
+		animalHandling: "Animal Handling",
+		arcana: "Arcana",
+		athletics: "Athletics",
+		deception: "Deception",
+		history: "History",
+		insight: "Insight",
+		intimidation: "Intimidation",
+		investigation: "Investigation",
+		medicine: "Medicine",
+		nature: "Nature",
+		perception: "Perception",
+		performance: "Performance",
+		persuasion: "Persuasion",
+		religion: "Religion",
+		sleightOfHand: "Sleight of Hand",
+		stealth: "Stealth",
+		survival: "Survival",
+	},
+	ptbr: {
+		acrobatics: "Acrobacias",
+		animalHandling: "Adestramento",
+		arcana: "Arcanismo",
+		athletics: "Atletismo",
+		deception: "Enganação",
+		history: "História",
+		insight: "Intuição",
+		intimidation: "Intimidação",
+		investigation: "Investigação",
+		medicine: "Medicina",
+		nature: "Natureza",
+		perception: "Percepção",
+		performance: "Atuação",
+		persuasion: "Persuasão",
+		religion: "Religião",
+		sleightOfHand: "Prestidigitação",
+		stealth: "Furtividade",
+		survival: "Sobrevivência",
+	},
+};
+
+const SIZE_FULL_PT = { T: "Minúsculo", S: "Pequeno", M: "Médio", L: "Grande", H: "Enorme", G: "Colossal" };
+
+function t (key, ...args) {
+	const pack = I18N[LANG] || I18N.en;
+	const v = pack[key] ?? I18N.en[key] ?? key;
+	return typeof v === "function" ? v(...args) : v;
+}
+
+function abilAbv (k) {
+	return (ABIL_ABV_BY_LANG[LANG] || ABIL_ABV_BY_LANG.en)[k] || k.toUpperCase();
+}
+
+function skillName (k) {
+	return (SKILL_NAMES_BY_LANG[LANG] || SKILL_NAMES_BY_LANG.en)[k] || k;
+}
+
+/* =========================
+   Params + blank helper
    ========================= */
 function getParams () {
 	const u = new URL(location.href);
+	const lang = (u.searchParams.get("lang") || "ptbr").toLowerCase();
+	LANG = lang === "en" ? "en" : "ptbr";
+
 	return {
 		id: u.searchParams.get("id"),
 		lvl: u.searchParams.get("lvl"),
 		auto: u.searchParams.get("auto") === "1",
 		features: u.searchParams.get("features") === "1",
 		blank: u.searchParams.get("blank") === "1",
+		lang: LANG,
 	};
 }
 
@@ -138,6 +295,8 @@ function findSubrace (races, baseName, baseSource, subName, subSource) {
 function fmtSize (size) {
 	const code = Array.isArray(size) ? size[0] : size;
 	if (!code) return "";
+	if (LANG === "ptbr") return SIZE_FULL_PT[code] || String(code);
+
 	try {
 		if (Parser?.sizeAbvToFull) return Parser.sizeAbvToFull(code);
 	} catch {}
@@ -164,7 +323,8 @@ function fmtSpeed (speed) {
 
 /* =========================
    Lite renderer for entries (NO Renderer)
-   - plus collapsible blocks for named entries
+   - strips {@...} tags
+   - entries blocks are collapsible
    ========================= */
 function strip5eTags (s) {
 	if (!s) return "";
@@ -179,7 +339,6 @@ function strip5eTags (s) {
 	return out;
 }
 
-/* Build maps to deref refClassFeature/refSubclassFeature */
 function buildFeatureRefMaps (classFile) {
 	const classFeatureMap = new Map();
 	const subclassFeatureMap = new Map();
@@ -187,7 +346,6 @@ function buildFeatureRefMaps (classFile) {
 	const cfs = Array.isArray(classFile?.classFeature) ? classFile.classFeature : [];
 	const scfs = Array.isArray(classFile?.subclassFeature) ? classFile.subclassFeature : [];
 
-	// store multiple key variants to maximize hits
 	for (const f of cfs) {
 		const base = `${f.name}|${f.className}|${f.classSource}|${f.level}`;
 		const keyA = `${base}|${f.source || ""}`.toLowerCase();
@@ -216,22 +374,20 @@ function renderEntriesLite (entries, ctx) {
 
 	if (typeof entries !== "object") return "";
 
-	// deref
 	if (entries.type === "refClassFeature" && entries.classFeature && ctx?.classFeatureMap) {
 		const k = String(entries.classFeature).toLowerCase();
 		const ref = ctx.classFeatureMap.get(k);
 		if (ref?.entries) return renderEntriesLite(ref.entries, ctx);
-		return `<div class="gpl-feat-p">(Missing class feature ref.)</div>`;
+		return `<div class="gpl-feat-p">${esc(t("missingCfRef"))}</div>`;
 	}
 
 	if (entries.type === "refSubclassFeature" && entries.subclassFeature && ctx?.subclassFeatureMap) {
 		const k = String(entries.subclassFeature).toLowerCase();
 		const ref = ctx.subclassFeatureMap.get(k);
 		if (ref?.entries) return renderEntriesLite(ref.entries, ctx);
-		return `<div class="gpl-feat-p">(Missing subclass feature ref.)</div>`;
+		return `<div class="gpl-feat-p">${esc(t("missingScfRef"))}</div>`;
 	}
 
-	// Named entries → collapsible
 	if (entries.type === "entries") {
 		if (entries.name) {
 			const title = esc(strip5eTags(entries.name));
@@ -263,14 +419,20 @@ function renderEntriesLite (entries, ctx) {
 	}
 
 	if (entries.type === "item") {
-		const nm = entries.name ? `<div class="gpl-feat-block-title">${esc(strip5eTags(entries.name))}</div>` : "";
-		const body = entries.entry ? `<div class="gpl-feat-p">${esc(strip5eTags(entries.entry))}</div>` : "";
+		const nm = entries.name
+			? `<div class="gpl-feat-block-title">${esc(strip5eTags(entries.name))}</div>`
+			: "";
+		const body = entries.entry
+			? `<div class="gpl-feat-p">${esc(strip5eTags(entries.entry))}</div>`
+			: "";
 		const extra = entries.entries ? renderEntriesLite(entries.entries, ctx) : "";
 		return `${nm}${body}${extra}`;
 	}
 
 	if (entries.type === "table") {
-		const caption = entries.caption ? `<div class="gpl-feat-block-title">${esc(strip5eTags(entries.caption))}</div>` : "";
+		const caption = entries.caption
+			? `<div class="gpl-feat-block-title">${esc(strip5eTags(entries.caption))}</div>`
+			: "";
 		const colLabels = entries.colLabels || [];
 		const rows = entries.rows || [];
 
@@ -329,7 +491,11 @@ function isSubclassFeatureMatch (f, subclassEnt, scChoice) {
 	const srcOk = !f.subclassSource || !selSource || fSource === selSource;
 	const nameOk = fName && fName === selName;
 	const shortOk =
-		fShort && (fShort === selShort || fShort === selName || selName.includes(fShort) || fShort.includes(selShort));
+		fShort &&
+		(fShort === selShort ||
+			fShort === selName ||
+			selName.includes(fShort) ||
+			fShort.includes(selShort));
 
 	return srcOk && (nameOk || shortOk);
 }
@@ -341,13 +507,12 @@ function nameTable (name) {
 	return `
 		<table class="tableBox">
 			<tr class="tableValueBox"><td>${esc(name)}</td></tr>
-			<tr><td class="label">Name</td></tr>
+			<tr><td class="label">${esc(t("name"))}</td></tr>
 		</table>
 	`;
 }
 
 function introBlock (meta) {
-	// languages removed from header
 	return `
 		<table class="tableBox">
 			<tr class="tableValueBox">
@@ -356,9 +521,9 @@ function introBlock (meta) {
 				<td class="oneThird">${esc(meta.playerName)}</td>
 			</tr>
 			<tr>
-				<td class="label">Class &amp; Level</td>
-				<td class="label">Background</td>
-				<td class="label">Player Name</td>
+				<td class="label">${esc(t("classLevel"))}</td>
+				<td class="label">${esc(t("background"))}</td>
+				<td class="label">${esc(t("playerName"))}</td>
 			</tr>
 		</table>
 
@@ -369,9 +534,9 @@ function introBlock (meta) {
 				<td class="oneThird">${esc(meta.experience)}</td>
 			</tr>
 			<tr>
-				<td class="label">Race</td>
-				<td class="label">Alignment</td>
-				<td class="label">Experience</td>
+				<td class="label">${esc(t("race"))}</td>
+				<td class="label">${esc(t("alignment"))}</td>
+				<td class="label">${esc(t("experience"))}</td>
 			</tr>
 		</table>
 
@@ -380,7 +545,7 @@ function introBlock (meta) {
 				<td>${esc(meta.size)}</td>
 			</tr>
 			<tr>
-				<td class="label">Size</td>
+				<td class="label">${esc(t("size"))}</td>
 			</tr>
 		</table>
 	`;
@@ -388,7 +553,7 @@ function introBlock (meta) {
 
 function combatStats (pb, dexMod, speed, isBlank) {
 	return `
-		<div class="header">Combat Stats</div>
+		<div class="header">${esc(t("combatStats"))}</div>
 		<table class="tableBox">
 			<tr class="tableValueBox">
 				<td class="oneEight">${vBlank(isBlank, `+${pb}`)}</td>
@@ -400,13 +565,13 @@ function combatStats (pb, dexMod, speed, isBlank) {
 				<td class="oneEight"></td>
 			</tr>
 			<tr>
-				<td class="label">Prof. Bonus</td>
-				<td class="label">Inspiration</td>
-				<td class="label">Initiative</td>
-				<td class="label">HD</td>
-				<td class="label">HP</td>
-				<td class="label">Spd</td>
-				<td class="label">AC</td>
+				<td class="label">${esc(t("profBonus"))}</td>
+				<td class="label">${esc(t("inspiration"))}</td>
+				<td class="label">${esc(t("initiative"))}</td>
+				<td class="label">${esc(t("hd"))}</td>
+				<td class="label">${esc(t("hp"))}</td>
+				<td class="label">${esc(t("spd"))}</td>
+				<td class="label">${esc(t("ac"))}</td>
 			</tr>
 		</table>
 	`;
@@ -430,7 +595,7 @@ function abilityAndSaves (ab, saveProfs, pb, isBlank) {
 		const saveTxt = isBlank ? "" : fmtMod(saves[k]);
 		const scoreTxt = isBlank ? "" : String(ab[k] ?? 10);
 
-		const nameTxt = (ABIL_LABEL[k] || k).toUpperCase();
+		const nameTxt = abilAbv(k);
 
 		return `
 			<td class="gpl-abil-card">
@@ -446,7 +611,7 @@ function abilityAndSaves (ab, saveProfs, pb, isBlank) {
 	}).join("");
 
 	return `
-		<div class="header">ABILITY SCORES &amp; SAVING THROWS</div>
+		<div class="header">${esc(t("abilitySaves"))}</div>
 		<table class="gpl-abil-grid">
 			<tr>${cells}</tr>
 		</table>
@@ -458,11 +623,10 @@ function skillsBlock (ab, skillProfs, pb, isBlank) {
 	for (const k of ABILS) mods[k] = modFromScore(ab[k]);
 
 	const groupsOrder = ["str", "dex", "con", "int", "wis", "cha"];
-	const abilLabel = { str: "STR", dex: "DEX", con: "CON", int: "INT", wis: "WIS", cha: "CHA" };
 
 	const groups = new Map(groupsOrder.map((k) => [k, []]));
 	for (const sk of SKILLS) if (groups.has(sk.abil)) groups.get(sk.abil).push(sk);
-	for (const k of groupsOrder) groups.get(k).sort((a, b) => a.name.localeCompare(b.name));
+	for (const k of groupsOrder) groups.get(k).sort((a, b) => skillName(a.key).localeCompare(skillName(b.key)));
 
 	let alt = false;
 
@@ -480,7 +644,7 @@ function skillsBlock (ab, skillProfs, pb, isBlank) {
 					<tr>
 						<td class="gpl-skill-col-chk">${mark}</td>
 						<td class="gpl-skill-col-mod">${val}</td>
-						<td>${esc(sk.name)}</td>
+						<td>${esc(skillName(sk.key))}</td>
 					</tr>
 				`;
 			})
@@ -489,7 +653,7 @@ function skillsBlock (ab, skillProfs, pb, isBlank) {
 		const table = `
 			<table class="gpl-skill-group ${alt ? "gpl-skill-group--alt" : ""}">
 				<tr class="gpl-skill-group-hdr">
-					<td colspan="3">${esc(abilLabel[abil])} skills</td>
+					<td colspan="3">${esc(abilAbv(abil))} ${esc(t("skillsWord"))}</td>
 				</tr>
 				${rows}
 			</table>
@@ -512,7 +676,7 @@ function skillsBlock (ab, skillProfs, pb, isBlank) {
 			<tr>
 				<td class="gpl-skill-col-chk"></td>
 				<td class="gpl-skill-col-mod">${ppVal}</td>
-				<td>Passive Perception (WIS)</td>
+				<td>${esc(t("passivePerception"))} (${esc(abilAbv("wis"))})</td>
 			</tr>
 		</table>
 	`);
@@ -537,24 +701,24 @@ function drawSkillsTriple (rec, lvl, pb, isBlank) {
 
 	const classLine = isBlank
 		? `${cls || "—"} ____${choice.subclass?.name ? ` (${choice.subclass.name})` : ""}`
-		: `${cls || "—"}${sub} (lvl ${lvl})`;
+		: `${cls || "—"}${sub} (${t("lvlShort")} ${lvl})`;
 
 	const midTop = `
-		<tr><td><b>Class</b>: ${esc(classLine)}</td></tr>
-		<tr><td><b>Race</b>: ${esc(race || "—")}</td></tr>
-		<tr><td><b>Background</b>: ${esc(bg || "—")}</td></tr>
-		<tr><td><b>Feats</b>: ${esc(feats || "—")}</td></tr>
-		<tr><td><b>Proficiencies</b>: ${esc(profs || "—")}</td></tr>
-		<tr><td><b>Languages</b>: ${esc(langs || "—")}</td></tr>
-		${notes ? `<tr><td><b>Notes</b>: ${esc(notes)}</td></tr>` : ""}
+		<tr><td><b>${esc(t("class"))}</b>: ${esc(classLine)}</td></tr>
+		<tr><td><b>${esc(t("race"))}</b>: ${esc(race || "—")}</td></tr>
+		<tr><td><b>${esc(t("background"))}</b>: ${esc(bg || "—")}</td></tr>
+		<tr><td><b>${esc(t("feats"))}</b>: ${esc(feats || "—")}</td></tr>
+		<tr><td><b>${esc(t("proficiencies"))}</b>: ${esc(profs || "—")}</td></tr>
+		<tr><td><b>${esc(t("languages"))}</b>: ${esc(langs || "—")}</td></tr>
+		${notes ? `<tr><td><b>${esc(t("notes"))}</b>: ${esc(notes)}</td></tr>` : ""}
 	`;
 
 	return `
 		<table>
 			<tr>
-				<td><div class="header">Skills</div></td>
-				<td style="width:100%" class="header">Proficiencies &amp; Basics</td>
-				<td><div class="header">Current Stats</div></td>
+				<td><div class="header">${esc(t("skills"))}</div></td>
+				<td style="width:100%" class="header">${esc(t("profsBasics"))}</td>
+				<td><div class="header">${esc(t("currentStats"))}</div></td>
 			</tr>
 			<tr>
 				<td valign="top">${skillsBlock(ab, skillProfs, pb, isBlank)}</td>
@@ -562,20 +726,20 @@ function drawSkillsTriple (rec, lvl, pb, isBlank) {
 				<td valign="top">
 					<table>
 						<tr class="tableValueBox"><td></td></tr>
-						<tr><td class="label">HP</td></tr>
+						<tr><td class="label">${esc(t("hp"))}</td></tr>
 
 						<tr class="tableValueBox"><td></td></tr>
-						<tr><td class="label">AC</td></tr>
+						<tr><td class="label">${esc(t("ac"))}</td></tr>
 
 						<tr class="tableValueBox">
 							<td>
 								<table>
-									<tr><td class="small">Success:</td><td>&#9723;&#9723;&#9723;</td></tr>
-									<tr><td class="small">Failures:</td><td>&#9723;&#9723;&#9723;</td></tr>
+									<tr><td class="small">${esc(t("success"))}:</td><td>&#9723;&#9723;&#9723;</td></tr>
+									<tr><td class="small">${esc(t("failures"))}:</td><td>&#9723;&#9723;&#9723;</td></tr>
 								</table>
 							</td>
 						</tr>
-						<tr><td class="label">Death Saves</td></tr>
+						<tr><td class="label">${esc(t("deathSaves"))}</td></tr>
 					</table>
 				</td>
 			</tr>
@@ -611,7 +775,7 @@ function renderFeatureToc (items) {
 
 	return `
 		<div class="gpl-feat-toc">
-			<div class="gpl-feat-toc-title">Contents</div>
+			<div class="gpl-feat-toc-title">${esc(t("contents"))}</div>
 			<ul>${items.map(fmt).join("")}</ul>
 		</div>
 	`;
@@ -638,12 +802,12 @@ function renderFeaturesPages (data) {
 	const subclassCount = (subclassFeatures || []).length;
 
 	const tocItems = [
-		{ id: "feat_race", title: "Race", count: raceCount },
-		...(subrace ? [{ id: "feat_subrace", title: "Subrace", count: subraceCount }] : []),
-		{ id: "feat_background", title: "Background", count: bgCount },
-		{ id: "feat_feats", title: "Feats", count: featsCount },
-		{ id: "feat_class", title: "Class", count: classCount },
-		{ id: "feat_subclass", title: "Subclass", count: subclassCount },
+		{ id: "feat_race", title: t("race"), count: raceCount },
+		...(subrace ? [{ id: "feat_subrace", title: t("subrace"), count: subraceCount }] : []),
+		{ id: "feat_background", title: t("background"), count: bgCount },
+		{ id: "feat_feats", title: t("feats"), count: featsCount },
+		{ id: "feat_class", title: t("class"), count: classCount },
+		{ id: "feat_subclass", title: t("subclass"), count: subclassCount },
 	];
 
 	const raceHtml = race ? renderEntriesLite(race.entries, ctx) : "";
@@ -655,7 +819,7 @@ function renderFeaturesPages (data) {
 			const body = ft.entries ? renderEntriesLite(ft.entries, ctx) : "";
 			return `
 				<details class="gpl-item" open>
-					<summary>Feat: ${esc(ft.name)} (${esc(ft.source || "")})</summary>
+					<summary>${esc(t("featPrefix"))}: ${esc(ft.name)} (${esc(ft.source || "")})</summary>
 					<div class="gpl-item-body">${body || `<div class="gpl-feat-p">(none)</div>`}</div>
 				</details>
 			`;
@@ -667,7 +831,7 @@ function renderFeaturesPages (data) {
 			const body = f.entries ? renderEntriesLite(f.entries, ctx) : "";
 			return `
 				<details class="gpl-item" open>
-					<summary>${esc(f.name)} (lvl ${esc(String(f.level))})</summary>
+					<summary>${esc(f.name)} (${esc(t("lvlShort"))} ${esc(String(f.level))})</summary>
 					<div class="gpl-item-body">${body || `<div class="gpl-feat-p">(none)</div>`}</div>
 				</details>
 			`;
@@ -679,7 +843,7 @@ function renderFeaturesPages (data) {
 			const body = f.entries ? renderEntriesLite(f.entries, ctx) : "";
 			return `
 				<details class="gpl-item" open>
-					<summary>${esc(f.name)} (lvl ${esc(String(f.level))})</summary>
+					<summary>${esc(f.name)} (${esc(t("lvlShort"))} ${esc(String(f.level))})</summary>
 					<div class="gpl-item-body">${body || `<div class="gpl-feat-p">(none)</div>`}</div>
 				</details>
 			`;
@@ -691,23 +855,23 @@ function renderFeaturesPages (data) {
 	// start features in a new page
 	parts.push(`<div class="page-break"></div>`);
 	parts.push(`<div class="gpl-feat-wrap gpl-feat-wrap--compact">`);
-	parts.push(`<div class="header">FEATURES (UP TO LEVEL ${esc(String(lvl))})</div>`);
+	parts.push(`<div class="header">${esc(t("featuresUpTo", String(lvl)))}</div>`);
 
 	// TOC (hidden in print by CSS)
 	parts.push(renderFeatureToc(tocItems));
 
 	// part 1: race/subrace/background/feats
-	parts.push(renderFeatureSection("feat_race", "Race", raceHtml, true));
-	if (subrace) parts.push(renderFeatureSection("feat_subrace", "Subrace", subraceHtml, true));
-	parts.push(renderFeatureSection("feat_background", "Background", bgHtml, true));
-	parts.push(renderFeatureSection("feat_feats", "Feats", featsHtml, true));
+	parts.push(renderFeatureSection("feat_race", t("race"), raceHtml, true));
+	if (subrace) parts.push(renderFeatureSection("feat_subrace", t("subrace"), subraceHtml, true));
+	parts.push(renderFeatureSection("feat_background", t("background"), bgHtml, true));
+	parts.push(renderFeatureSection("feat_feats", t("feats"), featsHtml, true));
 
 	// page break before class
 	parts.push(`<div class="page-break"></div>`);
 
 	// part 2: class/subclass
-	parts.push(renderFeatureSection("feat_class", "Class", classHtml, true));
-	parts.push(renderFeatureSection("feat_subclass", "Subclass", subclassHtml, true));
+	parts.push(renderFeatureSection("feat_class", t("class"), classHtml, true));
+	parts.push(renderFeatureSection("feat_subclass", t("subclass"), subclassHtml, true));
 
 	parts.push(`</div>`);
 	return parts.join("");
@@ -764,7 +928,7 @@ async function main () {
 
 	const dexMod = modFromScore(rec.sheet.abilities.dex);
 
-	// header strings
+	// header strings (blank-friendly)
 	const clsName = choice.cls?.name || "—";
 	const subclassName = choice.subclass?.name ? ` (${choice.subclass.name})` : "";
 	const classLevel = blank ? `${clsName} ____${subclassName}` : `${clsName} ${lvl}${subclassName}`;
@@ -773,7 +937,7 @@ async function main () {
 	const bgStr = choice.background?.name || "—";
 
 	const htmlParts = [];
-	htmlParts.push(`<div class="center title">Character Sheet</div>`);
+	htmlParts.push(`<div class="center title">${esc(t("charSheet"))}</div>`);
 	htmlParts.push(nameTable(rec.name || rec.state?.meta?.name || "Unnamed"));
 	htmlParts.push(
 		introBlock({
@@ -781,8 +945,8 @@ async function main () {
 			background: bgStr,
 			playerName: "",
 			race: raceStr,
-			alignment: blank ? "" : "",
-			experience: blank ? "" : "",
+			alignment: "",   // você pode preencher depois
+			experience: "",  // você pode preencher depois
 			size: sizeStr,
 		}),
 	);
@@ -790,7 +954,7 @@ async function main () {
 	htmlParts.push(abilityAndSaves(rec.sheet.abilities, rec.sheet.saveProfs, pb, blank));
 	htmlParts.push(drawSkillsTriple(rec, lvl, pb, blank));
 
-	// features pages
+	// features pages (entries completas)
 	if (features) {
 		const bgs = await pLoadBackgrounds();
 		const featsAll = await pLoadFeats();
@@ -804,7 +968,6 @@ async function main () {
 			.map((f) => featsAll.find((x) => x.name === f.name && x.source === f.source) || featsAll.find((x) => x.name === f.name))
 			.filter(Boolean);
 
-		// class/subclass features by level (objects with entries)
 		let classFeatures = [];
 		let subclassFeatures = [];
 		let ctx = {};

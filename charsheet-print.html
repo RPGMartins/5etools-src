@@ -4,6 +4,19 @@
 	<meta charset="utf-8">
 	<title>Character Sheet (Print)</title>
 
+	<script>
+		(() => {
+			const url = new URL(location.href);
+
+			// defaults
+			if (!url.searchParams.has("lang")) url.searchParams.set("lang", "ptbr");
+			if (!url.searchParams.has("features")) url.searchParams.set("features", "1");
+
+			// se mudou algo, recarrega uma vez com os params certos
+			if (url.toString() !== location.href) location.replace(url.toString());
+		})();
+	</script>
+
 	<!-- fonts usados pelo template -->
 	<link href="https://fonts.googleapis.com/css?family=UnifrakturMaguntia|Cinzel|Great+Vibes|Old+Standard+TT" rel="stylesheet">
 

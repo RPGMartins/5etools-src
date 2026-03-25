@@ -284,22 +284,40 @@ class SheetApp {
 		document.body.classList.add("cs--printing");
 		// Print
 		// Print
+		// Print
 		this._els.btnPrint.addEventListener("click", () => {
 			const lvl = this._rec?.sheet?.level || 1;
-			const blank = confirm("Imprimir com campos numéricos em branco?\n\nOK = Sim (blank)\nCancelar = Não (preenchido)");
-			window.open(
-				`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}&lvl=${encodeURIComponent(lvl)}&features=1${blank ? "&blank=1" : ""}`,
-				"_blank"
+
+			// se você ainda usa o modo blank por confirmação:
+			const blank = confirm(
+				"Imprimir com campos numéricos em branco?\n\nOK = Sim (blank)\nCancelar = Não (preenchido)"
 			);
+
+			const url =
+				`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}` +
+				`&lvl=${encodeURIComponent(lvl)}` +
+				`&features=1` +
+				`&lang=ptbr` +
+				(blank ? `&blank=1` : ``);
+
+			window.open(url, "_blank");
 		});
 
-// Print Full (lvl 20)
+// Print Full
 		this._els.btnPrintFull.addEventListener("click", () => {
-			const blank = confirm("Imprimir FULL com campos numéricos em branco?\n\nOK = Sim (blank)\nCancelar = Não (preenchido)");
-			window.open(
-				`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}&lvl=20&features=1&auto=1${blank ? "&blank=1" : ""}`,
-				"_blank"
+			const blank = confirm(
+				"Imprimir FULL com campos numéricos em branco?\n\nOK = Sim (blank)\nCancelar = Não (preenchido)"
 			);
+
+			const url =
+				`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}` +
+				`&lvl=20` +
+				`&features=1` +
+				`&lang=ptbr` +
+				`&auto=1` +
+				(blank ? `&blank=1` : ``);
+
+			window.open(url, "_blank");
 		});
 
 		const onAfter = () => {
