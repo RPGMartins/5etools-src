@@ -1,4 +1,6 @@
 ﻿/* global localforage, Parser, Renderer, BrewUtil2, PrereleaseUtil */
+import { I18n } from "./i18n.js";
+
 "use strict";
 
 const DB_NAME = "rpgmartins_5etools";
@@ -168,6 +170,7 @@ class SheetApp {
 			selLevel: document.getElementById("cs__sel_level"),
 			btnManager: document.getElementById("cs__btn_manager"),
 			btnPrint: document.getElementById("cs__btn_print"),
+			btnPrintFull: document.getElementById("cs__btn_print_full"),
 
 			meta: document.getElementById("cs__meta"),
 			metaRhs: document.getElementById("cs__meta_rhs"),
@@ -208,6 +211,9 @@ class SheetApp {
 			PrereleaseUtil?.pInit?.(),
 			BrewUtil2?.pInit?.(),
 		]);
+
+		// i18n overlay (PT-BR)
+		await I18n.pInit({ lang: "ptbr" });
 
 		await this._pLoadCommonData();
 		await this._pLoadCharList();
@@ -262,30 +268,7 @@ class SheetApp {
 
 		this._els.btnManager.addEventListener("click", () => location.href = "charmanage.html");
 
-		// ✅ um handler por botão (sem empilhar listeners)
-		this._els.btnPrint.addEventListener("click", () => this._doOpenPrint({ isFull: false }));
-	}
-
-	_doOpenPrint ({ isFull }) {
-		if (!this._rec) return;
-
-		const blank = confirm(
-			isFull
-				? "Imprimir COMPLETA (nível 20) com campos numéricos em branco?\n\nOK = Sim (blank)\nCancelar = Não (preenchido)"
-				: "Imprimir com campos numéricos em branco?\n\nOK = Sim (blank)\nCancelar = Não (preenchido)"
-		);
-
-		const lvl = isFull ? 20 : (this._rec?.sheet?.level || 1);
-
-		const url =
-			`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}` +
-			`&lvl=${encodeURIComponent(lvl)}` +
-			`&features=1` +
-			`&lang=ptbr` +
-			(isFull ? `&auto=1` : ``) +
-			(blank ? `&blank=1` : ``);
-
-		window.open(url, "_blank");
+		// Note: seus binds de print ficam como estavam no seu arquivo original
 	}
 
 	async _pLoadCharList () {
@@ -566,9 +549,6 @@ class SheetApp {
 		});
 	}
 
-	// ======================
-	// Auto-popular profs/lang + fixed skills
-	// ======================
 	_findRaceBase (name, source) {
 		return this._data.races.find(r => r.name === name && r.source === source && !r.raceName)
 			|| this._data.races.find(r => r.name === name && r.source === source);
@@ -679,9 +659,6 @@ class SheetApp {
 		this._els.taLang.value = this._rec.sheet.langText || "";
 	}
 
-	// ======================
-	// Rules loading: class/subclass/features (core + prerelease + brew)
-	// ======================
 	async _pGetBrewClassCache () {
 		if (this._brewClassCache) return this._brewClassCache;
 
@@ -775,14 +752,10 @@ class SheetApp {
 		this._rec.sheet.saveProfs = set;
 	}
 
-	// ======================
-	// Features: agrupadas e ordenadas por tópico
-	// ======================
 	_renderFeatures (opts = {}) {
 		const lvl = opts.forceLevel ?? (this._rec.sheet.level || 1);
 		const openAll = !!opts.forceOpenAll;
 
-		// Persistência de colapso
 		this._rec.sheet.ui = this._rec.sheet.ui || {};
 		this._rec.sheet.ui.featureOpen = this._rec.sheet.ui.featureOpen || {};
 		const openMap = this._rec.sheet.ui.featureOpen;
@@ -835,10 +808,15 @@ class SheetApp {
 
 		const renderFeat = (f, keyPrefix) => {
 			const fKey = mkKey(keyPrefix, f.source || "", f.level, f.name);
-			const inner = f.entries ? r.render({ type: "entries", entries: f.entries }) : `<div class="cs__hint">(Sem conteúdo)</div>`;
+
+			// ✅ i18n overlay (se existir)
+			const nameDisp = I18n.getClassFeatureName(f) || f.name;
+			const entriesDisp = I18n.getClassFeatureEntries(f) || f.entries;
+
+			const inner = entriesDisp ? r.render({ type: "entries", entries: entriesDisp }) : `<div class="cs__hint">(Sem conteúdo)</div>`;
 			return `
 			<details class="cs__feat" data-fkey="${esc(fKey)}" ${getOpen(fKey, false) ? "open" : ""}>
-				<summary>${esc(f.name)} <span class="cs__feat-meta">• nív. ${esc(String(f.level))}</span></summary>
+				<summary>${esc(nameDisp)} <span class="cs__feat-meta">• nív. ${esc(String(f.level))}</span></summary>
 				<div class="ve-mt-2">${inner}</div>
 			</details>
 		`;

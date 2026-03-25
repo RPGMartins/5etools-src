@@ -1,6 +1,8 @@
 ﻿/* GPL note:
    This file builds a print sheet using a layout inspired by dungeontiger/d_d_characterSheets_5e (GPL-3.0).
 */
+import { I18n } from "./i18n.js";
+
 "use strict";
 
 /* global localforage, Parser, BrewUtil2, PrereleaseUtil */
@@ -220,7 +222,6 @@ function getParams () {
 function vBlank (isBlank, val) {
 	return isBlank ? NBSP : val;
 }
-
 /* =========================
    Brew/Prerelease (processed) cache
    ========================= */
@@ -381,7 +382,6 @@ async function pLoadClassFileByName (className, classSource = null) {
 
 	return classFile;
 }
-
 /* =========================
    Race helpers (size/speed)
    ========================= */
@@ -470,9 +470,14 @@ function buildFeatureRefMaps (classFile) {
 		map.set(String(key).toLowerCase(), val);
 	};
 
-	const addMany = (map, keys, val) => keys.forEach((k) => add(map, k, val));
-
 	for (const f of cfs) {
+		// ✅ overlay também precisa “enxergar” as entradas traduzidas quando resolver refs
+		const fUse = {
+			...f,
+			entries: I18n.getClassFeatureEntries(f) || f.entries,
+			name: f.name,
+		};
+
 		const nm = f.name;
 		const cn = f.className;
 		const cs = f.classSource || "";
@@ -485,8 +490,8 @@ function buildFeatureRefMaps (classFile) {
 		];
 
 		for (const b of bases) {
-			add(classFeatureMap, b, f);
-			if (src) add(classFeatureMap, `${b}|${src}`, f);
+			add(classFeatureMap, b, fUse);
+			if (src) add(classFeatureMap, `${b}|${src}`, fUse);
 		}
 	}
 
@@ -639,7 +644,6 @@ function renderEntriesLite (entries, ctx) {
 	if (entries.entries) return renderEntriesLite(entries.entries, ctx);
 	return "";
 }
-
 /* =========================
    Subclass matching
    ========================= */
@@ -1008,10 +1012,14 @@ function renderFeaturesPages (data) {
 
 	const classHtml = (classFeatures || [])
 		.map((f) => {
-			const body = f.entries ? renderEntriesLite(f.entries, ctx) : "";
+			// ✅ overlay i18n para nome + entries
+			const nameDisp = I18n.getClassFeatureName(f) || f.name;
+			const entriesDisp = I18n.getClassFeatureEntries(f) || f.entries;
+
+			const body = entriesDisp ? renderEntriesLite(entriesDisp, ctx) : "";
 			return `
 				<details class="gpl-item" open>
-					<summary>${esc(f.name)} (${esc(t("lvlShort"))} ${esc(String(f.level))})</summary>
+					<summary>${esc(nameDisp)} (${esc(t("lvlShort"))} ${esc(String(f.level))})</summary>
 					<div class="gpl-item-body">${body || `<div class="gpl-feat-p">(none)</div>`}</div>
 				</details>
 			`;
@@ -1073,6 +1081,9 @@ async function main () {
 		return;
 	}
 
+	// ✅ init overlay i18n (mesmo quando não houver overlays, não quebra)
+	await I18n.pInit({ lang: LANG });
+
 	const db = localforage.createInstance({ name: DB_NAME, storeName: DB_STORE });
 	const rec = await db.getItem(id);
 	if (!rec) {
@@ -1129,7 +1140,7 @@ async function main () {
 	htmlParts.push(abilityAndSaves(rec.sheet.abilities, rec.sheet.saveProfs, pb, blank));
 	htmlParts.push(drawSkillsTriple(rec, lvl, pb, blank));
 
-	// features pages (entries completas) — agora com brew
+	// features pages (entries completas) — agora com brew + overlay
 	if (features) {
 		const bgs = await pLoadBackgrounds();
 		const featsAll = await pLoadFeats();
