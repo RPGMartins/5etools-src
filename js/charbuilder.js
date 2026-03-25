@@ -565,13 +565,12 @@ class CharacterBuilderApp {
 		const chips = [];
 		const pushChip = (label, value) => value ? chips.push(`<span class="cb__chip"><b>${this._escape(label)}:</b> ${this._escape(value)}</span>`) : null;
 
-		if (this._state.meta.name) pushChip("Name", this._state.meta.name);
-		if (this._state.meta.editId) pushChip("Editing", this._state.meta.editId);
-
-		if (ch.species) pushChip("Species", `${ch.species.name} (${ch.species.source})${ch.subrace ? ` — ${ch.subrace.name} (${ch.subrace.source})` : ""}`);
-		if (ch.cls) pushChip("Class", `${ch.cls.name} (${ch.cls.source})${ch.subclass ? ` — ${ch.subclass.name} (${ch.subclass.source})` : ""}`);
-		if (ch.background) pushChip("Background", `${ch.background.name} (${ch.background.source})`);
-		if (ch.feats?.length) pushChip("Feats", String(ch.feats.length));
+		if (this._state.meta.name) pushChip("Nome", this._state.meta.name);
+		if (this._state.meta.editId) pushChip("Editando", this._state.meta.editId);
+		if (ch.species) pushChip("Espécie", `${ch.species.name} (${ch.species.source})${ch.subrace ? ` — ${ch.subrace.name} (${ch.subrace.source})` : ""}`);
+		if (ch.cls) pushChip("Classe", `${ch.cls.name} (${ch.cls.source})${ch.subclass ? ` — ${ch.subclass.name} (${ch.subclass.source})` : ""}`);
+		if (ch.background) pushChip("Antecedente", `${ch.background.name} (${ch.background.source})`);
+		if (ch.feats?.length) pushChip("Talentos", String(ch.feats.length));
 
 		this._els.chips.innerHTML = chips.join("");
 	}
@@ -722,8 +721,7 @@ class CharacterBuilderApp {
 		if (!name) return toast("Dê um nome ao personagem antes de salvar.", "warning");
 
 		const id = this._state.meta.editId;
-		if (!id) return toast("Nenhum personagem carregado para atualizar. Use Save as New.", "warning");
-
+		if (!id) return toast("Nenhum personagem carregado para atualizar. Use \"Salvar como novo\".", "warning");
 		const now = Date.now();
 		const existing = await this._db.getItem(id);
 

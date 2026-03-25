@@ -156,7 +156,7 @@ class CharManageApp {
 						</div>
 
 						<div class="cm__actions">
-							<button class="ve-btn ve-btn-default ve-btn-xs" data-act="sheet" data-id="...">Sheet</button>
+							<button class="ve-btn ve-btn-default ve-btn-xs" data-act="sheet" data-id="${escapeHtml(rec.id)}">Ficha</button>
 							<button class="ve-btn ve-btn-default ve-btn-xs" data-act="edit" data-id="${escapeHtml(rec.id)}">Edit</button>
 							<button class="ve-btn ve-btn-danger ve-btn-xs" data-act="delete" data-id="${escapeHtml(rec.id)}">Delete</button>
 						</div>

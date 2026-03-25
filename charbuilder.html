@@ -1,9 +1,11 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+
+<html lang="pt-BR">
+
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-	<title>Character Builder - 5etools</title>
+	<title>Construtor de Personagem - 5etools</title>
 
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/main.css">
@@ -19,10 +21,11 @@
 <div class="overlay-noise no-print"></div>
 
 <div class="viewport-wrapper">
+
 	<header class="hidden-xs hidden-sm page__header">
 		<div class="container ve-flex-v-baseline">
-			<h1 class="page__title ve-no-wrap ve-my-0">Character Builder</h1>
-			<p class="page__subtitle ve-no-wrap ve-my-0">SRD por padrão. Salva no browser.</p>
+			<h1 class="page__title ve-no-wrap ve-my-0">Construtor de Personagem</h1>
+			<p class="page__subtitle ve-no-wrap ve-my-0">SRD por padrão. Salva no navegador.</p>
 		</div>
 	</header>
 
@@ -35,30 +38,32 @@
 
 			<!-- COLUNA ESQUERDA -->
 			<div class="view-col" id="listcontainer">
+
 				<div class="cb__controls" id="cb__controls">
+
 					<div class="cb__tabs" id="cb__tabs">
-						<button class="ve-btn ve-btn-default ve-btn-sm ve-active" data-cb-tab="species">Species</button>
-						<button class="ve-btn ve-btn-default ve-btn-sm" data-cb-tab="subrace" disabled>Subrace</button>
-
-						<button class="ve-btn ve-btn-default ve-btn-sm" data-cb-tab="class">Class</button>
-						<button class="ve-btn ve-btn-default ve-btn-sm" data-cb-tab="subclass" disabled>Subclass</button>
-
-						<button class="ve-btn ve-btn-default ve-btn-sm" data-cb-tab="background">Background</button>
-						<button class="ve-btn ve-btn-default ve-btn-sm" data-cb-tab="feats">Feats</button>
+						<button class="ve-btn ve-btn-default ve-btn-sm ve-active" data-cb-tab="species">Espécie</button>
+						<button class="ve-btn ve-btn-default ve-btn-sm" data-cb-tab="subrace" disabled>Sub-raça</button>
+						<button class="ve-btn ve-btn-default ve-btn-sm" data-cb-tab="class">Classe</button>
+						<button class="ve-btn ve-btn-default ve-btn-sm" data-cb-tab="subclass" disabled>Subclasse</button>
+						<button class="ve-btn ve-btn-default ve-btn-sm" data-cb-tab="background">Antecedente</button>
+						<button class="ve-btn ve-btn-default ve-btn-sm" data-cb-tab="feats">Talentos</button>
 					</div>
 
 					<div class="cb__controls-rhs">
-						<label class="cb__toggle ve-flex ve-flex-v-center" title="Filtrar só SRD/basic rules">
+
+						<label class="cb__toggle ve-flex ve-flex-v-center" title="Filtrar só SRD/regras básicas">
 							<input type="checkbox" id="cb__toggle_srd" checked>
-							<span class="ve-ml-1">SRD only</span>
+							<span class="ve-ml-1">Somente SRD</span>
 						</label>
 
 						<!-- ✅ Filtro padrão 5etools (FilterBox/SourceFilter) -->
 						<div class="cb__controls-row">
-							<button class="ve-btn ve-btn-default ve-btn-xs" id="cb__btn_filter_open" title="Filter">
+							<button class="ve-btn ve-btn-default ve-btn-xs" id="cb__btn_filter_open" title="Filtros">
 								<span class="glyphicon glyphicon-filter"></span>
 							</button>
-							<button class="ve-btn ve-btn-default ve-btn-xs" id="cb__btn_filter_reset" title="Reset Filters">
+
+							<button class="ve-btn ve-btn-default ve-btn-xs" id="cb__btn_filter_reset" title="Resetar filtros">
 								<span class="glyphicon glyphicon-refresh"></span>
 							</button>
 						</div>
@@ -72,13 +77,14 @@
 
 			<!-- COLUNA DIREITA -->
 			<div id="contentwrapper" class="view-col">
+
 				<div class="cb__topbar ve-flex ve-flex-v-center">
-					<input id="cb__name" class="ve-form-control input-sm cb__input-name" placeholder="Character name">
+					<input id="cb__name" class="ve-form-control input-sm cb__input-name" placeholder="Nome do personagem">
 
 					<div class="ve-ml-auto ve-flex ve-flex-v-center cb__topbar-actions">
-						<button class="ve-btn ve-btn-default ve-btn-xs" id="cb__btn_update" disabled>Update</button>
-						<button class="ve-btn ve-btn-primary ve-btn-xs" id="cb__btn_save_new">Save as New</button>
-						<button class="ve-btn ve-btn-danger ve-btn-xs" id="cb__btn_reset">Reset</button>
+						<button class="ve-btn ve-btn-default ve-btn-xs" id="cb__btn_update" disabled>Atualizar</button>
+						<button class="ve-btn ve-btn-primary ve-btn-xs" id="cb__btn_save_new">Salvar como novo</button>
+						<button class="ve-btn ve-btn-danger ve-btn-xs" id="cb__btn_reset">Limpar</button>
 					</div>
 				</div>
 
@@ -86,7 +92,7 @@
 				<div class="cb__notice cb__notice--hidden" id="cb__notice_srd">
 					<span class="glyphicon glyphicon-info-sign"></span>
 					<span>
-						<b>SRD only</b> está ligado — conteúdo não-SRD (ex.: várias subraças/subclasses do PHB) ficará oculto.
+						<b>Somente SRD</b> está ligado — conteúdo não-SRD (ex.: várias sub-raças/subclasses do PHB) ficará oculto.
 					</span>
 				</div>
 
@@ -101,6 +107,7 @@
 
 		</div>
 	</div>
+
 </div>
 
 <!-- base -->
@@ -108,7 +115,6 @@
 <script type="text/javascript" defer src="js/utils.js"></script>
 <script type="text/javascript" defer src="js/utils-ui.js"></script>
 <script type="text/javascript" defer src="lib/localforage.js"></script>
-
 <script type="module" src="js/utils-config.js"></script>
 
 <!-- renderer -->
@@ -124,5 +130,6 @@
 
 <!-- app -->
 <script type="module" src="js/charbuilder.js"></script>
+
 </body>
 </html>
