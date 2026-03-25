@@ -3,7 +3,7 @@
 */
 "use strict";
 
-/* global localforage, Parser */
+/* global localforage, Parser, BrewUtil2, PrereleaseUtil */
 
 const DB_NAME = "rpgmartins_5etools";
 const DB_STORE = "characters_v1";
@@ -222,7 +222,55 @@ function vBlank (isBlank, val) {
 }
 
 /* =========================
-   Fetch caches
+   Brew/Prerelease (processed) cache
+   ========================= */
+let __BREW_PROC_CACHE = null;
+
+async function pLoadBrewProcMerged () {
+	if (__BREW_PROC_CACHE) return __BREW_PROC_CACHE;
+
+	const out = {
+		race: [],
+		background: [],
+		feat: [],
+		class: [],
+		subclass: [],
+		classFeature: [],
+		subclassFeature: [],
+	};
+
+	try {
+		// Init (se existir)
+		if (globalThis.PrereleaseUtil?.pInit) await globalThis.PrereleaseUtil.pInit();
+		if (globalThis.BrewUtil2?.pInit) await globalThis.BrewUtil2.pInit();
+
+		const pre = globalThis.PrereleaseUtil?.pGetBrewProcessed
+			? await globalThis.PrereleaseUtil.pGetBrewProcessed()
+			: null;
+
+		const br = globalThis.BrewUtil2?.pGetBrewProcessed
+			? await globalThis.BrewUtil2.pGetBrewProcessed()
+			: null;
+
+		const merge = (obj) => {
+			if (!obj) return;
+			for (const k of Object.keys(out)) {
+				if (Array.isArray(obj[k])) out[k].push(...obj[k]);
+			}
+		};
+
+		merge(pre);
+		merge(br);
+	} catch (e) {
+		console.warn("[Print] Falha ao carregar homebrew/prerelease:", e);
+	}
+
+	__BREW_PROC_CACHE = out;
+	return out;
+}
+
+/* =========================
+   Fetch caches (core + brew)
    ========================= */
 let __RACES_CACHE = null;
 let __BGS_CACHE = null;
@@ -232,21 +280,34 @@ let __CLASS_INDEX_CACHE = null;
 async function pLoadRaces () {
 	if (__RACES_CACHE) return __RACES_CACHE;
 	const json = await fetch("data/races.json").then((r) => r.json());
-	__RACES_CACHE = Array.isArray(json.race) ? json.race : [];
+	__RACES_CACHE = Array.isArray(json.race) ? json.race.slice() : [];
+
+	// ✅ merge brew/prerelease
+	const brew = await pLoadBrewProcMerged();
+	if (brew?.race?.length) __RACES_CACHE.push(...brew.race);
+
 	return __RACES_CACHE;
 }
 
 async function pLoadBackgrounds () {
 	if (__BGS_CACHE) return __BGS_CACHE;
 	const json = await fetch("data/backgrounds.json").then((r) => r.json());
-	__BGS_CACHE = Array.isArray(json.background) ? json.background : [];
+	__BGS_CACHE = Array.isArray(json.background) ? json.background.slice() : [];
+
+	const brew = await pLoadBrewProcMerged();
+	if (brew?.background?.length) __BGS_CACHE.push(...brew.background);
+
 	return __BGS_CACHE;
 }
 
 async function pLoadFeats () {
 	if (__FEATS_CACHE) return __FEATS_CACHE;
 	const json = await fetch("data/feats.json").then((r) => r.json());
-	__FEATS_CACHE = Array.isArray(json.feat) ? json.feat : [];
+	__FEATS_CACHE = Array.isArray(json.feat) ? json.feat.slice() : [];
+
+	const brew = await pLoadBrewProcMerged();
+	if (brew?.feat?.length) __FEATS_CACHE.push(...brew.feat);
+
 	return __FEATS_CACHE;
 }
 
@@ -256,12 +317,69 @@ async function pLoadClassIndex () {
 	return __CLASS_INDEX_CACHE;
 }
 
-async function pLoadClassFileByName (className) {
+/**
+ * ✅ Carrega classe oficial quando existir, e mescla brew/prerelease.
+ * ✅ Se for classe 100% homebrew, monta um "classFile" virtual (class/subclass/features) a partir do brew.
+ */
+async function pLoadClassFileByName (className, classSource = null) {
 	if (!className) return null;
-	const idx = await pLoadClassIndex();
-	const fn = idx[String(className).toLowerCase()];
-	if (!fn) return null;
-	return fetch(`data/class/${fn}`).then((r) => r.json());
+
+	const brew = await pLoadBrewProcMerged();
+
+	// 1) tenta pegar a classe oficial via index
+	let classFile = null;
+	try {
+		const idx = await pLoadClassIndex();
+		const fn = idx[String(className).toLowerCase()];
+		if (fn) classFile = await fetch(`data/class/${fn}`).then((r) => r.json());
+	} catch {
+		// ignore
+	}
+
+	const isMatchClass = (it) =>
+		it?.name === className && (!classSource || !it.source || it.source === classSource);
+
+	// 2) se não achou arquivo oficial, tenta montar “virtual” a partir do brew
+	if (!classFile) {
+		const cls =
+			(brew.class || []).find(isMatchClass) ||
+			(brew.class || []).find((it) => it?.name === className);
+
+		if (!cls) return null;
+
+		const clsSrc = cls.source;
+
+		return {
+			class: [cls],
+			subclass: (brew.subclass || []).filter(
+				(sc) => sc?.className === cls.name && (!sc?.classSource || sc.classSource === clsSrc),
+			),
+			classFeature: (brew.classFeature || []).filter(
+				(cf) => cf?.className === cls.name && (!cf?.classSource || cf.classSource === clsSrc),
+			),
+			subclassFeature: (brew.subclassFeature || []).filter(
+				(sf) => sf?.className === cls.name && (!sf?.classSource || sf.classSource === clsSrc),
+			),
+		};
+	}
+
+	// 3) achou oficial: mescla qualquer subclass/feature vindo do brew
+	const clsSrcGuess =
+		classSource ||
+		(classFile.class || []).find((c) => c?.name === className)?.source ||
+		null;
+
+	const add = (prop, pred) => {
+		const arr = Array.isArray(brew[prop]) ? brew[prop].filter(pred) : [];
+		if (!arr.length) return;
+		classFile[prop] = (classFile[prop] || []).concat(arr);
+	};
+
+	add("subclass", (sc) => sc?.className === className && (!clsSrcGuess || !sc?.classSource || sc.classSource === clsSrcGuess));
+	add("classFeature", (cf) => cf?.className === className && (!clsSrcGuess || !cf?.classSource || cf.classSource === clsSrcGuess));
+	add("subclassFeature", (sf) => sf?.className === className && (!clsSrcGuess || !sf?.classSource || sf.classSource === clsSrcGuess));
+
+	return classFile;
 }
 
 /* =========================
@@ -286,9 +404,7 @@ function findSubrace (races, baseName, baseSource, subName, subSource) {
 				r.raceName === baseName &&
 				(r.raceSource || baseSource) === baseSource,
 		) ||
-		races.find(
-			(r) => r.name === subName && r.source === subSource && r.raceName === baseName,
-		)
+		races.find((r) => r.name === subName && r.source === subSource && r.raceName === baseName)
 	);
 }
 
@@ -339,6 +455,9 @@ function strip5eTags (s) {
 	return out;
 }
 
+/**
+ * ✅ Melhorado para refs de homebrew (inclui variações com/sem source no final)
+ */
 function buildFeatureRefMaps (classFile) {
 	const classFeatureMap = new Map();
 	const subclassFeatureMap = new Map();
@@ -346,22 +465,85 @@ function buildFeatureRefMaps (classFile) {
 	const cfs = Array.isArray(classFile?.classFeature) ? classFile.classFeature : [];
 	const scfs = Array.isArray(classFile?.subclassFeature) ? classFile.subclassFeature : [];
 
+	const add = (map, key, val) => {
+		if (!key) return;
+		map.set(String(key).toLowerCase(), val);
+	};
+
+	const addMany = (map, keys, val) => keys.forEach((k) => add(map, k, val));
+
 	for (const f of cfs) {
-		const base = `${f.name}|${f.className}|${f.classSource}|${f.level}`;
-		const keyA = `${base}|${f.source || ""}`.toLowerCase();
-		const keyB = `${base}`.toLowerCase();
-		classFeatureMap.set(keyA, f);
-		classFeatureMap.set(keyB, f);
+		const nm = f.name;
+		const cn = f.className;
+		const cs = f.classSource || "";
+		const lvl = f.level;
+		const src = f.source || "";
+
+		const bases = [
+			`${nm}|${cn}|${cs}|${lvl}`,
+			`${nm}|${cn}||${lvl}`, // classSource vazio
+		];
+
+		for (const b of bases) {
+			add(classFeatureMap, b, f);
+			if (src) add(classFeatureMap, `${b}|${src}`, f);
+		}
 	}
 
 	for (const f of scfs) {
+		const nm = f.name;
+		const cn = f.className;
+		const cs = f.classSource || "";
+		const lvl = f.level;
+
 		const subShort = f.subclassShortName || f.subclassName || "";
-		const base = `${f.name}|${f.className}|${f.classSource}|${subShort}|${f.subclassSource || ""}|${f.level}`;
-		const keyA = base.toLowerCase();
-		subclassFeatureMap.set(keyA, f);
+		const subFull = f.subclassName || subShort;
+
+		const subSrc = f.subclassSource || "";
+		const src = f.source || "";
+
+		const classSourceVars = [cs, ""];
+		const subclassSourceVars = [subSrc, ""];
+		const subNameVars = [subShort, subFull].filter(Boolean);
+
+		for (const csv of classSourceVars) {
+			for (const ssv of subclassSourceVars) {
+				for (const snv of subNameVars) {
+					const base = `${nm}|${cn}|${csv}|${snv}|${ssv}|${lvl}`;
+					add(subclassFeatureMap, base, f);
+					if (src) add(subclassFeatureMap, `${base}|${src}`, f); // cobre "...|lvl|SRC"
+				}
+			}
+		}
 	}
 
 	return { classFeatureMap, subclassFeatureMap };
+}
+
+function _tryResolveRef (map, rawKey) {
+	if (!map || !rawKey) return null;
+
+	const k0 = String(rawKey).toLowerCase();
+	if (map.has(k0)) return map.get(k0);
+
+	// tenta remover último segmento "|SRC" (comum em brew)
+	const parts = String(rawKey).split("|").map(s => s.trim());
+	if (parts.length >= 2) {
+		const k1 = parts.slice(0, -1).join("|").toLowerCase();
+		if (map.has(k1)) return map.get(k1);
+	}
+
+	// tenta remover source e também normalizar tokens vazios
+	const parts2 = parts.filter((p) => p !== "");
+	if (parts2.length >= 2) {
+		const k2 = parts2.join("|").toLowerCase();
+		if (map.has(k2)) return map.get(k2);
+
+		const k3 = parts2.slice(0, -1).join("|").toLowerCase();
+		if (map.has(k3)) return map.get(k3);
+	}
+
+	return null;
 }
 
 function renderEntriesLite (entries, ctx) {
@@ -375,15 +557,13 @@ function renderEntriesLite (entries, ctx) {
 	if (typeof entries !== "object") return "";
 
 	if (entries.type === "refClassFeature" && entries.classFeature && ctx?.classFeatureMap) {
-		const k = String(entries.classFeature).toLowerCase();
-		const ref = ctx.classFeatureMap.get(k);
+		const ref = _tryResolveRef(ctx.classFeatureMap, entries.classFeature);
 		if (ref?.entries) return renderEntriesLite(ref.entries, ctx);
 		return `<div class="gpl-feat-p">${esc(t("missingCfRef"))}</div>`;
 	}
 
 	if (entries.type === "refSubclassFeature" && entries.subclassFeature && ctx?.subclassFeatureMap) {
-		const k = String(entries.subclassFeature).toLowerCase();
-		const ref = ctx.subclassFeatureMap.get(k);
+		const ref = _tryResolveRef(ctx.subclassFeatureMap, entries.subclassFeature);
 		if (ref?.entries) return renderEntriesLite(ref.entries, ctx);
 		return `<div class="gpl-feat-p">${esc(t("missingScfRef"))}</div>`;
 	}
@@ -852,24 +1032,19 @@ function renderFeaturesPages (data) {
 
 	const parts = [];
 
-	// start features in a new page
 	parts.push(`<div class="page-break"></div>`);
 	parts.push(`<div class="gpl-feat-wrap gpl-feat-wrap--compact">`);
 	parts.push(`<div class="header">${esc(t("featuresUpTo", String(lvl)))}</div>`);
 
-	// TOC (hidden in print by CSS)
 	parts.push(renderFeatureToc(tocItems));
 
-	// part 1: race/subrace/background/feats
 	parts.push(renderFeatureSection("feat_race", t("race"), raceHtml, true));
 	if (subrace) parts.push(renderFeatureSection("feat_subrace", t("subrace"), subraceHtml, true));
 	parts.push(renderFeatureSection("feat_background", t("background"), bgHtml, true));
 	parts.push(renderFeatureSection("feat_feats", t("feats"), featsHtml, true));
 
-	// page break before class
 	parts.push(`<div class="page-break"></div>`);
 
-	// part 2: class/subclass
 	parts.push(renderFeatureSection("feat_class", t("class"), classHtml, true));
 	parts.push(renderFeatureSection("feat_subclass", t("subclass"), subclassHtml, true));
 
@@ -915,7 +1090,7 @@ async function main () {
 
 	const choice = rec.state?.choice || {};
 
-	// size/speed from race
+	// size/speed from race (core + brew)
 	const races = await pLoadRaces();
 	const sp = choice.species;
 	const sr = choice.subrace;
@@ -945,8 +1120,8 @@ async function main () {
 			background: bgStr,
 			playerName: "",
 			race: raceStr,
-			alignment: "",   // você pode preencher depois
-			experience: "",  // você pode preencher depois
+			alignment: "",
+			experience: "",
 			size: sizeStr,
 		}),
 	);
@@ -954,7 +1129,7 @@ async function main () {
 	htmlParts.push(abilityAndSaves(rec.sheet.abilities, rec.sheet.saveProfs, pb, blank));
 	htmlParts.push(drawSkillsTriple(rec, lvl, pb, blank));
 
-	// features pages (entries completas)
+	// features pages (entries completas) — agora com brew
 	if (features) {
 		const bgs = await pLoadBackgrounds();
 		const featsAll = await pLoadFeats();
@@ -973,7 +1148,7 @@ async function main () {
 		let ctx = {};
 
 		if (choice.cls?.name) {
-			const classFile = await pLoadClassFileByName(choice.cls.name);
+			const classFile = await pLoadClassFileByName(choice.cls.name, choice.cls.source);
 			if (classFile) {
 				ctx = buildFeatureRefMaps(classFile);
 

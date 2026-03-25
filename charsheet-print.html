@@ -24,13 +24,22 @@
 	<link rel="stylesheet" href="css/gpl/dungeontiger-character.css">
 	<link rel="stylesheet" href="css/charsheet-print-gpl-overrides.css?v=dev1">
 	<!-- storage -->
-	<script defer src="lib/localforage.js"></script>
-
-	<!-- (opcional) parser/utils do 5etools, se quiser usar depois -->
-	<script defer src="lib/localforage.js"></script>
 	<script defer src="js/parser.js"></script>
+	<script defer src="js/utils.js"></script>
+	<script defer src="js/utils-ui.js"></script>
+	<script defer src="lib/localforage.js"></script>
+	<script defer src="js/utils-dataloader.js"></script>
 
-	<script type="module" src="js/charsheet-print-gpl.js?v=dev3"></script>
+	<script type="module" src="js/utils-brew.js"></script>
+	<script type="module" src="js/utils-config.js"></script>
+
+	<script defer src="js/render.js"></script>
+	<script defer src="js/render-dice.js"></script>
+	<script defer src="js/render-markdown.js"></script>
+	<script type="module" src="js/shim-esmodules.js"></script>
+
+	<!-- seu print -->
+	<script type="module" src="js/charsheet-print-gpl.js?v=dev-brew-1"></script>
 </head>
 <body>
 <div id="gpl_sheet"></div>
