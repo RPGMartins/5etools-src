@@ -168,7 +168,6 @@ class SheetApp {
 			selLevel: document.getElementById("cs__sel_level"),
 			btnManager: document.getElementById("cs__btn_manager"),
 			btnPrint: document.getElementById("cs__btn_print"),
-			btnPrintFull: document.getElementById("cs__btn_print_full"),
 
 			meta: document.getElementById("cs__meta"),
 			metaRhs: document.getElementById("cs__meta_rhs"),
@@ -265,7 +264,6 @@ class SheetApp {
 
 		// ✅ um handler por botão (sem empilhar listeners)
 		this._els.btnPrint.addEventListener("click", () => this._doOpenPrint({ isFull: false }));
-		this._els.btnPrintFull.addEventListener("click", () => this._doOpenPrint({ isFull: true }));
 	}
 
 	_doOpenPrint ({ isFull }) {
