@@ -282,43 +282,115 @@ class CharManageApp {
 		}
 	}
 
+	async _pResolveIdConflict ({ existing, incoming }) {
+		const exName = existing?.name || existing?.state?.meta?.name || "(sem nome)";
+		const inName = incoming?.name || incoming?.state?.meta?.name || "(sem nome)";
+
+		// Prompt simples (funciona em qualquer lugar)
+		const msg =
+			`Já existe um personagem com o mesmo ID:\n\n` +
+			`ID: ${existing.id}\n` +
+			`No sistema: ${exName}\n` +
+			`Importando: ${inName}\n\n` +
+			`Escolha:\n` +
+			`1 = Manter o do sistema (não importar)\n` +
+			`2 = Substituir pelo importado\n` +
+			`3 = Importar como cópia (novo ID)\n`;
+
+		const resp = prompt(msg, "3");
+
+		if (resp === null) return "keep"; // cancel -> mantém o sistema
+		const v = String(resp).trim();
+
+		if (v === "1") return "keep";
+		if (v === "2") return "replace";
+		return "copy";
+	}
+
 	async _pImportFromText (text) {
 		let parsed;
 		try {
 			parsed = JSON.parse(text);
 		} catch (e) {
 			console.error(e);
-			alert("O conteúdo não é um JSON válido.");
-			return;
+			return toast("O conteúdo não é um JSON válido.", "danger");
 		}
 
-		// Aceita: 1 personagem, ou lista
-		const chars = Array.isArray(parsed)
+		const list = Array.isArray(parsed)
 			? parsed
 			: Array.isArray(parsed?.characters)
 				? parsed.characters
 				: [parsed];
 
-		let importedCount = 0;
+		let imported = 0;
+		let skipped = 0;
 
-		for (const raw of chars) {
-			const rec = this._normalizeImportedCharacter(raw);
-			if (!rec) continue;
+		for (const raw of list) {
+			const recBase = this._normalizeImportedCharacter(raw);
+			if (!recBase) { skipped++; continue; }
 
+			// ✅ Se o importado vier com ID, tenta usar
+			const wantedId = (raw?.id && typeof raw.id === "string" && raw.id.trim())
+				? raw.id.trim()
+				: null;
+
+			let rec = recBase;
+			if (wantedId) rec.id = wantedId;
+
+			// Checa colisão
+			const exists = await this._db.getItem(rec.id);
+
+			if (exists) {
+				const choice = await this._pResolveIdConflict({
+					existing: exists,
+					incoming: rec,
+				});
+
+				if (choice === "keep") {
+					skipped++;
+					continue;
+				}
+
+				if (choice === "replace") {
+					// mantém o id, sobrescreve
+					rec.createdAt = exists.createdAt ?? rec.createdAt;
+					rec.updatedAt = Date.now();
+					await this._db.setItem(rec.id, rec);
+					imported++;
+					continue;
+				}
+
+				if (choice === "copy") {
+					// gera novo id e salva como novo
+					rec.id = this._newId();
+					rec.createdAt = Date.now();
+					rec.updatedAt = rec.createdAt;
+					await this._db.setItem(rec.id, rec);
+					imported++;
+					continue;
+				}
+
+				// fallback seguro: não importa
+				skipped++;
+				continue;
+			}
+
+			// Sem colisão: salva normal
 			await this._db.setItem(rec.id, rec);
-			importedCount++;
+			imported++;
 		}
 
-		if (!importedCount) {
-			alert("Não encontrei nenhum personagem válido para importar.");
-			return;
-		}
+		if (!imported && !skipped) return toast("Não encontrei nenhum personagem válido para importar.", "warning");
 
-		// Recarrega lista
+		// Atualiza lista na hora
 		await this._pLoad();
+		if (this._els.search) this._els.search.value = "";
+		this._applyFilter();
 		this._render();
 
-		alert(`Importado${importedCount > 1 ? "s" : ""}: ${importedCount}`);
+		if (imported && skipped) toast(`Importados: ${imported} • Ignorados: ${skipped}`, "success");
+		else if (imported) toast(`Importado${imported > 1 ? "s" : ""}: ${imported}`, "success");
+		else toast(`Nenhum importado. Ignorados: ${skipped}`, "warning");
 	}
 
 	_normalizeImportedCharacter (raw) {
@@ -331,8 +403,11 @@ class CharManageApp {
 		// D) o usuário colou só o "state" -> {choice:{...}, meta:{...}} (a gente envolve)
 
 		const now = Date.now();
-		const id = this._newId();
+		const id = (raw?.id && typeof raw.id === "string" && raw.id.trim())
+			? raw.id.trim()
+			: this._newId();
 
+		
 		// Se veio só "state" (parece ter "choice" e/ou "meta"), embrulha
 		const looksLikeStateOnly = raw.choice || raw.meta;
 		const state = raw.state || (looksLikeStateOnly ? raw : null);
@@ -381,6 +456,8 @@ class CharManageApp {
 			createdAt: now,
 			updatedAt: now,
 		};
+
+
 	}
 }
 
