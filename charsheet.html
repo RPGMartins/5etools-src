@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-	<title>Character Sheet - 5etools</title>
+	<title>Ficha de Personagem - 5etools</title>
 
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/main.css">
@@ -20,152 +20,139 @@
 <div class="overlay-noise no-print"></div>
 
 <div class="viewport-wrapper">
-	<header class="hidden-xs hidden-sm page__header no-print">
-		<div class="container">
-			<h1 class="page__title">Character Sheet</h1>
-			<p class="page__subtitle">View/Play + Print</p>
+
+	<header class="page__header no-print">
+
+		<nav class="container page__nav" id="navigation">
+			<ul class="nav nav-pills page__nav-inner" id="navbar"></ul>
+		</nav>
+
+		<div class="page__title-row">
+			<h1 class="page__title">Ficha de Personagem</h1>
+			<div class="page__subtitle">Ver/Jogar + Imprimir</div>
+		</div>
+
+		<div class="cs__top-row ve-flex ve-flex-wrap ve-flex-v-center ve-gap-2 ve-mt-2">
+			<label class="cs__lbl">
+				<span class="cs__lbl-txt">Personagem</span>
+				<select id="cs__sel_char" class="ve-form-control input-sm"></select>
+			</label>
+
+			<label class="cs__lbl">
+				<span class="cs__lbl-txt">Nível</span>
+				<select id="cs__sel_level" class="ve-form-control input-sm">
+					<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option>
+					<option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option>
+					<option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option>
+					<option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
+				</select>
+			</label>
+
+			<div class="ve-flex ve-flex-v-center ve-gap-2 ve-ml-auto">
+				<button id="cs__btn_manager" class="ve-btn ve-btn-default">Voltar ao Gerenciador</button>
+				<button id="cs__btn_print" class="ve-btn ve-btn-primary">Imprimir</button>
+				<button id="cs__btn_print_full" class="ve-btn ve-btn-primary">Imprimir Completa (todas as habilidades)</button>
+			</div>
+		</div>
+
+		<div class="cs__meta ve-flex ve-flex-wrap ve-flex-v-center ve-gap-2 ve-mt-2">
+			<div id="cs__meta" class="cs__meta-lhs"></div>
+			<div id="cs__meta_rhs" class="cs__meta-rhs"></div>
 		</div>
 	</header>
 
-	<nav class="container page__nav no-print" id="navigation">
-		<ul class="nav nav-pills page__nav-inner" id="navbar"></ul>
-	</nav>
+	<main class="page__content">
+		<section class="cs__hdr ve-flex ve-flex-v-center ve-flex-wrap ve-gap-2">
+			<div class="cs__hdr-left">
+				<div id="cs__name" class="cs__name">—</div>
+				<div id="cs__sub" class="cs__sub">—</div>
+			</div>
 
-	<div class="view-col-group--cancer ve-h-100 mh-0">
-		<div class="container view-col-wrapper view-col-wrapper--cancer">
-			<div class="view-col ve-w-100">
+			<div class="cs__hdr-right ve-flex ve-flex-v-center ve-gap-2">
+				<div class="cs__pill">
+					<div class="cs__pill-k">Bônus de Prof.</div>
+					<div id="cs__prof" class="cs__pill-v">+2</div>
+				</div>
+				<div class="cs__pill">
+					<div class="cs__pill-k">Percepção Passiva</div>
+					<div id="cs__pp" class="cs__pill-v">10</div>
+				</div>
+			</div>
+		</section>
 
-				<!-- Top controls -->
-				<div class="cs__top no-print">
-					<div class="cs__top-row">
-						<label class="cs__lbl">
-							<span class="cs__lbl-txt">Character</span>
-							<select id="cs__sel_char" class="ve-form-control input-sm cs__sel"></select>
-						</label>
+		<div class="cs__grid ve-mt-3">
+			<section class="cs__card">
+				<h2 class="cs__h2">Atributos</h2>
+				<div id="cs__abilities" class="cs__abilities"></div>
+			</section>
 
-						<label class="cs__lbl">
-							<span class="cs__lbl-txt">Level</span>
-							<select id="cs__sel_level" class="ve-form-control input-sm cs__sel">
-								<option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option>
-								<option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option>
-								<option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
-								<option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option>
-								<option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option>
-							</select>
-						</label>
+			<section class="cs__card">
+				<h2 class="cs__h2">Testes de Resistência</h2>
+				<div id="cs__saves" class="cs__saves"></div>
+			</section>
 
-						<div class="cs__top-actions">
-							<button class="ve-btn ve-btn-default ve-btn-xs" id="cs__btn_manager">Back to Manager</button>
-							<button class="ve-btn ve-btn-default ve-btn-xs" id="cs__btn_print">Print</button>
-							<button class="ve-btn ve-btn-primary ve-btn-xs" id="cs__btn_print_full">Print Full (All Features)</button>
-						</div>
-					</div>
+			<section class="cs__card">
+				<h2 class="cs__h2">Perícias</h2>
+				<div id="cs__skills_hint" class="cs__hint ve-mb-2"></div>
+				<div id="cs__skills" class="cs__skills"></div>
+			</section>
 
-					<div class="cs__top-row">
-						<div class="cs__meta" id="cs__meta"></div>
-						<div class="cs__meta cs__meta--rhs" id="cs__meta_rhs"></div>
-					</div>
+			<section class="cs__card">
+				<h2 class="cs__h2">Proficiências e Idiomas</h2>
+
+				<div class="cs__split">
+					<label class="cs__lbl2">
+						<span class="cs__lbl-txt">Armaduras/Armas/Ferramentas</span>
+						<textarea id="cs__ta_profs" class="ve-form-control cs__ta" rows="4" placeholder="Um por linha..."></textarea>
+					</label>
+
+					<label class="cs__lbl2">
+						<span class="cs__lbl-txt">Idiomas</span>
+						<textarea id="cs__ta_lang" class="ve-form-control cs__ta" rows="4" placeholder="Um por linha..."></textarea>
+					</label>
 				</div>
 
-				<!-- Sheet -->
-				<div class="cs__sheet" id="cs__sheet">
-					<div class="cs__hdr">
-						<div>
-							<div class="cs__name" id="cs__name">—</div>
-							<div class="cs__sub" id="cs__sub">—</div>
-						</div>
-						<div class="cs__right">
-							<div class="cs__pill">
-								<div class="cs__pill-k">Prof</div>
-								<div class="cs__pill-v" id="cs__prof">+2</div>
-							</div>
-							<div class="cs__pill">
-								<div class="cs__pill-k">Passive Perception</div>
-								<div class="cs__pill-v" id="cs__pp">10</div>
-							</div>
-						</div>
-					</div>
+				<div class="cs__hint ve-mt-2">
+					Auto-populado (se estiver vazio) a partir de Raça/Classe/Antecedente. Você pode editar manualmente.
+				</div>
+			</section>
 
-					<div class="cs__layout">
-						<!-- LEFT -->
-						<div class="cs__col">
-							<div class="cs__box">
-								<div class="cs__box-title">Ability Scores</div>
-								<div class="cs__abilities" id="cs__abilities"></div>
-							</div>
+			<section class="cs__card cs__card--wide">
+				<h2 class="cs__h2">Habilidades (por nível)</h2>
+				<div id="cs__features" class="cs__features"></div>
+			</section>
 
-							<div class="cs__box">
-								<div class="cs__box-title">Saving Throws</div>
-								<div class="cs__grid" id="cs__saves"></div>
-							</div>
-
-							<div class="cs__box">
-								<div class="cs__box-title">Skills</div>
-								<div class="cs__hint" id="cs__skills_hint"></div>
-								<div class="cs__grid" id="cs__skills"></div>
-							</div>
-
-							<div class="cs__box">
-								<div class="cs__box-title">Proficiencies & Languages</div>
-
-								<div class="cs__ta-row">
-									<label class="cs__lbl2">
-										<span class="cs__lbl-txt">Armor/Weapons/Tools</span>
-										<textarea id="cs__ta_profs" class="ve-form-control cs__ta" rows="4" placeholder="One per line..."></textarea>
-									</label>
-
-									<label class="cs__lbl2">
-										<span class="cs__lbl-txt">Languages</span>
-										<textarea id="cs__ta_lang" class="ve-form-control cs__ta" rows="4" placeholder="One per line..."></textarea>
-									</label>
-								</div>
-
-								<div class="cs__hint">
-									Auto-populado (se estiver vazio) a partir de Race/Class/Background. Você pode editar manualmente.
-								</div>
-							</div>
-						</div>
-
-						<!-- RIGHT -->
-						<div class="cs__col">
-							<div class="cs__box">
-								<div class="cs__box-title">Features (by level)</div>
-								<div class="cs__features" id="cs__features"></div>
-							</div>
-
-							<div class="cs__box">
-								<div class="cs__box-title">Notes</div>
-								<textarea id="cs__ta_notes" class="ve-form-control cs__ta" rows="8" placeholder="Notes..."></textarea>
-							</div>
-						</div>
-					</div>
-
-				</div><!-- /sheet -->
-
-			</div>
+			<section class="cs__card cs__card--wide">
+				<h2 class="cs__h2">Anotações</h2>
+				<textarea id="cs__ta_notes" class="ve-form-control cs__ta" rows="8" placeholder="Anotações..."></textarea>
+			</section>
 		</div>
-	</div>
+	</main>
 </div>
 
-<!-- base -->
-<script type="text/javascript" defer src="js/parser.js"></script>
-<script type="text/javascript" defer src="js/utils.js"></script>
-<script type="text/javascript" defer src="js/utils-ui.js"></script>
-<script type="text/javascript" defer src="lib/localforage.js"></script>
+<!--5ETOOLS_SCRIPT_ANCHOR-->
 
+<script defer src="js/parser.js"></script>
+<script defer src="js/utils.js"></script>
+<script defer src="js/utils-ui.js"></script>
+<script defer src="lib/localforage.js"></script>
+
+<script defer src="js/utils-dataloader.js"></script>
+
+<script type="module" src="js/utils-brew.js"></script>
 <script type="module" src="js/utils-config.js"></script>
 
-<!-- renderer -->
-<script type="text/javascript" defer src="js/render.js"></script>
-<script type="text/javascript" defer src="js/render-dice.js"></script>
-<script type="text/javascript" defer src="js/render-markdown.js"></script>
-<script type="module" src="js/shim-esmodules.js"></script>
+<script defer src="js/render.js"></script>
+<script defer src="js/render-dice.js"></script>
+<script defer src="js/render-markdown.js"></script>
 
-<!-- brew/prerelease -->
-<script type="text/javascript" defer src="js/hist.js"></script>
-<script type="module" src="js/utils-brew.js"></script>
+<script type="module" src="js/shim-esmodules.js"></script>
+<script defer src="js/hist.js"></script>
 
 <!-- app -->
-<script type="module" src="js/charsheet.js?v=20260323a"></script>
+<script type="module" src="js/charsheet.js?v=20260324ptbr"></script>
+
+<!-- app -->
+<script type="module" src="js/charsheet.js?v=20260324ptbr"></script>
 </body>
 </html>

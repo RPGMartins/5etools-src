@@ -6,34 +6,64 @@ const DB_STORE = "characters_v1";
 const LS_LAST_CHAR = "rpgmartins_cs_lastCharId";
 
 const ABILS = ["str", "dex", "con", "int", "wis", "cha"];
-const ABIL_LABEL = {str:"STR", dex:"DEX", con:"CON", int:"INT", wis:"WIS", cha:"CHA"};
+// PT-BR
+const ABIL_LABEL = {str: "FOR", dex: "DES", con: "CON", int: "INT", wis: "SAB", cha: "CAR"};
 
+// Os nomes em inglês ainda são importantes para mapear "skills" que vêm dos JSONs
 const SKILLS = [
-	{key:"acrobatics", name:"Acrobatics", abil:"dex"},
-	{key:"animalHandling", name:"Animal Handling", abil:"wis"},
-	{key:"arcana", name:"Arcana", abil:"int"},
-	{key:"athletics", name:"Athletics", abil:"str"},
-	{key:"deception", name:"Deception", abil:"cha"},
-	{key:"history", name:"History", abil:"int"},
-	{key:"insight", name:"Insight", abil:"wis"},
-	{key:"intimidation", name:"Intimidation", abil:"cha"},
-	{key:"investigation", name:"Investigation", abil:"int"},
-	{key:"medicine", name:"Medicine", abil:"wis"},
-	{key:"nature", name:"Nature", abil:"int"},
-	{key:"perception", name:"Perception", abil:"wis"},
-	{key:"performance", name:"Performance", abil:"cha"},
-	{key:"persuasion", name:"Persuasion", abil:"cha"},
-	{key:"religion", name:"Religion", abil:"int"},
-	{key:"sleightOfHand", name:"Sleight of Hand", abil:"dex"},
-	{key:"stealth", name:"Stealth", abil:"dex"},
-	{key:"survival", name:"Survival", abil:"wis"},
+	{key: "acrobatics", name: "Acrobatics", abil: "dex"},
+	{key: "animalHandling", name: "Animal Handling", abil: "wis"},
+	{key: "arcana", name: "Arcana", abil: "int"},
+	{key: "athletics", name: "Athletics", abil: "str"},
+	{key: "deception", name: "Deception", abil: "cha"},
+	{key: "history", name: "History", abil: "int"},
+	{key: "insight", name: "Insight", abil: "wis"},
+	{key: "intimidation", name: "Intimidation", abil: "cha"},
+	{key: "investigation", name: "Investigation", abil: "int"},
+	{key: "medicine", name: "Medicine", abil: "wis"},
+	{key: "nature", name: "Nature", abil: "int"},
+	{key: "perception", name: "Perception", abil: "wis"},
+	{key: "performance", name: "Performance", abil: "cha"},
+	{key: "persuasion", name: "Persuasion", abil: "cha"},
+	{key: "religion", name: "Religion", abil: "int"},
+	{key: "sleightOfHand", name: "Sleight of Hand", abil: "dex"},
+	{key: "stealth", name: "Stealth", abil: "dex"},
+	{key: "survival", name: "Survival", abil: "wis"},
 ];
 
 const SKILL_KEY_TO_NAME = new Map(SKILLS.map(s => [s.key, s.name]));
 const SKILL_NAME_TO_KEY = new Map(SKILLS.map(s => [s.name.toLowerCase(), s.key]));
 
+// PT-BR (somente display)
+const SKILL_KEY_TO_NAME_PT = new Map([
+	["acrobatics", "Acrobacias"],
+	["animalHandling", "Adestramento"],
+	["arcana", "Arcanismo"],
+	["athletics", "Atletismo"],
+	["deception", "Enganação"],
+	["history", "História"],
+	["insight", "Intuição"],
+	["intimidation", "Intimidação"],
+	["investigation", "Investigação"],
+	["medicine", "Medicina"],
+	["nature", "Natureza"],
+	["perception", "Percepção"],
+	["performance", "Atuação"],
+	["persuasion", "Persuasão"],
+	["religion", "Religião"],
+	["sleightOfHand", "Prestidigitação"],
+	["stealth", "Furtividade"],
+	["survival", "Sobrevivência"],
+]);
+
+const getSkillDisplayName = (key) => SKILL_KEY_TO_NAME_PT.get(key) || SKILL_KEY_TO_NAME.get(key) || key;
+
 const esc = (s) => String(s ?? "")
-	.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#039;");
+	.replace(/&/g, "&amp;")
+	.replace(/</g, "&lt;")
+	.replace(/>/g, "&gt;")
+	.replace(/"/g, "&quot;")
+	.replace(/'/g, "&#039;");
 
 const getParam = (k) => {
 	const u = new URL(location.href);
@@ -82,7 +112,7 @@ function parseLangProf (lp) {
 		if (!it || typeof it !== "object") continue;
 		for (const [k, v] of Object.entries(it)) {
 			if (v === true) fixed.push(k);
-			else if (typeof v === "number" && v > 0) choose.push(`Choose ${v} (${k})`);
+			else if (typeof v === "number" && v > 0) choose.push(`Escolha ${v} (${k})`);
 		}
 	}
 	return { fixed, choose };
@@ -163,15 +193,9 @@ class SheetApp {
 		this._chars = [];
 		this._rec = null;
 
-		this._data = {
-			races: [],
-			backgrounds: [],
-			feats: [],
-		};
-
+		this._data = { races: [], backgrounds: [], feats: [] };
 		this._rules = null;
 
-		this._ui = { printFull: false };
 		this._pSaveDebounced = debounce(() => this._pSaveRec(), 300);
 
 		this._pickableSkills = new Set();
@@ -239,102 +263,31 @@ class SheetApp {
 
 		this._els.btnManager.addEventListener("click", () => location.href = "charmanage.html");
 
-		this._els.btnPrint.addEventListener("click", () => this._doPrintCurrent());
-
-		this._els.btnPrintFull.addEventListener("click", async () => {
-			if (!this._rec) return;
-
-			this._ui.printFull = true;
-			document.body.classList.add("cs--print-full");
-
-			this._renderFeatures({forceLevel: 20, forceOpenAll: true});
-			this._openAllDetails(true);
-			document.body.classList.add("cs--printing");
-			// Print
-			this._els.btnPrint.addEventListener("click", () => {
-				const lvl = this._rec?.sheet?.level || 1;
-				window.open(`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}&lvl=${encodeURIComponent(lvl)}`, "_blank");
-			});
-
-			// Print Full (lvl 20, auto print)
-			this._els.btnPrintFull.addEventListener("click", () => {
-				window.open(`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}&lvl=20&auto=1`, "_blank");
-			});;
-
-			const onAfter = () => {
-				window.removeEventListener("afterprint", onAfter);
-				this._ui.printFull = false;
-				document.body.classList.remove("cs--print-full");
-				document.body.classList.remove("cs--printing");
-				this._openAllDetails(false);
-				this._renderFeatures();
-			};
-			window.addEventListener("afterprint", onAfter);
-
-			setTimeout(() => {
-				if (this._ui.printFull) onAfter();
-			}, 1600);
-		});
+		// ✅ um handler por botão (sem empilhar listeners)
+		this._els.btnPrint.addEventListener("click", () => this._doOpenPrint({ isFull: false }));
+		this._els.btnPrintFull.addEventListener("click", () => this._doOpenPrint({ isFull: true }));
 	}
 
-	_doPrintCurrent () {
+	_doOpenPrint ({ isFull }) {
 		if (!this._rec) return;
 
-		this._openAllDetails(true);
-		document.body.classList.add("cs--printing");
-		// Print
-		// Print
-		// Print
-		this._els.btnPrint.addEventListener("click", () => {
-			const lvl = this._rec?.sheet?.level || 1;
+		const blank = confirm(
+			isFull
+				? "Imprimir COMPLETA (nível 20) com campos numéricos em branco?\n\nOK = Sim (blank)\nCancelar = Não (preenchido)"
+				: "Imprimir com campos numéricos em branco?\n\nOK = Sim (blank)\nCancelar = Não (preenchido)"
+		);
 
-			// se você ainda usa o modo blank por confirmação:
-			const blank = confirm(
-				"Imprimir com campos numéricos em branco?\n\nOK = Sim (blank)\nCancelar = Não (preenchido)"
-			);
+		const lvl = isFull ? 20 : (this._rec?.sheet?.level || 1);
 
-			const url =
-				`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}` +
-				`&lvl=${encodeURIComponent(lvl)}` +
-				`&features=1` +
-				`&lang=ptbr` +
-				(blank ? `&blank=1` : ``);
+		const url =
+			`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}` +
+			`&lvl=${encodeURIComponent(lvl)}` +
+			`&features=1` +
+			`&lang=ptbr` +
+			(isFull ? `&auto=1` : ``) +
+			(blank ? `&blank=1` : ``);
 
-			window.open(url, "_blank");
-		});
-
-// Print Full
-		this._els.btnPrintFull.addEventListener("click", () => {
-			const blank = confirm(
-				"Imprimir FULL com campos numéricos em branco?\n\nOK = Sim (blank)\nCancelar = Não (preenchido)"
-			);
-
-			const url =
-				`charsheet-print.html?id=${encodeURIComponent(this._rec.id)}` +
-				`&lvl=20` +
-				`&features=1` +
-				`&lang=ptbr` +
-				`&auto=1` +
-				(blank ? `&blank=1` : ``);
-
-			window.open(url, "_blank");
-		});
-
-		const onAfter = () => {
-			window.removeEventListener("afterprint", onAfter);
-			document.body.classList.remove("cs--printing");
-			this._openAllDetails(false);
-		};
-		window.addEventListener("afterprint", onAfter);
-
-		setTimeout(() => {
-			if (document.body.classList.contains("cs--printing")) onAfter();
-		}, 1600);
-	}
-
-	_openAllDetails (isOpen) {
-		const dets = this._els.features.querySelectorAll("details");
-		dets.forEach(d => { d.open = !!isOpen; });
+		window.open(url, "_blank");
 	}
 
 	async _pLoadCharList () {
@@ -343,7 +296,7 @@ class SheetApp {
 			if (!value) return;
 			out.push({
 				id: value.id || key,
-				name: value.name || value?.state?.meta?.name || "Unnamed",
+				name: value.name || value?.state?.meta?.name || "Sem nome",
 				updatedAt: value.updatedAt || value.createdAt || 0,
 			});
 		});
@@ -352,7 +305,7 @@ class SheetApp {
 
 		this._els.selChar.innerHTML = out.length
 			? out.map(c => `<option value="${esc(c.id)}">${esc(c.name)}</option>`).join("")
-			: `<option value="">(no characters saved)</option>`;
+			: `<option value="">(nenhum personagem salvo)</option>`;
 	}
 
 	async _pLoadCommonData () {
@@ -418,7 +371,7 @@ class SheetApp {
 	_getDefaultSheet () {
 		return {
 			level: 1,
-			abilities: {str:10, dex:10, con:10, int:10, wis:10, cha:10},
+			abilities: {str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10},
 			saveProfs: {},
 			skillProfs: {},
 			profsText: "",
@@ -429,13 +382,13 @@ class SheetApp {
 
 	_renderEmpty () {
 		this._els.name.textContent = "—";
-		this._els.sub.textContent = "No character saved yet.";
+		this._els.sub.textContent = "Nenhum personagem salvo ainda.";
 		this._els.meta.textContent = "";
 		this._els.metaRhs.textContent = "";
 		this._els.abilities.innerHTML = "";
 		this._els.saves.innerHTML = "";
 		this._els.skills.innerHTML = "";
-		this._els.features.innerHTML = `<div class="initial-message initial-message--med">Create a character first.</div>`;
+		this._els.features.innerHTML = `<div class="initial-message initial-message--med">Crie um personagem primeiro.</div>`;
 	}
 
 	_renderHeader () {
@@ -448,11 +401,11 @@ class SheetApp {
 		const sc = ch.subclass ? ` — ${ch.subclass.name} (${ch.subclass.source})` : "";
 		const bg = ch.background ? `${ch.background.name} (${ch.background.source})` : "—";
 
-		this._els.name.textContent = rec.name || rec?.state?.meta?.name || "Unnamed";
+		this._els.name.textContent = rec.name || rec?.state?.meta?.name || "Sem nome";
 		this._els.sub.textContent = `${cls}${sc} • ${sp}${sr} • ${bg}`;
 
 		this._els.meta.textContent = `ID: ${rec.id}`;
-		this._els.metaRhs.textContent = `Saved locally • Updated: ${new Date(rec.updatedAt || rec.createdAt || Date.now()).toLocaleString()}`;
+		this._els.metaRhs.textContent = `Salvo localmente • Atualizado: ${new Date(rec.updatedAt || rec.createdAt || Date.now()).toLocaleString()}`;
 	}
 
 	_renderAbilities () {
@@ -470,7 +423,7 @@ class SheetApp {
 					</div>
 					<div class="cs__ab-score">
 						<input class="ve-form-control input-sm" type="number" min="1" max="30" value="${esc(score)}" data-ab-in="${esc(k)}">
-						<span class="cs__row-meta">score</span>
+						<span class="cs__row-meta">valor</span>
 					</div>
 				</div>
 			`;
@@ -522,7 +475,7 @@ class SheetApp {
 					<label style="display:flex; align-items:center; gap:8px; margin:0;">
 						<input type="checkbox" data-save="${esc(k)}" ${isProf ? "checked" : ""}>
 						<span class="cs__row-name">${esc(ABIL_LABEL[k])}</span>
-						<span class="cs__row-meta">${esc(fmtMod(mod))}</span>
+						<span class="cs__row-meta">(${esc(fmtMod(mod))})</span>
 					</label>
 					<div class="cs__row-val">${esc(fmtMod(total))}</div>
 				</div>
@@ -534,6 +487,7 @@ class SheetApp {
 				const k = cb.dataset.save;
 				this._rec.sheet.saveProfs[k] = cb.checked;
 				this._pSaveDebounced();
+				this._renderDerived();
 				this._renderSaves();
 			});
 		});
@@ -545,13 +499,15 @@ class SheetApp {
 		const ab = this._rec.sheet.abilities;
 		const sp = this._rec.sheet.skillProfs || {};
 
-		// hint "choose N from ..."
+		// dica: skills escolhíveis da classe
 		if (this._chooseSkillInfo) {
-			const fromNames = this._chooseSkillInfo.from.map(k => SKILL_KEY_TO_NAME.get(k) || k).join(", ");
-			if (this._els.skillsHint) this._els.skillsHint.textContent = `Class skill options: choose ${this._chooseSkillInfo.count} from: ${fromNames}`;
+			const fromNames = this._chooseSkillInfo.from.map(k => getSkillDisplayName(k)).join(", ");
+			if (this._els.skillsHint) this._els.skillsHint.textContent =
+				`Opções de perícias da classe: escolha ${this._chooseSkillInfo.count} entre: ${fromNames}`;
 		} else if (this._pickableSkills.size) {
-			const fromNames = [...this._pickableSkills].map(k => SKILL_KEY_TO_NAME.get(k) || k).join(", ");
-			if (this._els.skillsHint) this._els.skillsHint.textContent = `Class skill options: ${fromNames}`;
+			const fromNames = [...this._pickableSkills].map(k => getSkillDisplayName(k)).join(", ");
+			if (this._els.skillsHint) this._els.skillsHint.textContent =
+				`Opções de perícias da classe: ${fromNames}`;
 		} else {
 			if (this._els.skillsHint) this._els.skillsHint.textContent = "";
 		}
@@ -559,12 +515,8 @@ class SheetApp {
 		// agrupa por atributo
 		const groupsOrder = ["str", "dex", "con", "int", "wis", "cha"];
 		const groups = new Map(groupsOrder.map(k => [k, []]));
+		for (const sk of SKILLS) groups.get(sk.abil)?.push(sk);
 
-		for (const sk of SKILLS) {
-			groups.get(sk.abil)?.push(sk);
-		}
-
-		// render helper
 		const renderRow = (sk) => {
 			const mod = modFromScore(ab[sk.abil]);
 			const isProf = !!sp[sk.key];
@@ -575,8 +527,8 @@ class SheetApp {
 			<div class="cs__row ${isPickable ? "cs__row--pickable" : ""}">
 				<label style="display:flex; align-items:center; gap:8px; margin:0;">
 					<input type="checkbox" data-skill="${esc(sk.key)}" ${isProf ? "checked" : ""}>
-					<span class="cs__row-name">${esc(sk.name)}</span>
-					<span class="cs__row-meta">(${esc(ABIL_LABEL[sk.abil])} ${esc(fmtMod(mod))})${isPickable ? " • pick" : ""}</span>
+					<span class="cs__row-name">${esc(getSkillDisplayName(sk.key))}</span>
+					<span class="cs__row-meta">(${esc(ABIL_LABEL[sk.abil])} ${esc(fmtMod(mod))})${isPickable ? " • escolha" : ""}</span>
 				</label>
 				<div class="cs__row-val">${esc(fmtMod(total))}</div>
 			</div>
@@ -589,14 +541,12 @@ class SheetApp {
 		for (const abil of groupsOrder) {
 			const arr = groups.get(abil) || [];
 			if (!arr.length) continue;
-
-			// ordena dentro do grupo por nome
-			arr.sort((a, b) => a.name.localeCompare(b.name));
+			arr.sort((a, b) => getSkillDisplayName(a.key).localeCompare(getSkillDisplayName(b.key)));
 
 			blocks.push(`
 			<div class="cs__skills-group ${alt ? "cs__skills-group--alt" : ""}">
 				<div class="cs__skills-group-hdr">
-					${esc(ABIL_LABEL[abil])} <span>skills</span>
+					${esc(ABIL_LABEL[abil])} <span>perícias</span>
 				</div>
 				${arr.map(renderRow).join("")}
 			</div>
@@ -607,7 +557,6 @@ class SheetApp {
 
 		this._els.skills.innerHTML = blocks.join("");
 
-		// bind checkboxes
 		this._els.skills.querySelectorAll("[data-skill]").forEach(cb => {
 			cb.addEventListener("change", () => {
 				const k = cb.dataset.skill;
@@ -656,6 +605,7 @@ class SheetApp {
 		const sp = clsEnt.startingProficiencies?.skills || clsEnt.skillProficiencies || clsEnt.skills;
 		const parsed = parseSkillProf(sp);
 
+		// fixed vem em nomes (EN) -> key
 		for (const nm of parsed.fixed) {
 			const k = SKILL_NAME_TO_KEY.get(String(nm).toLowerCase());
 			if (k) this._pickableSkills.add(k);
@@ -685,25 +635,25 @@ class SheetApp {
 
 		const pushProfs = (label, obj) => {
 			const p = parseStartingProfs(obj);
-			if (p.armor.length) profLines.push(`${label} Armor: ${p.armor.join(", ")}`);
-			if (p.weapons.length) profLines.push(`${label} Weapons: ${p.weapons.join(", ")}`);
-			if (p.tools.length) profLines.push(`${label} Tools: ${p.tools.join(", ")}`);
+			if (p.armor.length) profLines.push(`${label} — Armaduras: ${p.armor.join(", ")}`);
+			if (p.weapons.length) profLines.push(`${label} — Armas: ${p.weapons.join(", ")}`);
+			if (p.tools.length) profLines.push(`${label} — Ferramentas: ${p.tools.join(", ")}`);
 		};
 
-		if (race) pushProfs("Race", race);
-		if (subrace) pushProfs("Subrace", subrace);
-		if (this._rules?.classEnt) pushProfs("Class", this._rules.classEnt);
-		if (bg) pushProfs("Background", bg);
+		if (race) pushProfs("Raça", race);
+		if (subrace) pushProfs("Sub-raça", subrace);
+		if (this._rules?.classEnt) pushProfs("Classe", this._rules.classEnt);
+		if (bg) pushProfs("Antecedente", bg);
 
 		const addLang = (label, lp) => {
-			const {fixed, choose} = parseLangProf(lp);
+			const { fixed, choose } = parseLangProf(lp);
 			if (fixed.length) langLines.push(`${label}: ${fixed.join(", ")}`);
 			choose.forEach(c => langLines.push(`${label}: ${c}`));
 		};
 
-		if (race?.languageProficiencies) addLang("Race", race.languageProficiencies);
-		if (subrace?.languageProficiencies) addLang("Subrace", subrace.languageProficiencies);
-		if (bg?.languageProficiencies) addLang("Background", bg.languageProficiencies);
+		if (race?.languageProficiencies) addLang("Raça", race.languageProficiencies);
+		if (subrace?.languageProficiencies) addLang("Sub-raça", subrace.languageProficiencies);
+		if (bg?.languageProficiencies) addLang("Antecedente", bg.languageProficiencies);
 
 		if (!String(this._rec.sheet.profsText || "").trim() && profLines.length) {
 			this._rec.sheet.profsText = uniqLines(profLines).join("\n");
@@ -712,9 +662,10 @@ class SheetApp {
 			this._rec.sheet.langText = uniqLines(langLines).join("\n");
 		}
 
+		// skills fixas (se o usuário ainda não marcou nada)
 		if (!anyTrue(this._rec.sheet.skillProfs)) {
 			const applyFixedSkillsFrom = (sp) => {
-				const {fixed} = parseSkillProf(sp);
+				const { fixed } = parseSkillProf(sp);
 				for (const nm of fixed) {
 					const k = SKILL_NAME_TO_KEY.get(String(nm).toLowerCase());
 					if (k) this._rec.sheet.skillProfs[k] = true;
@@ -838,7 +789,6 @@ class SheetApp {
 		this._rec.sheet.ui.featureOpen = this._rec.sheet.ui.featureOpen || {};
 		const openMap = this._rec.sheet.ui.featureOpen;
 
-		const isPrinting = document.body.classList.contains("cs--printing") || document.body.classList.contains("cs--print-full");
 		const getOpen = (k, def = true) => openAll ? true : (openMap[k] ?? def);
 
 		const r = Renderer.get();
@@ -875,7 +825,8 @@ class SheetApp {
 			return srcOk && (nameOk || shortOk);
 		};
 
-		const cfAny = (this._rules?.classFeatures || []).slice().sort((a, b) => (a.level - b.level) || a.name.localeCompare(b.name));
+		const cfAny = (this._rules?.classFeatures || []).slice()
+			.sort((a, b) => (a.level - b.level) || a.name.localeCompare(b.name));
 		const cfAtLvl = cfAny.filter(f => Number(f.level) <= lvl);
 
 		const scfAny = (this._rules?.subclassFeatures || []).filter(isSubclassFeatureForSelected).slice()
@@ -886,19 +837,19 @@ class SheetApp {
 
 		const renderFeat = (f, keyPrefix) => {
 			const fKey = mkKey(keyPrefix, f.source || "", f.level, f.name);
-			const inner = f.entries ? r.render({type: "entries", entries: f.entries}) : `<div class="cs__hint">(No entries)</div>`;
+			const inner = f.entries ? r.render({ type: "entries", entries: f.entries }) : `<div class="cs__hint">(Sem conteúdo)</div>`;
 			return `
 			<details class="cs__feat" data-fkey="${esc(fKey)}" ${getOpen(fKey, false) ? "open" : ""}>
-				<summary>${esc(f.name)} <span class="cs__feat-meta">• lvl ${esc(String(f.level))}</span></summary>
+				<summary>${esc(f.name)} <span class="cs__feat-meta">• nív. ${esc(String(f.level))}</span></summary>
 				<div class="ve-mt-2">${inner}</div>
 			</details>
 		`;
 		};
 
 		const renderEntity = (ent, label, keyPrefix) => {
-			if (!ent) return `<div class="cs__hint">(none)</div>`;
+			if (!ent) return `<div class="cs__hint">(nenhum)</div>`;
 			const k = mkKey(keyPrefix, ent.source || "", ent.name || label || "entity");
-			const body = ent.entries ? r.render({type: "entries", entries: ent.entries}) : `<div class="cs__hint">(No entries)</div>`;
+			const body = ent.entries ? r.render({ type: "entries", entries: ent.entries }) : `<div class="cs__hint">(Sem conteúdo)</div>`;
 			return `
 			<details class="cs__feat" data-fkey="${esc(k)}" ${getOpen(k, true) ? "open" : ""}>
 				<summary>${esc(label ?? ent.name)} <span class="cs__feat-meta">• ${esc(ent.source || "")}</span></summary>
@@ -919,47 +870,57 @@ class SheetApp {
 
 		const sections = [];
 
-		sections.push({ id: "race", title: "Race", html: renderEntity(race, race?.name ?? "Race", "ent:race") });
-		if (subrace) sections.push({ id: "subrace", title: "Subrace", html: renderEntity(subrace, `${subrace.name} (Subrace)`, "ent:subrace") });
+		sections.push({ id: "race", title: "Raça", html: renderEntity(race, race?.name ?? "Raça", "ent:race") });
+		if (subrace) sections.push({ id: "subrace", title: "Sub-raça", html: renderEntity(subrace, `${subrace.name} (Sub-raça)`, "ent:subrace") });
 
 		sections.push({
 			id: "class",
-			title: `Class (showing up to level ${lvl})`,
+			title: `Classe (mostrando até o nível ${lvl})`,
 			html: classEnt
-				? (cfAtLvl.length ? cfAtLvl.map(f => renderFeat(f, "cf")).join("") : `<div class="cs__hint">(No class features found.)</div>`)
-				: `<div class="cs__hint">(none)</div>`,
+				? (cfAtLvl.length ? cfAtLvl.map(f => renderFeat(f, "cf")).join("") : `<div class="cs__hint">Nenhuma habilidade de classe encontrada.</div>`)
+				: `<div class="cs__hint">(nenhum)</div>`,
 		});
 
-		let subclassHtml = `<div class="cs__hint">(none)</div>`;
+		let subclassHtml = `<div class="cs__hint">(nenhum)</div>`;
 		if (subclassEnt) {
-			const intro = renderEntity(subclassEnt, `Subclass: ${subclassEnt.name}`, "ent:subclass");
+			const intro = renderEntity(subclassEnt, `Subclasse: ${subclassEnt.name}`, "ent:subclass");
 			if (scfAtLvl.length) subclassHtml = `${intro}${scfAtLvl.map(f => renderFeat(f, "scf")).join("")}`;
 			else if (scfAny.length) {
 				const minLvl = Math.min(...scfAny.map(it => Number(it.level)).filter(Number.isFinite));
-				subclassHtml = `${intro}<div class="cs__hint">(No subclass features at this level. Starts at level ${isFinite(minLvl) ? minLvl : 3}.)</div>`;
-			} else subclassHtml = `${intro}<div class="cs__hint">(No subclass features found.)</div>`;
+				subclassHtml = `${intro}<div class="cs__hint">Nenhuma habilidade de subclasse neste nível. Começa no nível ${isFinite(minLvl) ? minLvl : 3}.</div>`;
+			} else subclassHtml = `${intro}<div class="cs__hint">Nenhuma habilidade de subclasse encontrada.</div>`;
 		}
-		sections.push({ id: "subclass", title: "Subclass", html: subclassHtml });
+		sections.push({ id: "subclass", title: "Subclasse", html: subclassHtml });
 
 		sections.push({
 			id: "background",
-			title: "Background",
-			html: bg ? renderEntity(bg, `Background: ${bg.name}`, "ent:bg") : `<div class="cs__hint">(none)</div>`,
+			title: "Antecedente",
+			html: bg ? renderEntity(bg, `Antecedente: ${bg.name}`, "ent:bg") : `<div class="cs__hint">(nenhum)</div>`,
 		});
 
 		sections.push({
 			id: "feats",
-			title: "Feats",
+			title: "Talentos",
 			html: feats.length
-				? feats.map(ft => renderEntity(ft, `Feat: ${ft.name}`, "ent:feat")).join("")
-				: `<div class="cs__hint">(none)</div>`,
+				? feats.map(ft => renderEntity(ft, `Talento: ${ft.name}`, "ent:feat")).join("")
+				: `<div class="cs__hint">(nenhum)</div>`,
 		});
 
 		const toc = `
 		<div class="cs__toc">
-			<div class="cs__hint"><b>Topics</b></div>
+			<div class="cs__hint"><b>Tópicos</b></div>
 			<ul>
-				${sections.map(s => `<li><a href="#cs_${esc(s.id)}">${esc(s.id === "class" ? "Class" : s.id === "subclass" ? "Subclass" : s.id[0].toUpperCase() + s.id.slice(1))}</a></li>`).join("")}
+				${sections.map(s => {
+			const label =
+				s.id === "race" ? "Raça" :
+					s.id === "subrace" ? "Sub-raça" :
+						s.id === "class" ? "Classe" :
+							s.id === "subclass" ? "Subclasse" :
+								s.id === "background" ? "Antecedente" :
+									s.id === "feats" ? "Talentos" :
+										(s.id[0].toUpperCase() + s.id.slice(1));
+			return `<li><a href="#cs_${esc(s.id)}">${esc(label)}</a></li>`;
+		}).join("")}
 			</ul>
 		</div>
 	`;
@@ -972,7 +933,6 @@ class SheetApp {
 		// salva estado open/close quando usuário mexe
 		this._els.features.querySelectorAll("details[data-fkey]").forEach(det => {
 			det.addEventListener("toggle", () => {
-				if (isPrinting) return;
 				openMap[det.dataset.fkey] = det.open;
 				this._pSaveDebounced();
 			});
@@ -992,7 +952,7 @@ class SheetApp {
 			sheet: this._rec.sheet,
 		});
 
-		this._els.metaRhs.textContent = `Saved locally • Updated: ${new Date(this._rec.updatedAt).toLocaleString()}`;
+		this._els.metaRhs.textContent = `Salvo localmente • Atualizado: ${new Date(this._rec.updatedAt).toLocaleString()}`;
 	}
 }
 
