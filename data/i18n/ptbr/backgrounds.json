@@ -1,0 +1,49 @@
+{
+	"background": [
+		{
+			"name": "Acolyte",
+			"source": "PHB",
+			"namePt": "Acólito",
+			"entries": [
+				{
+					"type": "list",
+					"style": "list-hang-notitle",
+					"items": [
+						{
+							"type": "item",
+							"name": "Proficiências em Perícias:",
+							"entry": "{@skill Insight}, {@skill Religion}"
+						},
+						{
+							"type": "item",
+							"name": "Idiomas:",
+							"entry": "Dois à sua escolha"
+						},
+						{
+							"type": "item",
+							"name": "Equipamento:",
+							"entry": "Um {@item holy symbol|phb} (um presente quando você entrou no sacerdócio), um {@item book|phb} de orações ou uma roda de orações, 5 varetas de incenso, vestimentas, um conjunto de {@item common clothes|phb} e uma {@item pouch|phb} com 15 po"
+						}
+					]
+				},
+				{
+					"name": "Característica: Abrigo dos Fiéis",
+					"type": "entries",
+					"entries": [
+						"(TRADUZIR AQUI — texto da feature)"
+					],
+					"data": {
+						"isFeature": true
+					}
+				},
+				{
+					"name": "Características Sugeridas",
+					"type": "entries",
+					"entries": [
+						"(OPCIONAL — traduzir depois, inclui tabelas de traços/ideais/laços/defeitos)"
+					]
+				}
+			]
+		}
+	]
+}

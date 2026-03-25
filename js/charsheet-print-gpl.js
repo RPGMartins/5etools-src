@@ -1125,7 +1125,8 @@ async function main () {
 
 	const baseRace = sp ? findRaceBase(races, sp.name, sp.source) : null;
 	const subRace = sp && sr ? findSubrace(races, sp.name, sp.source, sr.name, sr.source) : null;
-
+	I18n.patchInPlaceEntity("race", baseRace);
+	I18n.patchInPlaceEntity("race", subRace);
 	const sizeStr = fmtSize(subRace?.size ?? baseRace?.size);
 	const speedStr = fmtSpeed(subRace?.speed ?? baseRace?.speed);
 
@@ -1171,6 +1172,8 @@ async function main () {
 			.map((f) => featsAll.find((x) => x.name === f.name && x.source === f.source) || featsAll.find((x) => x.name === f.name))
 			.filter(Boolean);
 
+		I18n.patchInPlaceEntity("background", bgEnt);
+		(featEnts || []).forEach(ft => I18n.patchInPlaceEntity("feat", ft));
 		let classFeatures = [];
 		let subclassFeatures = [];
 		let ctx = {};

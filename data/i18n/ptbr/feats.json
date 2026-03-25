@@ -1,0 +1,33 @@
+{
+	"feat": [
+		{
+			"name": "Aberrant Dragonmark",
+			"source": "EFA",
+			"namePt": "Marca Dracônica Aberrante",
+			"entries": [
+				"Você recebe os seguintes benefícios.",
+				{
+					"type": "entries",
+					"name": "Fortitude Aberrante",
+					"entries": [
+						"(TRADUZIR AQUI — texto desta parte)"
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Magia Aberrante",
+					"entries": [
+						"(TRADUZIR AQUI — texto desta parte)"
+					]
+				},
+				{
+					"type": "entries",
+					"name": "Surto Aberrante",
+					"entries": [
+						"(TRADUZIR AQUI — texto desta parte)"
+					]
+				}
+			]
+		}
+	]
+}

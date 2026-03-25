@@ -876,8 +876,8 @@ class SheetApp {
 
 		const sections = [];
 
-		sections.push({ id: "race", title: "Raça", html: renderEntity(race, race?.name ?? "Raça", "ent:race") });
-		if (subrace) sections.push({ id: "subrace", title: "Sub-raça", html: renderEntity(subrace, `${subrace.name} (Sub-raça)`, "ent:subrace") });
+		sections.push({ id: "race", title: "Raça", html: renderEntity(race, race?.namePt || race?.name || "Raça", "ent:race") });
+		if (subrace) sections.push({ id: "subrace", title: "Sub-raça", html: renderEntity(subrace, (subrace?.namePt || subrace?.name) + " (Sub-raça)", "ent:subrace") });
 
 		sections.push({
 			id: "class",
@@ -901,14 +901,14 @@ class SheetApp {
 		sections.push({
 			id: "background",
 			title: "Antecedente",
-			html: bg ? renderEntity(bg, `Antecedente: ${bg.name}`, "ent:bg") : `<div class="cs__hint">(nenhum)</div>`,
+			html: bg ? renderEntity(bg, `Antecedente: ${bg?.namePt || bg?.name}`, "ent:bg"): `<div class="cs__hint">(nenhum)</div>`,
 		});
 
 		sections.push({
 			id: "feats",
 			title: "Talentos",
 			html: feats.length
-				? feats.map(ft => renderEntity(ft, `Talento: ${ft.name}`, "ent:feat")).join("")
+				? feats.map(ft => renderEntity(ft, `Talento: ${ft?.namePt || ft?.name}`, "ent:feat")).join("")
 				: `<div class="cs__hint">(nenhum)</div>`,
 		});
 

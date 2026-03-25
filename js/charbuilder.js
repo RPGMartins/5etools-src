@@ -457,7 +457,7 @@ class CharacterBuilderApp {
 
 			row.innerHTML = `
 				<div class="cb__row-top">
-					<div class="cb__row-name">${this._escape(it.name)}</div>
+					<div class="cb__row-name">${this._escape(it.namePt || it.name)}</div>
 					<div class="cb__row-meta">${this._escape(it.source || "")}</div>
 				</div>
 			`;

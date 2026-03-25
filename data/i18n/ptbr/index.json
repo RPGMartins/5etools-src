@@ -2,6 +2,8 @@
 	"lang": "ptbr",
 	"files": [
 		"data/i18n/ptbr/barbarian.json",
-		"data/i18n/ptbr/races.json"
+		"data/i18n/ptbr/races.json",
+		"data/i18n/ptbr/backgrounds.json",
+		"data/i18n/ptbr/feats.json"
 	]
 }

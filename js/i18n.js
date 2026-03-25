@@ -233,4 +233,75 @@ export class I18n {
 	static getSubclassFluffEntries (scf) {
 		return this._mapSubclassFluff.get(this._keySubclassFluff(scf))?.entries || null;
 	}
+	// =========================
+// Patch helpers (in-place)
+// =========================
+	static patchInPlaceEntity (type, ent) {
+		if (!ent) return ent;
+
+		switch (type) {
+			case "race": {
+				const ov = this.getRaceOverlay(ent);
+				if (!ov) return ent;
+				if (ov.namePt) ent.namePt = ov.namePt;
+				if (ov.entries) ent.entries = ov.entries;
+				if (ov.sizeEntry) ent.sizeEntry = ov.sizeEntry;
+				return ent;
+			}
+
+			case "background": {
+				const ov = this.getBackgroundOverlay(ent);
+				if (!ov) return ent;
+				if (ov.namePt) ent.namePt = ov.namePt;
+				if (ov.entries) ent.entries = ov.entries;
+				return ent;
+			}
+
+			case "feat": {
+				const ov = this.getFeatOverlay(ent);
+				if (!ov) return ent;
+				if (ov.namePt) ent.namePt = ov.namePt;
+				if (ov.entries) ent.entries = ov.entries;
+				return ent;
+			}
+
+			default: return ent;
+		}
+	}
+
+	static patchInPlaceEntities (type, arr) {
+		if (!Array.isArray(arr)) return arr;
+		for (const ent of arr) this.patchInPlaceEntity(type, ent);
+		return arr;
+	}
+
+	static patchInPlaceData (data) {
+		if (!data || typeof data !== "object") return data;
+
+		// Seu charbuilder usa exatamente esses nomes
+		this.patchInPlaceEntities("race", data.races);
+		this.patchInPlaceEntities("background", data.backgrounds);
+		this.patchInPlaceEntities("feat", data.feats);
+
+		// Features (se você traduzir)
+		if (Array.isArray(data.classFeatures)) {
+			for (const f of data.classFeatures) {
+				const nm = this.getClassFeatureName(f);
+				const en = this.getClassFeatureEntries(f);
+				if (nm) f.namePt = nm;
+				if (en) f.entries = en;
+			}
+		}
+
+		if (Array.isArray(data.subclassFeatures)) {
+			for (const f of data.subclassFeatures) {
+				const nm = this.getSubclassFeatureName(f);
+				const en = this.getSubclassFeatureEntries(f);
+				if (nm) f.namePt = nm;
+				if (en) f.entries = en;
+			}
+		}
+
+		return data;
+	}
 }
