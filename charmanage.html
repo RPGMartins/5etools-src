@@ -38,8 +38,18 @@
 					<input id="cm__search" class="ve-form-control input-sm cm__search" placeholder="Search characters...">
 
 					<div class="ve-ml-auto ve-flex ve-flex-v-center cm__top-actions">
-						<button class="ve-btn ve-btn-primary ve-btn-xs" id="cm__btn_new">Criar novo personagem</button>
+						<div class="ve-flex ve-flex-v-center ve-gap-2 ve-mb-2">
+							<button class="ve-btn ve-btn-default" id="cm__btn_import_file">
+								Importar .json
+							</button>
+							<button class="ve-btn ve-btn-default" id="cm__btn_import_clipboard">
+								Importar do clipboard
+							</button>
+
+							<input id="cm__ipt_import_file" type="file" accept="application/json,.json" style="display:none">
+						</div>
 						<button class="ve-btn ve-btn-default ve-btn-xs" id="cm__btn_refresh">Refresh</button>
+						<button class="ve-btn ve-btn-primary ve-btn-xs" id="cm__btn_new">Criar novo personagem</button>
 					</div>
 				</div>
 

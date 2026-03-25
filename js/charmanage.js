@@ -65,6 +65,9 @@ class CharManageApp {
 			list: document.getElementById("cm__list"),
 			empty: document.getElementById("cm__empty"),
 			count: document.getElementById("cm__count"),
+			btnImportFile: document.getElementById("cm__btn_import_file"),
+			btnImportClipboard: document.getElementById("cm__btn_import_clipboard"),
+			iptImportFile: document.getElementById("cm__ipt_import_file"),
 		};
 
 		this._all = [];
@@ -108,6 +111,20 @@ class CharManageApp {
 			if (act === "export") return this._doExport(rec);
 			if (act === "copyjson") return this._doCopyJson(rec);
 			if (act === "sheet") return (window.location.href = `charsheet.html?id=${encodeURIComponent(rec.id)}`);
+		});
+
+		this._els.btnImportFile?.addEventListener("click", () => this._els.iptImportFile?.click());
+
+		this._els.iptImportFile?.addEventListener("change", async () => {
+			const f = this._els.iptImportFile.files?.[0];
+			// reseta o input pra permitir importar o mesmo arquivo de novo
+			this._els.iptImportFile.value = "";
+			if (!f) return;
+			await this._pImportFromFile(f);
+		});
+
+		this._els.btnImportClipboard?.addEventListener("click", async () => {
+			await this._pImportFromClipboard();
 		});
 	}
 
@@ -234,6 +251,136 @@ class CharManageApp {
 		} catch {
 			toast("Não consegui acessar o clipboard (permissão do navegador).", "warning");
 		}
+	}
+
+	_newId () {
+		// Preferir UUID nativo
+		if (globalThis.crypto?.randomUUID) return crypto.randomUUID();
+		// Fallback simples
+		return `ch_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+	}
+
+	async _pImportFromFile (file) {
+		try {
+			const text = await file.text();
+			await this._pImportFromText(text);
+		} catch (e) {
+			console.error(e);
+			alert("Falha ao ler o arquivo.");
+		}
+	}
+
+	async _pImportFromClipboard () {
+		try {
+			// Clipboard API exige HTTPS ou localhost
+			const text = await navigator.clipboard.readText();
+			if (!text?.trim()) return alert("Clipboard vazio.");
+			await this._pImportFromText(text);
+		} catch (e) {
+			console.error(e);
+			alert("Não consegui ler o clipboard. Dica: isso funciona em HTTPS ou localhost e pode precisar de permissão.");
+		}
+	}
+
+	async _pImportFromText (text) {
+		let parsed;
+		try {
+			parsed = JSON.parse(text);
+		} catch (e) {
+			console.error(e);
+			alert("O conteúdo não é um JSON válido.");
+			return;
+		}
+
+		// Aceita: 1 personagem, ou lista
+		const chars = Array.isArray(parsed)
+			? parsed
+			: Array.isArray(parsed?.characters)
+				? parsed.characters
+				: [parsed];
+
+		let importedCount = 0;
+
+		for (const raw of chars) {
+			const rec = this._normalizeImportedCharacter(raw);
+			if (!rec) continue;
+
+			await this._db.setItem(rec.id, rec);
+			importedCount++;
+		}
+
+		if (!importedCount) {
+			alert("Não encontrei nenhum personagem válido para importar.");
+			return;
+		}
+
+		// Recarrega lista
+		await this._pLoad();
+		this._render();
+
+		alert(`Importado${importedCount > 1 ? "s" : ""}: ${importedCount}`);
+	}
+
+	_normalizeImportedCharacter (raw) {
+		if (!raw || typeof raw !== "object") return null;
+
+		// Formatos aceitos:
+		// A) formato do seu DB: {id, name, state, sheet, createdAt, updatedAt}
+		// B) export “solto”: {name, state, sheet}
+		// C) export do builder: {state, sheet} ou {meta,...}
+		// D) o usuário colou só o "state" -> {choice:{...}, meta:{...}} (a gente envolve)
+
+		const now = Date.now();
+		const id = this._newId();
+
+		// Se veio só "state" (parece ter "choice" e/ou "meta"), embrulha
+		const looksLikeStateOnly = raw.choice || raw.meta;
+		const state = raw.state || (looksLikeStateOnly ? raw : null);
+
+		if (!state || typeof state !== "object") return null;
+
+		const sheet = raw.sheet && typeof raw.sheet === "object"
+			? raw.sheet
+			: {}; // opcional, pode vir vazio
+
+		const name =
+			raw.name
+			|| raw?.state?.meta?.name
+			|| raw?.meta?.name
+			|| "Personagem importado";
+
+		// Limpa qualquer “editId” que possa apontar pra algo antigo
+		if (state?.meta) {
+			state.meta = { ...state.meta };
+			delete state.meta.editId;
+		}
+
+		// Normaliza: garante objetos principais existirem
+		const safeState = {
+			meta: state.meta || {},
+			choice: state.choice || {},
+			...state,
+		};
+
+		const safeSheet = {
+			level: Number(sheet.level) || 1,
+			abilities: sheet.abilities || { str: 10, dex: 10, con: 10, int: 10, wis: 10, cha: 10 },
+			saveProfs: sheet.saveProfs || {},
+			skillProfs: sheet.skillProfs || {},
+			profsText: sheet.profsText ?? "",
+			langText: sheet.langText ?? "",
+			notes: sheet.notes ?? "",
+			ui: sheet.ui || {},
+		};
+
+		return {
+			id,
+			name,
+			state: safeState,
+			sheet: safeSheet,
+			createdAt: now,
+			updatedAt: now,
+		};
 	}
 }
 
