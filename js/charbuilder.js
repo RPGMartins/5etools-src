@@ -1,4 +1,5 @@
 ﻿/* global Renderer, localforage, MiscUtil, DataUtil, BrewUtil2, PrereleaseUtil, FilterBox, SourceFilter, FILTER_BOX_EVNT_VALCHANGE */
+import { I18n } from "./i18n.js";
 "use strict";
 
 const CB_STORAGE_KEY = "rpgmartins_cb_active_v11";
@@ -62,7 +63,9 @@ class CharacterBuilderApp {
 		this._syncControlsFromState();
 
 		this._renderPreviewDefault("Carregando dados...");
+		await I18n.pInit({ lang: "ptbr" });
 		await this._pLoadAllData();
+		I18n.patchInPlaceData(this._data);
 		await this._pInitFilters5etools();
 
 		this._syncTabDisables();

@@ -1,0 +1,267 @@
+{
+	"race": [
+		{
+			"name": "Elf",
+			"source": "PHB",
+			"namePt": "Elfo",
+			"entries": [
+				{
+					"name": "Age",
+					"namePt": "Idade",
+					"entries": [
+						"Embora os elfos atinjam maturidade física mais ou menos na mesma idade que humanos, o entendimento élfico de vida adulta vai além do crescimento físico e abrange experiência no mundo. Um elfo normalmente reivindica a vida adulta e um nome adulto por volta dos 100 anos e pode viver até 750 anos."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Size",
+					"namePt": "Tamanho",
+					"entries": [
+						"Elfos variam de menos de 1,50 m a mais de 1,80 m de altura e têm constituição esguia. Seu tamanho é Médio."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Darkvision",
+					"namePt": "Visão no Escuro",
+					"entries": [
+						"Acostumado a florestas crepusculares e ao céu noturno, você tem visão superior em condições de pouca luz e escuridão. Você enxerga na penumbra a até 18 metros como se fosse luz plena, e na escuridão como se fosse penumbra. Você não pode discernir cores na escuridão, apenas tons de cinza."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Keen Senses",
+					"namePt": "Sentidos Aguçados",
+					"entries": [
+						"Você tem proficiência na perícia {@skill Perception}."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Fey Ancestry",
+					"namePt": "Ancestralidade Feérica",
+					"entries": [
+						"Você tem vantagem em testes de resistência contra ser {@condition charmed}, e magia não pode fazer você dormir."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Trance",
+					"namePt": "Transe",
+					"entries": [
+						"Elfos não precisam dormir. Em vez disso, eles meditam profundamente, permanecendo semiconscientes, por 4 horas por dia. (A palavra comum para essa meditação é “transe”.) Enquanto medita, você pode sonhar de certa forma; tais sonhos são na verdade exercícios mentais que se tornaram reflexos através de anos de prática. Depois de descansar dessa maneira, você recebe o mesmo benefício que um humano obtém com 8 horas de sono."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Languages",
+					"namePt": "Idiomas",
+					"entries": [
+						"Você pode falar, ler e escrever Comum e Élfico."
+					],
+					"type": "entries"
+				}
+			]
+		},
+		{
+			"name": "Elf",
+			"source": "XPHB",
+			"namePt": "Elfo",
+			"sizeEntry": {
+				"type": "entries",
+				"name": "Size:",
+				"entries": [
+					"Médio (cerca de 1,50 a 1,80 m de altura)."
+				],
+				"namePt": "Tamanho:"
+			},
+			"entries": [
+				{
+					"name": "Darkvision",
+					"namePt": "Visão no Escuro",
+					"entries": [
+						"Você tem {@sense Darkvision|XPHB} com alcance de 60 pés."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Elven Lineage",
+					"entries": [
+						"Você faz parte de uma linhagem que concede habilidades sobrenaturais. Escolha uma linhagem na tabela Linhagens Élficas. Você ganha o benefício de 1º nível dessa linhagem.",
+						"Quando você alcança os níveis de personagem 3 e 5, você aprende uma magia de nível mais alto, conforme mostrado na tabela. Você sempre tem essa magia preparada. Você pode conjurá-la uma vez sem gastar um espaço de magia, e recupera a capacidade de conjurá-la dessa forma quando termina um {@variantrule Long Rest|XPHB}. Você também pode conjurar a magia usando quaisquer espaços de magia que tiver do nível apropriado.",
+						"Inteligência, Sabedoria ou Carisma é sua habilidade de conjuração para as magias que você conjura com este traço (escolha a habilidade quando selecionar a linhagem).",
+						{
+							"type": "table",
+							"caption": "Linhagens Élficas",
+							"colLabels": [
+								"Linhagem",
+								"Nível 1",
+								"Nível 3",
+								"Nível 5"
+							],
+							"colStyles": [
+								"col-3",
+								"col-3",
+								"col-3",
+								"col-3"
+							],
+							"rows": [
+								[
+									"Drow",
+									"O alcance do seu {@sense Darkvision|XPHB} aumenta para 120 pés. Você também conhece o truque {@spell Dancing Lights|XPHB}.",
+									"{@spell Faerie Fire|XPHB}",
+									"{@spell Darkness|XPHB}"
+								],
+								[
+									"Alto Elfo",
+									"Você conhece o truque {@spell Prestidigitation|XPHB}. Sempre que terminar um {@variantrule Long Rest|XPHB}, você pode substituir esse truque por um {@filter cantrip from the Wizard spell list|spells|level=0|class=Wizard} diferente.",
+									"{@spell Detect Magic|XPHB}",
+									"{@spell Misty Step|XPHB}"
+								],
+								[
+									"Elfo da Floresta",
+									"Seu {@variantrule Speed|XPHB} aumenta para 35 pés. Você também conhece o truque {@spell Druidcraft|XPHB}.",
+									"{@spell Longstrider|XPHB}",
+									"{@spell Pass without Trace|XPHB}"
+								]
+							]
+						}
+					],
+					"type": "entries",
+					"namePt": "Linhagem Élfica"
+				},
+				{
+					"name": "Fey Ancestry",
+					"namePt": "Ancestralidade Feérica",
+					"entries": [
+						"Você tem {@variantrule Advantage|XPHB} em testes de resistência que fizer para evitar ou encerrar a condição {@condition Charmed|XPHB}."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Keen Senses",
+					"namePt": "Sentidos Aguçados",
+					"entries": [
+						"Você tem proficiência na perícia {@skill Insight|XPHB}, {@skill Perception|XPHB} ou {@skill Survival|XPHB}."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Trance",
+					"namePt": "Transe",
+					"entries": [
+						"Você não precisa dormir, e magia não pode fazer você dormir. Você pode terminar um {@variantrule Long Rest|XPHB} em 4 horas se passar essas horas em uma meditação semelhante a transe, durante a qual você mantém a consciência."
+					],
+					"type": "entries"
+				}
+			]
+		},
+		{
+			"name": "High",
+			"source": "PHB",
+			"raceName": "Elf",
+			"raceSource": "PHB",
+			"namePt": "Alto Elfo",
+			"entries": [
+				{
+					"name": "Elf Weapon Training",
+					"namePt": "Treinamento com Armas Élficas",
+					"entries": [
+						"Você tem proficiência com espadas longas, espadas curtas, arcos longos e arcos curtos."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Cantrip",
+					"namePt": "Truque",
+					"entries": [
+						"Você conhece um truque de sua escolha da lista de magias de mago. Inteligência é sua habilidade de conjuração para ele."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Extra Language",
+					"namePt": "Idioma Extra",
+					"entries": [
+						"Você pode falar, ler e escrever um idioma adicional de sua escolha."
+					],
+					"type": "entries"
+				}
+			]
+		},
+		{
+			"name": "Wood",
+			"source": "PHB",
+			"raceName": "Elf",
+			"raceSource": "PHB",
+			"namePt": "Elfo da Floresta",
+			"entries": [
+				{
+					"name": "Elf Weapon Training",
+					"namePt": "Treinamento com Armas Élficas",
+					"entries": [
+						"Você tem proficiência com espadas longas, espadas curtas, arcos longos e arcos curtos."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Fleet of Foot",
+					"namePt": "Passo Ligeiro",
+					"entries": [
+						"Seu deslocamento base de caminhada aumenta para 35 pés."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Mask of the Wild",
+					"namePt": "Máscara da Natureza",
+					"entries": [
+						"Você pode tentar se esconder mesmo quando estiver apenas levemente obscurecido por folhagem, chuva forte, neve caindo, névoa e outros fenômenos naturais."
+					],
+					"type": "entries"
+				}
+			]
+		},
+		{
+			"name": "Drow",
+			"source": "PHB",
+			"raceName": "Elf",
+			"raceSource": "PHB",
+			"namePt": "Drow",
+			"entries": [
+				{
+					"name": "Superior Darkvision",
+					"namePt": "Visão no Escuro Superior",
+					"entries": [
+						"O alcance do seu {@sense Darkvision} aumenta para 120 pés."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Sunlight Sensitivity",
+					"namePt": "Sensibilidade à Luz Solar",
+					"entries": [
+						"Você tem desvantagem em jogadas de ataque e em testes de Sabedoria ({@skill Perception}) que dependam de visão quando você, o alvo do ataque, ou o que quer que você esteja tentando perceber esteja sob luz solar direta."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Drow Magic",
+					"namePt": "Magia Drow",
+					"entries": [
+						"Você conhece o truque {@spell Dancing Lights}. Quando atingir 3º nível, você poderá conjurar {@spell Faerie Fire} uma vez por dia. Quando atingir 5º nível, você poderá conjurar {@spell Darkness} uma vez por dia. Carisma é sua habilidade de conjuração para essas magias."
+					],
+					"type": "entries"
+				},
+				{
+					"name": "Drow Weapon Training",
+					"namePt": "Treinamento com Armas Drow",
+					"entries": [
+						"Você tem proficiência com rapieiras, espadas curtas e bestas de mão."
+					],
+					"type": "entries"
+				}
+			]
+		}
+	]
+}

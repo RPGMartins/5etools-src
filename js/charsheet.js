@@ -268,7 +268,26 @@ class SheetApp {
 
 		this._els.btnManager.addEventListener("click", () => location.href = "charmanage.html");
 
-		// Note: seus binds de print ficam como estavam no seu arquivo original
+		this._els.btnPrint?.addEventListener("click", () => this._doOpenPrint({ isFull: false }));
+		this._els.btnPrintFull?.addEventListener("click", () => this._doOpenPrint({ isFull: true }));
+	}
+
+	_doOpenPrint ({ isFull = false } = {}) {
+		if (!this._rec?.id) return;
+
+		const lvlCurrent = Number(this._els.selLevel?.value) || Number(this._rec?.sheet?.level) || 1;
+		const lvl = isFull ? 20 : lvlCurrent;
+
+		// Se o seu HTML tiver outro nome, ajuste aqui:
+		const u = new URL("charsheet-print.html", window.location.href);
+		u.searchParams.set("id", this._rec.id);
+		u.searchParams.set("lvl", String(lvl));
+		u.searchParams.set("lang", "ptbr");
+
+		// Você pediu pra abrir já com as entries de features
+		u.searchParams.set("features", "1");
+
+		window.open(u.toString(), "_blank", "noopener");
 	}
 
 	async _pLoadCharList () {
@@ -304,6 +323,10 @@ class SheetApp {
 			this._data.backgrounds.push(...normArr(obj.background));
 			this._data.feats.push(...normArr(obj.feat));
 		};
+
+		I18n.patchInPlaceEntities("race", this._data.races);
+		I18n.patchInPlaceEntities("background", this._data.backgrounds);
+		I18n.patchInPlaceEntities("feat", this._data.feats);
 
 		try { if (PrereleaseUtil?.pGetBrewProcessed) merge(await PrereleaseUtil.pGetBrewProcessed()); } catch {}
 		try { if (BrewUtil2?.pGetBrewProcessed) merge(await BrewUtil2.pGetBrewProcessed()); } catch {}
@@ -810,8 +833,15 @@ class SheetApp {
 			const fKey = mkKey(keyPrefix, f.source || "", f.level, f.name);
 
 			// ✅ i18n overlay (se existir)
-			const nameDisp = I18n.getClassFeatureName(f) || f.name;
-			const entriesDisp = I18n.getClassFeatureEntries(f) || f.entries;
+			const isScf = f?.subclassShortName != null || f?.subclassName != null || f?.subclassSource != null;
+
+			const nameDisp = isScf
+				? (I18n.getSubclassFeatureName(f) || f.namePt || f.name)
+				: (I18n.getClassFeatureName(f) || f.namePt || f.name);
+
+			const entriesDisp = isScf
+				? (I18n.getSubclassFeatureEntries(f) || f.entries)
+				: (I18n.getClassFeatureEntries(f) || f.entries);
 
 			const inner = entriesDisp ? r.render({ type: "entries", entries: entriesDisp }) : `<div class="cs__hint">(Sem conteúdo)</div>`;
 			return `

@@ -515,8 +515,12 @@ function buildFeatureRefMaps (classFile) {
 			for (const ssv of subclassSourceVars) {
 				for (const snv of subNameVars) {
 					const base = `${nm}|${cn}|${csv}|${snv}|${ssv}|${lvl}`;
-					add(subclassFeatureMap, base, f);
-					if (src) add(subclassFeatureMap, `${base}|${src}`, f); // cobre "...|lvl|SRC"
+					const fUse = {
+						...f,
+						entries: I18n.getSubclassFeatureEntries(f) || f.entries,
+					};
+					add(subclassFeatureMap, base, fUse);
+					if (src) add(subclassFeatureMap, `${base}|${src}`, fUse);					if (src) add(subclassFeatureMap, `${base}|${src}`, f); // cobre "...|lvl|SRC"
 				}
 			}
 		}
@@ -554,7 +558,18 @@ function _tryResolveRef (map, rawKey) {
 function renderEntriesLite (entries, ctx) {
 	if (entries == null) return "";
 	if (typeof entries === "string") {
-		return `<div class="gpl-feat-p">${esc(strip5eTags(entries))}</div>`;
+		const raw = strip5eTags(entries).trim();
+
+		// Alguns homebrews (ex. FF) colocam refs como string "Name|Class|...|Lvl|Src"
+		if (ctx && raw.includes("|")) {
+			const refCf = _tryResolveRef(ctx.classFeatureMap, raw);
+			if (refCf?.entries) return renderEntriesLite(refCf.entries, ctx);
+
+			const refScf = _tryResolveRef(ctx.subclassFeatureMap, raw);
+			if (refScf?.entries) return renderEntriesLite(refScf.entries, ctx);
+		}
+
+		return `<div class="gpl-feat-p">${esc(raw)}</div>`;
 	}
 
 	if (Array.isArray(entries)) return entries.map((it) => renderEntriesLite(it, ctx)).join("");
@@ -1076,6 +1091,8 @@ window.addEventListener("beforeprint", () => setAllDetailsOpen(true));
    ========================= */
 async function main () {
 	const { id, lvl: lvlRaw, auto, features, blank } = getParams();
+	const params = getParams();
+	await I18n.pInit({ lang: params.lang || "ptbr" });
 	if (!id) {
 		document.getElementById("gpl_sheet").innerHTML = "<b>Missing ?id=</b>";
 		return;
