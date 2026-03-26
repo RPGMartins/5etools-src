@@ -1,0 +1,3717 @@
+{
+  "_meta": {
+    "internalCopies": [
+      "subclasse"
+    ]
+  },
+  "class": [
+    {
+      "name": "Bárbaro",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "reprintedAs": [
+        "Barbarian|XPHB"
+      ],
+      "edition": "classic",
+      "hd": {
+        "number": 1,
+        "faces": 12
+      },
+      "proficiency": [
+        "str",
+        "golpe"
+      ],
+      "startingProficiencies": {
+        "armor": [
+          "luz",
+          "médio",
+          "escudo"
+        ],
+        "weapons": [
+          "simples",
+          "marcial"
+        ],
+        "skills": [
+          {
+            "choose": {
+              "from": [
+                "manejo de animais",
+                "atletismo",
+                "intimidação",
+                "natureza",
+                "percepção",
+                "sobrevivência"
+              ],
+              "count": 2
+            }
+          }
+        ]
+      },
+      "startingEquipment": {
+        "additionalFromBackground": true,
+        "default": [
+          "(a) um {@item greataxe|phb} ou (b) qualquer {@filter martial melee weapon|items|source=phb|category=basic|type=martial weapon;melee weapon=sand}",
+          "(a) dois {@item handaxe|phb|handaxes} ou (b) qualquer {@filter simple weapon|items|source=phb|category=basic|type=simple weapon}",
+          "Um {@item explorer's pack|phb}e quatro {@item javelin|phb|javelins}"
+        ],
+        "goldAlternative": "{@dice 2d4 × 10|2d4 × 10|Starting Gold}",
+        "defaultData": [
+          {
+            "a": [
+              "machado grande | phb"
+            ],
+            "b": [
+              {
+                "equipmentType": "armaMarcialMelee"
+              }
+            ]
+          },
+          {
+            "a": [
+              {
+                "item": "machado | phb",
+                "quantity": 2
+              }
+            ],
+            "b": [
+              {
+                "equipmentType": "armaSimples"
+              }
+            ]
+          },
+          {
+            "_": [
+              "pacote do explorador | phb",
+              {
+                "item": "dardo | phb",
+                "quantity": 4
+              }
+            ]
+          }
+        ]
+      },
+      "multiclassing": {
+        "requirements": {
+          "str": 13
+        },
+        "proficienciesGained": {
+          "armor": [
+            "escudo"
+          ],
+          "weapons": [
+            "simples",
+            "marcial"
+          ]
+        }
+      },
+      "classTableGroups": [
+        {
+          "colLabels": [
+            "Rages",
+            "Rage Damage"
+          ],
+          "rows": [
+            [
+              "2",
+              {
+                "type": "bonus",
+                "value": 2
+              }
+            ],
+            [
+              "2",
+              {
+                "type": "bonus",
+                "value": 2
+              }
+            ],
+            [
+              "3",
+              {
+                "type": "bonus",
+                "value": 2
+              }
+            ],
+            [
+              "3",
+              {
+                "type": "bonus",
+                "value": 2
+              }
+            ],
+            [
+              "3",
+              {
+                "type": "bonus",
+                "value": 2
+              }
+            ],
+            [
+              "4",
+              {
+                "type": "bonus",
+                "value": 2
+              }
+            ],
+            [
+              "4",
+              {
+                "type": "bonus",
+                "value": 2
+              }
+            ],
+            [
+              "4",
+              {
+                "type": "bonus",
+                "value": 2
+              }
+            ],
+            [
+              "4",
+              {
+                "type": "bonus",
+                "value": 3
+              }
+            ],
+            [
+              "4",
+              {
+                "type": "bonus",
+                "value": 3
+              }
+            ],
+            [
+              "4",
+              {
+                "type": "bonus",
+                "value": 3
+              }
+            ],
+            [
+              "5",
+              {
+                "type": "bonus",
+                "value": 3
+              }
+            ],
+            [
+              "5",
+              {
+                "type": "bonus",
+                "value": 3
+              }
+            ],
+            [
+              "5",
+              {
+                "type": "bonus",
+                "value": 3
+              }
+            ],
+            [
+              "5",
+              {
+                "type": "bonus",
+                "value": 3
+              }
+            ],
+            [
+              "5",
+              {
+                "type": "bonus",
+                "value": 4
+              }
+            ],
+            [
+              "6",
+              {
+                "type": "bonus",
+                "value": 4
+              }
+            ],
+            [
+              "6",
+              {
+                "type": "bonus",
+                "value": 4
+              }
+            ],
+            [
+              "6",
+              {
+                "type": "bonus",
+                "value": 4
+              }
+            ],
+            [
+              "Unlimited",
+              {
+                "type": "bonus",
+                "value": 4
+              }
+            ]
+          ]
+        }
+      ],
+      "classFeatures": [
+        "Fúria|Bárbaro||1",
+        "Defesa Sem Armadura|Bárbaro||1",
+        "Sentido de Perigo|Bárbaro||2",
+        "Ataque Imprudente|Bárbaro||2",
+        {
+          "classFeature": "Caminho Primordial|Bárbaro||3",
+          "gainSubclassFeature": true
+        },
+        "Conhecimento Primordial|Bárbaro||3|TCE",
+        "Melhoria na Pontuação de Habilidade|Bárbaro||4",
+        "Ataque Extra|Bárbaro||5",
+        "Movimento Rápido|Bárbaro||5",
+        {
+          "classFeature": "Recurso de Caminho|Bárbaro||6",
+          "gainSubclassFeature": true
+        },
+        "Instinto Selvagem|Bárbaro||7",
+        "Ataque Instintivo|Bárbaro||7|TCE",
+        "Melhoria na Pontuação de Habilidade|Bárbaro||8",
+        "Crítico Brutal (1 dado)|Bárbaro||9",
+        {
+          "classFeature": "Recurso de caminho|Bárbaro||10",
+          "gainSubclassFeature": true
+        },
+        "Fúria Implacável|Bárbaro||11",
+        "Melhoria na Pontuação de Habilidade|Bárbaro||12",
+        "Crítico Brutal (2 dados)|Bárbaro||13",
+        {
+          "classFeature": "Recurso de caminho|Bárbaro||14",
+          "gainSubclassFeature": true
+        },
+        "Fúria Persistente|Bárbaro||15",
+        "Melhoria na Pontuação de Habilidade|Bárbaro||16",
+        "Crítico Brutal (3 dados)|Bárbaro||17",
+        "Poder Indomável|Bárbaro||18",
+        "Melhoria na Pontuação de Habilidade|Bárbaro||19",
+        "Campeão Primordial|Bárbaro||20"
+      ],
+      "subclassTitle": "Caminho Primordial",
+      "hasFluff": true,
+      "hasFluffImages": true
+    },
+    {
+      "name": "Bárbaro",
+      "source": "XPHB",
+      "page": 50,
+      "srd52": true,
+      "basicRules2024": true,
+      "edition": "one",
+      "primaryAbility": [
+        {
+          "str": true
+        }
+      ],
+      "hd": {
+        "number": 1,
+        "faces": 12
+      },
+      "proficiency": [
+        "str",
+        "golpe"
+      ],
+      "featProgression": [
+        {
+          "name": "Benefício épico",
+          "category": [
+            "BE"
+          ],
+          "progression": {
+            "19": 1
+          }
+        }
+      ],
+      "startingProficiencies": {
+        "armor": [
+          "luz",
+          "médio",
+          "escudo"
+        ],
+        "weapons": [
+          "simples",
+          "marcial"
+        ],
+        "skills": [
+          {
+            "choose": {
+              "from": [
+                "manejo de animais",
+                "atletismo",
+                "intimidação",
+                "natureza",
+                "percepção",
+                "sobrevivência"
+              ],
+              "count": 2
+            }
+          }
+        ]
+      },
+      "startingEquipment": {
+        "additionalFromBackground": true,
+        "defaultData": [
+          {
+            "A": [
+              {
+                "item": "machado grande | xphb"
+              },
+              {
+                "item": "machado | xphb",
+                "quantity": 4
+              },
+              {
+                "item": "pacote do explorador | xphb"
+              },
+              {
+                "value": 1500
+              }
+            ],
+            "B": [
+              {
+                "value": 7500
+              }
+            ]
+          }
+        ],
+        "entries": [
+          "{@i Choose A or B:} (UM) {@item Greataxe|XPHB}, 4 {@item Handaxe|XPHB|Handaxes}, {@item Explorer's Pack|XPHB}e 15 GP; ou (B) 75 GP"
+        ]
+      },
+      "multiclassing": {
+        "proficienciesGained": {
+          "armor": [
+            "escudo"
+          ],
+          "weapons": [
+            "marcial"
+          ]
+        }
+      },
+      "classTableGroups": [
+        {
+          "colLabels": [
+            "Rages",
+            "Rage Damage",
+            "Weapon Mastery"
+          ],
+          "rows": [
+            [
+              "2",
+              {
+                "type": "bonus",
+                "value": 2
+              },
+              "2"
+            ],
+            [
+              "2",
+              {
+                "type": "bonus",
+                "value": 2
+              },
+              "2"
+            ],
+            [
+              "3",
+              {
+                "type": "bonus",
+                "value": 2
+              },
+              "2"
+            ],
+            [
+              "3",
+              {
+                "type": "bonus",
+                "value": 2
+              },
+              "3"
+            ],
+            [
+              "3",
+              {
+                "type": "bonus",
+                "value": 2
+              },
+              "3"
+            ],
+            [
+              "4",
+              {
+                "type": "bonus",
+                "value": 2
+              },
+              "3"
+            ],
+            [
+              "4",
+              {
+                "type": "bonus",
+                "value": 2
+              },
+              "3"
+            ],
+            [
+              "4",
+              {
+                "type": "bonus",
+                "value": 2
+              },
+              "3"
+            ],
+            [
+              "4",
+              {
+                "type": "bonus",
+                "value": 3
+              },
+              "3"
+            ],
+            [
+              "4",
+              {
+                "type": "bonus",
+                "value": 3
+              },
+              "4"
+            ],
+            [
+              "4",
+              {
+                "type": "bonus",
+                "value": 3
+              },
+              "4"
+            ],
+            [
+              "5",
+              {
+                "type": "bonus",
+                "value": 3
+              },
+              "4"
+            ],
+            [
+              "5",
+              {
+                "type": "bonus",
+                "value": 3
+              },
+              "4"
+            ],
+            [
+              "5",
+              {
+                "type": "bonus",
+                "value": 3
+              },
+              "4"
+            ],
+            [
+              "5",
+              {
+                "type": "bonus",
+                "value": 3
+              },
+              "4"
+            ],
+            [
+              "5",
+              {
+                "type": "bonus",
+                "value": 4
+              },
+              "4"
+            ],
+            [
+              "6",
+              {
+                "type": "bonus",
+                "value": 4
+              },
+              "4"
+            ],
+            [
+              "6",
+              {
+                "type": "bonus",
+                "value": 4
+              },
+              "4"
+            ],
+            [
+              "6",
+              {
+                "type": "bonus",
+                "value": 4
+              },
+              "4"
+            ],
+            [
+              "6",
+              {
+                "type": "bonus",
+                "value": 4
+              },
+              "4"
+            ]
+          ]
+        }
+      ],
+      "classFeatures": [
+        "Fúria|Bárbaro|XPHB|1",
+        "Defesa Não Blindada|Bárbaro|XPHB|1",
+        "Maestria com Armas|Bárbaro|XPHB|1",
+        "Sentido de Perigo|Bárbaro|XPHB|2",
+        "Ataque Imprudente|Bárbaro|XPHB|2",
+        {
+          "classFeature": "Subclasse Bárbaro|Bárbaro|XPHB|3",
+          "gainSubclassFeature": true
+        },
+        "Conhecimento Primordial|Bárbaro|XPHB|3",
+        "Melhoria na Pontuação de Habilidade|Bárbaro|XPHB|4",
+        "Ataque Extra|Bárbaro|XPHB|5",
+        "Movimento Rápido|Bárbaro|XPHB|5",
+        {
+          "classFeature": "Recurso de subclasse|Bárbaro|XPHB|6",
+          "gainSubclassFeature": true
+        },
+        "Instinto Selvagem|Bárbaro|XPHB|7",
+        "Ataque Instintivo|Bárbaro|XPHB|7",
+        "Melhoria na Pontuação de Habilidade|Bárbaro|XPHB|8",
+        "Ataque Brutal|Bárbaro|XPHB|9",
+        {
+          "classFeature": "Recurso de subclasse|Bárbaro|XPHB|10",
+          "gainSubclassFeature": true
+        },
+        "Fúria Implacável|Bárbaro|XPHB|11",
+        "Melhoria na Pontuação de Habilidade|Bárbaro|XPHB|12",
+        "Ataque Brutal Melhorado|Bárbaro|XPHB|13",
+        {
+          "classFeature": "Recurso de subclasse|Bárbaro|XPHB|14",
+          "gainSubclassFeature": true
+        },
+        "Fúria Persistente|Bárbaro|XPHB|15",
+        "Melhoria na Pontuação de Habilidade|Bárbaro|XPHB|16",
+        "Ataque Brutal Melhorado|Bárbaro|XPHB|17",
+        "Poder Indomável|Bárbaro|XPHB|18",
+        "Benefício Épico|Bárbaro|XPHB|19",
+        "Campeão Primordial|Bárbaro|XPHB|20"
+      ],
+      "subclassTitle": "Subclasse Bárbara",
+      "hasFluff": true,
+      "hasFluffImages": true
+    }
+  ],
+  "subclass": [
+    {
+      "name": "Caminho do Berserker",
+      "shortName": "Berserker",
+      "source": "PHB",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "page": 49,
+      "srd": true,
+      "reprintedAs": [
+        "Berserker|Barbarian|XPHB|XPHB"
+      ],
+      "edition": "classic",
+      "subclassFeatures": [
+        "Caminho do Berserker|Bárbaro||Berserker||3",
+        "Fúria Insensata|Bárbaro||Berserker||6",
+        "Presença Intimidadora|Bárbaro||Berserker||10",
+        "Retaliação|Bárbaro||Berserker||14"
+      ]
+    },
+    {
+      "name": "Caminho do Berserker",
+      "shortName": "Berserker",
+      "source": "PHB",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "_copy": {
+        "name": "Path of the Berserker",
+        "source": "PHB",
+        "shortName": "Berserker",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "name": "Caminho do Guerreiro Totem",
+      "shortName": "Totem Warrior",
+      "source": "PHB",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "page": 50,
+      "reprintedAs": [
+        "Wild Heart|Barbarian|XPHB|XPHB"
+      ],
+      "edition": "classic",
+      "additionalSpells": [
+        {
+          "innate": {
+            "3": {
+              "ritual": [
+                "beast sense",
+                "speak with animals"
+              ]
+            },
+            "10": {
+              "ritual": [
+                "commune with nature"
+              ]
+            }
+          }
+        }
+      ],
+      "subclassFeatures": [
+        "Caminho do Guerreiro Totem|Bárbaro||Guerreiro Totem||3",
+        "Aspecto da Besta|Bárbaro||Guerreiro Totem||6",
+        "Caminhante Espiritual|Bárbaro||Guerreiro Totem||10",
+        "Sintonia Totêmica|Bárbaro||Guerreiro Totem||14"
+      ],
+      "hasFluffImages": true
+    },
+    {
+      "name": "Caminho do Guerreiro Totem",
+      "shortName": "Totem Warrior",
+      "source": "PHB",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "_copy": {
+        "name": "Path of the Totem Warrior",
+        "source": "PHB",
+        "shortName": "Totem Warrior",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      },
+      "fluff": {
+        "_subclassFluff": {
+          "name": "Caminho do Guerreiro Totem",
+          "source": "PHB",
+          "shortName": "Totem Warrior",
+          "className": "Barbarian",
+          "classSource": "PHB"
+        }
+      }
+    },
+    {
+      "name": "Caminho do Battlerager",
+      "shortName": "Battlerager",
+      "source": "SCAG",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "page": 121,
+      "edition": "classic",
+      "subclassFeatures": [
+        "Caminho do Battlerager|Bárbaro||Battlerager|SCAG|3",
+        "Abandono Imprudente|Bárbaro||Battlerager|SCAG|6",
+        "Investida do Battlerager|Bárbaro||Battlerager|SCAG|10",
+        "Retribuição Cravada|Bárbaro||Battlerager|SCAG|14"
+      ]
+    },
+    {
+      "name": "Caminho do Battlerager",
+      "shortName": "Battlerager",
+      "source": "SCAG",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "_copy": {
+        "name": "Path of the Battlerager",
+        "source": "SCAG",
+        "shortName": "Battlerager",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "name": "Caminho do Guardião Ancestral",
+      "shortName": "Ancestral Guardian",
+      "source": "XGE",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "page": 9,
+      "edition": "classic",
+      "spellcastingAbility": "wis",
+      "additionalSpells": [
+        {
+          "innate": {
+            "10": [
+              "augury",
+              "clairvoyance"
+            ]
+          }
+        }
+      ],
+      "subclassFeatures": [
+        "Caminho do Guardião Ancestral|Bárbaro||Guardião Ancestral|XGE|3",
+        "Escudo Espiritual|Bárbaro||Guardião Ancestral|XGE|6",
+        "Consulte os Espíritos|Bárbaro||Guardião Ancestral|XGE|10",
+        "Ancestrais Vingativos|Bárbaro||Guardião Ancestral|XGE|14"
+      ],
+      "hasFluff": true,
+      "hasFluffImages": true
+    },
+    {
+      "name": "Caminho do Guardião Ancestral",
+      "shortName": "Ancestral Guardian",
+      "source": "XGE",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "_copy": {
+        "name": "Path of the Ancestral Guardian",
+        "source": "XGE",
+        "shortName": "Ancestral Guardian",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "name": "Caminho do Arauto da Tempestade",
+      "shortName": "Storm Herald",
+      "source": "XGE",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "page": 10,
+      "edition": "classic",
+      "subclassFeatures": [
+        "Caminho do Arauto da Tempestade|Bárbaro||Arauto da Tempestade|XGE|3",
+        "Alma da Tempestade|Bárbaro||Arauto da Tempestade|XGE|6",
+        "Protegendo Tempestade|Bárbaro||Arauto da Tempestade|XGE|10",
+        "Tempestade Furiosa|Bárbaro||Arauto da Tempestade|XGE|14"
+      ],
+      "hasFluff": true,
+      "hasFluffImages": true
+    },
+    {
+      "name": "Caminho do Arauto da Tempestade",
+      "shortName": "Storm Herald",
+      "source": "XGE",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "_copy": {
+        "name": "Path of the Storm Herald",
+        "source": "XGE",
+        "shortName": "Storm Herald",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      },
+      "fluff": {
+        "_subclassFluff": {
+          "name": "Caminho do Arauto da Tempestade",
+          "source": "XGE",
+          "shortName": "Storm Herald",
+          "className": "Barbarian",
+          "classSource": "PHB"
+        }
+      }
+    },
+    {
+      "name": "Caminho do Zelote",
+      "shortName": "Zealot",
+      "source": "XGE",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "page": 11,
+      "reprintedAs": [
+        "Zealot|Barbarian|XPHB|XPHB"
+      ],
+      "edition": "classic",
+      "subclassFeatures": [
+        "Caminho do Zelote|Bárbaro||Zelote|XGE|3",
+        "Foco Fanático|Bárbaro||Zelota|XGE|6",
+        "Presença Zelosa|Bárbaro||Zelota|XGE|10",
+        "Fúria além da Morte|Bárbaro||Zealot|XGE|14"
+      ],
+      "hasFluffImages": true
+    },
+    {
+      "name": "Caminho do Zelote",
+      "shortName": "Zealot",
+      "source": "XGE",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "_copy": {
+        "name": "Path of the Zealot",
+        "source": "XGE",
+        "shortName": "Zealot",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      }
+    },
+    {
+      "name": "Caminho da Besta",
+      "shortName": "Beast",
+      "source": "TCE",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "page": 24,
+      "edition": "classic",
+      "subclassFeatures": [
+        "Caminho da Besta|Bárbaro||Besta|TCE|3",
+        "Alma Bestial|Bárbaro||Besta|TCE|6",
+        "Fúria Infecciosa|Bárbaro||Besta|TCE|10",
+        "Chame a Caçada|Bárbaro||Besta|TCE|14"
+      ],
+      "hasFluffImages": true
+    },
+    {
+      "name": "Caminho da Besta",
+      "shortName": "Beast",
+      "source": "TCE",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "_copy": {
+        "name": "Path of the Beast",
+        "source": "TCE",
+        "shortName": "Beast",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      },
+      "fluff": {
+        "_subclassFluff": {
+          "name": "Caminho da Besta",
+          "source": "TCE",
+          "shortName": "Beast",
+          "className": "Barbarian",
+          "classSource": "PHB"
+        }
+      }
+    },
+    {
+      "name": "Caminho da Magia Selvagem",
+      "shortName": "Wild Magic",
+      "source": "TCE",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "page": 25,
+      "edition": "classic",
+      "subclassFeatures": [
+        "Caminho da Magia Selvagem|Bárbaro||Magia Selvagem|TCE|3",
+        "Reforçando a Magia|Bárbaro||Magia Selvagem|TCE|6",
+        "Reação Instável|Bárbaro||Magia Selvagem|TCE|10",
+        "Surto Controlado|Bárbaro||Magia Selvagem|TCE|14"
+      ],
+      "hasFluffImages": true
+    },
+    {
+      "name": "Caminho da Magia Selvagem",
+      "shortName": "Wild Magic",
+      "source": "TCE",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "_copy": {
+        "name": "Path of Wild Magic",
+        "source": "TCE",
+        "shortName": "Wild Magic",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      },
+      "fluff": {
+        "_subclassFluff": {
+          "name": "Caminho da Magia Selvagem",
+          "source": "TCE",
+          "shortName": "Wild Magic",
+          "className": "Barbarian",
+          "classSource": "PHB"
+        }
+      }
+    },
+    {
+      "name": "Caminho do Gigante",
+      "shortName": "Giant",
+      "source": "BGG",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "page": 11,
+      "edition": "classic",
+      "spellcastingAbility": "wis",
+      "additionalSpells": [
+        {
+          "innate": {
+            "3": [
+              "druidcraft#c"
+            ]
+          }
+        },
+        {
+          "innate": {
+            "3": [
+              "thaumaturgy#c"
+            ]
+          }
+        }
+      ],
+      "subclassFeatures": [
+        "Caminho do Gigante|Bárbaro||Gigante|BGG|3",
+        "Cutelo Elemental|Bárbaro||Gigante|BGG|6",
+        "Poderoso Impel|Bárbaro||Gigante|BGG|10",
+        "Colosso Demiúrgico|Bárbaro||Gigante|BGG|14"
+      ],
+      "hasFluffImages": true
+    },
+    {
+      "name": "Caminho do Gigante",
+      "shortName": "Giant",
+      "source": "BGG",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "_copy": {
+        "name": "Path of the Giant",
+        "source": "BGG",
+        "shortName": "Giant",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_preserve": {
+          "page": true,
+          "otherSources": true,
+          "referenceSources": true,
+          "srd": true,
+          "basicRules": true,
+          "reprintedAs": true
+        }
+      },
+      "fluff": {
+        "_subclassFluff": {
+          "name": "Caminho do Gigante",
+          "source": "BGG",
+          "shortName": "Giant",
+          "className": "Barbarian",
+          "classSource": "PHB"
+        }
+      }
+    },
+    {
+      "name": "Caminho do Berserker",
+      "shortName": "Berserker",
+      "source": "XPHB",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "page": 54,
+      "srd52": true,
+      "edition": "one",
+      "subclassFeatures": [
+        "Caminho do Berserker|Bárbaro|XPHB|Berserker|XPHB|3",
+        "Fúria Desatenta|Bárbaro|XPHB|Berserker|XPHB|6",
+        "Retaliação|Bárbaro|XPHB|Berserker|XPHB|10",
+        "Presença Intimidadora|Bárbaro|XPHB|Berserker|XPHB|14"
+      ],
+      "hasFluffImages": true
+    },
+    {
+      "name": "Caminho do Coração Selvagem",
+      "shortName": "Wild Heart",
+      "source": "XPHB",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "page": 55,
+      "edition": "one",
+      "additionalSpells": [
+        {
+          "innate": {
+            "3": {
+              "ritual": [
+                "beast sense|xphb",
+                "speak with animals|xphb"
+              ]
+            },
+            "10": {
+              "ritual": [
+                "commune with nature|xphb"
+              ]
+            }
+          }
+        }
+      ],
+      "subclassFeatures": [
+        "Caminho do Coração Selvagem|Bárbaro|XPHB|Coração Selvagem|XPHB|3",
+        "Aspecto da Natureza|Bárbaro|XPHB|Coração Selvagem|XPHB|6",
+        "Palestrante da Natureza|Bárbaro|XPHB|Coração Selvagem|XPHB|10",
+        "Poder da Natureza|Bárbaro|XPHB|Coração Selvagem|XPHB|14"
+      ],
+      "hasFluffImages": true
+    },
+    {
+      "name": "Caminho da Árvore do Mundo",
+      "shortName": "World Tree",
+      "source": "XPHB",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "page": 56,
+      "edition": "one",
+      "subclassFeatures": [
+        "Caminho da Árvore do Mundo|Bárbaro|XPHB|Árvore do Mundo|XPHB|3",
+        "Ramos da Árvore|Bárbaro|XPHB|Árvore do Mundo|XPHB|6",
+        "Raízes Destruidoras|Bárbaro|XPHB|Árvore do Mundo|XPHB|10",
+        "Viaje ao longo da árvore|Bárbaro|XPHB|Árvore do mundo|XPHB|14"
+      ],
+      "hasFluffImages": true
+    },
+    {
+      "name": "Caminho do Zelote",
+      "shortName": "Zealot",
+      "source": "XPHB",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "page": 57,
+      "edition": "one",
+      "subclassFeatures": [
+        "Caminho do Zelote|Bárbaro|XPHB|Zelote|XPHB|3",
+        "Foco Fanático|Bárbaro|XPHB|Zelota|XPHB|6",
+        "Presença Zelosa|Bárbaro|XPHB|Zelota|XPHB|10",
+        "Fúria dos Deuses|Bárbaro|XPHB|Zelota|XPHB|14"
+      ],
+      "hasFluffImages": true
+    }
+  ],
+  "classFeature": [
+    {
+      "name": "Raiva",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 1,
+      "entries": [
+        "Na batalha, você luta com ferocidade primitiva. No seu turno, você pode entrar em fúria como uma ação bônus.",
+        "Enquanto estiver em fúria, você ganha os seguintes benefícios se não estiver usando armadura pesada:",
+        {
+          "type": "list",
+          "items": [
+            "Você tem vantagem em testes de Força e testes de resistência de Força.",
+            "Quando você faz um ataque corpo a corpo com arma usando Força, você ganha um bônus de +2 na jogada de dano. Este bônus aumenta conforme você sobe de nível.",
+            "Você tem resistência a danos de concussão, perfurantes e cortantes."
+          ]
+        },
+        "Se você for capaz de lançar feitiços, não poderá lançá-los ou se concentrar neles enquanto estiver em fúria.",
+        "Sua raiva dura 1 minuto. Termina mais cedo se você levar uma pancada {@condition unconscious} ou se o seu turno terminar e você não tiver atacado uma criatura hostil desde o seu último turno ou sofrido danos desde então. Você também pode acabar com sua fúria no seu turno com uma ação bônus.",
+        "Depois de ter enfurecido o número máximo de vezes para o seu nível de bárbaro, você deve terminar um descanso longo antes de poder entrar em fúria novamente. Você pode entrar em fúria 2 vezes no 1º nível, 3 no 3º, 4 no 6º, 5 no 12º e 6 no 17º."
+      ]
+    },
+    {
+      "name": "Defesa Não Blindada",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 1,
+      "entries": [
+        "Enquanto você não estiver usando nenhuma armadura, sua Classe de Armadura é igual a 10 + seu modificador de Destreza + seu modificador de Constituição. Você pode usar um escudo e ainda ganhar esse benefício."
+      ]
+    },
+    {
+      "name": "Sentido de Perigo",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 2,
+      "entries": [
+        "No 2º nível, você ganha uma sensação estranha de quando as coisas próximas não estão como deveriam ser, lhe dando uma vantagem quando você se esquiva do perigo. Você tem vantagem nos testes de resistência de Destreza contra efeitos que você pode ver, como armadilhas e magias. Para obter esse benefício, você não pode estar {@condition blinded}, {@condition deafened}, ou {@condition incapacitated}."
+      ]
+    },
+    {
+      "name": "Ataque imprudente",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 2,
+      "entries": [
+        "A partir do 2º nível, você pode deixar de lado toda preocupação com a defesa para atacar com desespero feroz. Ao fazer seu primeiro ataque no seu turno, você pode decidir atacar de forma imprudente. Fazer isso lhe dá vantagem nas jogadas de ataque com armas corpo a corpo usando Força durante este turno, mas as jogadas de ataque contra você têm vantagem até o próximo turno."
+      ]
+    },
+    {
+      "name": "Conhecimento Primordial",
+      "source": "TCE",
+      "page": 24,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 3,
+      "isClassFeatureVariant": true,
+      "entries": [
+        "{@i bárbaro de 3º nível {@variantrule optional class features|tce|optional feature}}",
+        "Quando você alcança o 3º nível e novamente o 10º nível, você ganha proficiência em uma perícia de sua escolha da lista de perícias disponíveis para bárbaros no 1º nível."
+      ]
+    },
+    {
+      "name": "Caminho Primordial",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 3,
+      "entries": [
+        "No 3º nível, você escolhe um caminho que molda a natureza de sua fúria na lista de caminhos disponíveis. Sua escolha concede características no 3º nível e novamente no 6º, 10º e 14º níveis."
+      ]
+    },
+    {
+      "name": "Melhoria na pontuação de habilidade",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 4,
+      "entries": [
+        "Quando você alcança o 4º nível, você pode aumentar um valor de habilidade de sua escolha em 2, ou você pode aumentar dois valores de habilidade de sua escolha em 1. Como normal, você não pode aumentar um valor de habilidade acima de 20 usando esta característica.",
+        "Se o seu Mestre permitir o uso de talentos, você pode escolher um {@5etools feat|feats.html}."
+      ]
+    },
+    {
+      "name": "Ataque Extra",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 5,
+      "entries": [
+        "A partir do 5º nível, você pode atacar duas vezes, em vez de uma, sempre que escolher o {@action Attack} ação no seu turno."
+      ]
+    },
+    {
+      "name": "Movimento Rápido",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 5,
+      "entries": [
+        "A partir do 5º nível, seu deslocamento aumenta em 3 metros enquanto você não estiver usando armadura pesada."
+      ]
+    },
+    {
+      "name": "Recurso de caminho",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 6,
+      "entries": [
+        "No 6º nível, você ganha uma característica do seu Caminho Primordial."
+      ]
+    },
+    {
+      "name": "Instinto Selvagem",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 7,
+      "entries": [
+        "No 7º nível, seus instintos estão tão aguçados que você tem vantagem nas jogadas de iniciativa.",
+        "Além disso, se você estiver {@status surprised} no início do combate e não são {@condition incapacitated}, você pode agir normalmente em seu primeiro turno, mas apenas se entrar em fúria antes de fazer qualquer outra coisa naquele turno."
+      ]
+    },
+    {
+      "name": "Ataque Instintivo",
+      "source": "TCE",
+      "page": 24,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 7,
+      "isClassFeatureVariant": true,
+      "entries": [
+        "{@i bárbaro de 7º nível {@variantrule optional class features|tce|optional feature}}",
+        "Como parte da ação bônus que você realiza para entrar em sua fúria, você pode se mover até metade de seu deslocamento."
+      ]
+    },
+    {
+      "name": "Melhoria na pontuação de habilidade",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 8,
+      "entries": [
+        "Quando você alcança o 8º nível, você pode aumentar um valor de habilidade de sua escolha em 2, ou você pode aumentar dois valores de habilidade de sua escolha em 1. Como normal, você não pode aumentar um valor de habilidade acima de 20 usando esta característica.",
+        "Se o seu Mestre permitir o uso de talentos, você pode escolher um {@5etools feat|feats.html}."
+      ]
+    },
+    {
+      "name": "Crítico Brutal (1 dado)",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 9,
+      "entries": [
+        "A partir do 9º nível, você pode rolar um dado adicional de dano de arma ao determinar o dano extra para um acerto crítico com um ataque corpo a corpo.",
+        "Isso aumenta para dois dados adicionais no 13º nível e três dados adicionais no 17º nível."
+      ]
+    },
+    {
+      "name": "Recurso de caminho",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 10,
+      "entries": [
+        "No 10º nível, você ganha uma característica do seu Caminho Primordial."
+      ]
+    },
+    {
+      "name": "Fúria Implacável",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 11,
+      "entries": [
+        "A partir do 11º nível, sua fúria pode mantê-lo lutando apesar de ferimentos graves. Se você cair para 0 pontos de vida enquanto estiver em fúria e não morrer imediatamente, você pode fazer um {@dc 10} Teste de resistência da Constituição. Se tiver sucesso, você cai para 1 ponto de vida.",
+        "Cada vez que você usa esse recurso após o primeiro, a CD aumenta em 5. Quando você termina um descanso curto ou longo, a CD é redefinida para 10."
+      ]
+    },
+    {
+      "name": "Melhoria na pontuação de habilidade",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 12,
+      "entries": [
+        "Quando você alcança o 12º nível, você pode aumentar um valor de habilidade de sua escolha em 2, ou você pode aumentar dois valores de habilidade de sua escolha em 1. Como normal, você não pode aumentar um valor de habilidade acima de 20 usando esta característica.",
+        "Se o seu Mestre permitir o uso de talentos, você pode escolher um {@5etools feat|feats.html}."
+      ]
+    },
+    {
+      "name": "Crítico Brutal (2 dados)",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 13,
+      "entries": [
+        "No 13º nível, você pode rolar dois dados adicionais de dano de arma ao determinar o dano extra para um acerto crítico com um ataque corpo a corpo.",
+        "Isso aumenta para três dados adicionais no 17º nível."
+      ]
+    },
+    {
+      "name": "Recurso de caminho",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 14,
+      "entries": [
+        "No 14º nível, você ganha uma característica do seu Caminho Primordial."
+      ]
+    },
+    {
+      "name": "Raiva Persistente",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 15,
+      "entries": [
+        "A partir do 15º nível, sua fúria é tão feroz que só termina mais cedo se você cair {@condition unconscious} ou se você decidir encerrá-lo."
+      ]
+    },
+    {
+      "name": "Melhoria na pontuação de habilidade",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 16,
+      "entries": [
+        "Quando você atinge o 16º nível, você pode aumentar um valor de habilidade de sua escolha em 2, ou você pode aumentar dois valores de habilidade de sua escolha em 1. Como normal, você não pode aumentar um valor de habilidade acima de 20 usando esta característica.",
+        "Se o seu Mestre permitir o uso de talentos, você pode escolher um {@5etools feat|feats.html}."
+      ]
+    },
+    {
+      "name": "Crítico Brutal (3 dados)",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 17,
+      "entries": [
+        "No 17º nível, você pode rolar três dados adicionais de dano de arma ao determinar o dano extra para um acerto crítico com um ataque corpo a corpo."
+      ]
+    },
+    {
+      "name": "Poder Indomável",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 18,
+      "entries": [
+        "A partir do 18º nível, se o total de um teste de Força for menor que seu valor de Força, você pode usar esse valor no lugar do total."
+      ]
+    },
+    {
+      "name": "Melhoria na pontuação de habilidade",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 19,
+      "entries": [
+        "Quando você atinge o 19º nível, você pode aumentar um valor de habilidade de sua escolha em 2, ou você pode aumentar dois valores de habilidade de sua escolha em 1. Como normal, você não pode aumentar um valor de habilidade acima de 20 usando esta característica.",
+        "Se o seu Mestre permitir o uso de talentos, você pode escolher um {@5etools feat|feats.html}."
+      ]
+    },
+    {
+      "name": "Campeão Primordial",
+      "source": "PHB",
+      "page": 46,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "level": 20,
+      "entries": [
+        "No 20º nível, você incorpora o poder da natureza. Seus valores de Força e Constituição aumentam em 4. Seu máximo para esses valores agora é 24."
+      ]
+    },
+    {
+      "name": "Raiva",
+      "source": "XPHB",
+      "page": 51,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 1,
+      "entries": [
+        "Você pode imbuir-se de um poder primordial chamado Fúria, uma força que lhe concede poder e resiliência extraordinários. Você pode inseri-lo como um {@variantrule Bonus Action|XPHB} se você não estiver usando armadura pesada.",
+        "Você pode inserir sua Fúria o número de vezes mostrado para seu nível de Bárbaro na coluna Fúria da tabela Características do Bárbaro. Você recupera um uso gasto ao terminar um {@variantrule Short Rest|XPHB}, e você recupera todos os usos gastos ao terminar um {@variantrule Long Rest|XPHB}.",
+        "Enquanto estiver ativo, sua Fúria segue as regras abaixo.",
+        {
+          "type": "entries",
+          "entries": [
+            {
+              "type": "entries",
+              "name": "Resistência a danos",
+              "entries": [
+                "Você tem {@variantrule Resistance|XPHB} a danos de concussão, perfurantes e cortantes."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Dano de Fúria",
+              "entries": [
+                "Quando você faz um ataque usando Força – com uma arma ou um {@variantrule Unarmed Strike|XPHB}—e causar dano ao alvo, você ganha um bônus de dano que aumenta à medida que você ganha níveis como Bárbaro, conforme mostrado na coluna Dano de Fúria da tabela Características do Bárbaro."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Vantagem de Força",
+              "entries": [
+                "Você tem {@variantrule Advantage|XPHB} em testes de Força e testes de resistência de Força."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Sem concentração ou feitiços",
+              "entries": [
+                "Você não pode manter {@status Concentration|XPHB}, e você não pode lançar feitiços."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Duração",
+              "entries": [
+                "A Fúria dura até o final do seu próximo turno e termina mais cedo se você usar armadura pesada ou tiver o {@condition Incapacitated|XPHB} doença. Se sua Fúria ainda estiver ativa no seu próximo turno, você pode estender a Fúria por mais uma rodada seguindo um destes procedimentos:",
+                {
+                  "type": "list",
+                  "items": [
+                    "Faça uma jogada de ataque contra um inimigo.",
+                    "Forçar um inimigo a fazer um teste de resistência.",
+                    "Pegue um {@variantrule Bonus Action|XPHB} para estender sua Fúria."
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "Cada vez que a Fúria é estendida, ela dura até o final do seu próximo turno. Você pode manter a Fúria por até 10 minutos."
+      ]
+    },
+    {
+      "name": "Defesa Não Blindada",
+      "source": "XPHB",
+      "page": 51,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 1,
+      "entries": [
+        "Enquanto você não estiver usando nenhuma armadura, sua base {@variantrule Armor Class|XPHB} é igual a 10 mais seus modificadores de Destreza e Constituição. Você pode usar um {@item Shield|XPHB} e ainda ganhar esse benefício."
+      ]
+    },
+    {
+      "name": "Maestria em Armas",
+      "source": "XPHB",
+      "page": 52,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 1,
+      "entries": [
+        "Seu treinamento com armas permite que você use o {@variantrule weapon mastery properties|XPHB|mastery properties} de dois tipos de {@filter Simple|items|type=simple weapon;melee weapon=sand} ou {@filter Martial Melee weapons|items|type=martial weapon;melee weapon=sand} de sua escolha, como {@item Greataxe|XPHB|Greataxes} e {@item Handaxe|XPHB|Handaxes}. Sempre que você termina um {@variantrule Long Rest|XPHB}, você pode praticar exercícios com armas e alterar uma dessas opções de armas.",
+        "Ao atingir certos níveis de Bárbaro, você ganha a habilidade de usar o {@variantrule weapon mastery properties|XPHB|mastery properties} de mais tipos de armas, conforme mostrado na coluna Maestria em Armas da tabela Características Bárbaras."
+      ]
+    },
+    {
+      "name": "Sentido de Perigo",
+      "source": "XPHB",
+      "page": 52,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 2,
+      "entries": [
+        "Você ganha uma sensação estranha de quando as coisas não estão como deveriam ser, o que lhe dá uma vantagem ao se esquivar dos perigos. Você tem {@variantrule Advantage|XPHB} em testes de resistência de Destreza, a menos que você tenha o {@condition Incapacitated|XPHB} doença."
+      ]
+    },
+    {
+      "name": "Ataque imprudente",
+      "source": "XPHB",
+      "page": 52,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 2,
+      "entries": [
+        "Você pode deixar de lado toda preocupação com a defesa para atacar com maior ferocidade. Quando você faz sua primeira jogada de ataque no seu turno, você pode decidir atacar de forma imprudente. Fazer isso lhe dá {@variantrule Advantage|XPHB} nas jogadas de ataque usando Força até o início do seu próximo turno, mas as jogadas de ataque contra você têm {@variantrule Advantage|XPHB} durante esse tempo."
+      ]
+    },
+    {
+      "name": "Subclasse Bárbara",
+      "source": "XPHB",
+      "page": 52,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 3,
+      "entries": [
+        "Você ganha uma subclasse de Bárbaro à sua escolha. Uma subclasse é uma especialização que concede recursos em certos níveis de Bárbaro. Pelo resto de sua carreira, você ganha cada uma das características de sua subclasse que sejam do seu nível Bárbaro ou inferior."
+      ]
+    },
+    {
+      "name": "Conhecimento Primordial",
+      "source": "XPHB",
+      "page": 52,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 3,
+      "entries": [
+        "Você ganha proficiência em outra habilidade de sua escolha da lista de habilidades disponível para Bárbaros no nível 1.",
+        "Além disso, enquanto sua Fúria estiver ativa, você pode canalizar o poder primordial ao tentar determinadas tarefas; sempre que você fizer um teste de habilidade usando uma das seguintes perícias, você pode fazê-lo como um teste de Força, mesmo que normalmente use uma habilidade diferente: {@skill Acrobatics|XPHB}, {@skill Intimidation|XPHB}, {@skill Perception|XPHB}, {@skill Stealth|XPHB}, ou {@skill Survival|XPHB}. Quando você usa essa habilidade, sua Força representa o poder primordial fluindo através de você, aprimorando sua agilidade, porte e sentidos."
+      ]
+    },
+    {
+      "name": "Melhoria na pontuação de habilidade",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 4,
+      "entries": [
+        "Você ganha o {@feat Ability Score Improvement|XPHB} façanha ou outra {@5etools feat|feats.html} de sua escolha para o qual você se qualifica. Você ganha esse recurso novamente nos níveis 8, 12 e 16 do Bárbaro."
+      ]
+    },
+    {
+      "name": "Ataque Extra",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 5,
+      "entries": [
+        "Você pode atacar duas vezes em vez de uma vez sempre que pegar o {@action Attack|XPHB} ação no seu turno."
+      ]
+    },
+    {
+      "name": "Movimento Rápido",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 5,
+      "entries": [
+        "Sua velocidade aumenta em 3 metros enquanto você não estiver usando armadura pesada."
+      ]
+    },
+    {
+      "name": "Recurso de subclasse",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 6,
+      "entries": [
+        "Você ganha uma característica da sua subclasse Bárbaro."
+      ]
+    },
+    {
+      "name": "Instinto Selvagem",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 7,
+      "entries": [
+        "Seus instintos são tão aguçados que você tem {@variantrule Advantage|XPHB} sobre {@variantrule Initiative|XPHB} rolos."
+      ]
+    },
+    {
+      "name": "Ataque Instintivo",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 7,
+      "entries": [
+        "Como parte do {@variantrule Bonus Action|XPHB} você leva para entrar em sua Fúria, você pode mover até metade de sua {@variantrule Speed|XPHB}."
+      ]
+    },
+    {
+      "name": "Melhoria na pontuação de habilidade",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 8,
+      "entries": [
+        "Você ganha o {@feat Ability Score Improvement|XPHB} façanha ou outra {@5etools feat|feats.html} de sua escolha para o qual você se qualifica."
+      ]
+    },
+    {
+      "name": "Golpe Brutal",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 9,
+      "entries": [
+        "Se você usar o Reckless Attack, poderá renunciar a qualquer {@variantrule Advantage|XPHB} em uma jogada de ataque baseada em Força, à sua escolha, no seu turno. A jogada de ataque escolhida não deve ter {@variantrule Disadvantage|XPHB}. Se a jogada de ataque escolhida acertar, o alvo recebe um {@damage 1d10} dano do mesmo tipo causado pela arma ou {@variantrule Unarmed Strike|XPHB}, e você pode causar um efeito de Golpe Brutal à sua escolha. Você tem as seguintes opções de efeitos.",
+        {
+          "type": "entries",
+          "entries": [
+            {
+              "type": "entries",
+              "name": "Golpe Forte",
+              "entries": [
+                "O alvo é empurrado 15 pés para longe de você. Você pode então mover até metade do seu {@variantrule Speed|XPHB} direto em direção ao alvo sem provocar {@action Opportunity Attack|XPHB|Opportunity Attacks}."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Golpe no tendão",
+              "entries": [
+                "O alvo {@variantrule Speed|XPHB} é reduzido em 4,5 metros até o início do seu próximo turno. Um alvo pode ser afetado por apenas um golpe nos isquiotibiais por vez – o mais recente."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Recurso de subclasse",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 10,
+      "entries": [
+        "Você ganha uma característica da sua subclasse Bárbaro."
+      ]
+    },
+    {
+      "name": "Fúria Implacável",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 11,
+      "entries": [
+        "Sua Fúria pode mantê-lo lutando apesar de ferimentos graves. Se você cair para 0 {@variantrule Hit Points|XPHB} enquanto sua Fúria estiver ativa e não morrer imediatamente, você pode fazer um {@dc 10} Teste de resistência da Constituição. Se você tiver sucesso, seu {@variantrule Hit Points|XPHB} em vez disso, mude para um número igual ao dobro do seu nível de Bárbaro.",
+        "Cada vez que você usa esse recurso após o primeiro, a CD aumenta em 5. Quando você termina um {@variantrule Short Rest|XPHB|Short} ou {@variantrule Long Rest|XPHB}, o DC é redefinido para 10."
+      ]
+    },
+    {
+      "name": "Melhoria na pontuação de habilidade",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 12,
+      "entries": [
+        "Você ganha o {@feat Ability Score Improvement|XPHB} façanha ou outra {@5etools feat|feats.html} de sua escolha para o qual você se qualifica."
+      ]
+    },
+    {
+      "name": "Ataque Brutal Melhorado",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 13,
+      "entries": [
+        "Você aprimorou novas maneiras de atacar furiosamente. Os efeitos a seguir estão agora entre suas opções de Ataque Brutal.",
+        {
+          "type": "entries",
+          "entries": [
+            {
+              "type": "entries",
+              "name": "Golpe impressionante",
+              "entries": [
+                "O alvo tem {@variantrule Disadvantage|XPHB} no próximo teste de resistência que ele fizer, e não poderá fazer {@action Opportunity Attack|XPHB|Opportunity Attacks} até o início do seu próximo turno."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Golpe Separador",
+              "entries": [
+                "Antes do início do seu próximo turno, a próxima jogada de ataque feita por outra criatura contra o alvo ganha um bônus de +5 na jogada. Uma jogada de ataque pode ganhar apenas um bônus de Golpe Sundering."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Recurso de subclasse",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 14,
+      "entries": [
+        "Você ganha uma característica da sua subclasse Bárbaro."
+      ]
+    },
+    {
+      "name": "Raiva Persistente",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 15,
+      "entries": [
+        "Quando você rola {@variantrule Initiative|XPHB}, você pode recuperar todos os usos gastos de Fúria. Depois de recuperar usos de Fúria desta forma, você não poderá fazê-lo novamente até terminar um {@variantrule Long Rest|XPHB}.",
+        "Além disso, sua Fúria é tão feroz que agora dura 10 minutos sem que você precise fazer nada para estendê-la de rodada em rodada. Sua Fúria termina mais cedo se você tiver o {@condition Unconscious|XPHB} condição (não apenas a {@condition Incapacitated|XPHB} condição) ou vista armadura pesada."
+      ]
+    },
+    {
+      "name": "Melhoria na pontuação de habilidade",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 16,
+      "entries": [
+        "Você ganha o {@feat Ability Score Improvement|XPHB} façanha ou outra {@5etools feat|feats.html} de sua escolha para o qual você se qualifica."
+      ]
+    },
+    {
+      "name": "Ataque Brutal Melhorado",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 17,
+      "entries": [
+        "O dano extra do seu Ataque Brutal aumenta para {@damage 2d10}. Além disso, você pode usar dois efeitos Brutal Strike diferentes sempre que usar o recurso Brutal Strike."
+      ]
+    },
+    {
+      "name": "Poder Indomável",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 18,
+      "entries": [
+        "Se o seu total para um teste de Força ou teste de resistência de Força for menor que seu valor de Força, você pode usar esse valor no lugar do total."
+      ]
+    },
+    {
+      "name": "Benefício épico",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 19,
+      "entries": [
+        "Você ganha um {@filter Epic Boon feat|feats|category=EB} ou outro {@5etools feat|feats.html} de sua escolha para o qual você se qualifica. {@feat Boon of Irresistible Offense|XPHB} é recomendado."
+      ]
+    },
+    {
+      "name": "Campeão Primordial",
+      "source": "XPHB",
+      "page": 53,
+      "srd52": true,
+      "basicRules2024": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "level": 20,
+      "entries": [
+        "Você incorpora o poder primordial. Seus valores de Força e Constituição aumentam em 4, até um máximo de 25."
+      ]
+    }
+  ],
+  "subclassFeature": [
+    {
+      "name": "Poder Gigante",
+      "source": "BGG",
+      "page": 11,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Giant",
+      "subclassSource": "BGG",
+      "level": 3,
+      "entries": [
+        "{@i 3rd-Level Path of the Giant Feature}",
+        "Ao escolher esse caminho, você aprende a falar, ler e escrever Gigante ou outro idioma de sua escolha, caso já conheça Gigante. Além disso, você aprende um truque de sua escolha: {@spell druidcraft} ou {@spell thaumaturgy}. Sabedoria é a sua habilidade de lançar feitiços para este feitiço."
+      ]
+    },
+    {
+      "name": "Devastação do Gigante",
+      "source": "BGG",
+      "page": 11,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Giant",
+      "subclassSource": "BGG",
+      "level": 3,
+      "entries": [
+        "{@i 3rd-Level Path of the Giant Feature}",
+        "Sua fúria extrai força do poder primordial dos gigantes, transformando você em uma enorme força de destruição. Enquanto estiver em fúria, você ganha os seguintes benefícios:",
+        {
+          "type": "list",
+          "style": "lista-pendurar-notitle",
+          "items": [
+            {
+              "type": "item",
+              "name": "Arremesso Esmagador",
+              "entry": "Quando você faz um ataque à distância bem-sucedido com uma arma de arremesso usando Força, você pode adicionar seu bônus de Dano de Fúria à jogada de dano do ataque."
+            },
+            {
+              "type": "item",
+              "name": "Estatura Gigante",
+              "entry": "Seu alcance aumenta em 1,5 metro e se você for menor que Grande, você se torna Grande, junto com qualquer coisa que esteja vestindo. Se não houver espaço suficiente para aumentar seu tamanho, seu tamanho não muda."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Caminho do Gigante",
+      "source": "BGG",
+      "page": 11,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Giant",
+      "subclassSource": "BGG",
+      "level": 3,
+      "entries": [
+        "Os bárbaros que trilham o Caminho do Gigante extraem força das mesmas forças primordiais dos gigantes. À medida que se enfurecem, esses bárbaros surgem com poder elemental e crescem em tamanho, assumindo formas que evocam a glória dos gigantes. Alguns bárbaros parecem versões gigantescas de si mesmos, talvez com um toque de energia elementar brilhando em seus olhos e ao redor de suas armas. Outros se transformam de forma mais dramática, assumindo a aparência de um gigante real ou uma forma semelhante a um Elemental, envolto em fogo, gelo ou relâmpago.",
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Poder Gigante|Bárbaro||Gigante|BGG|3"
+        },
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Devastação do Gigante|Bárbaro||Gigante|BGG|3"
+        }
+      ]
+    },
+    {
+      "name": "Cutelo Elemental",
+      "source": "BGG",
+      "page": 11,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Giant",
+      "subclassSource": "BGG",
+      "level": 6,
+      "header": 2,
+      "entries": [
+        "{@i 6th-Level Path of the Giant Feature}",
+        "Seu vínculo com o poder elemental dos gigantes cresce e você aprende a infundir energia primordial em armas.",
+        "Ao entrar em fúria, você pode escolher uma arma que está segurando e infundi-la com um dos seguintes tipos de dano: ácido, frio, fogo, trovão ou raio. Enquanto você empunhar a arma infundida durante sua fúria, o tipo de dano da arma muda para o tipo escolhido, ela causa um dano extra {@damage 1d6} dano do tipo escolhido ao acertar, e ganha a propriedade de arremesso, com alcance normal de 6 metros e longo alcance de 18 metros. Se você lançar a arma, ela reaparecerá em sua mão no instante seguinte em que acertar ou errar um alvo. Os benefícios da arma infundida são suprimidos enquanto uma criatura que não seja você a empunha.",
+        "Enquanto estiver em fúria e segurando a arma infundida, você pode usar uma ação bônus para alterar o tipo de dano atual da arma infundida para outro das opções de tipo de dano acima."
+      ]
+    },
+    {
+      "name": "Poderoso Impel",
+      "source": "BGG",
+      "page": 12,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Giant",
+      "subclassSource": "BGG",
+      "level": 10,
+      "header": 2,
+      "entries": [
+        "{@i 10th-Level Path of the Giant Feature}",
+        "Sua conexão com a força gigante permite que você lance aliados e inimigos no campo de batalha. Como uma ação bônus enquanto estiver em fúria, você pode escolher uma criatura Média ou menor ao seu alcance e movê-la para um espaço desocupado que você possa ver a até 9 metros de você. Uma criatura involuntária deve ser bem sucedida em um teste de resistência de Força (CD igual a 8 + seu bônus de proficiência + seu modificador de Força) para evitar o efeito.",
+        "Se, ao final deste movimento, a criatura lançada não estiver em uma superfície ou líquido que possa sustentá-la, a criatura cai, sofrendo dano normalmente e caindo {@condition prone}."
+      ]
+    },
+    {
+      "name": "Colosso Demiúrgico",
+      "source": "BGG",
+      "page": 12,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Giant",
+      "subclassSource": "BGG",
+      "level": 14,
+      "header": 2,
+      "entries": [
+        "{@i 14th-Level Path of the Giant Feature}",
+        "O poder primordial da sua raiva se intensifica. Quando você fica furioso, seu alcance aumenta em 3 metros, seu tamanho pode aumentar para Grande ou Enorme (sua escolha) e você pode usar seu Impel Poderoso para mover criaturas Grandes ou menores.",
+        "Além disso, o dano extra causado pelo seu recurso Elemental Cleaver aumenta para {@dice 2d6}."
+      ]
+    },
+    {
+      "name": "Caminho do Berserker",
+      "source": "PHB",
+      "page": 49,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Berserker",
+      "subclassSource": "PHB",
+      "level": 3,
+      "entries": [
+        "Para alguns bárbaros, a raiva é um meio para atingir um fim – esse fim é a violência. O Caminho do Berserker é um caminho de fúria desenfreada, escorregadio de sangue. Ao entrar na fúria do berserker, você vibra no caos da batalha, sem se importar com sua própria saúde ou bem-estar.",
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Frenesi|Bárbaro||Berserker||3"
+        }
+      ]
+    },
+    {
+      "name": "Frenesi",
+      "source": "PHB",
+      "page": 49,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Berserker",
+      "subclassSource": "PHB",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "Começando quando você escolhe esse caminho no 3º nível, você pode entrar em frenesi quando estiver furioso. Se você fizer isso, durante sua fúria você poderá realizar um único ataque corpo a corpo com arma como uma ação bônus em cada um de seus turnos após este. Quando sua raiva termina, você sofre um nível de {@condition exhaustion}."
+      ]
+    },
+    {
+      "name": "Raiva estúpida",
+      "source": "PHB",
+      "page": 49,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Berserker",
+      "subclassSource": "PHB",
+      "level": 6,
+      "header": 2,
+      "entries": [
+        "A partir do 6º nível, você não pode ser {@condition charmed} ou {@condition frightened} enquanto está furioso. Se você estiver {@condition charmed} ou {@condition frightened} quando você entra em fúria, o efeito é suspenso enquanto durar a fúria."
+      ]
+    },
+    {
+      "name": "Presença intimidante",
+      "source": "PHB",
+      "page": 49,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Berserker",
+      "subclassSource": "PHB",
+      "level": 10,
+      "header": 2,
+      "entries": [
+        "A partir do 10º nível, você pode usar sua ação para assustar alguém com sua presença ameaçadora. Ao fazer isso, escolha uma criatura que você possa ver a até 9 metros de você. Se a criatura puder ver ou ouvir você, ela deverá ser bem sucedida em um teste de resistência de Sabedoria (CD igual a 8 + seu bônus de proficiência + seu modificador de Carisma) ou será {@condition frightened} de você até o final do seu próximo turno. Nos turnos subsequentes, você pode usar sua ação para estender a duração deste efeito no {@condition frightened} criatura até o final do seu próximo turno. Este efeito termina se a criatura terminar seu turno fora da linha de visão ou a mais de 18 metros de você.",
+        "Se a criatura tiver sucesso no teste de resistência, você não poderá usar esse recurso naquela criatura novamente por 24 horas."
+      ]
+    },
+    {
+      "name": "Retaliação",
+      "source": "PHB",
+      "page": 49,
+      "srd": true,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Berserker",
+      "subclassSource": "PHB",
+      "level": 14,
+      "header": 2,
+      "entries": [
+        "A partir do 14º nível, quando você sofre dano de uma criatura que está a até 1,5 metro de você, você pode usar sua reação para realizar um ataque corpo-a-corpo com arma contra aquela criatura."
+      ]
+    },
+    {
+      "name": "Urso",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 3,
+      "entries": [
+        "Enquanto estiver em fúria, você tem resistência a todos os danos, exceto dano psíquico. O espírito do urso torna você forte o suficiente para resistir a qualquer punição."
+      ]
+    },
+    {
+      "name": "Águia",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 3,
+      "entries": [
+        "Enquanto você estiver em fúria e não estiver usando armadura pesada, outras criaturas terão desvantagem nas jogadas de ataque de oportunidade contra você, e você pode usar o {@action Dash} ação como uma ação bônus no seu turno. O espírito da águia transforma você em um predador que pode escapar da briga com facilidade."
+      ]
+    },
+    {
+      "name": "Alce",
+      "source": "SCAG",
+      "page": 122,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 3,
+      "entries": [
+        "Enquanto você estiver em fúria e não estiver usando armadura pesada, sua velocidade de caminhada aumenta em 4,5 metros. O espírito do alce torna você extraordinariamente rápido."
+      ]
+    },
+    {
+      "name": "Caminho do Guerreiro Totem",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 3,
+      "entries": [
+        "O Caminho do Guerreiro Totem é uma jornada espiritual, pois o bárbaro aceita um espírito animal como guia, protetor e inspiração. Na batalha, seu espírito totêmico enche você de poder sobrenatural, adicionando combustível mágico à sua fúria bárbara.",
+        "A maioria das tribos bárbaras considera um animal totem parente de um determinado clã. Nesses casos, é incomum que um indivíduo tenha mais de um espírito animal totêmico, embora existam exceções.",
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Caçador de Espíritos|Bárbaro||Guerreiro Totem||3"
+        },
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Espírito Totem|Bárbaro||Guerreiro Totem||3"
+        }
+      ]
+    },
+    {
+      "name": "Tigre",
+      "source": "SCAG",
+      "page": 122,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 3,
+      "entries": [
+        "Enquanto estiver em fúria, você pode adicionar 3 metros à distância do salto em distância e 90 centímetros à distância do salto em altura. O espírito do tigre fortalece seus saltos."
+      ]
+    },
+    {
+      "name": "Lobo",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 3,
+      "entries": [
+        "Enquanto você estiver em fúria, seus amigos terão vantagem em jogadas de ataque corpo a corpo contra qualquer criatura a até 1,5 metro de você que seja hostil a você. O espírito do lobo faz de você um líder dos caçadores."
+      ]
+    },
+    {
+      "name": "Buscador de Espíritos",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "O seu é um caminho que busca a sintonia com o mundo natural, proporcionando-lhe um parentesco com as feras. No 3º nível, quando você adota esse caminho, você ganha a habilidade de conjurar o {@spell beast sense} e {@spell speak with animals} feitiços, mas apenas como rituais, conforme descrito em {@book chapter 10|PHB|10|rituals}."
+      ]
+    },
+    {
+      "name": "Espírito Totêmico",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "No 3º nível, ao adotar esse caminho, você escolhe um espírito totêmico e ganha sua característica. Você deve fazer ou adquirir um objeto totêmico físico – um amuleto ou adorno semelhante – que incorpore peles ou penas, garras, dentes ou ossos do animal totêmico. A seu critério, você também ganha atributos físicos menores que lembram o espírito do seu totem. Por exemplo, se você tem um espírito totêmico de urso, você pode ser excepcionalmente peludo e de pele grossa, ou se seu totem for a águia, seus olhos ficam amarelos brilhantes.",
+        "Seu animal totêmico pode ser um animal relacionado aos listados aqui, mas mais apropriado para sua terra natal. Por exemplo, você pode escolher um falcão ou um abutre no lugar de uma águia.",
+        {
+          "type": "options",
+          "count": 1,
+          "entries": [
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Urso|Bárbaro||Guerreiro Totem||3"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Águia|Bárbaro||Guerreiro Totem||3"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Alce|Bárbaro|PHB|Guerreiro Totem||3|SCAG"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Tigre|Bárbaro|PHB|Guerreiro Totem||3|SCAG"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Lobo|Bárbaro||Guerreiro Totem||3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Urso",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 6,
+      "entries": [
+        "Você ganha o poder de um urso. Sua capacidade de carga (incluindo carga máxima e sustentação máxima) é duplicada e você tem vantagem em testes de Força feitos para empurrar, puxar, levantar ou quebrar objetos."
+      ]
+    },
+    {
+      "name": "Águia",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 6,
+      "entries": [
+        "Você ganha a visão de uma águia. Você pode ver até 1,6 km de distância sem dificuldade, sendo capaz de discernir até mesmo detalhes sutis, como se estivesse olhando para algo a não mais de 30 metros de distância de você. Além disso, a luz fraca não impõe desvantagem à sua Sabedoria ({@skill Perception}) verificações."
+      ]
+    },
+    {
+      "name": "Alce",
+      "source": "SCAG",
+      "page": 122,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 6,
+      "entries": [
+        "Seja montado ou a pé, seu ritmo de viagem é duplicado, assim como o ritmo de viagem de até dez companheiros enquanto eles estão a até 18 metros de você e você não está {@condition incapacitated}. O espírito do alce ajuda você a vagar longe e rápido."
+      ]
+    },
+    {
+      "name": "Tigre",
+      "source": "SCAG",
+      "page": 122,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 6,
+      "entries": [
+        "Você ganha proficiência em duas perícias da lista a seguir: {@skill Athletics}, {@skill Acrobatics}, {@skill Stealth}, e {@skill Survival}. O espírito do gato aprimora seus instintos de sobrevivência."
+      ]
+    },
+    {
+      "name": "Lobo",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 6,
+      "entries": [
+        "Você ganha a sensibilidade de caça de um lobo. Você pode rastrear outras criaturas enquanto viaja em ritmo acelerado e pode se mover furtivamente enquanto viaja em ritmo normal."
+      ]
+    },
+    {
+      "name": "Aspecto da Besta",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 6,
+      "header": 2,
+      "entries": [
+        "No 6º nível, você ganha um benefício mágico baseado no animal totêmico de sua escolha. Você pode escolher o mesmo animal selecionado no 3º nível ou um diferente.",
+        {
+          "type": "options",
+          "count": 1,
+          "entries": [
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Urso|Bárbaro||Guerreiro Totem||6"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Águia|Bárbaro||Guerreiro Totem||6"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Alce|Bárbaro|PHB|Guerreiro Totem||6|SCAG"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Tigre|Bárbaro|PHB|Guerreiro Totem||6|SCAG"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Lobo|Bárbaro||Guerreiro Totem||6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Andarilho Espiritual",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 10,
+      "header": 2,
+      "entries": [
+        "No 10º nível, você pode lançar o {@spell commune with nature} feitiço, mas apenas como um ritual. Ao fazer isso, uma versão espiritual de um dos animais que você escolheu como Espírito Totem ou Aspecto da Besta aparece para transmitir a informação que você procura."
+      ]
+    },
+    {
+      "name": "Urso",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 14,
+      "entries": [
+        "Enquanto você estiver em fúria, qualquer criatura a até 1,5 metro de você que seja hostil a você terá desvantagem nas jogadas de ataque contra alvos que não sejam você ou outro personagem com esta característica. Um inimigo é imune a este efeito se não puder ver ou ouvir você ou se não puder ser {@condition frightened}."
+      ]
+    },
+    {
+      "name": "Águia",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 14,
+      "entries": [
+        "Enquanto estiver em fúria, você tem um deslocamento de voo igual ao seu deslocamento atual de caminhada. Este benefício funciona apenas em períodos curtos; você cai se terminar seu turno no ar e nada mais o segurar no ar."
+      ]
+    },
+    {
+      "name": "Alce",
+      "source": "SCAG",
+      "page": 122,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 14,
+      "entries": [
+        "Enquanto estiver em fúria, você pode usar uma ação bônus durante seu movimento para passar pelo espaço de uma criatura Grande ou menor. Essa criatura deve ser bem sucedida em um teste de resistência de Força ({@dc 8} + seu bônus de Força + seu bônus de proficiência) ou será derrubado {@condition prone} e sofrer dano de concussão igual a {@damage 1d12} + seu modificador de Força."
+      ]
+    },
+    {
+      "name": "Tigre",
+      "source": "SCAG",
+      "page": 122,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 14,
+      "entries": [
+        "Enquanto estiver em fúria, se você se mover pelo menos 6 metros em linha reta em direção a um alvo Grande ou menor logo antes de realizar um ataque corpo a corpo com arma contra ele, você pode usar uma ação bônus para realizar um ataque corpo a corpo adicional com arma contra ele."
+      ]
+    },
+    {
+      "name": "Lobo",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 14,
+      "entries": [
+        "Enquanto estiver em fúria, você pode usar uma ação bônus no seu turno para derrubar uma criatura Grande ou menor. {@condition prone} quando você acerta com um ataque de arma corpo a corpo."
+      ]
+    },
+    {
+      "name": "Sintonia Totêmica",
+      "source": "PHB",
+      "page": 50,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Totem Warrior",
+      "subclassSource": "PHB",
+      "level": 14,
+      "header": 2,
+      "entries": [
+        "No 14º nível, você ganha um benefício mágico baseado em um animal totêmico de sua escolha. Você pode escolher o mesmo animal selecionado anteriormente ou um diferente.",
+        {
+          "type": "options",
+          "count": 1,
+          "entries": [
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Urso|Bárbaro||Guerreiro Totem||14"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Águia|Bárbaro||Guerreiro Totem||14"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Alce|Bárbaro|PHB|Guerreiro Totem||14|SCAG"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Tigre|Bárbaro|PHB|Guerreiro Totem||14|SCAG"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Lobo|Bárbaro||Guerreiro Totem||14"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Caminho do Battlerager",
+      "source": "SCAG",
+      "page": 121,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Battlerager",
+      "subclassSource": "SCAG",
+      "level": 3,
+      "entries": [
+        "Conhecidos como Kuldjargh (literalmente \"idiota do machado\") em anão, os battleragers são anões seguidores dos deuses da guerra e seguem o Caminho do Battlerager. Eles são especializados em usar roupas volumosas, {@item spiked armor|scag} e se lançando ao combate, golpeando com o próprio corpo e entregando-se à fúria da batalha.",
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Restrição — Somente Anões|Bárbaro||Battlerager|SCAG|3"
+        },
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Armadura Battlerager|Bárbaro||Battlerager|SCAG|3"
+        }
+      ]
+    },
+    {
+      "name": "Armadura de Batalha Furiosa",
+      "source": "SCAG",
+      "page": 121,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Battlerager",
+      "subclassSource": "SCAG",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "Quando você escolhe esse caminho no 3º nível, você ganha a habilidade de usar {@item spiked armor|scag} como uma arma.",
+        "Enquanto você está vestindo {@item spiked armor|scag} e estiver em fúria, você pode usar uma ação bônus para realizar um ataque corpo a corpo com sua armadura espetada em um alvo a até 1,5 metro de você. Se o ataque acertar, os espinhos causam {@damage 1d4} dano perfurante. Você usa seu modificador de Força para as jogadas de ataque e dano.",
+        "Além disso, quando você usa o {@action Attack} ação para agarrar uma criatura, o alvo sofre 3 pontos de dano perfurante se seu teste de agarrar for bem-sucedido."
+      ]
+    },
+    {
+      "name": "Restrição – Somente Anões",
+      "source": "SCAG",
+      "page": 121,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Battlerager",
+      "subclassSource": "SCAG",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "Somente anões podem seguir o Caminho do Battlerager. O Battlerager preenche um nicho particular na sociedade e cultura anã.",
+        "Seu Mestre pode suspender esta restrição para melhor se adequar à campanha. A restrição existe para Forgotten Realms. Pode não se aplicar à configuração do seu Mestre ou à versão dos Reinos do seu Mestre."
+      ]
+    },
+    {
+      "name": "Abandono imprudente",
+      "source": "SCAG",
+      "page": 121,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Battlerager",
+      "subclassSource": "SCAG",
+      "level": 6,
+      "header": 2,
+      "entries": [
+        "A partir do 6º nível, quando você usa Ataque Imprudente enquanto está em fúria, você também ganha pontos de vida temporários iguais ao seu modificador de Constituição (mínimo de 1). Eles desaparecem se algum deles sobrar quando sua raiva acabar."
+      ]
+    },
+    {
+      "name": "Carga de Battlerager",
+      "source": "SCAG",
+      "page": 121,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Battlerager",
+      "subclassSource": "SCAG",
+      "level": 10,
+      "header": 2,
+      "entries": [
+        "A partir do 10º nível, você pode pegar o {@action Dash} ação como uma ação bônus enquanto você está em fúria."
+      ]
+    },
+    {
+      "name": "Retribuição Cravada",
+      "source": "SCAG",
+      "page": 121,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Battlerager",
+      "subclassSource": "SCAG",
+      "level": 14,
+      "header": 2,
+      "entries": [
+        "A partir do 14º nível, quando uma criatura a até 1,5 metro de você atinge você com um ataque corpo a corpo, o atacante sofre 3 pontos de dano perfurante se você estiver em fúria, não estiver {@condition incapacitated}, e estão vestindo {@item spiked armor|scag}."
+      ]
+    },
+    {
+      "name": "Caminho da Besta",
+      "source": "TCE",
+      "page": 24,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Beast",
+      "subclassSource": "TCE",
+      "level": 3,
+      "entries": [
+        "Bárbaros que trilham o Caminho da Besta extraem sua raiva de uma faísca bestial que arde em suas almas. Essa fera irrompe em acessos de raiva, transformando fisicamente o bárbaro.",
+        "Tal bárbaro pode ser habitado por um espírito primitivo ou ser descendente de metamorfos. Você pode escolher a origem do seu poder selvagem ou determiná-lo rolando na tabela Origem da Besta.",
+        {
+          "type": "table",
+          "caption": "Origem da Besta",
+          "colLabels": [
+            "d4",
+            "Origem"
+          ],
+          "colStyles": [
+            "col-2 centro de texto",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "Um de seus pais é um licantropo e você herdou parte da maldição deles."
+            ],
+            [
+              "2",
+              "Você descende de um arquidruida e herdou a habilidade de mudar parcialmente de forma."
+            ],
+            [
+              "3",
+              "Um espírito feérico presenteou você com a habilidade de adotar diferentes aspectos bestiais."
+            ],
+            [
+              "4",
+              "Um antigo espírito animal habita dentro de você, permitindo-lhe trilhar este caminho."
+            ]
+          ]
+        },
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Forma da Besta|Bárbaro||Besta|TCE|3"
+        }
+      ]
+    },
+    {
+      "name": "Forma da Besta",
+      "source": "TCE",
+      "page": 24,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Beast",
+      "subclassSource": "TCE",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "{@i 3rd-level Path of the Beast feature}",
+        "Quando você entra em fúria, você pode se transformar, revelando o poder bestial dentro de você. Até que a raiva acabe, você manifesta uma arma natural. Ela conta como uma arma corpo a corpo simples para você, e você adiciona seu modificador de Força às jogadas de ataque e dano quando ataca com ela, normalmente.",
+        "Você escolhe a forma da arma cada vez que entra em fúria:",
+        {
+          "type": "list",
+          "style": "lista-pendurar-notitle",
+          "items": [
+            {
+              "type": "item",
+              "name": "Morder",
+              "entry": "Sua boca se transforma em um focinho bestial ou em grandes mandíbulas (você escolhe). Trata {@damage 1d8} dano perfurante em um golpe. Uma vez em cada um de seus turnos, quando você causa dano a uma criatura com esta mordida, você recupera um número de pontos de vida igual ao seu bônus de proficiência, desde que tenha menos da metade de seus pontos de vida quando acertar."
+            },
+            {
+              "type": "item",
+              "name": "Garras",
+              "entry": "Cada uma de suas mãos se transforma em uma garra, que você pode usar como arma se estiver vazia. Trata {@damage 1d6} cortando o dano em um golpe. Uma vez em cada um dos seus turnos, quando você atacar com uma garra usando o {@action Attack} ação, você pode realizar um ataque de garra adicional como parte da mesma ação."
+            },
+            {
+              "type": "item",
+              "name": "Cauda",
+              "entry": "Você desenvolve uma cauda espinhosa e forte, que trata {@damage 1d8} dano perfurante em um golpe e tem a propriedade de alcance. Se uma criatura que você possa ver a até 3 metros de você acertar você com uma jogada de ataque, você pode usar sua reação para passar a cauda e rolar uma jogada de ataque. {@dice d8}, aplicando um bônus à sua CA igual ao número obtido, potencialmente fazendo com que o ataque erre você."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Alma Bestial",
+      "source": "TCE",
+      "page": 24,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Beast",
+      "subclassSource": "TCE",
+      "level": 6,
+      "header": 2,
+      "entries": [
+        "{@i 6th-level Path of the Beast feature}",
+        "O poder feroz dentro de você aumenta, fazendo com que as armas naturais da sua Forma da Besta sejam consideradas mágicas com o propósito de superar a resistência e a imunidade a ataques e danos não mágicos.",
+        "Você também pode alterar sua forma para ajudá-lo a se adaptar ao ambiente. Ao terminar um descanso curto ou longo, escolha um dos seguintes benefícios, que dura até você terminar seu próximo descanso curto ou longo:",
+        {
+          "type": "list",
+          "items": [
+            "Você ganha um deslocamento de natação igual ao seu deslocamento de caminhada e pode respirar debaixo d'água.",
+            "Você ganha um deslocamento de escalada igual ao seu deslocamento de caminhada e pode escalar superfícies difíceis, inclusive tetos de cabeça para baixo, sem precisar fazer um teste de habilidade.",
+            "Ao pular, você pode fazer um teste de Força ({@skill Athletics}) verifique e estenda seu salto em um número de pés igual ao total do teste. Você pode fazer esse teste especial apenas uma vez por turno."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Fúria Infecciosa",
+      "source": "TCE",
+      "page": 24,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Beast",
+      "subclassSource": "TCE",
+      "level": 10,
+      "header": 2,
+      "entries": [
+        "{@i 10th-level Path of the Beast feature}",
+        "Quando você atinge uma criatura com suas armas naturais enquanto está em fúria, a fera dentro de você pode amaldiçoar seu alvo com fúria raivosa. O alvo deve ser bem sucedido em um teste de resistência de Sabedoria (CD igual a 8 + seu modificador de Constituição + seu bônus de proficiência) ou sofrerá um dos seguintes efeitos (sua escolha):",
+        {
+          "type": "list",
+          "items": [
+            "O alvo deve usar sua reação para realizar um ataque corpo a corpo contra outra criatura de sua escolha que você possa ver.",
+            "O alvo leva {@damage 2d12} danos psíquicos."
+          ]
+        },
+        "Você pode usar esse recurso um número de vezes igual ao seu bônus de proficiência e recupera todos os usos gastos ao terminar um descanso longo."
+      ]
+    },
+    {
+      "name": "Chame a caça",
+      "source": "TCE",
+      "page": 24,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Beast",
+      "subclassSource": "TCE",
+      "level": 14,
+      "header": 2,
+      "entries": [
+        "{@i 14th-level Path of the Beast feature}",
+        "A fera dentro de você se torna tão poderosa que você pode espalhar sua ferocidade para outros e ganhar resiliência quando eles se juntarem à sua caçada. Quando você entra em fúria, você pode escolher um número de outras criaturas voluntárias que você possa ver a até 9 metros de você igual ao seu modificador de Constituição (mínimo de uma criatura).",
+        "Você ganha 5 pontos de vida temporários para cada criatura que aceitar esse recurso. Até que a fúria acabe, cada uma das criaturas escolhidas pode usar o seguinte benefício uma vez em cada um de seus turnos: quando a criatura atinge um alvo com uma jogada de ataque e causa dano a ele, a criatura pode rolar um {@dice d6} e ganhe um bônus de dano igual ao número obtido.",
+        "Você pode usar esse recurso um número de vezes igual ao seu bônus de proficiência e recupera todos os usos gastos ao terminar um descanso longo."
+      ]
+    },
+    {
+      "name": "Caminho da Magia Selvagem",
+      "source": "TCE",
+      "page": 25,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Wild Magic",
+      "subclassSource": "TCE",
+      "level": 3,
+      "entries": [
+        "Muitos lugares no multiverso estão repletos de beleza, emoção intensa e magia desenfreada; a Agrestia das Fadas, os Planos Superiores e outros reinos de poder sobrenatural irradiam tais forças e podem influenciar profundamente as pessoas. Como pessoas de sentimentos profundos, os bárbaros são especialmente suscetíveis a essas influências selvagens, com alguns bárbaros sendo transformados pela magia. Esses bárbaros repletos de magia trilham o Caminho da Magia Selvagem. Bárbaros élficos, tieflings, aasimar e genasis frequentemente buscam esse caminho, ansiosos para manifestar a magia sobrenatural de seus ancestrais.",
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Consciência Mágica|Bárbaro||Magia Selvagem|TCE|3"
+        },
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Onda Selvagem|Bárbaro||Magia Selvagem|TCE|3"
+        }
+      ]
+    },
+    {
+      "name": "Consciência Mágica",
+      "source": "TCE",
+      "page": 25,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Wild Magic",
+      "subclassSource": "TCE",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "{@i 3rd-level Path of Wild Magic feature}",
+        "Como ação, você pode abrir sua consciência para a presença de magia concentrada. Até o final do seu próximo turno, você sabe a localização de qualquer feitiço ou item mágico a até 18 metros de você que não esteja atrás {@quickref Cover||3||total cover}. Ao sentir um feitiço, você aprende a qual escola de magia ele pertence.",
+        "Você pode usar esse recurso um número de vezes igual ao seu bônus de proficiência e recupera todos os usos gastos ao terminar um descanso longo."
+      ]
+    },
+    {
+      "name": "Onda Selvagem",
+      "source": "TCE",
+      "page": 25,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Wild Magic",
+      "subclassSource": "TCE",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "{@i 3rd-level Path of Wild Magic feature}",
+        "A energia mágica que agita dentro de você às vezes irrompe de você. Quando você entrar em fúria, role na tabela de Magia Selvagem para determinar o efeito mágico produzido.",
+        "Se o efeito exigir um teste de resistência, a CD será igual a 8 + seu bônus de proficiência + seu modificador de Constituição.",
+        {
+          "type": "table",
+          "caption": "Magia Selvagem",
+          "colLabels": [
+            "d8",
+            "Efeito Mágico"
+          ],
+          "colStyles": [
+            "col-2 centro de texto",
+            "col-10"
+          ],
+          "rows": [
+            [
+              "1",
+              "Gavinhas sombrias chicoteiam ao seu redor. Cada criatura de sua escolha que você possa ver a até 9 metros de você deve ser bem sucedida em um teste de resistência de Constituição ou sofrerá {@damage 1d12} dano necrótico. Você também ganha {@dice 1d12} pontos de vida temporários."
+            ],
+            [
+              "2",
+              "Você se teletransporta até 9 metros para um espaço desocupado que você possa ver. Até que sua fúria acabe, você pode usar este efeito novamente em cada um de seus turnos como uma ação bônus."
+            ],
+            [
+              "3",
+              "Um espírito intangível, que parece um {@creature flumph} ou um {@creature pixie} (sua escolha), aparece a até 1,5 metro de uma criatura de sua escolha que você possa ver a até 9 metros de você. No final do turno atual, o espírito explode e cada criatura a até 1,5 metro dele deve ser bem sucedida em um teste de resistência de Destreza ou sofrerá {@damage 1d6} dano de força. Até que sua fúria acabe, você pode usar este efeito novamente, invocando outro espírito, em cada um de seus turnos como uma ação bônus."
+            ],
+            [
+              "4",
+              "A magia infunde uma arma de sua escolha que você está segurando. Até que sua fúria acabe, o tipo de dano da arma muda para força, e ela ganha as propriedades leve e de arremesso, com alcance normal de 6 metros e longo alcance de 18 metros. Se a arma sair da sua mão, ela reaparecerá na sua mão no final do turno atual."
+            ],
+            [
+              "5",
+              "Sempre que uma criatura atingir você em uma jogada de ataque antes de sua fúria terminar, aquela criatura sofre {@damage 1d6} dano de força, enquanto a magia ataca em retribuição."
+            ],
+            [
+              "6",
+              "Até que sua raiva acabe, você estará cercado por luzes protetoras multicoloridas; você ganha um bônus de +1 na CA e, enquanto estiver a até 3 metros de você, seus aliados ganham o mesmo bônus."
+            ],
+            [
+              "7",
+              "Flores e vinhas crescem temporariamente ao seu redor. Até que sua fúria acabe, o chão a até 4,5 metros de você estará {@quickref difficult terrain||3} para seus inimigos."
+            ],
+            [
+              "8",
+              "Um raio de luz sai do seu peito. Outra criatura de sua escolha que você possa ver a até 9 metros de você deve ser bem sucedida em um teste de resistência de Constituição ou sofrerá {@damage 1d6} dano radiante e ser {@condition blinded} até o início do seu próximo turno. Até que sua fúria acabe, você pode usar este efeito novamente em cada um de seus turnos como uma ação bônus."
+            ]
+          ],
+          "data": {
+            "genTables": {
+              "tableInclude": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reforçando a Magia",
+      "source": "TCE",
+      "page": 25,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Wild Magic",
+      "subclassSource": "TCE",
+      "level": 6,
+      "header": 2,
+      "entries": [
+        "{@i 6th-level Path of Wild Magic feature}",
+        "Você pode aproveitar sua magia selvagem para fortalecer a si mesmo ou a um companheiro. Com uma ação, você pode tocar uma criatura (que pode ser você mesmo) e conferir um dos seguintes benefícios de sua escolha a essa criatura:",
+        {
+          "type": "list",
+          "items": [
+            "Por 10 minutos, a criatura pode rolar um {@dice d3} sempre que fizer uma jogada de ataque ou um teste de habilidade e adicione o número rolado ao {@dice d20} rolar.",
+            "Role um {@dice d3}. A criatura recupera um espaço de magia gasto, cujo nível é igual ao número rolado ou menor (a escolha da criatura). Uma vez que uma criatura receba este benefício, ela não poderá recebê-lo novamente até depois de um descanso longo."
+          ]
+        },
+        "Você pode realizar esta ação um número de vezes igual ao seu bônus de proficiência e recupera todos os usos gastos ao terminar um descanso longo."
+      ]
+    },
+    {
+      "name": "Reação Instável",
+      "source": "TCE",
+      "page": 25,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Wild Magic",
+      "subclassSource": "TCE",
+      "level": 10,
+      "header": 2,
+      "entries": [
+        "{@i 10th-level Path of Wild Magic feature}",
+        "Quando você está em perigo durante sua raiva, a magia dentro de você pode atacar; imediatamente após sofrer dano ou falhar em um teste de resistência enquanto estiver em fúria, você pode usar sua reação para rolar na tabela de Magia Selvagem e produzir imediatamente o efeito rolado. Este efeito substitui seu efeito de Magia Selvagem atual."
+      ]
+    },
+    {
+      "name": "Surto Controlado",
+      "source": "TCE",
+      "page": 25,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Wild Magic",
+      "subclassSource": "TCE",
+      "level": 14,
+      "header": 2,
+      "entries": [
+        "{@i 14th-level Path of Wild Magic feature}",
+        "Sempre que você rolar na mesa Wild Magic, você pode lançar o dado duas vezes e escolher qual dos dois efeitos deseja desencadear. Se você lançar o mesmo número em ambos os dados, poderá ignorar o número e escolher qualquer efeito na mesa."
+      ]
+    },
+    {
+      "name": "Caminho do Guardião Ancestral",
+      "source": "XGE",
+      "page": 9,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Ancestral Guardian",
+      "subclassSource": "XGE",
+      "level": 3,
+      "entries": [
+        "Alguns bárbaros vêm de culturas que reverenciam seus ancestrais. Estas tribos ensinam que os guerreiros do passado permanecem no mundo como espíritos poderosos, que podem guiar e proteger os vivos. Quando um bárbaro que segue esse caminho se enfurece, o bárbaro entra em contato com o mundo espiritual e pede ajuda a esses espíritos guardiões.",
+        "Os bárbaros que recorrem aos seus guardiões ancestrais podem lutar melhor para proteger as suas tribos e os seus aliados. Para cimentar os laços com os seus guardiões ancestrais, os bárbaros que seguem este caminho cobrem-se com tatuagens elaboradas que celebram os feitos dos seus antepassados. Essas tatuagens contam sagas de vitórias contra monstros terríveis e outros rivais temíveis.",
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Protetores Ancestrais|Bárbaro||Guardião Ancestral|XGE|3"
+        }
+      ]
+    },
+    {
+      "name": "Protetores Ancestrais",
+      "source": "XGE",
+      "page": 9,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Ancestral Guardian",
+      "subclassSource": "XGE",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "Começando quando você escolhe este caminho no 3º nível, guerreiros espectrais aparecem quando você entra em fúria. Enquanto você está em fúria, a primeira criatura que você atingir com um ataque no seu turno se torna alvo dos guerreiros, o que dificulta seus ataques. Até o início do seu próximo turno, aquele alvo terá desvantagem em qualquer jogada de ataque que não seja contra você, e quando o alvo atingir uma criatura que não seja você com um ataque, aquela criatura terá resistência ao dano causado pelo ataque. O efeito no alvo termina mais cedo se sua fúria acabar."
+      ]
+    },
+    {
+      "name": "Escudo Espiritual",
+      "source": "XGE",
+      "page": 9,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Ancestral Guardian",
+      "subclassSource": "XGE",
+      "level": 6,
+      "header": 2,
+      "entries": [
+        "A partir do 6º nível, os espíritos guardiões que o ajudam podem fornecer proteção sobrenatural àqueles que você defende. Se você estiver em fúria e outra criatura que você possa ver a até 9 metros de você sofrer dano, você pode usar sua reação para reduzir esse dano, {@dice 2d6}.",
+        "Ao atingir certos níveis nesta classe, você pode reduzir ainda mais o dano: {@dice 3d6} no 10º nível e por {@dice 4d6} no 14º nível."
+      ]
+    },
+    {
+      "name": "Consulte os Espíritos",
+      "source": "XGE",
+      "page": 9,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Ancestral Guardian",
+      "subclassSource": "XGE",
+      "level": 10,
+      "header": 2,
+      "entries": [
+        "No 10º nível, você ganha a habilidade de consultar seus espíritos ancestrais. Ao fazer isso, você lança o {@spell augury} ou {@spell clairvoyance} magia, sem usar um espaço de magia ou componentes materiais. Em vez de criar um sensor esférico, este uso de {@spell clairvoyance} invoca invisivelmente um de seus espíritos ancestrais para o local escolhido. Sabedoria é sua habilidade de lançar feitiços para esses feitiços.",
+        "Depois de lançar qualquer magia dessa maneira, você não poderá usar esse recurso novamente até terminar um descanso curto ou longo."
+      ]
+    },
+    {
+      "name": "Ancestrais Vingativos",
+      "source": "XGE",
+      "page": 9,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Ancestral Guardian",
+      "subclassSource": "XGE",
+      "level": 14,
+      "header": 2,
+      "entries": [
+        "No 14º nível, seus espíritos ancestrais tornam-se poderosos o suficiente para retaliar. Quando você usa seu Escudo Espiritual para reduzir o dano de um ataque, o atacante sofre uma quantidade de dano de força igual ao dano que seu Escudo Espiritual evita."
+      ]
+    },
+    {
+      "name": "Deserto",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 3,
+      "entries": [
+        "Quando este efeito é ativado, todas as outras criaturas em sua aura sofrem 2 de dano de fogo cada. O dano aumenta quando você atinge certos níveis nesta classe, aumentando para 3 no 5º nível, 4 no 10º nível, 5 no 15º nível e 6 no 20º nível."
+      ]
+    },
+    {
+      "name": "Caminho do Arauto da Tempestade",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 3,
+      "entries": [
+        "Todos os bárbaros abrigam uma fúria interior. Sua raiva lhes confere força, durabilidade e velocidade superiores. Bárbaros que seguem o Caminho do Arauto da Tempestade aprendem a transformar essa raiva em um manto de magia primordial, que gira em torno deles. Quando em fúria, um bárbaro desta linha recorre às forças da natureza para criar efeitos mágicos poderosos.",
+        "Arautos da tempestade são tipicamente campeões de elite que treinam ao lado de druidas, rangers e outros que juraram proteger a natureza. Outros arautos de tempestades aprimoram suas habilidades em alojamentos em regiões devastadas por tempestades, nas regiões congeladas do fim do mundo ou nas profundezas dos desertos mais quentes.",
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Aura da Tempestade|Bárbaro||Arauto da Tempestade|XGE|3"
+        }
+      ]
+    },
+    {
+      "name": "Mar",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 3,
+      "entries": [
+        "Quando este efeito é ativado, você pode escolher outra criatura que possa ver em sua aura. O alvo deve fazer um teste de resistência de Destreza. O alvo leva {@damage 1d6} dano elétrico em caso de falha na resistência, ou metade do dano em caso de sucesso. O dano aumenta quando você atinge certos níveis nesta classe, aumentando para {@damage 2d6} no 10º nível, {@damage 3d6} no 15º nível, e {@damage 4d6} no 20º nível."
+      ]
+    },
+    {
+      "name": "Tundra",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 3,
+      "entries": [
+        "Quando este efeito é ativado, cada criatura de sua escolha em sua aura ganha 2 pontos de vida temporários, pois os espíritos gelados a habituam ao sofrimento. Os pontos de vida temporários aumentam quando você atinge certos níveis nesta classe, aumentando para 3 no 5º nível, 4 no 10º nível, 5 no 15º nível e 6 no 20º nível."
+      ]
+    },
+    {
+      "name": "Aura de Tempestade",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "A partir do 3º nível, você emana uma aura mágica e tempestuosa enquanto se enfurece. A aura se estende por 3 metros de você em todas as direções, mas não através {@quickref Cover||3||total cover}.",
+        "Sua aura tem um efeito que é ativado quando você entra em fúria, e você pode ativar o efeito novamente em cada um de seus turnos como uma ação bônus. Escolha deserto, mar ou tundra. O efeito da sua aura depende do ambiente escolhido, conforme detalhado abaixo. Você pode alterar sua escolha de ambiente sempre que ganhar um nível nesta classe.",
+        "Se os efeitos da sua aura exigirem um teste de resistência, a CD será igual a 8 + seu bônus de proficiência + seu modificador de Constituição.",
+        {
+          "type": "options",
+          "entries": [
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Deserto|Bárbaro|PHB|Arauto da Tempestade|XGE|3"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Mar|Bárbaro|PHB|Arauto da Tempestade|XGE|3"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Tundra|Bárbaro|PHB|Arauto da Tempestade|XGE|3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Deserto",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 6,
+      "entries": [
+        "Você ganha resistência a danos de fogo e não sofre os efeitos do calor extremo, conforme descrito no Dungeon Master's Guide. Além disso, como uma ação, você pode tocar um objeto inflamável que não esteja sendo usado ou carregado por mais ninguém e incendiá-lo."
+      ]
+    },
+    {
+      "name": "Mar",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 6,
+      "entries": [
+        "Você ganha resistência a danos causados ​​por raios e pode respirar debaixo d'água. Você também ganha deslocamento de natação de 9 metros."
+      ]
+    },
+    {
+      "name": "Tundra",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 6,
+      "entries": [
+        "Você ganha resistência a danos de frio e não sofre os efeitos do frio extremo, conforme descrito no Dungeon Master's Guide. Além disso, como uma ação, você pode tocar na água e transformar um cubo de 1,5 metro dela em gelo, que derrete após 1 minuto. Esta ação falha se uma criatura estiver no cubo."
+      ]
+    },
+    {
+      "name": "Alma Tempestuosa",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 6,
+      "header": 2,
+      "entries": [
+        "No 6º nível, a tempestade concede benefícios mesmo quando sua aura não está ativa. Os benefícios são baseados no ambiente que você escolheu para sua Storm Aura.",
+        {
+          "type": "options",
+          "entries": [
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Deserto|Bárbaro|PHB|Arauto da Tempestade|XGE|6"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Mar|Bárbaro|PHB|Arauto da Tempestade|XGE|6"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Tundra|Bárbaro|PHB|Arauto da Tempestade|XGE|6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Tempestade de Proteção",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 10,
+      "header": 2,
+      "entries": [
+        "No 10º nível, você aprende a usar seu domínio da tempestade para proteger os outros. Cada criatura de sua escolha tem a resistência a danos que você ganhou com o recurso Storm Soul enquanto a criatura está em sua Storm Aura."
+      ]
+    },
+    {
+      "name": "Deserto",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 14,
+      "entries": [
+        "Imediatamente após uma criatura em sua aura atingir você com um ataque, você pode usar sua reação para forçar aquela criatura a fazer um teste de resistência de Destreza. Se falhar na resistência, a criatura sofre dano de fogo igual a metade do seu nível de bárbaro."
+      ]
+    },
+    {
+      "name": "Mar",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 14,
+      "entries": [
+        "Quando você atinge uma criatura em sua aura com um ataque, você pode usar sua reação para forçar aquela criatura a fazer um teste de resistência de Força. Se falhar na resistência, a criatura é derrubada {@condition prone}, como se tivesse sido atingido por uma onda."
+      ]
+    },
+    {
+      "name": "Tundra",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 14,
+      "entries": [
+        "Sempre que o efeito da sua Aura Tempestuosa for ativado, você poderá escolher uma criatura que possa ver na aura. Essa criatura deve ser bem sucedida em um teste de resistência de Força, ou sua velocidade será reduzida a 0 até o início do seu próximo turno, pois o gelo mágico a cobre."
+      ]
+    },
+    {
+      "name": "Tempestade Furiosa",
+      "source": "XGE",
+      "page": 10,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Storm Herald",
+      "subclassSource": "XGE",
+      "level": 14,
+      "header": 2,
+      "entries": [
+        "No 14º nível, o poder da tempestade que você canaliza fica mais poderoso, atacando seus inimigos. O efeito é baseado no ambiente que você escolheu para sua Storm Aura.",
+        {
+          "type": "options",
+          "entries": [
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Deserto|Bárbaro|PHB|Arauto da Tempestade|XGE|14"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Mar|Bárbaro|PHB|Arauto da Tempestade|XGE|14"
+            },
+            {
+              "type": "refSubclassFeature",
+              "subclassFeature": "Tundra|Bárbaro|PHB|Arauto da Tempestade|XGE|14"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Caminho do Zelote",
+      "source": "XGE",
+      "page": 11,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Zealot",
+      "subclassSource": "XGE",
+      "level": 3,
+      "entries": [
+        "Algumas divindades inspiram seus seguidores a se lançarem em uma batalha feroz e furiosa. Esses bárbaros são fanáticos – guerreiros que canalizam sua raiva em poderosas demonstrações de poder divino.",
+        "Uma variedade de deuses nos mundos de D&D inspiram seus seguidores a abraçar esse caminho. Tempus dos Reinos Esquecidos e Hextor e Erythnul de Greyhawk são excelentes exemplos. Em geral, os deuses que inspiram os fanáticos são divindades do combate, da destruição e da violência. Nem todos são maus, mas poucos são bons.",
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Fúria Divina|Bárbaro||Zelote|XGE|3"
+        },
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Guerreiro dos Deuses|Bárbaro||Zelota|XGE|3"
+        }
+      ]
+    },
+    {
+      "name": "Fúria Divina",
+      "source": "XGE",
+      "page": 11,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Zealot",
+      "subclassSource": "XGE",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "Começando quando você escolhe esse caminho no 3º nível, você pode canalizar a fúria divina em seus ataques com armas. Enquanto você estiver em fúria, a primeira criatura que você acertar em cada um dos seus turnos com um ataque com arma sofre dano extra igual a {@damage 1d6} + metade do seu nível de bárbaro. O dano extra é necrótico ou radiante; você escolhe o tipo de dano ao ganhar esse recurso."
+      ]
+    },
+    {
+      "name": "Guerreiro dos Deuses",
+      "source": "XGE",
+      "page": 11,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Zealot",
+      "subclassSource": "XGE",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "No 3º nível, sua alma está marcada para batalhas sem fim. Se um feitiço, como {@spell raise dead}, tem o único efeito de restaurar você à vida (mas não à morte), o conjurador não precisa de componentes materiais para lançar o feitiço em você."
+      ]
+    },
+    {
+      "name": "Foco Fanático",
+      "source": "XGE",
+      "page": 11,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Zealot",
+      "subclassSource": "XGE",
+      "level": 6,
+      "header": 2,
+      "entries": [
+        "A partir do 6º nível, o poder divino que alimenta sua raiva pode protegê-lo. Se você falhar em um teste de resistência enquanto estiver em fúria, poderá jogá-lo novamente e deverá usar o novo teste. Você pode usar essa habilidade apenas uma vez por fúria."
+      ]
+    },
+    {
+      "name": "Presença Zelosa",
+      "source": "XGE",
+      "page": 11,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Zealot",
+      "subclassSource": "XGE",
+      "level": 10,
+      "header": 2,
+      "entries": [
+        "No 10º nível, você aprende a canalizar o poder divino para inspirar fanatismo nos outros. Como uma ação bônus, você solta um grito de guerra infundido com energia divina. Até dez outras criaturas à sua escolha, a até 18 metros de você, que possam ouvi-lo, ganham vantagem em jogadas de ataque e testes de resistência até o início do seu próximo turno.",
+        "Depois de usar esse recurso, você não poderá usá-lo novamente até terminar um descanso longo."
+      ]
+    },
+    {
+      "name": "Fúria além da morte",
+      "source": "XGE",
+      "page": 11,
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "subclassShortName": "Zealot",
+      "subclassSource": "XGE",
+      "level": 14,
+      "header": 2,
+      "entries": [
+        "A partir do 14º nível, o poder divino que alimenta sua fúria permite que você evite golpes fatais.",
+        "Enquanto você está furioso, ter 0 pontos de vida não o derruba {@condition unconscious}. Você ainda deve fazer testes de resistência contra a morte e sofrerá os efeitos normais de receber dano enquanto estiver com 0 pontos de vida. No entanto, se você morrer devido a uma falha nos testes de resistência à morte, você não morrerá até que sua fúria termine, e você morrerá somente se ainda tiver 0 pontos de vida."
+      ]
+    },
+    {
+      "name": "Caminho do Berserker",
+      "source": "XPHB",
+      "page": 54,
+      "srd52": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Berserker",
+      "subclassSource": "XPHB",
+      "level": 3,
+      "entries": [
+        "{@i Channel Rage into Violent Fury}",
+        "Bárbaros que trilham o Caminho do Berserker direcionam sua Fúria principalmente para a violência. Seu caminho é de fúria desenfreada, e eles vibram no caos da batalha enquanto permitem que sua Fúria os domine e os fortaleça.",
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Frenesi|Bárbaro|XPHB|Berserker|XPHB|3"
+        }
+      ]
+    },
+    {
+      "name": "Frenesi",
+      "source": "XPHB",
+      "page": 54,
+      "srd52": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Berserker",
+      "subclassSource": "XPHB",
+      "level": 3,
+      "header": 2,
+      "entries": [
+        "Se você usar Ataque Imprudente enquanto sua Fúria estiver ativa, você causará dano extra ao primeiro alvo atingido no seu turno com um ataque baseado em Força. Para determinar o dano extra, role um número de d6s igual ao seu bônus de Dano de Fúria e some-os. O dano é do mesmo tipo da arma ou {@variantrule Unarmed Strike|XPHB} usado para o ataque."
+      ]
+    },
+    {
+      "name": "Raiva estúpida",
+      "source": "XPHB",
+      "page": 54,
+      "srd52": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Berserker",
+      "subclassSource": "XPHB",
+      "level": 6,
+      "header": 2,
+      "entries": [
+        "Você tem {@variantrule Immunity|XPHB} para o {@condition Charmed|XPHB} e {@condition Frightened|XPHB} condições enquanto sua Fúria estiver ativa. Se você estiver {@condition Charmed|XPHB} ou {@condition Frightened|XPHB} quando você entra em sua Fúria, a condição termina em você."
+      ]
+    },
+    {
+      "name": "Retaliação",
+      "source": "XPHB",
+      "page": 54,
+      "srd52": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Berserker",
+      "subclassSource": "XPHB",
+      "level": 10,
+      "header": 2,
+      "entries": [
+        "Quando você sofre dano de uma criatura que esteja a até 1,5 metro de você, você pode sofrer um {@variantrule Reaction|XPHB} fazer um ataque corpo a corpo contra aquela criatura, usando uma arma ou um {@variantrule Unarmed Strike|XPHB}."
+      ]
+    },
+    {
+      "name": "Presença intimidante",
+      "source": "XPHB",
+      "page": 54,
+      "srd52": true,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Berserker",
+      "subclassSource": "XPHB",
+      "level": 14,
+      "header": 2,
+      "entries": [
+        "Como um {@variantrule Bonus Action|XPHB}, você pode aterrorizar outras pessoas com sua presença ameaçadora e seu poder primordial. Ao fazer isso, cada criatura de sua escolha em um raio de 9 metros {@variantrule Emanation [Area of Effect]|XPHB|Emanation} originando-se de você deve fazer um teste de resistência de Sabedoria ({@dc 8} mais seu modificador de Força e {@variantrule Proficiency|XPHB|Proficiency Bonus}). Se falhar na resistência, uma criatura tem o {@condition Frightened|XPHB} condição por 1 minuto. No final de cada um dos {@condition Frightened|XPHB} turnos da criatura, a criatura repete o salvamento, encerrando o efeito sobre si mesma com um sucesso.",
+        "Depois de usar esse recurso, você não poderá usá-lo novamente até terminar um {@variantrule Long Rest|XPHB} a menos que você gaste um uso de sua Fúria (nenhuma ação necessária) para restaurá-la."
+      ]
+    },
+    {
+      "name": "Caminho do Coração Selvagem",
+      "source": "XPHB",
+      "page": 55,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Wild Heart",
+      "subclassSource": "XPHB",
+      "level": 3,
+      "entries": [
+        "{@i Walk in Community with the Animal World}",
+        "Os bárbaros que seguem o Caminho do Coração Selvagem se consideram parentes dos animais. Esses Bárbaros aprendem meios mágicos de se comunicar com os animais, e sua Fúria aumenta sua conexão com os animais, pois os enche de poder sobrenatural.",
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Orador Animal|Bárbaro|XPHB|Coração Selvagem|XPHB|3"
+        },
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Fúria da Selva|Bárbaro|XPHB|Coração Selvagem|XPHB|3"
+        }
+      ]
+    },
+    {
+      "name": "Orador Animal",
+      "source": "XPHB",
+      "page": 55,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Wild Heart",
+      "subclassSource": "XPHB",
+      "level": 3,
+      "header": 2,
+      "entries": [
+        "Você pode lançar o {@spell Beast Sense|XPHB} e {@spell Speak with Animals|XPHB} feitiços, mas apenas como Rituais. Sabedoria é sua habilidade de lançar feitiços para eles."
+      ]
+    },
+    {
+      "name": "Fúria dos Selvagens",
+      "source": "XPHB",
+      "page": 55,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Wild Heart",
+      "subclassSource": "XPHB",
+      "level": 3,
+      "header": 2,
+      "entries": [
+        "Sua Fúria explora o poder primordial dos animais. Sempre que ativar sua Fúria, você ganha uma das seguintes opções à sua escolha.",
+        {
+          "type": "entries",
+          "name": "Urso",
+          "entries": [
+            "Enquanto sua Fúria estiver ativa, você tem {@variantrule Resistance|XPHB} para todos os tipos de dano, exceto Força, Necrótico, Psíquico e Radiante."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Águia",
+          "entries": [
+            "Ao ativar sua Fúria, você pode pegar o {@action Disengage|XPHB} e {@action Dash|XPHB} ações como parte disso {@variantrule Bonus Action|XPHB}. Enquanto sua Fúria estiver ativa, você pode fazer um {@variantrule Bonus Action|XPHB} para tomar ambas as ações."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Lobo",
+          "entries": [
+            "Enquanto sua Fúria estiver ativa, seus aliados terão {@variantrule Advantage|XPHB} em jogadas de ataque contra qualquer inimigo seu a até 1,5 metro de você."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Aspecto da Natureza",
+      "source": "XPHB",
+      "page": 55,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Wild Heart",
+      "subclassSource": "XPHB",
+      "level": 6,
+      "header": 2,
+      "entries": [
+        "Você ganha uma das seguintes opções à sua escolha. Sempre que você termina um {@variantrule Long Rest|XPHB}, você pode alterar sua escolha.",
+        {
+          "type": "entries",
+          "name": "Coruja",
+          "entries": [
+            "Você tem {@sense Darkvision|XPHB} com um alcance de 60 pés. Se você já tem {@sense Darkvision|XPHB}, seu alcance aumenta em 18 metros."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Pantera",
+          "entries": [
+            "Você tem um {@variantrule Climb Speed|XPHB} igual ao seu {@variantrule Speed|XPHB}."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Salmão",
+          "entries": [
+            "Você tem um {@variantrule Swim Speed|XPHB} igual ao seu {@variantrule Speed|XPHB}."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Palestrante da Natureza",
+      "source": "XPHB",
+      "page": 55,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Wild Heart",
+      "subclassSource": "XPHB",
+      "level": 10,
+      "header": 2,
+      "entries": [
+        "Você pode lançar o {@spell Commune with Nature|XPHB} feitiço, mas apenas como um {@variantrule Ritual|XPHB}. Sabedoria é sua habilidade de lançar feitiços para isso."
+      ]
+    },
+    {
+      "name": "Poder da Natureza",
+      "source": "XPHB",
+      "page": 55,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Wild Heart",
+      "subclassSource": "XPHB",
+      "level": 14,
+      "header": 2,
+      "entries": [
+        "Sempre que ativar sua Fúria, você ganha uma das seguintes opções à sua escolha.",
+        {
+          "type": "entries",
+          "name": "Falcão",
+          "entries": [
+            "Enquanto sua Fúria estiver ativa, você terá um {@variantrule Fly Speed|XPHB} igual ao seu {@variantrule Speed|XPHB} se você não estiver usando nenhuma armadura."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Leão",
+          "entries": [
+            "Enquanto sua Fúria estiver ativa, qualquer um dos seus inimigos a até 1,5 metro de você tem {@variantrule Disadvantage|XPHB} em jogadas de ataque contra alvos que não sejam você ou outro Bárbaro que tenha esta opção ativa."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Bater",
+          "entries": [
+            "Enquanto sua Fúria estiver ativa, você pode fazer com que uma criatura Grande ou menor tenha o {@condition Prone|XPHB} condição quando você o acerta com um ataque corpo a corpo."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Caminho da Árvore do Mundo",
+      "source": "XPHB",
+      "page": 56,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "World Tree",
+      "subclassSource": "XPHB",
+      "level": 3,
+      "entries": [
+        "{@i Trace the Roots and Branches of the Multiverse}",
+        "Bárbaros que seguem o Caminho da Árvore do Mundo se conectam com a árvore cósmica Yggdrasil através de sua Fúria. Esta árvore cresce entre os Planos Exteriores, conectando-os entre si e ao Plano Material. Esses Bárbaros recorrem à magia da árvore para obter vitalidade e como meio de viagem dimensional.",
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Vitalidade da Árvore|Bárbaro|XPHB|Árvore do Mundo|XPHB|3"
+        }
+      ]
+    },
+    {
+      "name": "Vitalidade da Árvore",
+      "source": "XPHB",
+      "page": 56,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "World Tree",
+      "subclassSource": "XPHB",
+      "level": 3,
+      "header": 2,
+      "entries": [
+        "Sua Fúria explora a força vital da Árvore do Mundo. Você ganha os seguintes benefícios.",
+        {
+          "type": "entries",
+          "entries": [
+            {
+              "type": "entries",
+              "name": "Surto de Vitalidade",
+              "entries": [
+                "Ao ativar sua Fúria, você ganha uma série de {@variantrule Temporary Hit Points|XPHB} igual ao seu nível de Bárbaro."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Força que dá vida",
+              "entries": [
+                "No início de cada um dos seus turnos enquanto sua Fúria estiver ativa, você pode escolher outra criatura a até 3 metros de você para ganhar {@variantrule Temporary Hit Points|XPHB}. Para determinar o número de {@variantrule Temporary Hit Points|XPHB}, role um número de d6s igual ao seu bônus de Dano de Fúria e some-os. Se algum destes {@variantrule Temporary Hit Points|XPHB} permanecem quando sua Fúria termina, eles desaparecem."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ramos da Árvore",
+      "source": "XPHB",
+      "page": 56,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "World Tree",
+      "subclassSource": "XPHB",
+      "level": 6,
+      "header": 2,
+      "entries": [
+        "Sempre que uma criatura que você pode ver começar seu turno a até 9 metros de você enquanto sua Fúria estiver ativa, você pode realizar um {@variantrule Reaction|XPHB} para invocar ramos espectrais da Árvore do Mundo ao seu redor. O alvo deve ser bem sucedido em um teste de resistência de Força ({@dc 8} mais seu modificador de Força e {@variantrule Proficiency|XPHB|Proficiency Bonus}) ou ser teletransportado para um espaço desocupado que você possa ver a até 1,5 metro de você ou para o espaço desocupado mais próximo que você possa ver. Após o alvo se teletransportar, você pode reduzir seu {@variantrule Speed|XPHB} para 0 até o final do turno atual."
+      ]
+    },
+    {
+      "name": "Raízes Destruidoras",
+      "source": "XPHB",
+      "page": 56,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "World Tree",
+      "subclassSource": "XPHB",
+      "level": 10,
+      "header": 2,
+      "entries": [
+        "Durante seu turno, seu alcance é 3 metros maior com qualquer {@filter Melee weapon that has the Heavy or Versatile property|items|type=melee weapon|property=heavy;versatile}, à medida que gavinhas da Árvore do Mundo se estendem de você. Ao acertar com tal arma no seu turno, você pode ativar o {@itemMastery Push|XPHB} ou {@itemMastery Topple|XPHB} propriedade de maestria além de uma propriedade de maestria diferente que você está usando com aquela arma."
+      ]
+    },
+    {
+      "name": "Viaje ao longo da árvore",
+      "source": "XPHB",
+      "page": 56,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "World Tree",
+      "subclassSource": "XPHB",
+      "level": 14,
+      "header": 2,
+      "entries": [
+        "Quando você ativa sua Fúria e como um {@variantrule Bonus Action|XPHB} enquanto sua Fúria estiver ativa, você pode se teletransportar até 18 metros para um espaço desocupado que você possa ver.",
+        "Além disso, uma vez por Fúria, você pode aumentar o alcance desse teletransporte para 150 pés. Ao fazer isso, você também pode trazer até seis criaturas voluntárias que estejam a até 3 metros de você. Cada criatura se teletransporta para um espaço desocupado, à sua escolha, a até 3 metros do seu espaço de destino."
+      ]
+    },
+    {
+      "name": "Caminho do Zelote",
+      "source": "XPHB",
+      "page": 57,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Zealot",
+      "subclassSource": "XPHB",
+      "level": 3,
+      "entries": [
+        "{@i Rage in Ecstatic Union with a God}",
+        "Bárbaros que trilham o Caminho do Zelote recebem bênçãos de um deus ou panteão. Esses Bárbaros vivenciam sua Fúria como um episódio extático de união divina que os infunde com poder. Freqüentemente, são aliados dos sacerdotes e outros seguidores de seu deus ou panteão.",
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Fúria Divina|Bárbaro|XPHB|Zelota|XPHB|3"
+        },
+        {
+          "type": "refSubclassFeature",
+          "subclassFeature": "Guerreiro dos Deuses|Bárbaro|XPHB|Zelota|XPHB|3"
+        }
+      ]
+    },
+    {
+      "name": "Fúria Divina",
+      "source": "XPHB",
+      "page": 57,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Zealot",
+      "subclassSource": "XPHB",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "Você pode canalizar o poder divino em seus ataques. Em cada um dos seus turnos enquanto sua Fúria estiver ativa, a primeira criatura que você atingir com uma arma ou {@variantrule Unarmed Strike|XPHB} sofre dano extra igual a {@dice 1d6} mais metade do seu nível de Bárbaro (arredondado para baixo). O dano extra é Necrótico ou Radiante; você escolhe o tipo cada vez que causa o dano."
+      ]
+    },
+    {
+      "name": "Guerreiro dos Deuses",
+      "source": "XPHB",
+      "page": 57,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Zealot",
+      "subclassSource": "XPHB",
+      "level": 3,
+      "header": 1,
+      "entries": [
+        "Uma entidade divina ajuda a garantir que você possa continuar a luta. Você tem um conjunto de quatro d12s que pode gastar para se curar. Como um {@variantrule Bonus Action|XPHB}, você pode gastar dados da reserva, jogá-los e recuperar uma série de {@variantrule Hit Points|XPHB} igual ao total do lançamento.",
+        "Sua reserva recupera todos os dados gastos quando você termina um {@variantrule Long Rest|XPHB}.",
+        "O número máximo de dados da reserva aumenta em um quando você atinge os níveis Bárbaros 6 (5 dados), 12 (6 dados) e 17 (7 dados)."
+      ]
+    },
+    {
+      "name": "Foco Fanático",
+      "source": "XPHB",
+      "page": 57,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Zealot",
+      "subclassSource": "XPHB",
+      "level": 6,
+      "header": 2,
+      "entries": [
+        "Uma vez por Fúria ativa, se você falhar em um teste de resistência, você poderá jogá-lo novamente com um bônus igual ao seu bônus de Dano de Fúria e deverá usar a nova jogada."
+      ]
+    },
+    {
+      "name": "Presença Zelosa",
+      "source": "XPHB",
+      "page": 57,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Zealot",
+      "subclassSource": "XPHB",
+      "level": 10,
+      "header": 2,
+      "entries": [
+        "Como um {@variantrule Bonus Action|XPHB}, você solta um grito de guerra infundido com energia divina. Até dez outras criaturas de sua escolha em um raio de 18 metros de você ganham {@variantrule Advantage|XPHB} nas jogadas de ataque e testes de resistência até o início do seu próximo turno.",
+        "Depois de usar esse recurso, você não poderá usá-lo novamente até terminar um {@variantrule Long Rest|XPHB} a menos que você gaste um uso de sua Fúria (nenhuma ação necessária) para restaurá-la."
+      ]
+    },
+    {
+      "name": "Fúria dos Deuses",
+      "source": "XPHB",
+      "page": 57,
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "subclassShortName": "Zealot",
+      "subclassSource": "XPHB",
+      "level": 14,
+      "header": 2,
+      "entries": [
+        "Ao ativar sua Fúria, você pode assumir a forma de um guerreiro divino. Este formulário dura 1 minuto ou até você cair para 0 {@variantrule Hit Points|XPHB}. Depois de usar esse recurso, você não poderá fazê-lo novamente até terminar um {@variantrule Long Rest|XPHB}.",
+        "Enquanto estiver nesta forma, você obtém os benefícios abaixo.",
+        {
+          "type": "entries",
+          "name": "Voo",
+          "entries": [
+            "Você tem um {@variantrule Fly Speed|XPHB} igual ao seu {@variantrule Speed|XPHB} e pode pairar."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Resistência",
+          "entries": [
+            "Você tem {@variantrule Resistance|XPHB} a danos necróticos, psíquicos e radiantes."
+          ]
+        },
+        {
+          "type": "entries",
+          "name": "Revivificação",
+          "entries": [
+            "Quando uma criatura a até 9 metros de você cairia para 0 {@variantrule Hit Points|XPHB}, você pode pegar um {@variantrule Reaction|XPHB} gastar um uso de sua Fúria para mudar o alvo {@variantrule Hit Points|XPHB} para um número igual ao seu nível de Bárbaro."
+          ]
+        }
+      ]
+    }
+  ]
+}

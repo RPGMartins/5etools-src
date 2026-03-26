@@ -1,9 +1,16 @@
 {
 	"lang": "ptbr",
-	"files": [
-		"data/i18n/ptbr/barbarian.json",
-		"data/i18n/ptbr/races.json",
-		"data/i18n/ptbr/backgrounds.json",
-		"data/i18n/ptbr/feats.json"
-	]
+
+	"groups": {
+		"core": [
+			"data/i18n/ptbr/races.json",
+			"data/i18n/ptbr/backgrounds.json",
+			"data/i18n/ptbr/feats.json",
+
+			"data/i18n/ptbr/classes/barbarian.json"
+		],
+		"fluff": [
+			"data/i18n/ptbr/fluff/barbarian.json"
+		]
+	}
 }
