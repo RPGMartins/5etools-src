@@ -1,574 +1,574 @@
 {
-	"classFluff": [
-		{
-			"name": "Wizard",
-			"source": "PHB",
-			"entries": [
-				{
-					"name": "Wizard",
-					"type": "section",
-					"entries": [
-						"Clad in the silver robes that denote her station, an elf closes her eyes to shut out the distractions of the battlefield and begins her quiet chant. Fingers weaving in front of her, she completes her spell and launches a tiny bead of fire toward the enemy ranks, where it erupts into a conflagration that engulfs the soldiers.",
-						"Checking and rechecking his work, a human scribes an intricate magic circle in chalk on the bare stone floor, then sprinkles powdered iron along every line and graceful curve. When the circle is complete, he drones a long incantation. A hole opens in space inside the circle, bringing a whiff of brimstone from the otherworldly plane beyond.",
-						"Crouching on the floor in a dungeon intersection, a gnome tosses a handful of small bones inscribed with mystic symbols, muttering a few words of power over them. Closing his eyes to see the visions more clearly, he nods slowly, then opens his eyes and points down the passage to his left.",
-						"Wizards are supreme magic-users, defined and united as a class by the spells they cast. Drawing on the subtle weave of magic that permeates the cosmos, wizards cast spells of explosive fire, arcing lightning, subtle deception, and brute-force mind control. Their magic conjures monsters from other planes of existence, glimpses the future, or turns slain foes into zombies. Their mightiest spells change one substance into another, call meteors down from the sky, or open portals to other worlds.",
-						{
-							"type": "entries",
-							"name": "Scholars of the Arcane",
-							"entries": [
-								"Wild and enigmatic, varied in form and function, the power of magic draws students who seek to master its mysteries. Some aspire to become like the gods, shaping reality itself. Though the casting of a typical spell requires merely the utterance of a few strange words, fleeting gestures, and sometimes a pinch or clump of exotic materials, these surface components barely hint at the expertise attained after years of apprenticeship and countless hours of study.",
-								"Wizards live and die by their spells. Everything else is secondary. They learn new spells as they experiment and grow in experience. They can also learn them from other wizards, from ancient tomes or inscriptions, and from ancient creatures (such as the fey) that are steeped in magic."
-							]
-						},
-						{
-							"type": "entries",
-							"name": "The Lure of Knowledge",
-							"entries": [
-								"Wizards' lives are seldom mundane. The closest a wizard is likely to come to an ordinary life is working as a sage or lecturer in a library or university, teaching others the secrets of the multiverse. Other wizards sell their services as diviners, serve in military forces, or pursue lives of crime or domination.",
-								"But the lure of knowledge and power calls even the most unadventurous wizards out of the safety of their libraries and laboratories and into crumbling ruins and lost cities. Most wizards believe that their counterparts in ancient civilizations knew secrets of magic that have been lost to the ages, and discovering those secrets could unlock the path to a power greater than any magic available in the present age."
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Creating a Wizard",
-							"entries": [
-								"Creating a wizard character demands a backstory dominated by at least one extraordinary event. How did your character first come into contact with magic? How did you discover you had an aptitude for it? Do you have a natural talent, or did you simply study hard and practice incessantly? Did you encounter a magical creature or an ancient tome that taught you the basics of magic?",
-								"What drew you forth from your life of study? Did your first taste of magical knowledge leave you hungry for more? Have you received word of a secret repository of knowledge not yet plundered by any other wizard? Perhaps you're simply eager to put your newfound magical skills to the test in the face of danger.",
-								{
-									"type": "entries",
-									"name": "Quick Build",
-									"entries": [
-										"You can make a wizard quickly by following these suggestions. First, Intelligence should be your highest ability score, followed by Constitution or Dexterity. If you plan to join the School of Enchantment, make Charisma your next-best score. Second, choose the {@background sage} background. Third, choose the {@spell mage hand}, {@spell light}, and {@spell ray of frost} cantrips, along with the following 1st-level spells for your spellbook: {@spell burning hands}, {@spell charm person}, {@spell feather fall}, {@spell mage armor}, {@spell magic missile}, and {@spell sleep}."
-									]
-								}
-							]
-						}
-					],
-					"page": 112,
-					"source": "PHB"
-				},
-				{
-					"type": "section",
-					"entries": [
-						{
-							"type": "quote",
-							"entries": [
-								"Wizardry requires understanding. The knowledge of how and why magic works, and our efforts to broaden that understanding, have brought about the key advances in civilization over the centuries."
-							],
-							"by": "Gimble the illusionist"
-						},
-						"Only a select few people in the world are wielders of magic. Of all those, wizards stand at the pinnacle of the craft. Even the least of them can manipulate forces that flout the laws of nature, and the most accomplished among them can cast spells with world-shaking effects.",
-						"The price that wizards pay for their mastery is that most valuable of commodities: time. It takes years of study, instruction, and experimentation to learn how to harness magical energy and carry spells around in one's own mind. For adventuring wizards and other spellcasters who aspire to the highest echelons of the profession, the studying never ends, nor does the quest for knowledge and power.",
-						"If you're playing a wizard, take advantage of the opportunity to make your character more than just a stereotypical spell-slinger. Use the advice that follows to add some intriguing details to how your wizard interacts with the world.",
-						{
-							"type": "quote",
-							"entries": [
-								"Watch. I love this trick.",
-								"Hey, wizard! You can't do magic. Oops, now you can. Oops, now you can't anymore. Ha ha ha!"
-							],
-							"by": "Xanathar"
-						},
-						{
-							"type": "entries",
-							"name": "Spellbook",
-							"entries": [
-								"Your wizard character's most prized possession\u2014your spellbook\u2014might be an innocuous-looking volume whose covers show no hint of what's inside. Or you might display some flair, as many wizards do, by carrying a spellbook of an unusual sort. If you don't own such an item already, one of your goals might be to find a spellbook that sets you apart by its appearance or its means of manufacture.",
-								{
-									"type": "table",
-									"caption": "Spellbooks",
-									"colLabels": [
-										"{@dice d6}",
-										"Spellbook"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"A tome with pages that are thin sheets of metal, spells etched into them with acid"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"Long straps of leather on which spells are written, wrapped around a staff for ease of transport"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"A battered tome filled with pictographs that only you can understand"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"Small stones inscribed with spells and kept in a cloth bag"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"A scorched book, ravaged by dragon fire, with the script of your spells barely visible on its pages"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"A tome full of black pages whose writing is visible only in dim light or darkness"
-										]
-									]
-								}
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Ambition",
-							"entries": [
-								"Few aspiring wizards undertake the study of magic without some personal goal in mind. Many wizards use their spells as a tool to produce a tangible benefit, in material goods or in status, for themselves or their companions. For others, the theoretical aspect of magic might have a strong appeal, pushing those wizards to seek out knowledge that supports new theories of the arcane or confirms old ones.",
-								"Beyond the obvious, why does your wizard character study magic, and what do you want to achieve? If you haven't given these questions much thought, you can do so now, and the answers you come up with will likely affect how your future unfolds.",
-								{
-									"type": "table",
-									"caption": "Ambitions",
-									"colLabels": [
-										"{@dice d6}",
-										"Ambition"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"You will prove that the gods aren't as powerful as folk believe."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"Immortality is the end goal of your studies."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"If you can fully understand magic, you can unlock its use for all and usher in an era of equality."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"Magic is a dangerous tool. You use it to protect what you treasure."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"Arcane power must be taken away from those who would abuse it."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"You will become the greatest wizard the world has seen in generations."
-										]
-									]
-								}
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Eccentricity",
-							"entries": [
-								"Endless hours of solitary study and research can have a negative effect on anyone's social skills. Wizards, who are a breed apart to begin with, are no exception. An odd mannerism or two is not necessarily a drawback, though; an eccentricity of this sort is usually harmless and could provide a source of amusement or serve as a calling card of sorts.",
-								"If your character has an eccentricity, is it a physical tic or a mental one? Are you well known in some circles because of it? Do you fight to overcome it, or do you embrace this minor claim to fame of yours?",
-								{
-									"type": "table",
-									"caption": "Eccentricities",
-									"colLabels": [
-										"{@dice d6}",
-										"Eccentricity"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"You have the habit of tapping your foot incessantly, which often annoys those around you."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"Your memory is quite good, but you have no trouble pretending to be absentminded when it suits your purposes."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"You never enter a room without looking to see what's hanging from the ceiling."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"Your most prized possession is a dead worm that you keep inside a potion vial."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"When you want people to leave you alone, you start talking to yourself. That usually does the trick."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"Your fashion sense and grooming, or more accurately lack thereof, sometimes cause others to assume you are a beggar."
-										]
-									]
-								}
-							]
-						}
-					],
-					"page": 58,
-					"source": "XGE"
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/PHB/Wizard.webp"
-					},
-					"width": 826,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "Wizard",
-			"source": "XPHB",
-			"entries": [
-				{
-					"type": "section",
-					"name": "Wizard",
-					"source": "XPHB",
-					"page": 164,
-					"entries": [
-						"Wizards are defined by their exhaustive study of magic's inner workings. They cast spells of explosive fire, arcing lightning, subtle deception, and spectacular transformations. Their magic conjures monsters from other planes of existence, glimpses the future, or forms protective barriers. Their mightiest spells change one substance into another, call meteors from the sky, or open portals to other worlds.",
-						"Most Wizards share a scholarly approach to magic. They examine the theoretical underpinnings of magic, particularly the categorization of spells into schools of magic. Renowned Wizards such as Bigby, Tasha, Mordenkainen, and Yolande have built on their studies to invent iconic spells now used across the multiverse.",
-						"The closest a Wizard is likely to come to an ordinary life is working as a sage or lecturer. Other Wizards sell their services as advisers, serve in military forces, or pursue lives of crime or domination.",
-						"But the lure of knowledge calls even the most unadventurous Wizards from the safety of their libraries and laboratories and into crumbling ruins and lost cities. Most Wizards believe that their counterparts in ancient civilizations knew secrets of magic that have been lost to the ages, and discovering those secrets could unlock the path to a power greater than any magic available in the present age."
-					]
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Wizard.webp"
-					},
-					"credit": "Billy Christian",
-					"width": 1700,
-					"height": 2259
-				},
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/120-04-035.elf-queen-yolande.webp"
-					},
-					"title": "The elf queen Yolande awes a red dragon with her spell, Yolande's Regal Presence",
-					"credit": "April Prime",
-					"width": 2037,
-					"height": 1440
-				},
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/121-04-036.wizard-book.webp"
-					},
-					"credit": "Jane Katsubo",
-					"width": 1934,
-					"height": 731
-				},
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/122-04-037.wizard-leomund.webp"
-					},
-					"title": "The Wizard Leomund studies spellbooks to prepare his magic",
-					"credit": "Michele Giorgi",
-					"width": 2155,
-					"height": 1440
-				}
-			]
-		}
-	],
-	"subclassFluff": [
-		{
-			"name": "War Magic",
-			"shortName": "War",
-			"source": "XGE",
-			"className": "Wizard",
-			"classSource": "PHB",
-			"entries": [
-				{
-					"type": "quote",
-					"entries": [
-						"War magic? Does that make you a War Wizard? I've heard about them. They dress in purple, I think. But you're not dressed in purple. That's disappointing. Go change."
-					],
-					"by": "Xanathar"
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XGE/War Wizard.webp"
-					},
-					"width": 858,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "Chronurgy Magic",
-			"shortName": "Chronurgy",
-			"source": "EGW",
-			"className": "Wizard",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/EGW/Chronurgy Wizard.webp"
-					},
-					"width": 753,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "Graviturgy Magic",
-			"shortName": "Graviturgy",
-			"source": "EGW",
-			"className": "Wizard",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/EGW/Graviturgy Wizard.webp"
-					},
-					"width": 811,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "Bladesinging",
-			"shortName": "Bladesinging",
-			"source": "TCE",
-			"className": "Wizard",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/TCE/Bladesinging Wizard.webp"
-					},
-					"width": 1200,
-					"height": 935
-				}
-			]
-		},
-		{
-			"name": "Order of Scribes",
-			"shortName": "Scribes",
-			"source": "TCE",
-			"className": "Wizard",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/TCE/Scribes Wizard.webp"
-					},
-					"width": 800,
-					"height": 1353
-				}
-			]
-		},
-		{
-			"name": "Abjurer",
-			"shortName": "Abjurer",
-			"source": "XPHB",
-			"className": "Wizard",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Abjurer Wizard.webp"
-					},
-					"credit": "Caroline Gariba",
-					"width": 1071,
-					"height": 1440
-				}
-			]
-		},
-		{
-			"name": "Diviner",
-			"shortName": "Diviner",
-			"source": "XPHB",
-			"className": "Wizard",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Diviner Wizard.webp"
-					},
-					"credit": "Jodie Muir",
-					"width": 850,
-					"height": 1725
-				}
-			]
-		},
-		{
-			"name": "Evoker",
-			"shortName": "Evoker",
-			"source": "XPHB",
-			"className": "Wizard",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Evoker Wizard.webp"
-					},
-					"credit": "Caroline Gariba",
-					"width": 803,
-					"height": 1440
-				}
-			]
-		},
-		{
-			"name": "Illusionist",
-			"shortName": "Illusionist",
-			"source": "XPHB",
-			"className": "Wizard",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Illusionist Wizard.webp"
-					},
-					"credit": "Polar Engine",
-					"width": 850,
-					"height": 2211
-				}
-			]
-		},
-		{
-			"name": "Bladesinger",
-			"shortName": "Bladesinger",
-			"source": "FRHoF",
-			"className": "Wizard",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/FRHoF/Bladesinger Wizard.webp"
-					},
-					"credit": "Erion Makuo",
-					"width": 850,
-					"height": 2375
-				}
-			]
-		}
-	]
+  "classFluff": [
+    {
+      "name": "Wizard",
+      "source": "PHB",
+      "entries": [
+        {
+          "name": "Wizard",
+          "type": "section",
+          "entries": [
+            "Vestida com vestes prateadas que denotam sua posição, uma elfa fecha os olhos para afastar as distrações do campo de batalha e começa seu canto silencioso. Com os dedos entrelaçados à sua frente, ela completa seu feitiço e lança uma pequena gota de fogo em direção às fileiras inimigas, onde irrompe em uma conflagração que engole os soldados.",
+            "Verificando e verificando novamente seu trabalho, um humano desenha um intrincado círculo mágico com giz no chão de pedra nua e depois espalha ferro em pó ao longo de cada linha e curva graciosa. Quando o círculo está completo, ele pronuncia um longo encantamento. Um buraco se abre no espaço dentro do círculo, trazendo um cheiro de enxofre do plano sobrenatural além.",
+            "Agachado no chão no cruzamento de uma masmorra, um gnomo joga um punhado de pequenos ossos inscritos com símbolos místicos, murmurando algumas palavras de poder sobre eles. Fechando os olhos para ver as visões com mais clareza, ele balança a cabeça lentamente, depois abre os olhos e aponta para a passagem à sua esquerda.",
+            "Os magos são usuários supremos de magia, definidos e unidos como uma classe pelos feitiços que lançam. Baseando-se na sutil trama de magia que permeia o cosmos, os magos lançam feitiços de fogo explosivo, arcos de raios, engano sutil e controle mental por força bruta. Sua magia evoca monstros de outros planos de existência, vislumbra o futuro ou transforma inimigos mortos em zumbis. Seus feitiços mais poderosos transformam uma substância em outra, invocam meteoros do céu ou abrem portais para outros mundos.",
+            {
+              "type": "entries",
+              "name": "Scholars of the Arcane",
+              "entries": [
+                "Selvagem e enigmático, variado em forma e função, o poder da magia atrai estudantes que buscam dominar seus mistérios. Alguns aspiram tornar-se como os deuses, moldando a própria realidade. Embora a conjuração de um feitiço típico exija apenas a expressão de algumas palavras estranhas, gestos fugazes e, às vezes, uma pitada ou aglomerado de materiais exóticos, esses componentes superficiais mal sugerem a perícia alcançada após anos de aprendizado e incontáveis ​​horas de estudo.",
+                "Os magos vivem e morrem por seus feitiços. Todo o resto é secundário. Eles aprendem novos feitiços à medida que experimentam e ganham experiência. Eles também podem aprendê-los com outros magos, com tomos ou inscrições antigas e com criaturas antigas (como as fadas) que estão imersas em magia."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "The Lure of Knowledge",
+              "entries": [
+                "A vida dos bruxos raramente é mundana. O mais próximo que um mago pode chegar de uma vida comum é trabalhar como sábio ou professor em uma biblioteca ou universidade, ensinando aos outros os segredos do multiverso. Outros magos vendem seus serviços como adivinhos, servem em forças militares ou levam vidas de crime ou de dominação.",
+                "Mas a atração do conhecimento e do poder tira até mesmo os bruxos menos aventureiros da segurança de suas bibliotecas e laboratórios e os leva a ruínas em ruínas e cidades perdidas. A maioria dos bruxos acredita que seus equivalentes em civilizações antigas conheciam segredos de magia que foram perdidos ao longo dos tempos, e descobrir esses segredos poderia abrir o caminho para um poder maior do que qualquer magia disponível na era atual."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Creating a Wizard",
+              "entries": [
+                "Criar um personagem bruxo exige uma história dominada por pelo menos um evento extraordinário. Como seu personagem teve contato com a magia pela primeira vez? Como você descobriu que tinha aptidão para isso? Você tem um talento natural ou simplesmente estudou muito e praticou incessantemente? Você encontrou uma criatura mágica ou um livro antigo que lhe ensinou o básico da magia?",
+                "O que o atraiu em sua vida de estudo? Sua primeira experiência com conhecimento mágico deixou você com fome de mais? Você recebeu a notícia de um repositório secreto de conhecimento ainda não saqueado por nenhum outro mago? Talvez você esteja simplesmente ansioso para testar suas novas habilidades mágicas diante do perigo.",
+                {
+                  "type": "entries",
+                  "name": "Quick Build",
+                  "entries": [
+                    "Você pode criar um assistente rapidamente seguindo estas sugestões. Primeiro, Inteligência deve ser seu valor de habilidade mais alto, seguido por Constituição ou Destreza. Se você planeja ingressar na Escola de Encantamento, faça do Carisma sua próxima melhor pontuação. Em segundo lugar, escolha o {@background sage} fundo. Terceiro, escolha o {@spell mage hand}, {@spell light}, e {@spell ray of frost} truques, junto com as seguintes magias de 1º nível para seu livro de feitiços: {@spell burning hands}, {@spell charm person}, {@spell feather fall}, {@spell mage armor}, {@spell magic missile}, e {@spell sleep}."
+                  ]
+                }
+              ]
+            }
+          ],
+          "page": 112,
+          "source": "PHB"
+        },
+        {
+          "type": "section",
+          "entries": [
+            {
+              "type": "quote",
+              "entries": [
+                "A magia requer compreensão. O conhecimento de como e por que a magia funciona, e os nossos esforços para ampliar essa compreensão, trouxeram os principais avanços na civilização ao longo dos séculos."
+              ],
+              "by": "Gimble the illusionist"
+            },
+            "Apenas algumas pessoas selecionadas no mundo são detentoras de magia. De todos eles, os magos estão no auge da arte. Mesmo o menor deles pode manipular forças que desrespeitam as leis da natureza, e os mais talentosos entre eles podem lançar feitiços com efeitos que abalarão o mundo.",
+            "O preço que os magos pagam por seu domínio é o mais valioso dos bens: o tempo. São necessários anos de estudo, instrução e experimentação para aprender como aproveitar a energia mágica e carregar feitiços em sua própria mente. Para magos aventureiros e outros conjuradores que aspiram aos mais altos escalões da profissão, o estudo nunca termina, nem a busca por conhecimento e poder.",
+            "Se você estiver interpretando um mago, aproveite a oportunidade para tornar seu personagem mais do que apenas um lançador de feitiços estereotipado. Use o conselho a seguir para adicionar alguns detalhes intrigantes sobre como seu mago interage com o mundo.",
+            {
+              "type": "quote",
+              "entries": [
+                "Assistir. Eu adoro esse truque.",
+                "Ei, mago! Você não pode fazer mágica. Ops, agora você pode. Ops, agora você não pode mais. Ha ha ha!"
+              ],
+              "by": "Xanathar"
+            },
+            {
+              "type": "entries",
+              "name": "Spellbook",
+              "entries": [
+                "O bem mais precioso do seu personagem bruxo – seu livro de feitiços – pode ser um volume de aparência inócua, cujas capas não mostram nenhum indício do que está dentro. Ou você pode demonstrar algum talento, como muitos magos fazem, carregando um livro de feitiços de um tipo incomum. Se você ainda não possui tal item, um de seus objetivos pode ser encontrar um livro de feitiços que o diferencie pela aparência ou pelo meio de fabricação.",
+                {
+                  "type": "table",
+                  "caption": "Spellbooks",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Spellbook"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "Um tomo com páginas que são folhas finas de metal, feitiços gravados com ácido"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "Longas tiras de couro nas quais estão escritos feitiços, enroladas em um cajado para facilitar o transporte"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Um livro surrado cheio de imagens que só você pode entender"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Pequenas pedras com inscrições de feitiços e guardadas em um saco de pano"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Um livro queimado, devastado pelo fogo do dragão, com a escrita dos seus feitiços quase invisível nas páginas"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Um tomo cheio de páginas pretas cuja escrita só é visível na penumbra ou na escuridão"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Ambition",
+              "entries": [
+                "Poucos aspirantes a bruxos empreendem o estudo da magia sem algum objetivo pessoal em mente. Muitos magos usam seus feitiços como uma ferramenta para produzir um benefício tangível, em bens materiais ou em status, para si ou para seus companheiros. Para outros, o aspecto teórico da magia pode ter um forte apelo, levando esses magos a buscar conhecimento que apoie novas teorias do arcano ou confirme as antigas.",
+                "Além do óbvio, por que seu personagem mago estuda magia e o que você deseja alcançar? Se você não pensou muito nessas questões, pode fazê-lo agora, e as respostas que você encontrar provavelmente afetarão o desenrolar do seu futuro.",
+                {
+                  "type": "table",
+                  "caption": "Ambitions",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Ambition"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "Você provará que os deuses não são tão poderosos quanto as pessoas acreditam."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "A imortalidade é o objetivo final de seus estudos."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Se você conseguir compreender completamente a magia, poderá desbloquear seu uso para todos e inaugurar uma era de igualdade."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "A magia é uma ferramenta perigosa. Você o usa para proteger o que você valoriza."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "O poder arcano deve ser tirado daqueles que abusam dele."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Você se tornará o maior bruxo que o mundo já viu em gerações."
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Eccentricity",
+              "entries": [
+                "Horas intermináveis ​​de estudo e pesquisa solitários podem ter um efeito negativo nas habilidades sociais de qualquer pessoa. Os bruxos, que para começar são uma raça à parte, não são exceção. No entanto, um ou dois maneirismos estranhos não são necessariamente uma desvantagem; uma excentricidade desse tipo geralmente é inofensiva e pode fornecer uma fonte de diversão ou servir como uma espécie de cartão de visita.",
+                "Se o seu personagem tem uma excentricidade, é um tique físico ou mental? Você é bem conhecido em alguns círculos por causa disso? Você luta para superá-lo ou abraça essa sua pequena reivindicação de fama?",
+                {
+                  "type": "table",
+                  "caption": "Eccentricities",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Eccentricity"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "Você tem o hábito de bater o pé incessantemente, o que muitas vezes incomoda as pessoas ao seu redor."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "Sua memória é muito boa, mas você não tem problemas em fingir estar distraído quando isso convém aos seus propósitos."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Você nunca entra em uma sala sem olhar para o que está pendurado no teto."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Seu bem mais precioso é um verme morto que você guarda dentro de um frasco de poção."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Quando você quer que as pessoas te deixem em paz, você começa a falar sozinho. Isso geralmente resolve."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Seu senso de moda e aparência, ou mais precisamente a falta deles, às vezes fazem com que os outros presumam que você é um mendigo."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "page": 58,
+          "source": "XGE"
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/PHB/Wizard.webp"
+          },
+          "width": 826,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "Wizard",
+      "source": "XPHB",
+      "entries": [
+        {
+          "type": "section",
+          "name": "Wizard",
+          "source": "XPHB",
+          "page": 164,
+          "entries": [
+            "Os magos são definidos por seu estudo exaustivo do funcionamento interno da magia. Eles lançam feitiços de fogo explosivo, raios em arco, engano sutil e transformações espetaculares. Sua magia evoca monstros de outros planos de existência, vislumbra o futuro ou forma barreiras protetoras. Seus feitiços mais poderosos transformam uma substância em outra, invocam meteoros do céu ou abrem portais para outros mundos.",
+            "A maioria dos Wizards compartilha uma abordagem acadêmica da magia. Eles examinam os fundamentos teóricos da magia, particularmente a categorização dos feitiços em escolas de magia. Feiticeiros renomados como Bigby, Tasha, Mordenkainen e Yolande desenvolveram seus estudos para inventar feitiços icônicos agora usados ​​em todo o multiverso.",
+            "O mais próximo que um Mago pode chegar de uma vida comum é trabalhar como sábio ou conferencista. Outros magos vendem seus serviços como conselheiros, servem em forças militares ou levam vidas de crime ou de dominação.",
+            "Mas a atração do conhecimento atrai até mesmo os bruxos menos aventureiros da segurança de suas bibliotecas e laboratórios para ruínas em ruínas e cidades perdidas. A maioria dos Magos acredita que seus equivalentes em civilizações antigas conheciam segredos de magia que foram perdidos ao longo dos tempos, e descobrir esses segredos poderia abrir o caminho para um poder maior do que qualquer magia disponível na era atual."
+          ]
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Wizard.webp"
+          },
+          "credit": "Billy Christian",
+          "width": 1700,
+          "height": 2259
+        },
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/120-04-035.elf-queen-yolande.webp"
+          },
+          "title": "The elf queen Yolande awes a red dragon with her spell, Yolande's Regal Presence",
+          "credit": "April Prime",
+          "width": 2037,
+          "height": 1440
+        },
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/121-04-036.wizard-book.webp"
+          },
+          "credit": "Jane Katsubo",
+          "width": 1934,
+          "height": 731
+        },
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/122-04-037.wizard-leomund.webp"
+          },
+          "title": "The Wizard Leomund studies spellbooks to prepare his magic",
+          "credit": "Michele Giorgi",
+          "width": 2155,
+          "height": 1440
+        }
+      ]
+    }
+  ],
+  "subclassFluff": [
+    {
+      "name": "War Magic",
+      "shortName": "War",
+      "source": "XGE",
+      "className": "Wizard",
+      "classSource": "PHB",
+      "entries": [
+        {
+          "type": "quote",
+          "entries": [
+            "Magia de guerra? Isso faz de você um mago de guerra? Eu ouvi falar deles. Eles se vestem de roxo, eu acho. Mas você não está vestido de roxo. Isso é decepcionante. Vá mudar."
+          ],
+          "by": "Xanathar"
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XGE/War Wizard.webp"
+          },
+          "width": 858,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "Chronurgy Magic",
+      "shortName": "Chronurgy",
+      "source": "EGW",
+      "className": "Wizard",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/EGW/Chronurgy Wizard.webp"
+          },
+          "width": 753,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "Graviturgy Magic",
+      "shortName": "Graviturgy",
+      "source": "EGW",
+      "className": "Wizard",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/EGW/Graviturgy Wizard.webp"
+          },
+          "width": 811,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "Bladesinging",
+      "shortName": "Bladesinging",
+      "source": "TCE",
+      "className": "Wizard",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/TCE/Bladesinging Wizard.webp"
+          },
+          "width": 1200,
+          "height": 935
+        }
+      ]
+    },
+    {
+      "name": "Order of Scribes",
+      "shortName": "Scribes",
+      "source": "TCE",
+      "className": "Wizard",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/TCE/Scribes Wizard.webp"
+          },
+          "width": 800,
+          "height": 1353
+        }
+      ]
+    },
+    {
+      "name": "Abjurer",
+      "shortName": "Abjurer",
+      "source": "XPHB",
+      "className": "Wizard",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Abjurer Wizard.webp"
+          },
+          "credit": "Caroline Gariba",
+          "width": 1071,
+          "height": 1440
+        }
+      ]
+    },
+    {
+      "name": "Diviner",
+      "shortName": "Diviner",
+      "source": "XPHB",
+      "className": "Wizard",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Diviner Wizard.webp"
+          },
+          "credit": "Jodie Muir",
+          "width": 850,
+          "height": 1725
+        }
+      ]
+    },
+    {
+      "name": "Evoker",
+      "shortName": "Evoker",
+      "source": "XPHB",
+      "className": "Wizard",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Evoker Wizard.webp"
+          },
+          "credit": "Caroline Gariba",
+          "width": 803,
+          "height": 1440
+        }
+      ]
+    },
+    {
+      "name": "Illusionist",
+      "shortName": "Illusionist",
+      "source": "XPHB",
+      "className": "Wizard",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Illusionist Wizard.webp"
+          },
+          "credit": "Polar Engine",
+          "width": 850,
+          "height": 2211
+        }
+      ]
+    },
+    {
+      "name": "Bladesinger",
+      "shortName": "Bladesinger",
+      "source": "FRHoF",
+      "className": "Wizard",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/FRHoF/Bladesinger Wizard.webp"
+          },
+          "credit": "Erion Makuo",
+          "width": 850,
+          "height": 2375
+        }
+      ]
+    }
+  ]
 }

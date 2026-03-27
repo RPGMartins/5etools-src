@@ -1,588 +1,588 @@
 {
-	"_meta": {
-		"internalCopies": [
-			"subclassFluff"
-		]
-	},
-	"classFluff": [
-		{
-			"name": "Ranger",
-			"source": "PHB",
-			"entries": [
-				{
-					"name": "Ranger",
-					"type": "section",
-					"entries": [
-						"Rough and wild looking, a human stalks alone through the shadows of trees, hunting the orcs he knows are planning a raid on a nearby farm. Clutching a shortsword in each hand, he becomes a whirlwind of steel, cutting down one enemy after another.",
-						"After tumbling away from a cone of freezing air, an elf finds her feet and draws back her bow to loose an arrow at the white dragon. Shrugging off the wave of fear that emanates from the dragon like the cold of its breath, she sends one arrow after another to find the gaps between the dragon's thick scales.",
-						"Holding his hand high, a half-elf whistles to the hawk that circles high above him, calling the bird back to his side. Whispering instructions in Elvish, he points to the owlbear he's been tracking and sends the hawk to distract the creature while he readies his bow.",
-						"Far from the bustle of cities and towns, past the hedges that shelter the most distant farms from the terrors of the wild, amid the dense-packed trees of trackless forests and across wide and empty plains, rangers keep their unending watch.",
-						{
-							"type": "entries",
-							"name": "Deadly Hunters",
-							"entries": [
-								"Warriors of the wilderness, rangers specialize in hunting the monsters that threaten the edges of civilization\u2014humanoid raiders, rampaging beasts and monstrosities, terrible giants, and deadly dragons. They learn to track their quarry as a predator does, moving stealthily through the wilds and hiding themselves in brush and rubble. Rangers focus their combat training on techniques that are particularly useful against their specific favored foes.",
-								"Thanks to their familiarity with the wilds, rangers acquire the ability to cast spells that harness nature's power, much as a druid does. Their spells, like their combat abilities, emphasize speed, stealth, and the hunt. A ranger's talents and abilities are honed with deadly focus on the grim task of protecting the borderlands."
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Independent Adventurers",
-							"entries": [
-								"Though a ranger might make a living as a hunter, a guide, or a tracker, a ranger's true calling is to defend the outskirts of civilization from the ravages of monsters and humanoid hordes that press in from the wild. In some places, rangers gather in secretive orders or join forces with druidic circles. Many rangers, though, are independent almost to a fault, knowing that, when a dragon or a band of orcs attacks, a ranger might be the first\u2014and possibly the last\u2014line of defense.",
-								"This fierce independence makes rangers well suited to adventuring, since they are accustomed to life far from the comforts of a dry bed and a hot bath. Faced with city-bred adventurers who grouse and whine about the hardships of the wild, rangers respond with some mixture of amusement, frustration, and compassion. But they quickly learn that other adventurers who can carry their own weight in a fight against civilization's foes are worth any extra burden. Coddled city folk might not know how to feed themselves or find fresh water in the wild, but they make up for it in other ways."
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Creating a Ranger",
-							"entries": [
-								"As you create your ranger character, consider the nature of the training that gave you your particular capabilities. Did you train with a single mentor, wandering the wilds together until you mastered the ranger's ways? Did you leave your apprenticeship, or was your mentor slain\u2014perhaps by the same kind of monster that became your favored enemy? Or perhaps you learned your skills as part of a band of rangers affiliated with a druidic circle, trained in mystic paths as well as wilderness lore. You might be self-taught, a recluse who learned combat skills, tracking, and even a magical connection to nature through the necessity of surviving in the wilds.",
-								"What's the source of your particular hatred of a certain kind of enemy? Did a monster kill someone you loved or destroy your home village? Or did you see too much of the destruction these monsters cause and commit yourself to reining in their depredations? Is your adventuring career a continuation of your work in protecting the borderlands, or a significant change? What made you join up with a band of adventurers? Do you find it challenging to teach new allies the ways of the wild, or do you welcome the relief from solitude that they offer?",
-								{
-									"type": "entries",
-									"name": "Quick Build",
-									"entries": [
-										"You can make a ranger quickly by following these suggestions. First, make Dexterity your highest ability score, followed by Wisdom. (Some rangers who focus on two-weapon fighting make Strength higher than Dexterity.) Second, choose the {@background outlander} background."
-									]
-								}
-							]
-						}
-					],
-					"source": "PHB",
-					"page": 89
-				},
-				{
-					"type": "section",
-					"entries": [
-						{
-							"type": "quote",
-							"entries": [
-								"I spend a lot of my life away from civilization, keeping to its fringes to protect it. Don't assume that because I don't bend the knee to your king that I haven't done more to protect him than all his knights put together."
-							],
-							"by": "Soveliss"
-						},
-						"Rangers are free-minded wanderers and seekers who patrol the edges of civilized territory, turning back the denizens of the wild lands beyond. It is a thankless job, since their efforts are rarely understood and almost never rewarded. Yet rangers persist in their duties, never doubting that their work makes the world a safer place.",
-						"A relationship with civilization informs every ranger's personality and history. Some rangers see themselves as enforcers of the law and bringers of justice on civilization's frontier, answering to no sovereign power. Others are survivalists who eschew civilization altogether. They vanquish monsters to keep themselves safe while they live in and travel through the perilous wild areas of the world. If their efforts also benefit the kingdoms and other civilized realms that they avoid, so be it.",
-						"If you're creating or playing a ranger character, the following sections offer ideas for embellishing the character and enhancing your roleplaying experience.",
-						{
-							"type": "quote",
-							"entries": [
-								"I'm a monster. Are you going to try to kill me? Didn't think so. Go kill some goblins or something. On second thought, goblins aren't monsters - they're people. So maybe you should call yourself a people killer."
-							],
-							"by": "Xanathar"
-						},
-						{
-							"type": "entries",
-							"name": "View of the World",
-							"entries": [
-								"A ranger's view of the world begins (and sometimes ends) with that character's outlook toward civilized folk and the places they occupy. Some rangers have an attitude toward civilization that's deeply rooted in disdain, while others pity the people they have sworn to protect\u2014though on the battlefield, it's impossible to tell the difference between one ranger and another. Indeed, to those who have seen them operate and been the beneficiaries of their prowess, it scarcely matters why rangers do what they do. That said, no two rangers are likely to express their opinions on any matter in the same way.",
-								"If you haven't yet thought about the details of your character's worldview, consider putting a finer point on things by summarizing that viewpoint in a short statement (such as the entries on the following table). How might that feeling affect the way you conduct yourself?",
-								{
-									"type": "table",
-									"caption": "View of the World",
-									"colLabels": [
-										"{@dice d6}",
-										"View"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"Towns and cities are the best places for those who can't survive on their own."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"The advancement of civilization is the best way to thwart chaos, but its reach must be monitored."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"Towns and cities are a necessary evil, but once the wilderness is purged of supernatural threats, we will need them no more."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"Walls are for cowards, who huddle behind them while others do the work of making the world safe."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"Visiting a town is not unpleasant, but after a few days I feel the irresistible call to return to the wild."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"Cities breed weakness by isolating folk from the harsh lessons of the wild."
-										]
-									]
-								}
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Homelands",
-							"entries": [
-								"All rangers, regardless of how they came to take up the profession, have a strong connection to the natural world and its various terrains. For some rangers, the wilderness is where they grew up, either as a result of being born there or moving there at a young age. For other rangers, civilization was originally home, but the wilderness became a second homeland.",
-								"Think of your character's backstory and decide what terrain feels most like home, whether or not you were born there. What does that terrain say about your personality? Does it influence which spells you choose to learn? Have your experiences there shaped who your favored enemies are?",
-								{
-									"type": "table",
-									"caption": "Homelands",
-									"colLabels": [
-										"{@dice d6}",
-										"Homeland"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"You patrolled an ancient forest, darkened and corrupted by several crossings to the Shadowfell."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"As part of a group of nomads, you acquired the skills for surviving in the desert."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"Your early life in the Underdark prepared you for the challenges of combating its denizens."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"You dwelled on the edge of a swamp, in an area imperiled by land creatures as well as aquatic ones."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"Because you grew up among the peaks, finding the best path through the mountains is second nature to you."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"You wandered the far north, learning how to protect yourself and prosper in a realm overrun by ice."
-										]
-									]
-								}
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Sworn Enemy",
-							"entries": [
-								"Every ranger begins with a favored enemy (or two). The determination of a favored enemy might be tied to a specific event in the character's early life, or it might be entirely a matter of choice.",
-								"What spurred your character to select a particular enemy? Was the choice made because of tradition or curiosity, or do you have a grudge to settle?",
-								{
-									"type": "table",
-									"caption": "Sworn Enemies",
-									"colLabels": [
-										"{@dice d6}",
-										"Enemy"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"You seek revenge on nature's behalf for the great transgressions your foe has committed."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"Your forebears or predecessors fought these creatures, and so shall you."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"You bear no enmity toward your foe. You stalk such creatures as a hunter tracks down a wild animal."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"You find your foe fascinating, and you collect books of tales and history concerning it."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"You collect tokens of your fallen enemies to remind you of each kill."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"You respect your chosen enemy, and you see your battles as a test of respective skills."
-										]
-									]
-								}
-							]
-						}
-					],
-					"page": 40,
-					"source": "XGE"
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/PHB/Ranger.webp"
-					},
-					"width": 900,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "Ranger",
-			"source": "XPHB",
-			"entries": [
-				{
-					"type": "section",
-					"name": "Ranger",
-					"source": "XPHB",
-					"page": 118,
-					"entries": [
-						"Far from bustling cities, amid the trees of trackless forests and across wide plains, Rangers keep their unending watch in the wilderness. Rangers learn to track their quarry as a predator does, moving stealthily through the wilds and hiding themselves in brush and rubble.",
-						"Thanks to their connection with nature, Rangers can also cast spells that harness primal powers of the wilderness. A Ranger's talents and magic are honed with deadly focus to protect the world from the ravages of monsters and tyrants."
-					]
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Ranger.webp"
-					},
-					"credit": "Chris Rallis",
-					"width": 1700,
-					"height": 2259
-				},
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/093-04-008.ranger-and-deer.webp"
-					},
-					"credit": "Mike Pape",
-					"width": 540,
-					"height": 1440
-				}
-			]
-		}
-	],
-	"subclassFluff": [
-		{
-			"name": "Gloom Stalker",
-			"shortName": "Gloom Stalker",
-			"source": "XGE",
-			"className": "Ranger",
-			"classSource": "PHB",
-			"_copy": {
-				"name": "Ranger",
-				"shortName": "Ranger",
-				"source": "XGE",
-				"className": "Ranger",
-				"classSource": "PHB"
-			},
-			"entries": [
-				{
-					"type": "quote",
-					"entries": [
-						"So you sneak around in the dark? You know most everything but humans can see in the dark, right? We all see you. Tiptoeing doesn't turn you {@condition invisible}."
-					],
-					"by": "Xanathar"
-				}
-			]
-		},
-		{
-			"name": "Horizon Walker",
-			"shortName": "Horizon Walker",
-			"source": "XGE",
-			"className": "Ranger",
-			"classSource": "PHB",
-			"_copy": {
-				"name": "Ranger",
-				"shortName": "Ranger",
-				"source": "XGE",
-				"className": "Ranger",
-				"classSource": "PHB"
-			},
-			"entries": [
-				{
-					"type": "quote",
-					"entries": [
-						"You can't walk to the horizon, because it keeps on getting farther away. Boom! Did I just blow your mind? I did, didn't I?"
-					],
-					"by": "Xanathar"
-				}
-			]
-		},
-		{
-			"name": "Monster Slayer",
-			"shortName": "Monster Slayer",
-			"source": "XGE",
-			"className": "Ranger",
-			"classSource": "PHB",
-			"_copy": {
-				"name": "Ranger",
-				"shortName": "Ranger",
-				"source": "XGE",
-				"className": "Ranger",
-				"classSource": "PHB"
-			}
-		},
-		{
-			"name": "Ranger",
-			"shortName": "Ranger",
-			"source": "XGE",
-			"className": "Ranger",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XGE/Ranger.webp"
-					},
-					"width": 1000,
-					"height": 408
-				}
-			]
-		},
-		{
-			"name": "Fey Wanderer",
-			"shortName": "Fey Wanderer",
-			"source": "TCE",
-			"className": "Ranger",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/TCE/Fey Wanderer Ranger.webp"
-					},
-					"width": 800,
-					"height": 1265
-				}
-			]
-		},
-		{
-			"name": "Swarmkeeper",
-			"shortName": "Swarmkeeper",
-			"source": "TCE",
-			"className": "Ranger",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/TCE/Swarmkeeper Ranger.webp"
-					},
-					"width": 860,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "Drakewarden",
-			"shortName": "Drakewarden",
-			"source": "FTD",
-			"className": "Ranger",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/FTD/Drakewarden Ranger.webp"
-					},
-					"width": 850,
-					"height": 1015
-				}
-			]
-		},
-		{
-			"name": "Beast Master",
-			"shortName": "Beast Master",
-			"source": "XPHB",
-			"className": "Ranger",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Beast Master Ranger.webp"
-					},
-					"credit": "Alditha Siregar",
-					"width": 850,
-					"height": 1863
-				}
-			]
-		},
-		{
-			"name": "Fey Wanderer",
-			"shortName": "Fey Wanderer",
-			"source": "XPHB",
-			"className": "Ranger",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Fey Wanderer Ranger.webp"
-					},
-					"credit": "John Grello",
-					"width": 850,
-					"height": 2199
-				}
-			]
-		},
-		{
-			"name": "Gloom Stalker",
-			"shortName": "Gloom Stalker",
-			"source": "XPHB",
-			"className": "Ranger",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Gloom Stalker Ranger.webp"
-					},
-					"credit": "Polar Engine",
-					"width": 850,
-					"height": 2146
-				}
-			]
-		},
-		{
-			"name": "Hunter",
-			"shortName": "Hunter",
-			"source": "XPHB",
-			"className": "Ranger",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Hunter Ranger.webp"
-					},
-					"credit": "Katerina Ladon",
-					"width": 850,
-					"height": 1752
-				}
-			]
-		},
-		{
-			"name": "Winter Walker",
-			"shortName": "Winter Walker",
-			"source": "FRHoF",
-			"className": "Ranger",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/FRHoF/Winter Walker Ranger.webp"
-					},
-					"credit": "Alejandro Pacheco",
-					"width": 850,
-					"height": 2222
-				}
-			]
-		}
-	]
+  "_meta": {
+    "internalCopies": [
+      "subclassFluff"
+    ]
+  },
+  "classFluff": [
+    {
+      "name": "Ranger",
+      "source": "PHB",
+      "entries": [
+        {
+          "name": "Ranger",
+          "type": "section",
+          "entries": [
+            "De aparência rude e selvagem, um humano caminha sozinho pelas sombras das árvores, caçando os orcs que ele sabe que estão planejando um ataque a uma fazenda próxima. Segurando uma espada curta em cada mão, ele se torna um redemoinho de aço, derrubando um inimigo após o outro.",
+            "Depois de cair de um cone de ar gelado, uma elfa se levanta e puxa seu arco para disparar uma flecha no dragão branco. Ignorando a onda de medo que emana do dragão como o frio de seu hálito, ela envia uma flecha após a outra para encontrar as lacunas entre as escamas grossas do dragão.",
+            "Erguendo a mão, um meio-elfo assobia para o falcão que voa acima dele, chamando o pássaro de volta para o seu lado. Sussurrando instruções em élfico, ele aponta para o urso-coruja que está rastreando e envia o falcão para distrair a criatura enquanto ele prepara seu arco.",
+            "Longe da agitação das cidades e vilas, além das sebes que protegem as fazendas mais distantes dos terrores da natureza, entre as árvores densas de florestas sem trilhas e através de planícies amplas e vazias, os guardas florestais mantêm sua vigilância interminável.",
+            {
+              "type": "entries",
+              "name": "Deadly Hunters",
+              "entries": [
+                "Guerreiros da natureza selvagem, os rangers se especializam em caçar os monstros que ameaçam os limites da civilização – invasores humanóides, feras e monstruosidades furiosas, gigantes terríveis e dragões mortais. Eles aprendem a rastrear sua presa como um predador, movendo-se furtivamente pela selva e se escondendo em arbustos e escombros. Os Rangers concentram seu treinamento de combate em técnicas que são particularmente úteis contra seus inimigos favoritos específicos.",
+                "Graças à sua familiaridade com a natureza, os rangers adquirem a habilidade de lançar feitiços que aproveitam o poder da natureza, assim como um druida faz. Seus feitiços, assim como suas habilidades de combate, enfatizam a velocidade, a furtividade e a caça. Os talentos e habilidades de um ranger são aprimorados com foco mortal na dura tarefa de proteger as fronteiras."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Independent Adventurers",
+              "entries": [
+                "Embora um ranger possa ganhar a vida como caçador, guia ou rastreador, a verdadeira vocação de um ranger é defender os arredores da civilização da devastação de monstros e hordas humanóides que avançam da natureza. Em alguns lugares, os rangers se reúnem em ordens secretas ou unem forças com círculos druidas. Muitos rangers, entretanto, são independentes quase ao extremo, sabendo que, quando um dragão ou um bando de orcs ataca, um ranger pode ser a primeira – e possivelmente a última – linha de defesa.",
+                "Essa independência feroz torna os patrulheiros adequados para aventuras, já que estão acostumados a viver longe do conforto de uma cama seca e de um banho quente. Diante de aventureiros criados na cidade que reclamam e reclamam das dificuldades da vida selvagem, os rangers respondem com uma mistura de diversão, frustração e compaixão. Mas eles aprendem rapidamente que outros aventureiros que conseguem carregar seu próprio peso na luta contra os inimigos da civilização valem qualquer fardo extra. As pessoas mimadas da cidade podem não saber como se alimentar ou encontrar água fresca na natureza, mas compensam isso de outras maneiras."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Creating a Ranger",
+              "entries": [
+                "Ao criar seu personagem ranger, considere a natureza do treinamento que lhe deu suas capacidades específicas. Você treinou com um único mentor, vagando juntos pelas florestas até dominar os métodos do ranger? Você abandonou seu aprendizado ou seu mentor foi morto — talvez pelo mesmo tipo de monstro que se tornou seu inimigo favorito? Ou talvez você tenha aprendido suas habilidades como parte de um bando de rangers afiliados a um círculo druídico, treinados em caminhos místicos e também em conhecimentos da natureza selvagem. Você pode ser autodidata, um recluso que aprendeu habilidades de combate, rastreamento e até mesmo uma conexão mágica com a natureza através da necessidade de sobreviver na selva.",
+                "Qual é a fonte do seu ódio particular por um certo tipo de inimigo? Um monstro matou alguém que você amava ou destruiu sua aldeia natal? Ou você viu muita destruição que esses monstros causam e se comprometeu a controlar suas depredações? A sua carreira de aventureiro é uma continuação do seu trabalho na proteção das fronteiras ou uma mudança significativa? O que fez você se juntar a um bando de aventureiros? Você acha um desafio ensinar aos novos aliados os costumes da natureza ou você aceita o alívio da solidão que eles oferecem?",
+                {
+                  "type": "entries",
+                  "name": "Quick Build",
+                  "entries": [
+                    "Você pode criar um ranger rapidamente seguindo estas sugestões. Primeiro, faça da Destreza o seu valor de habilidade mais alto, seguido pela Sabedoria. (Alguns rangers que se concentram no combate com duas armas tornam a Força maior que a Destreza.) Segundo, escolha o {@background outlander} fundo."
+                  ]
+                }
+              ]
+            }
+          ],
+          "source": "PHB",
+          "page": 89
+        },
+        {
+          "type": "section",
+          "entries": [
+            {
+              "type": "quote",
+              "entries": [
+                "Passei grande parte da minha vida longe da civilização, mantendo-me à margem para protegê-la. Não presuma que, por não dobrar os joelhos diante do seu rei, não fiz mais para protegê-lo do que todos os seus cavaleiros juntos."
+              ],
+              "by": "Soveliss"
+            },
+            "Rangers são andarilhos e buscadores de mente livre que patrulham os limites do território civilizado, expulsando os habitantes das terras selvagens além. É um trabalho ingrato, pois os seus esforços raramente são compreendidos e quase nunca recompensados. No entanto, os guardas-florestais persistem nos seus deveres, nunca duvidando que o seu trabalho torna o mundo um lugar mais seguro.",
+            "Um relacionamento com a civilização informa a personalidade e a história de cada guarda florestal. Alguns rangers se consideram aplicadores da lei e portadores de justiça na fronteira da civilização, sem responder a nenhum poder soberano. Outros são sobreviventes que evitam completamente a civilização. Eles derrotam monstros para se manterem seguros enquanto vivem e viajam pelas perigosas áreas selvagens do mundo. Se os seus esforços também beneficiarem os reinos e outros reinos civilizados que evitam, que assim seja.",
+            "Se você estiver criando ou interpretando um personagem ranger, as seções a seguir oferecem ideias para embelezar o personagem e aprimorar sua experiência de interpretação.",
+            {
+              "type": "quote",
+              "entries": [
+                "Eu sou um monstro. Você vai tentar me matar? Não pensei assim. Vá matar alguns goblins ou algo assim. Pensando bem, goblins não são monstros – eles são pessoas. Então talvez você devesse se considerar um assassino de pessoas."
+              ],
+              "by": "Xanathar"
+            },
+            {
+              "type": "entries",
+              "name": "View of the World",
+              "entries": [
+                "A visão de mundo de um ranger começa (e às vezes termina) com a visão do personagem em relação às pessoas civilizadas e aos lugares que elas ocupam. Alguns rangers têm uma atitude em relação à civilização profundamente enraizada no desdém, enquanto outros têm pena das pessoas que juraram proteger – embora no campo de batalha seja impossível dizer a diferença entre um ranger e outro. Na verdade, para aqueles que os viram operar e foram os beneficiários das suas proezas, pouco importa a razão pela qual os guardas florestais fazem o que fazem. Dito isto, não é provável que dois guardas expressem as suas opiniões sobre qualquer assunto da mesma maneira.",
+                "Se você ainda não pensou nos detalhes da visão de mundo do seu personagem, considere esclarecer as coisas resumindo esse ponto de vista em uma declaração curta (como as entradas na tabela a seguir). Como esse sentimento pode afetar a maneira como você se comporta?",
+                {
+                  "type": "table",
+                  "caption": "View of the World",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "View"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "As vilas e cidades são os melhores lugares para aqueles que não conseguem sobreviver sozinhos."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "O avanço da civilização é a melhor forma de impedir o caos, mas o seu alcance deve ser monitorizado."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "As vilas e cidades são um mal necessário, mas assim que a natureza selvagem for expurgada de ameaças sobrenaturais, não precisaremos mais delas."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Os muros são para os covardes, que se amontoam atrás deles enquanto outros fazem o trabalho de tornar o mundo seguro."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Visitar uma cidade não é desagradável, mas depois de alguns dias sinto um chamado irresistível de retornar à natureza."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "As cidades geram fraqueza ao isolar as pessoas das duras lições da vida selvagem."
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Homelands",
+              "entries": [
+                "Todos os guardas-florestais, independentemente da forma como assumiram a profissão, têm uma forte ligação ao mundo natural e aos seus diversos terrenos. Para alguns guardas-florestais, o deserto é onde eles cresceram, seja por terem nascido lá ou por terem se mudado para lá ainda jovens. Para outros guardas florestais, a civilização era originalmente o lar, mas a natureza selvagem tornou-se uma segunda pátria.",
+                "Pense na história do seu personagem e decida qual terreno parece mais com o seu lar, independentemente de você ter nascido lá ou não. O que esse terreno diz sobre sua personalidade? Isso influencia quais feitiços você escolhe aprender? Suas experiências lá moldaram quem são seus inimigos favoritos?",
+                {
+                  "type": "table",
+                  "caption": "Homelands",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Homeland"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "Você patrulhou uma floresta antiga, escurecida e corrompida por várias travessias até o Pendor das Sombras."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "Como parte de um grupo de nômades, você adquiriu as habilidades necessárias para sobreviver no deserto."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Sua infância no Subterrâneo preparou você para os desafios de combater seus habitantes."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Você morava à beira de um pântano, em uma área ameaçada tanto por criaturas terrestres quanto aquáticas."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Como você cresceu entre os picos, encontrar o melhor caminho pelas montanhas é uma segunda natureza para você."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Você vagou pelo extremo norte, aprendendo como se proteger e prosperar em um reino dominado pelo gelo."
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Sworn Enemy",
+              "entries": [
+                "Todo ranger começa com um inimigo favorito (ou dois). A determinação de um inimigo favorito pode estar ligada a um evento específico no início da vida do personagem, ou pode ser inteiramente uma questão de escolha.",
+                "O que estimulou seu personagem a selecionar um inimigo específico? A escolha foi feita por tradição ou curiosidade, ou você tem algum rancor para resolver?",
+                {
+                  "type": "table",
+                  "caption": "Sworn Enemies",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Enemy"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "Você busca vingança em nome da natureza pelas grandes transgressões que seu inimigo cometeu."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "Seus antepassados ​​ou predecessores lutaram contra essas criaturas, e você também lutará."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Você não tem inimizade com seu inimigo. Você persegue essas criaturas como um caçador persegue um animal selvagem."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Você acha seu inimigo fascinante e coleciona livros de contos e histórias a respeito dele."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Você coleta fichas de seus inimigos caídos para lembrá-lo de cada morte."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Você respeita o inimigo escolhido e vê suas batalhas como um teste de suas respectivas habilidades."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "page": 40,
+          "source": "XGE"
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/PHB/Ranger.webp"
+          },
+          "width": 900,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "Ranger",
+      "source": "XPHB",
+      "entries": [
+        {
+          "type": "section",
+          "name": "Ranger",
+          "source": "XPHB",
+          "page": 118,
+          "entries": [
+            "Longe das cidades movimentadas, entre as árvores de florestas sem trilhas e através de vastas planícies, os Rangers mantêm sua vigilância interminável na natureza. Os Rangers aprendem a rastrear sua presa como um predador, movendo-se furtivamente pela selva e se escondendo em arbustos e escombros.",
+            "Graças à sua conexão com a natureza, os Rangers também podem lançar feitiços que aproveitam os poderes primitivos da natureza selvagem. Os talentos e a magia de um Ranger são aprimorados com foco mortal para proteger o mundo da devastação de monstros e tiranos."
+          ]
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Ranger.webp"
+          },
+          "credit": "Chris Rallis",
+          "width": 1700,
+          "height": 2259
+        },
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/093-04-008.ranger-and-deer.webp"
+          },
+          "credit": "Mike Pape",
+          "width": 540,
+          "height": 1440
+        }
+      ]
+    }
+  ],
+  "subclassFluff": [
+    {
+      "name": "Gloom Stalker",
+      "shortName": "Gloom Stalker",
+      "source": "XGE",
+      "className": "Ranger",
+      "classSource": "PHB",
+      "_copy": {
+        "name": "Ranger",
+        "shortName": "Ranger",
+        "source": "XGE",
+        "className": "Ranger",
+        "classSource": "PHB"
+      },
+      "entries": [
+        {
+          "type": "quote",
+          "entries": [
+            "Então você se esgueira no escuro? Você sabe quase tudo, mas os humanos podem ver no escuro, certo? Todos nós vemos você. Andar na ponta dos pés não te transforma {@condition invisible}."
+          ],
+          "by": "Xanathar"
+        }
+      ]
+    },
+    {
+      "name": "Horizon Walker",
+      "shortName": "Horizon Walker",
+      "source": "XGE",
+      "className": "Ranger",
+      "classSource": "PHB",
+      "_copy": {
+        "name": "Ranger",
+        "shortName": "Ranger",
+        "source": "XGE",
+        "className": "Ranger",
+        "classSource": "PHB"
+      },
+      "entries": [
+        {
+          "type": "quote",
+          "entries": [
+            "Você não pode caminhar até o horizonte, porque ele fica cada vez mais distante. Bum! Acabei de te surpreender? Eu fiz, não foi?"
+          ],
+          "by": "Xanathar"
+        }
+      ]
+    },
+    {
+      "name": "Monster Slayer",
+      "shortName": "Monster Slayer",
+      "source": "XGE",
+      "className": "Ranger",
+      "classSource": "PHB",
+      "_copy": {
+        "name": "Ranger",
+        "shortName": "Ranger",
+        "source": "XGE",
+        "className": "Ranger",
+        "classSource": "PHB"
+      }
+    },
+    {
+      "name": "Ranger",
+      "shortName": "Ranger",
+      "source": "XGE",
+      "className": "Ranger",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XGE/Ranger.webp"
+          },
+          "width": 1000,
+          "height": 408
+        }
+      ]
+    },
+    {
+      "name": "Fey Wanderer",
+      "shortName": "Fey Wanderer",
+      "source": "TCE",
+      "className": "Ranger",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/TCE/Fey Wanderer Ranger.webp"
+          },
+          "width": 800,
+          "height": 1265
+        }
+      ]
+    },
+    {
+      "name": "Swarmkeeper",
+      "shortName": "Swarmkeeper",
+      "source": "TCE",
+      "className": "Ranger",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/TCE/Swarmkeeper Ranger.webp"
+          },
+          "width": 860,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "Drakewarden",
+      "shortName": "Drakewarden",
+      "source": "FTD",
+      "className": "Ranger",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/FTD/Drakewarden Ranger.webp"
+          },
+          "width": 850,
+          "height": 1015
+        }
+      ]
+    },
+    {
+      "name": "Beast Master",
+      "shortName": "Beast Master",
+      "source": "XPHB",
+      "className": "Ranger",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Beast Master Ranger.webp"
+          },
+          "credit": "Alditha Siregar",
+          "width": 850,
+          "height": 1863
+        }
+      ]
+    },
+    {
+      "name": "Fey Wanderer",
+      "shortName": "Fey Wanderer",
+      "source": "XPHB",
+      "className": "Ranger",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Fey Wanderer Ranger.webp"
+          },
+          "credit": "John Grello",
+          "width": 850,
+          "height": 2199
+        }
+      ]
+    },
+    {
+      "name": "Gloom Stalker",
+      "shortName": "Gloom Stalker",
+      "source": "XPHB",
+      "className": "Ranger",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Gloom Stalker Ranger.webp"
+          },
+          "credit": "Polar Engine",
+          "width": 850,
+          "height": 2146
+        }
+      ]
+    },
+    {
+      "name": "Hunter",
+      "shortName": "Hunter",
+      "source": "XPHB",
+      "className": "Ranger",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Hunter Ranger.webp"
+          },
+          "credit": "Katerina Ladon",
+          "width": 850,
+          "height": 1752
+        }
+      ]
+    },
+    {
+      "name": "Winter Walker",
+      "shortName": "Winter Walker",
+      "source": "FRHoF",
+      "className": "Ranger",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/FRHoF/Winter Walker Ranger.webp"
+          },
+          "credit": "Alejandro Pacheco",
+          "width": 850,
+          "height": 2222
+        }
+      ]
+    }
+  ]
 }

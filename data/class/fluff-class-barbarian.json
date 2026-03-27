@@ -1,607 +1,607 @@
 {
-	"_meta": {
-		"internalCopies": [
-			"subclassFluff"
-		]
-	},
-	"classFluff": [
-		{
-			"name": "Barbarian",
-			"source": "PHB",
-			"entries": [
-				{
-					"name": "Barbarian",
-					"type": "section",
-					"entries": [
-						"A tall human tribesman strides through a blizzard, draped in fur and hefting his axe. He laughs as he charges toward the frost giant who dared poach his people's elk herd.",
-						"A half-orc snarls at the latest challenger to her authority over their savage tribe, ready to break his neck with her bare hands as she did to the last six rivals.",
-						"Frothing at the mouth, a dwarf slams his helmet into the face of his drow foe, then turns to drive his armored elbow into the gut of another.",
-						"These barbarians, different as they might be, are defined by their rage: unbridled, unquenchable, and unthinking fury. More than a mere emotion, their anger is the ferocity of a cornered predator, the unrelenting assault of a storm, the churning turmoil of the sea.",
-						"For some, their rage springs from a communion with fierce animal spirits. Others draw from a roiling reservoir of anger at a world full of pain. For every barbarian, rage is a power that fuels not just a battle frenzy but also uncanny reflexes, resilience, and feats of strength.",
-						{
-							"type": "entries",
-							"name": "Primal Instinct",
-							"entries": [
-								"People of towns and cities take pride in how their civilized ways set them apart from animals, as if denying one's own nature was a mark of superiority. To a barbarian, though, civilization is no virtue, but a sign of weakness. The strong embrace their animal nature\u2014keen instincts, primal physicality, and ferocious rage. Barbarians are uncomfortable when hedged in by walls and crowds. They thrive in the wilds of their homelands: the tundra, jungle, or grasslands where their tribes live and hunt.",
-								"Barbarians come alive in the chaos of combat. They can enter a berserk state where rage takes over, giving them superhuman strength and resilience. A barbarian can draw on this reservoir of fury only a few times without resting, but those few rages are usually sufficient to defeat whatever threats arise."
-							]
-						},
-						{
-							"type": "entries",
-							"name": "A Life of Danger",
-							"entries": [
-								"Not every member of the tribes deemed \"barbarians\" by scions of civilized society has the barbarian class. A true barbarian among these people is as uncommon as a skilled fighter in a town, and he or she plays a similar role as a protector of the people and a leader in times of war. Life in the wild places of the world is fraught with peril: rival tribes, deadly weather, and terrifying monsters. Barbarians charge headlong into that danger so that their people don't have to.",
-								"Their courage in the face of danger makes barbarians perfectly suited for adventuring. Wandering is often a way of life for their native tribes, and the rootless life of the adventurer is little hardship for a barbarian. Some barbarians miss the close-knit family structures of the tribe, but eventually find them replaced by the bonds formed among the members of their adventuring parties."
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Creating a Barbarian",
-							"entries": [
-								"When creating a barbarian character, think about where your character comes from and his or her place in the world. Talk with your DM about an appropriate origin for your barbarian. Did you come from a distant land, making you a stranger in the area of the campaign? Or is the campaign set in a rough-and-tumble frontier where barbarians are common?",
-								"What led you to take up the adventuring life? Were you lured to settled lands by the promise of riches? Did you join forces with soldiers of those lands to face a shared threat? Did monsters or an invading horde drive you out of your homeland, making you a rootless refugee? Perhaps you were a prisoner of war, brought in chains to \"civilized\" lands and only now able to win your freedom. Or you might have been cast out from your people because of a crime you committed, a taboo you violated, or a coup that removed you from a position of authority.",
-								{
-									"type": "entries",
-									"name": "Quick Build",
-									"entries": [
-										"You can make a barbarian quickly by following these suggestions. First, put your highest ability score in Strength, followed by Constitution. Second, choose the {@background outlander} background."
-									]
-								}
-							]
-						}
-					],
-					"source": "PHB",
-					"page": 46
-				},
-				{
-					"type": "section",
-					"entries": [
-						{
-							"type": "quote",
-							"entries": [
-								"I have witnessed the indomitable performance of barbarians on the field of battle, and it makes me wonder what force lies at the heart of their rage."
-							],
-							"by": "Seret, archwizard"
-						},
-						"The anger felt by a normal person resembles the rage of a barbarian in the same way that a gentle breeze is akin to a furious thunderstorm. The barbarian's driving force comes from a place that transcends mere emotion, making its manifestation all the more terrible. Whether the impetus for the fury comes entirely from within or from forging a link with a spirit animal, a raging barbarian becomes able to perform supernatural feats of strength and endurance. The outburst is temporary, but while it lasts, it takes over body and mind, driving the barbarian on despite peril and injury, until the last enemy falls.",
-						"It can be tempting to play a barbarian character that is a straightforward application of the classic archetype\u2014a brute, and usually a dimwitted one at that, who rushes in where others fear to tread. But not all the barbarians in the world are cut from that cloth, so you can certainly put your own spin on things. Either way, consider adding some flourishes to make your barbarian stand out from all others; see the following sections for some ideas.",
-						{
-							"type": "quote",
-							"entries": [
-								"Rawr! I'm really angry! Funny, I don't feel any stronger. Maybe because I'm always angry, I'm always in top condition. Stands to reason."
-							],
-							"by": "Xanathar"
-						},
-						{
-							"type": "entries",
-							"name": "Personal Totems",
-							"entries": [
-								"Barbarians tend to travel light, carrying little in the way of personal effects or other unnecessary gear. The few possessions they do carry often include small items that have special significance. A personal totem is significant because it has a mystical origin or is tied to an important moment in the character's life\u2014perhaps a remembrance from the barbarian's past or a harbinger of what lies ahead.",
-								"A personal totem of this sort might be associated with a barbarian's spirit animal, or might actually be the totem object for the animal, but such a connection is not essential. One who has a bear totem spirit, for instance, could still carry an eagle's feather as a personal totem.",
-								"Consider creating one or more personal totems for your character\u2014objects that hold a special link to your character's past or future. Think about how a totem might affect your character's actions.",
-								{
-									"type": "table",
-									"caption": "Personal Totems",
-									"colLabels": [
-										"{@dice d6}",
-										"Totem"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"A tuft of fur from a solitary wolf that you befriended during a hunt"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"Three eagle feathers given to you by a wise shaman, who told you they would play a role in determining your fate"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"A necklace made from the claws of a young cave bear that you slew singlehandedly as a child"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"A small leather pouch holding three stones that represent your ancestors"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"A few small bones from the first beast you killed, tied together with colored wool"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"An egg-sized stone in the shape of your spirit animal that appeared one day in your belt pouch"
-										]
-									]
-								}
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Tattoos",
-							"entries": [
-								"The members of many barbarian clans decorate their bodies with tattoos, each of which represents a significant moment in the life of the bearer or the bearer's ancestors, or which symbolizes a feeling or an attitude. As with personal totems, a barbarian's tattoos might or might not be related to an animal spirit.",
-								"Each tattoo a barbarian displays contributes to that individual's identity. If your character wears tattoos, what do they look like, and what do they represent?",
-								{
-									"type": "table",
-									"caption": "Tattoos",
-									"colLabels": [
-										"{@dice d6}",
-										"Tattoo"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"The wings of an eagle are spread wide across your upper back."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"Etched on the backs of your hands are the paws of a cave bear."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"The symbols of your clan are displayed in viny patterns along your arms."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"The antlers of an elk are inked across your back."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"Images of your spirit animal are tattooed along your weapon arm and hand."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"The eyes of a wolf are marked on your back to help you see and ward off evil spirits."
-										]
-									]
-								}
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Superstitions",
-							"entries": [
-								"Barbarians vary widely in how they understand life. Some follow gods and look for guidance from those deities in the cycles of nature and the animals they encounter. These barbarians believe that spirits inhabit the plants and animals of the world, and the barbarians look to them for omens and power.",
-								"Other barbarians trust only in the blood that runs in their veins and the steel they hold in their hands. They have no use for the invisible world, instead relying on their senses to hunt and survive like the wild beasts they emulate.",
-								"Both of these attitudes can give rise to superstitions. These beliefs are often passed down within a family or shared among the members of a clan or a hunting group.",
-								"If your barbarian character has any superstitions, were they ingrained in you by your family, or are they the result of personal experience?",
-								{
-									"type": "table",
-									"caption": "Superstition",
-									"colLabels": [
-										"{@dice d6}",
-										"Superstition"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"If you disturb the bones of the dead, you inherit all the troubles that plagued them in life."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"Never trust a wizard. They're all devils in disguise, especially the friendly ones."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"Dwarves have lost their spirits, and are almost like the undead. That's why they live underground."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"Magical things bring trouble. Never sleep with a magic object within ten feet of you."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"When you walk through a graveyard, be sure to wear silver, or a ghost might jump into your body."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"If an elf looks you in the eyes, she's trying to read your thoughts."
-										]
-									]
-								}
-							]
-						}
-					],
-					"source": "XGE",
-					"page": 8
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/PHB/Barbarian.webp"
-					},
-					"width": 959,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "Barbarian",
-			"source": "XPHB",
-			"entries": [
-				{
-					"type": "section",
-					"name": "Barbarian",
-					"source": "XPHB",
-					"page": 50,
-					"entries": [
-						"Barbarians are mighty warriors who are powered by primal forces of the multiverse that manifest as a Rage. More than a mere emotion\u2014and not limited to anger\u2014this Rage is an incarnation of a predator's ferocity, a storm's fury, and a sea's turmoil.",
-						"Some Barbarians personify their Rage as a fierce spirit or revered forebear. Others see it as a connection to the pain and anguish of the world, as an impersonal tangle of wild magic, or as an expression of their own deepest self. For every Barbarian, their Rage is a power that fuels not just battle prowess, but also uncanny reflexes and heightened senses.",
-						"Barbarians often serve as protectors and leaders in their communities. They charge headlong into danger so those under their protection don't have to. Their courage in the face of danger makes Barbarians perfectly suited for adventure."
-					]
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Barbarian.webp"
-					},
-					"credit": "Denman Rooke",
-					"width": 1700,
-					"height": 2265
-				},
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/039-03-015.barbarian-weapons.webp"
-					},
-					"credit": "Wayne England",
-					"width": 850,
-					"height": 1057
-				}
-			]
-		}
-	],
-	"subclassFluff": [
-		{
-			"name": "Path of the Totem Warrior",
-			"shortName": "Totem Warrior",
-			"source": "PHB",
-			"className": "Barbarian",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/PHB/Totem Warrior Barbarian.webp"
-					},
-					"width": 903,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "Barbarian",
-			"shortName": "Barbarian",
-			"source": "XGE",
-			"className": "Barbarian",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XGE/Barbarian.webp"
-					},
-					"width": 1000,
-					"height": 491
-				}
-			]
-		},
-		{
-			"name": "Path of the Ancestral Guardian",
-			"shortName": "Ancestral Guardian",
-			"source": "XGE",
-			"className": "Barbarian",
-			"classSource": "PHB",
-			"_copy": {
-				"name": "Barbarian",
-				"shortName": "Barbarian",
-				"source": "XGE",
-				"className": "Barbarian",
-				"classSource": "PHB"
-			},
-			"entries": [
-				{
-					"type": "quote",
-					"entries": [
-						"So ancestors are people who did the procreation thing to make more people before you were born? Like how many people?",
-						"That's a lot of the procreation thing.",
-						"Ew. You're disgusting."
-					],
-					"by": "Xanathar"
-				}
-			]
-		},
-		{
-			"name": "Path of the Storm Herald",
-			"shortName": "Storm Herald",
-			"source": "XGE",
-			"className": "Barbarian",
-			"classSource": "PHB",
-			"_copy": {
-				"name": "Barbarian",
-				"shortName": "Barbarian",
-				"source": "XGE",
-				"className": "Barbarian",
-				"classSource": "PHB",
-				"_mod": {
-					"images": {
-						"mode": "appendArr",
-						"items": {
-							"type": "image",
-							"href": {
-								"type": "internal",
-								"path": "classes/XGE/Storm Herald Barbarian.webp"
-							},
-							"width": 1000,
-							"height": 491
-						}
-					}
-				}
-			},
-			"entries": [
-				{
-					"type": "quote",
-					"entries": [
-						"You know one of the great benefits of living underground? No weather. Don't mess this up for me."
-					],
-					"by": "Xanathar"
-				}
-			]
-		},
-		{
-			"name": "Path of the Zealot",
-			"shortName": "Zealot",
-			"source": "XGE",
-			"className": "Barbarian",
-			"classSource": "PHB",
-			"_copy": {
-				"name": "Barbarian",
-				"shortName": "Barbarian",
-				"source": "XGE",
-				"className": "Barbarian",
-				"classSource": "PHB"
-			}
-		},
-		{
-			"name": "Path of the Beast",
-			"shortName": "Beast",
-			"source": "TCE",
-			"className": "Barbarian",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/TCE/Beast Barbarian.webp"
-					},
-					"width": 1000,
-					"height": 834
-				}
-			]
-		},
-		{
-			"name": "Path of Wild Magic",
-			"shortName": "Wild Magic",
-			"source": "TCE",
-			"className": "Barbarian",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/TCE/Wild Magic Barbarian.webp"
-					},
-					"width": 1000,
-					"height": 831
-				}
-			]
-		},
-		{
-			"name": "Path of the Giant",
-			"shortName": "Giant",
-			"source": "BGG",
-			"className": "Barbarian",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/BGG/Giant Barbarian.webp"
-					},
-					"width": 850,
-					"height": 1222
-				}
-			]
-		},
-		{
-			"name": "Path of the Berserker",
-			"shortName": "Berserker",
-			"source": "XPHB",
-			"className": "Barbarian",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Berserker Barbarian.webp"
-					},
-					"credit": "Nathaniel Himawan",
-					"width": 850,
-					"height": 2316
-				}
-			]
-		},
-		{
-			"name": "Path of the Wild Heart",
-			"shortName": "Wild Heart",
-			"source": "XPHB",
-			"className": "Barbarian",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Wild Heart Barbarian.webp"
-					},
-					"credit": "Alditha Siregar",
-					"width": 850,
-					"height": 2108
-				}
-			]
-		},
-		{
-			"name": "Path of the World Tree",
-			"shortName": "World Tree",
-			"source": "XPHB",
-			"className": "Barbarian",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/World Tree Barbarian.webp"
-					},
-					"credit": "Marcela Medeiros",
-					"width": 850,
-					"height": 2013
-				}
-			]
-		},
-		{
-			"name": "Path of the Zealot",
-			"shortName": "Zealot",
-			"source": "XPHB",
-			"className": "Barbarian",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Zealot Barbarian.webp"
-					},
-					"credit": "Ignatius Budi",
-					"width": 850,
-					"height": 2141
-				}
-			]
-		}
-	]
+  "_meta": {
+    "internalCopies": [
+      "subclassFluff"
+    ]
+  },
+  "classFluff": [
+    {
+      "name": "Barbarian",
+      "source": "PHB",
+      "entries": [
+        {
+          "name": "Barbarian",
+          "type": "section",
+          "entries": [
+            "Um homem alto de uma tribo humana caminha em meio a uma nevasca, envolto em peles e empunhando seu machado. Ele ri enquanto avança em direção ao gigante do gelo que ousou roubar o rebanho de alces de seu povo.",
+            "Uma meio-orc rosna para o mais recente desafiante à sua autoridade sobre sua tribo selvagem, pronta para quebrar seu pescoço com as próprias mãos, como fez com os últimos seis rivais.",
+            "Espumando pela boca, um anão bate seu capacete no rosto de seu inimigo drow, então se vira para enfiar seu cotovelo blindado na barriga de outro.",
+            "Esses bárbaros, por mais diferentes que sejam, são definidos por sua raiva: fúria desenfreada, inextinguível e impensada. Mais do que uma mera emoção, a sua raiva é a ferocidade de um predador encurralado, o ataque implacável de uma tempestade, a agitação do mar.",
+            "Para alguns, a raiva surge da comunhão com espíritos animais ferozes. Outros extraem de um reservatório turbulento de raiva um mundo cheio de dor. Para todo bárbaro, a raiva é um poder que alimenta não apenas o frenesi da batalha, mas também reflexos misteriosos, resiliência e feitos de força.",
+            {
+              "type": "entries",
+              "name": "Primal Instinct",
+              "entries": [
+                "As pessoas das cidades orgulham-se de como os seus modos civilizados as diferenciam dos animais, como se negar a própria natureza fosse uma marca de superioridade. Para um bárbaro, porém, a civilização não é uma virtude, mas um sinal de fraqueza. Os fortes abraçam sua natureza animal – instintos aguçados, fisicalidade primitiva e raiva feroz. Os bárbaros ficam desconfortáveis ​​quando cercados por muros e multidões. Eles prosperam nas regiões selvagens de suas terras natais: a tundra, a selva ou as pastagens onde suas tribos vivem e caçam.",
+                "Os bárbaros ganham vida no caos do combate. Eles podem entrar em um estado frenético onde a raiva assume o controle, dando-lhes força e resiliência sobre-humanas. Um bárbaro pode recorrer a esse reservatório de fúria apenas algumas vezes sem descansar, mas essas poucas fúrias geralmente são suficientes para derrotar quaisquer ameaças que surjam."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "A Life of Danger",
+              "entries": [
+                "Nem todos os membros das tribos considerados “bárbaros” pelos descendentes da sociedade civilizada pertencem à classe bárbara. Um verdadeiro bárbaro entre essas pessoas é tão incomum quanto um lutador habilidoso em uma cidade, e ele ou ela desempenha um papel semelhante como protetor do povo e líder em tempos de guerra. A vida nos lugares selvagens do mundo está repleta de perigos: tribos rivais, clima mortal e monstros terríveis. Os bárbaros atacam de cabeça esse perigo para que o seu povo não precise fazê-lo.",
+                "Sua coragem diante do perigo torna os bárbaros perfeitamente adequados para aventuras. Vaguear é muitas vezes um modo de vida para suas tribos nativas, e a vida desenraizada do aventureiro não representa muitas dificuldades para um bárbaro. Alguns bárbaros sentem falta das estruturas familiares unidas da tribo, mas eventualmente as encontram substituídas pelos laços formados entre os membros de seus grupos de aventureiros."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Creating a Barbarian",
+              "entries": [
+                "Ao criar um personagem bárbaro, pense na origem do seu personagem e em seu lugar no mundo. Converse com seu Mestre sobre a origem apropriada para seu bárbaro. Você veio de uma terra distante, o que o tornou um estranho na área da campanha? Ou a campanha se passa em uma fronteira turbulenta onde os bárbaros são comuns?",
+                "O que o levou a seguir a vida de aventura? Você foi atraído para terras colonizadas pela promessa de riquezas? Você uniu forças com soldados dessas terras para enfrentar uma ameaça compartilhada? Monstros ou uma horda invasora expulsaram você de sua terra natal, tornando-o um refugiado sem raízes? Talvez você tenha sido um prisioneiro de guerra, levado acorrentado para terras “civilizadas” e só agora capaz de conquistar sua liberdade. Ou você pode ter sido expulso do seu povo por causa de um crime que cometeu, de um tabu que violou ou de um golpe que o removeu de uma posição de autoridade.",
+                {
+                  "type": "entries",
+                  "name": "Quick Build",
+                  "entries": [
+                    "Você pode criar um bárbaro rapidamente seguindo estas sugestões. Primeiro, coloque seu valor de habilidade mais alto em Força, seguido de Constituição. Em segundo lugar, escolha o {@background outlander} fundo."
+                  ]
+                }
+              ]
+            }
+          ],
+          "source": "PHB",
+          "page": 46
+        },
+        {
+          "type": "section",
+          "entries": [
+            {
+              "type": "quote",
+              "entries": [
+                "Testemunhei o desempenho indomável dos bárbaros no campo de batalha, e isso me faz pensar que força está no cerne de sua raiva."
+              ],
+              "by": "Seret, archwizard"
+            },
+            "A raiva sentida por uma pessoa normal se assemelha à raiva de um bárbaro, da mesma forma que uma brisa suave é semelhante a uma tempestade furiosa. A força motriz do bárbaro vem de um lugar que transcende a mera emoção, tornando a sua manifestação ainda mais terrível. Quer o ímpeto para a fúria venha inteiramente de dentro ou de forjar uma ligação com um espírito animal, um bárbaro furioso torna-se capaz de realizar feitos sobrenaturais de força e resistência. A explosão é temporária, mas enquanto dura, ela toma conta do corpo e da mente, levando o bárbaro apesar do perigo e dos ferimentos, até que o último inimigo caia.",
+            "Pode ser tentador interpretar um personagem bárbaro que seja uma aplicação direta do arquétipo clássico – um bruto, e geralmente estúpido, que corre onde outros temem pisar. Mas nem todos os bárbaros do mundo são feitos desse tecido, então você certamente pode dar seu próprio toque às coisas. De qualquer forma, considere adicionar alguns floreios para fazer seu bárbaro se destacar de todos os outros; veja as seções a seguir para algumas ideias.",
+            {
+              "type": "quote",
+              "entries": [
+                "Rawr! Estou com muita raiva! Engraçado, não me sinto mais forte. Talvez porque estou sempre com raiva, estou sempre em ótimas condições. É lógico."
+              ],
+              "by": "Xanathar"
+            },
+            {
+              "type": "entries",
+              "name": "Personal Totems",
+              "entries": [
+                "Bárbaros tendem a viajar com pouca bagagem, carregando poucos objetos pessoais ou outros equipamentos desnecessários. Os poucos bens que carregam geralmente incluem pequenos itens que têm um significado especial. Um totem pessoal é significativo porque tem uma origem mística ou está ligado a um momento importante na vida do personagem – talvez uma lembrança do passado do bárbaro ou um prenúncio do que está por vir.",
+                "Um totem pessoal desse tipo pode estar associado ao espírito animal de um bárbaro, ou pode realmente ser o objeto totêmico do animal, mas tal conexão não é essencial. Alguém que tenha um espírito totêmico de urso, por exemplo, ainda poderia carregar uma pena de águia como totem pessoal.",
+                "Considere criar um ou mais totens pessoais para seu personagem – objetos que mantêm uma ligação especial com o passado ou futuro de seu personagem. Pense em como um totem pode afetar as ações do seu personagem.",
+                {
+                  "type": "table",
+                  "caption": "Personal Totems",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Totem"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "Um tufo de pêlo de um lobo solitário com quem você fez amizade durante uma caçada"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "Três penas de águia dadas a você por um sábio xamã, que lhe disse que elas desempenhariam um papel na determinação do seu destino"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Um colar feito com as garras de um jovem urso das cavernas que você matou sozinho quando criança"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Uma pequena bolsa de couro contendo três pedras que representam seus antepassados"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Alguns pequenos ossos do primeiro animal que você matou, amarrados com lã colorida"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Uma pedra do tamanho de um ovo no formato do seu espírito animal que apareceu um dia na bolsa do seu cinto"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Tattoos",
+              "entries": [
+                "Os membros de muitos clãs bárbaros decoram seus corpos com tatuagens, cada uma das quais representa um momento significativo na vida do portador ou dos ancestrais do portador, ou que simboliza um sentimento ou uma atitude. Tal como acontece com os totens pessoais, as tatuagens de um bárbaro podem ou não estar relacionadas a um espírito animal.",
+                "Cada tatuagem que um bárbaro exibe contribui para a identidade daquele indivíduo. Se o seu personagem usa tatuagens, como elas são e o que representam?",
+                {
+                  "type": "table",
+                  "caption": "Tattoos",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Tattoo"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "As asas de uma águia estão bem abertas na parte superior das costas."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "Gravadas nas costas de suas mãos estão as patas de um urso das cavernas."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Os símbolos do seu clã são exibidos em padrões de vinhedos ao longo de seus braços."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Os chifres de um alce estão pintados em suas costas."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Imagens do seu espírito animal estão tatuadas ao longo do braço e da mão da arma."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Os olhos de um lobo estão marcados em suas costas para ajudá-lo a ver e afastar os maus espíritos."
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Superstitions",
+              "entries": [
+                "Os bárbaros variam muito na forma como entendem a vida. Alguns seguem deuses e buscam orientação dessas divindades nos ciclos da natureza e dos animais que encontram. Esses bárbaros acreditam que os espíritos habitam as plantas e os animais do mundo, e os bárbaros recorrem a eles em busca de presságios e poder.",
+                "Outros bárbaros confiam apenas no sangue que corre em suas veias e no aço que seguram em suas mãos. Eles não têm utilidade para o mundo invisível, em vez disso confiam em seus sentidos para caçar e sobreviver como as feras que imitam.",
+                "Ambas as atitudes podem dar origem a superstições. Essas crenças são frequentemente transmitidas dentro de uma família ou compartilhadas entre os membros de um clã ou grupo de caça.",
+                "Se o seu caráter bárbaro tem alguma superstição, ela foi enraizada em você pela sua família ou é resultado de experiência pessoal?",
+                {
+                  "type": "table",
+                  "caption": "Superstition",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Superstition"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "Se você perturbar os ossos dos mortos, herdará todos os problemas que os atormentaram em vida."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "Nunca confie em um mago. São todos demônios disfarçados, principalmente os amigáveis."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Os anões perderam o ânimo e são quase como mortos-vivos. É por isso que eles vivem no subsolo."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Coisas mágicas trazem problemas. Nunca durma com um objeto mágico a menos de três metros de você."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Ao caminhar por um cemitério, certifique-se de usar prata, ou um fantasma pode pular em seu corpo."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Se um elfo olha nos seus olhos, ele está tentando ler seus pensamentos."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "source": "XGE",
+          "page": 8
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/PHB/Barbarian.webp"
+          },
+          "width": 959,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "Barbarian",
+      "source": "XPHB",
+      "entries": [
+        {
+          "type": "section",
+          "name": "Barbarian",
+          "source": "XPHB",
+          "page": 50,
+          "entries": [
+            "Os bárbaros são guerreiros poderosos movidos por forças primitivas do multiverso que se manifestam como Fúria. Mais do que uma mera emoção – e não limitada à raiva – esta Fúria é uma encarnação da ferocidade de um predador, da fúria de uma tempestade e da agitação de um mar.",
+            "Alguns Bárbaros personificam sua Fúria como um espírito feroz ou um antepassado reverenciado. Outros vêem-no como uma ligação à dor e angústia do mundo, como um emaranhado impessoal de magia selvagem, ou como uma expressão do seu próprio eu mais profundo. Para cada Bárbaro, sua Fúria é um poder que alimenta não apenas a destreza em batalha, mas também reflexos misteriosos e sentidos aguçados.",
+            "Os bárbaros muitas vezes servem como protetores e líderes nas suas comunidades. Eles avançam de cabeça para o perigo para que aqueles sob sua proteção não precisem fazê-lo. Sua coragem diante do perigo torna os Bárbaros perfeitamente adequados para a aventura."
+          ]
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Barbarian.webp"
+          },
+          "credit": "Denman Rooke",
+          "width": 1700,
+          "height": 2265
+        },
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/039-03-015.barbarian-weapons.webp"
+          },
+          "credit": "Wayne England",
+          "width": 850,
+          "height": 1057
+        }
+      ]
+    }
+  ],
+  "subclassFluff": [
+    {
+      "name": "Path of the Totem Warrior",
+      "shortName": "Totem Warrior",
+      "source": "PHB",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/PHB/Totem Warrior Barbarian.webp"
+          },
+          "width": 903,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "Barbarian",
+      "shortName": "Barbarian",
+      "source": "XGE",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XGE/Barbarian.webp"
+          },
+          "width": 1000,
+          "height": 491
+        }
+      ]
+    },
+    {
+      "name": "Path of the Ancestral Guardian",
+      "shortName": "Ancestral Guardian",
+      "source": "XGE",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "_copy": {
+        "name": "Barbarian",
+        "shortName": "Barbarian",
+        "source": "XGE",
+        "className": "Barbarian",
+        "classSource": "PHB"
+      },
+      "entries": [
+        {
+          "type": "quote",
+          "entries": [
+            "Então ancestrais são pessoas que fizeram a procriação para formar mais pessoas antes de você nascer? Tipo quantas pessoas?",
+            "Isso é muito da questão da procriação.",
+            "Eca. Você é nojento."
+          ],
+          "by": "Xanathar"
+        }
+      ]
+    },
+    {
+      "name": "Path of the Storm Herald",
+      "shortName": "Storm Herald",
+      "source": "XGE",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "_copy": {
+        "name": "Barbarian",
+        "shortName": "Barbarian",
+        "source": "XGE",
+        "className": "Barbarian",
+        "classSource": "PHB",
+        "_mod": {
+          "images": {
+            "mode": "appendArr",
+            "items": {
+              "type": "image",
+              "href": {
+                "type": "internal",
+                "path": "classes/XGE/Storm Herald Barbarian.webp"
+              },
+              "width": 1000,
+              "height": 491
+            }
+          }
+        }
+      },
+      "entries": [
+        {
+          "type": "quote",
+          "entries": [
+            "Você conhece um dos grandes benefícios de viver no subsolo? Sem tempo. Não estrague tudo para mim."
+          ],
+          "by": "Xanathar"
+        }
+      ]
+    },
+    {
+      "name": "Path of the Zealot",
+      "shortName": "Zealot",
+      "source": "XGE",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "_copy": {
+        "name": "Barbarian",
+        "shortName": "Barbarian",
+        "source": "XGE",
+        "className": "Barbarian",
+        "classSource": "PHB"
+      }
+    },
+    {
+      "name": "Path of the Beast",
+      "shortName": "Beast",
+      "source": "TCE",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/TCE/Beast Barbarian.webp"
+          },
+          "width": 1000,
+          "height": 834
+        }
+      ]
+    },
+    {
+      "name": "Path of Wild Magic",
+      "shortName": "Wild Magic",
+      "source": "TCE",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/TCE/Wild Magic Barbarian.webp"
+          },
+          "width": 1000,
+          "height": 831
+        }
+      ]
+    },
+    {
+      "name": "Path of the Giant",
+      "shortName": "Giant",
+      "source": "BGG",
+      "className": "Barbarian",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/BGG/Giant Barbarian.webp"
+          },
+          "width": 850,
+          "height": 1222
+        }
+      ]
+    },
+    {
+      "name": "Path of the Berserker",
+      "shortName": "Berserker",
+      "source": "XPHB",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Berserker Barbarian.webp"
+          },
+          "credit": "Nathaniel Himawan",
+          "width": 850,
+          "height": 2316
+        }
+      ]
+    },
+    {
+      "name": "Path of the Wild Heart",
+      "shortName": "Wild Heart",
+      "source": "XPHB",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Wild Heart Barbarian.webp"
+          },
+          "credit": "Alditha Siregar",
+          "width": 850,
+          "height": 2108
+        }
+      ]
+    },
+    {
+      "name": "Path of the World Tree",
+      "shortName": "World Tree",
+      "source": "XPHB",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/World Tree Barbarian.webp"
+          },
+          "credit": "Marcela Medeiros",
+          "width": 850,
+          "height": 2013
+        }
+      ]
+    },
+    {
+      "name": "Path of the Zealot",
+      "shortName": "Zealot",
+      "source": "XPHB",
+      "className": "Barbarian",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Zealot Barbarian.webp"
+          },
+          "credit": "Ignatius Budi",
+          "width": 850,
+          "height": 2141
+        }
+      ]
+    }
+  ]
 }

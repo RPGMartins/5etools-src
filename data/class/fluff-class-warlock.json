@@ -1,505 +1,505 @@
 {
-	"classFluff": [
-		{
-			"name": "Warlock",
-			"source": "PHB",
-			"entries": [
-				{
-					"name": "Warlock",
-					"type": "section",
-					"entries": [
-						"With a pseudodragon curled on his shoulder, a young elf in golden robes smiles warmly, weaving a magical charm into his honeyed words and bending the palace sentinel to his will.",
-						"As flames spring to life in her hands, a wizened human whispers the secret name of her demonic patron, infusing her spell with fiendish magic.",
-						"Shifting his gaze between a battered tome and the odd alignment of the stars overhead, a wild-eyed tiefling chants the mystic ritual that will open a doorway to a distant world.",
-						"Warlocks are seekers of the knowledge that lies hidden in the fabric of the multiverse. Through pacts made with mysterious beings of supernatural power, warlocks unlock magical effects both subtle and spectacular. Drawing on the ancient knowledge of beings such as fey nobles, demons, devils, hags, and alien entities of the Far Realm, warlocks piece together arcane secrets to bolster their own power.",
-						{
-							"type": "entries",
-							"name": "Sworn and Beholden",
-							"entries": [
-								"A warlock is defined by a pact with an otherworldly being. Sometimes the relationship between warlock and patron is like that of a cleric and a deity, though the beings that serve as patrons for warlocks are not gods. A warlock might lead a cult dedicated to a demon prince, an archdevil, or an utterly alien entity\u2014beings not typically served by clerics. More often, though, the arrangement is similar to that between a master and an apprentice. The warlock learns and grows in power, at the cost of occasional services performed on the patron's behalf.",
-								"The magic bestowed on a warlock ranges from minor but lasting alterations to the warlock's being (such as the ability to see in darkness or to read any language) to access to powerful spells. Unlike bookish wizards, warlocks supplement their magic with some facility at hand-to-hand combat. They are comfortable in light armor and know how to use simple weapons."
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Delvers into Secrets",
-							"entries": [
-								"Warlocks are driven by an insatiable need for knowledge and power, which compels them into their pacts and shapes their lives. This thirst drives warlocks into their pacts and shapes their later careers as well.",
-								"Stories of warlocks binding themselves to fiends are widely known. But many warlocks serve patrons that are not fiendish. Sometimes a traveler in the wilds comes to a strangely beautiful tower, meets its fey lord or lady, and stumbles into a pact without being fully aware of it. And sometimes, while poring over tomes of forbidden lore, a brilliant but crazed student's mind is opened to realities beyond the material world and to the alien beings that dwell in the outer void.",
-								"Once a pact is made, a warlock's thirst for knowledge and power can't be slaked with mere study and research. No one makes a pact with such a mighty patron if he or she doesn't intend to use the power thus gained. Rather, the vast majority of warlocks spend their days in active pursuit of their goals, which typically means some kind of adventuring. Furthermore, the demands of their patrons drive warlocks toward adventure."
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Creating a Warlock",
-							"entries": [
-								"As you make your warlock character, spend some time thinking about your patron and the obligations that your pact imposes upon you. What led you to make the pact, and how did you make contact with your patron? Were you seduced into summoning a devil, or did you seek out the ritual that would allow you to make contact with an alien elder god? Did you search for your patron, or did your patron find and choose you? Do you chafe under the obligations of your pact or serve joyfully in anticipation of the rewards promised to you?",
-								"Work with your DM to determine how big a part your pact will play in your character's adventuring career. Your patron's demands might drive you into adventures, or they might consist entirely of small favors you can do between adventures.",
-								"What kind of relationship do you have with your patron? Is it friendly, antagonistic, uneasy, or romantic? How important does your patron consider you to be? What part do you play in your patron's plans? Do you know other servants of your patron?",
-								"How does your patron communicate with you? If you have a familiar, it might occasionally speak with your patron's voice. Some warlocks find messages from their patrons etched on trees, mingled among tea leaves, or adrift in the clouds\u2014messages that only the warlock can see. Other warlocks converse with their patrons in dreams or waking visions, or deal only with intermediaries.",
-								{
-									"type": "entries",
-									"name": "Quick Build",
-									"entries": [
-										"You can make a warlock quickly by following these suggestions. First, Charisma should be your highest ability score, followed by Constitution. Second, choose the {@background charlatan} background. Third, choose the {@spell eldritch blast} and {@spell chill touch} cantrips, along with the 1st-level spells {@spell charm person} and {@spell witch bolt}."
-									]
-								}
-							]
-						}
-					],
-					"page": 105,
-					"source": "PHB"
-				},
-				{
-					"type": "section",
-					"entries": [
-						{
-							"type": "quote",
-							"entries": [
-								"You think me mad? I think true insanity is being content to live a life of mortal drudgery when knowledge and power is there for the taking in the realm beyond."
-							],
-							"by": "Xarren, herald of Acamar"
-						},
-						"Warlocks are finders and keepers of secrets. They push at the edge of our understanding of the world, always seeking to expand their expertise. Where sages or wizards might heed a clear sign of danger and end their research, a warlock plunges ahead, heedless of the cost. Thus, it takes a peculiar mixture of intelligence, curiosity, and recklessness to produce a warlock. Many folk would describe that combination as evidence of madness. Warlocks see it as a demonstration of bravery.",
-						"Warlocks are defined by two elements that work in concert to forge their path into this class. The first element is the event or circumstances that led to a warlock's entering into a pact with a planar entity. The second one is the nature of the entity a warlock is bound to. Unlike clerics, who typically embrace a deity and that god's ethos, a warlock might have no love for a patron, or vice versa.",
-						"The sections that follow provide ways to embellish a warlock character that could generate some intriguing story and roleplaying opportunities.",
-						{
-							"type": "quote",
-							"entries": [
-								"So you got your powers by making a contract with something? Is it in writing, perchance? Well, never mind. Just tell me this: Can I get your powers by eating you?"
-							],
-							"by": "Xanathar"
-						},
-						{
-							"type": "entries",
-							"name": "Patron's Attitude",
-							"entries": [
-								"Every relationship is a two-way street, but in the case of warlocks and their patrons it's not necessarily true that both sides of the street are the same width or made of the same stuff. The feeling that a warlock holds for their patron, whether positive or negative, might be reciprocated by the patron, or the two participants in the pact might view one another with opposing emotions.",
-								"When you determine the attitude your warlock character holds toward your patron, also consider how things look from the patron's perspective. How does your patron behave toward you? Is your patron a friend and ally, or an enemy that grants you power only because you forced a pact upon it?",
-								{
-									"type": "table",
-									"caption": "Patron Attitudes",
-									"colLabels": [
-										"{@dice d6}",
-										"Attitude"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"Your patron has guided and helped your family for generations and is kindly toward you."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"Each interaction with your capricious patron is a surprise, whether pleasant or painful."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"Your patron is the spirit of a long-dead hero who sees your pact as a way for it to continue to influence the world."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"Your patron is a strict disciplinarian but treats you with a measure of respect."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"Your patron tricked you into a pact and treats you as a slave."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"You are mostly left to your own devices with no interference from your patron. Sometimes you dread the demands it will make when it does appear."
-										]
-									]
-								}
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Special Terms of the Pact",
-							"entries": [
-								"A pact can range from a loose agreement to a formal contract with lengthy, detailed clauses and lists of requirements. The terms of a pact\u2014what a warlock must do to receive a patron's favor\u2014are always dictated by the patron. On occasion, those terms include a special proviso that might seem odd or whimsical, but warlocks take these dictates as seriously as they do the other requirements of their pacts.",
-								"Does your character have a pact that requires you to change your behavior in an unusual or seemingly frivolous way? Even if your patron hasn't imposed such a duty on you already, that's not to say it couldn't still happen.",
-								{
-									"type": "table",
-									"caption": "Special Terms",
-									"colLabels": [
-										"{@dice d6}",
-										"Term"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"When directed, you must take immediate action against a specific enemy of your patron."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"Your pact tests your willpower; you are required to abstain from alcohol and other intoxicants."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"At least once a day, you must inscribe or carve your patron's name or symbol on the wall of a building."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"You must occasionally conduct bizarre rituals to maintain your pact."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"You can never wear the same outfit twice, since your patron finds such predictability to be boring."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"When you use an eldritch invocation, you must speak your patron's name aloud or risk incurring its displeasure."
-										]
-									]
-								}
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Binding Mark",
-							"entries": [
-								"Some patrons make a habit of, and often enjoy, marking the warlocks under their sway in some fashion. A binding mark makes it clear\u2014to those who know about such things\u2014that the individual in question is bound to the patron's service. A warlock might take advantage of such a mark, claiming it as proof of one's pact, or might want to keep it under wraps (if possible) to avoid the difficulties it might bring.",
-								"If your warlock's pact comes with a binding mark, how you feel about displaying it probably depends on the nature of your relationship with the one who gave it to you. Is the mark a source of pride or something you are secretly ashamed of?",
-								{
-									"type": "table",
-									"caption": "Binding Marks",
-									"colLabels": [
-										"d6",
-										"Mark"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											"1",
-											"One of your eyes looks the same as one of your patron's eyes."
-										],
-										[
-											"2",
-											"Each time you wake up, the small blemish on your face appears in a different place."
-										],
-										[
-											"3",
-											"You display outward symptoms of a disease but suffer no ill effects from it."
-										],
-										[
-											"4",
-											"Your tongue is an unnatural color."
-										],
-										[
-											"5",
-											"You have a vestigial tail."
-										],
-										[
-											"6",
-											"Your nose glows in the dark."
-										]
-									]
-								}
-							]
-						}
-					],
-					"page": 53,
-					"source": "XGE"
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/PHB/Warlock.webp"
-					},
-					"width": 780,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "Warlock",
-			"source": "XPHB",
-			"entries": [
-				{
-					"type": "section",
-					"name": "Warlock",
-					"source": "XPHB",
-					"page": 152,
-					"entries": [
-						"Warlocks quest for knowledge that lies hidden in the fabric of the multiverse. They often begin their search for magical power by delving into tomes of forbidden lore, dabbling in invocations meant to attract the power of extraplanar beings, or seeking places of power where the influence of these beings can be felt. In no time, each Warlock is drawn into a binding pact with a powerful patron. Drawing on the ancient knowledge of beings such as angels, archfey, demons, devils, hags, and alien entities of the Far Realm, Warlocks piece together arcane secrets to bolster their own power.",
-						"Warlocks view their patrons as resources, as means to the end of achieving magical power. Some Warlocks respect, revere, or even love their patrons; some serve their patrons grudgingly; and some seek to undermine their patrons even as they wield the power their patrons have given them.",
-						"Once a pact is made, a Warlock's thirst for knowledge and power can't be slaked with mere study. Most Warlocks spend their days pursuing greater power and deeper knowledge, which typically means some kind of adventure."
-					]
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Warlock.webp"
-					},
-					"credit": "Nèstor Ossandón Leal",
-					"width": 1700,
-					"height": 2283
-				},
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/114-04-029.skull-spiders.webp"
-					},
-					"credit": "Wayne England",
-					"width": 1021,
-					"height": 1440
-				}
-			]
-		}
-	],
-	"subclassFluff": [
-		{
-			"name": "The Celestial",
-			"shortName": "Celestial",
-			"source": "XGE",
-			"className": "Warlock",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XGE/Celestial Warlock.webp"
-					},
-					"width": 658,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "The Hexblade",
-			"shortName": "Hexblade",
-			"source": "XGE",
-			"className": "Warlock",
-			"classSource": "PHB",
-			"entries": [
-				{
-					"type": "quote",
-					"entries": [
-						"Hexblade. What a cool name! So is your sword evil or cursed or something? But you're evil, right?... Okay, now I don't like the name. Names aren't cool if they don't make sense. Like mine: The Xanathar. See? It's cool, and it makes sense!"
-					],
-					"by": "Xanathar"
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XGE/Hexblade Warlock.webp"
-					},
-					"width": 743,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "The Fathomless",
-			"shortName": "Fathomless",
-			"source": "TCE",
-			"className": "Warlock",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/TCE/Fathomless Warlock.webp"
-					},
-					"width": 800,
-					"height": 1290
-				}
-			]
-		},
-		{
-			"name": "The Genie",
-			"shortName": "Genie",
-			"source": "TCE",
-			"className": "Warlock",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/TCE/Genie Warlock.webp"
-					},
-					"width": 1200,
-					"height": 802
-				}
-			]
-		},
-		{
-			"name": "The Undead",
-			"shortName": "Undead",
-			"source": "VRGR",
-			"className": "Warlock",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/VRGR/Undead Warlock.webp"
-					},
-					"width": 800,
-					"height": 1470
-				}
-			]
-		},
-		{
-			"name": "Archfey Patron",
-			"shortName": "Archfey",
-			"source": "XPHB",
-			"className": "Warlock",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Archfey Warlock.webp"
-					},
-					"credit": "Erion Makuo",
-					"width": 850,
-					"height": 2300
-				}
-			]
-		},
-		{
-			"name": "Celestial Patron",
-			"shortName": "Celestial",
-			"source": "XPHB",
-			"className": "Warlock",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Celestial Warlock.webp"
-					},
-					"credit": "Ekaterina Burmak",
-					"width": 850,
-					"height": 2470
-				}
-			]
-		},
-		{
-			"name": "Fiend Patron",
-			"shortName": "Fiend",
-			"source": "XPHB",
-			"className": "Warlock",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Fiend Warlock.webp"
-					},
-					"credit": "Jodie Muir",
-					"width": 850,
-					"height": 2486
-				}
-			]
-		},
-		{
-			"name": "Great Old One Patron",
-			"shortName": "Great Old One",
-			"source": "XPHB",
-			"className": "Warlock",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Great Old One Warlock.webp"
-					},
-					"credit": "Magali Villeneuve",
-					"width": 850,
-					"height": 1995
-				}
-			]
-		}
-	]
+  "classFluff": [
+    {
+      "name": "Warlock",
+      "source": "PHB",
+      "entries": [
+        {
+          "name": "Warlock",
+          "type": "section",
+          "entries": [
+            "Com um pseudodragão enrolado em seu ombro, um jovem elfo em vestes douradas sorri calorosamente, tecendo um encanto mágico em suas palavras doces e subjugando a sentinela do palácio à sua vontade.",
+            "À medida que as chamas ganham vida em suas mãos, um humano enrugado sussurra o nome secreto de seu patrono demoníaco, infundindo seu feitiço com magia diabólica.",
+            "Movendo seu olhar entre um tomo surrado e o estranho alinhamento das estrelas acima, um tiefling de olhos arregalados entoa o ritual místico que abrirá uma porta para um mundo distante.",
+            "Warlocks buscam o conhecimento que está escondido na estrutura do multiverso. Através de pactos feitos com seres misteriosos de poder sobrenatural, os bruxos desbloqueiam efeitos mágicos sutis e espetaculares. Baseando-se no conhecimento antigo de seres como nobres feéricos, demônios, diabos, bruxas e entidades alienígenas do Reino Distante, os bruxos reúnem segredos misteriosos para reforçar seu próprio poder.",
+            {
+              "type": "entries",
+              "name": "Sworn and Beholden",
+              "entries": [
+                "Um bruxo é definido por um pacto com um ser de outro mundo. Às vezes, a relação entre o feiticeiro e o patrono é como a de um clérigo e uma divindade, embora os seres que servem como patronos dos feiticeiros não sejam deuses. Um bruxo pode liderar um culto dedicado a um príncipe demônio, um arquidiabo ou uma entidade totalmente alienígena – seres que normalmente não são servidos por clérigos. Mais frequentemente, porém, o acordo é semelhante ao entre um mestre e um aprendiz. O bruxo aprende e cresce em poder, à custa de serviços ocasionais realizados em nome do patrono.",
+                "A magia concedida a um bruxo varia de alterações menores, mas duradouras, no ser do bruxo (como a habilidade de ver na escuridão ou de ler qualquer idioma) até o acesso a feitiços poderosos. Ao contrário dos magos estudiosos, os bruxos complementam sua magia com alguma facilidade no combate corpo a corpo. Eles se sentem confortáveis ​​com armaduras leves e sabem usar armas simples."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Delvers into Secrets",
+              "entries": [
+                "Os Warlocks são movidos por uma necessidade insaciável de conhecimento e poder, que os obriga a fazer pactos e moldar suas vidas. Essa sede leva os bruxos a fazerem pactos e também molda suas carreiras posteriores.",
+                "Histórias de bruxos se ligando a demônios são amplamente conhecidas. Mas muitos bruxos servem a clientes que não são diabólicos. Às vezes, um viajante nas florestas chega a uma torre estranhamente bela, encontra seu senhor ou senhora fada e tropeça em um pacto sem estar totalmente ciente disso. E às vezes, enquanto se debruça sobre tomos de conhecimento proibido, a mente de um estudante brilhante, mas enlouquecido, se abre para realidades além do mundo material e para os seres alienígenas que habitam o vazio exterior.",
+                "Uma vez feito um pacto, a sede de conhecimento e poder de um bruxo não pode ser saciada com mero estudo e pesquisa. Ninguém faz um pacto com um patrono tão poderoso se ele ou ela não pretende usar o poder assim obtido. Em vez disso, a grande maioria dos bruxos passa seus dias buscando ativamente seus objetivos, o que normalmente significa algum tipo de aventura. Além disso, as demandas de seus patronos levam os bruxos à aventura."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Creating a Warlock",
+              "entries": [
+                "Ao criar seu personagem bruxo, passe algum tempo pensando em seu patrono e nas obrigações que seu pacto impõe a você. O que o levou a fazer o pacto e como você fez contato com seu patrono? Você foi seduzido a invocar um demônio ou procurou o ritual que lhe permitiria fazer contato com um deus ancião alienígena? Você procurou seu patrono ou ele encontrou e escolheu você? Você se irrita com as obrigações do seu pacto ou serve com alegria em antecipação às recompensas prometidas a você?",
+                "Trabalhe com seu Mestre para determinar o tamanho do papel que seu pacto terá na carreira de aventura de seu personagem. As exigências do seu patrono podem levá-lo a aventuras ou podem consistir inteiramente em pequenos favores que você pode fazer entre as aventuras.",
+                "Que tipo de relacionamento você tem com seu patrono? É amigável, antagônico, inquieto ou romântico? Quão importante seu patrono considera você? Que papel você desempenha nos planos do seu patrono? Você conhece outros servos do seu patrono?",
+                "Como seu patrono se comunica com você? Se você tiver um familiar, ele poderá ocasionalmente falar com a voz do seu patrono. Alguns bruxos encontram mensagens de seus patronos gravadas em árvores, misturadas entre folhas de chá ou à deriva nas nuvens – mensagens que somente o bruxo pode ver. Outros bruxos conversam com seus patronos em sonhos ou visões despertas, ou lidam apenas com intermediários.",
+                {
+                  "type": "entries",
+                  "name": "Quick Build",
+                  "entries": [
+                    "Você pode criar um bruxo rapidamente seguindo estas sugestões. Primeiro, Carisma deve ser seu valor de habilidade mais alto, seguido por Constituição. Em segundo lugar, escolha o {@background charlatan} fundo. Terceiro, escolha o {@spell eldritch blast} e {@spell chill touch} truques, junto com os feitiços de 1º nível {@spell charm person} e {@spell witch bolt}."
+                  ]
+                }
+              ]
+            }
+          ],
+          "page": 105,
+          "source": "PHB"
+        },
+        {
+          "type": "section",
+          "entries": [
+            {
+              "type": "quote",
+              "entries": [
+                "Você me acha louco? Acho que a verdadeira insanidade é contentar-se em viver uma vida de trabalho penoso e mortal quando o conhecimento e o poder estão disponíveis para serem conquistados no reino além."
+              ],
+              "by": "Xarren, herald of Acamar"
+            },
+            "Warlocks são descobridores e guardiões de segredos. Eles vão além da nossa compreensão do mundo, sempre buscando expandir seus conhecimentos. Onde sábios ou magos poderiam prestar atenção a um sinal claro de perigo e encerrar sua pesquisa, um bruxo avança, sem se importar com o custo. Assim, é necessária uma mistura peculiar de inteligência, curiosidade e imprudência para produzir um bruxo. Muitas pessoas descreveriam essa combinação como evidência de loucura. Os Warlocks veem isso como uma demonstração de bravura.",
+            "Warlocks são definidos por dois elementos que trabalham em conjunto para abrir seu caminho nesta classe. O primeiro elemento é o evento ou circunstâncias que levaram um bruxo a firmar um pacto com uma entidade planar. A segunda é a natureza da entidade à qual um bruxo está vinculado. Ao contrário dos clérigos, que normalmente abraçam uma divindade e o ethos desse deus, um feiticeiro pode não ter amor por um patrono, ou vice-versa.",
+            "As seções a seguir fornecem maneiras de embelezar um personagem bruxo que pode gerar histórias intrigantes e oportunidades de interpretação.",
+            {
+              "type": "quote",
+              "entries": [
+                "Então você conseguiu seus poderes fazendo um contrato com alguma coisa? Está por escrito, por acaso? Bem, não importa. Apenas me diga uma coisa: posso obter seus poderes comendo você?"
+              ],
+              "by": "Xanathar"
+            },
+            {
+              "type": "entries",
+              "name": "Patron's Attitude",
+              "entries": [
+                "Todo relacionamento é uma via de mão dupla, mas no caso dos feiticeiros e seus clientes não é necessariamente verdade que ambos os lados da rua tenham a mesma largura ou sejam feitos do mesmo material. O sentimento que um bruxo tem por seu patrono, seja positivo ou negativo, pode ser retribuído pelo patrono, ou os dois participantes do pacto podem ver um ao outro com emoções opostas.",
+                "Ao determinar a atitude que seu personagem bruxo tem em relação ao seu patrono, considere também como as coisas parecem do ponto de vista do patrono. Como seu patrono se comporta com você? Seu patrono é um amigo e aliado ou um inimigo que lhe concede poder apenas porque você forçou um pacto com ele?",
+                {
+                  "type": "table",
+                  "caption": "Patron Attitudes",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Attitude"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "Seu patrono tem guiado e ajudado sua família por gerações e é gentil com você."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "Cada interação com seu patrono caprichoso é uma surpresa, seja ela agradável ou dolorosa."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Seu patrono é o espírito de um herói morto há muito tempo que vê seu pacto como uma forma de continuar a influenciar o mundo."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Seu patrono é um disciplinador rigoroso, mas o trata com certo respeito."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Seu patrono enganou você fazendo um pacto e o trata como um escravo."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Na maior parte, você fica por conta própria, sem interferência de seu patrono. Às vezes você teme as exigências que ele fará quando aparecer."
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Special Terms of the Pact",
+              "entries": [
+                "Um pacto pode variar de um acordo vago a um contrato formal com cláusulas longas e detalhadas e listas de requisitos. Os termos de um pacto – o que um feiticeiro deve fazer para receber o favor de um patrono – são sempre ditados pelo patrono. Ocasionalmente, esses termos incluem uma cláusula especial que pode parecer estranha ou caprichosa, mas os bruxos levam esses ditames tão a sério quanto os outros requisitos de seus pactos.",
+                "Seu personagem tem um pacto que exige que você mude seu comportamento de uma forma incomum ou aparentemente frívola? Mesmo que o seu patrono ainda não tenha imposto tal dever a você, isso não quer dizer que isso ainda não possa acontecer.",
+                {
+                  "type": "table",
+                  "caption": "Special Terms",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Term"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "Quando orientado, você deve tomar medidas imediatas contra um inimigo específico de seu patrono."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "Seu pacto testa sua força de vontade; você é obrigado a se abster de álcool e outras substâncias intoxicantes."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Pelo menos uma vez por dia, você deve inscrever ou gravar o nome ou símbolo do seu patrono na parede de um edifício."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Você deve ocasionalmente realizar rituais bizarros para manter seu pacto."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Você nunca pode usar a mesma roupa duas vezes, pois seu cliente acha essa previsibilidade chata."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Ao usar uma invocação sobrenatural, você deve falar o nome de seu patrono em voz alta ou corre o risco de incorrer em seu desagrado."
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Binding Mark",
+              "entries": [
+                "Alguns clientes adquirem o hábito, e muitas vezes gostam, de marcar os feiticeiros sob seu domínio de alguma forma. Uma marca vinculativa deixa claro – para aqueles que sabem dessas coisas – que o indivíduo em questão está vinculado ao serviço do patrono. Um bruxo pode tirar vantagem de tal marca, reivindicando-a como prova de seu pacto, ou pode querer mantê-la em segredo (se possível) para evitar as dificuldades que ela possa trazer.",
+                "Se o pacto do seu feiticeiro vem com uma marca vinculativa, como você se sente ao exibi-lo provavelmente depende da natureza do seu relacionamento com quem o deu a você. A marca é uma fonte de orgulho ou algo de que você secretamente se envergonha?",
+                {
+                  "type": "table",
+                  "caption": "Binding Marks",
+                  "colLabels": [
+                    "d6",
+                    "Mark"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      "1",
+                      "Um dos seus olhos se parece com um dos olhos do seu patrono."
+                    ],
+                    [
+                      "2",
+                      "Cada vez que você acorda, a pequena mancha no seu rosto aparece em um lugar diferente."
+                    ],
+                    [
+                      "3",
+                      "Você apresenta sintomas externos de uma doença, mas não sofre efeitos nocivos dela."
+                    ],
+                    [
+                      "4",
+                      "Sua língua tem uma cor não natural."
+                    ],
+                    [
+                      "5",
+                      "Você tem uma cauda vestigial."
+                    ],
+                    [
+                      "6",
+                      "Seu nariz brilha no escuro."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "page": 53,
+          "source": "XGE"
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/PHB/Warlock.webp"
+          },
+          "width": 780,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "Warlock",
+      "source": "XPHB",
+      "entries": [
+        {
+          "type": "section",
+          "name": "Warlock",
+          "source": "XPHB",
+          "page": 152,
+          "entries": [
+            "Warlocks buscam conhecimento que está escondido na estrutura do multiverso. Eles muitas vezes começam sua busca por poder mágico investigando tomos de conhecimento proibido, mergulhando em invocações destinadas a atrair o poder de seres extraplanares ou buscando locais de poder onde a influência desses seres possa ser sentida. Em nenhum momento, cada Warlock é levado a um pacto vinculativo com um patrono poderoso. Baseando-se no conhecimento antigo de seres como anjos, arquifadas, demônios, diabos, bruxas e entidades alienígenas do Reino Distante, os Warlocks reúnem segredos misteriosos para reforçar seu próprio poder.",
+            "Os bruxos veem seus patronos como recursos, como meios para alcançar o poder mágico. Alguns Warlocks respeitam, reverenciam ou até amam seus patronos; alguns servem seus clientes de má vontade; e alguns procuram minar os seus patronos, mesmo quando exercem o poder que estes lhes deram.",
+            "Uma vez feito um pacto, a sede de conhecimento e poder de um Bruxo não pode ser saciada com mero estudo. A maioria dos Warlocks passa seus dias buscando maior poder e conhecimento mais profundo, o que normalmente significa algum tipo de aventura."
+          ]
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Warlock.webp"
+          },
+          "credit": "Nèstor Ossandón Leal",
+          "width": 1700,
+          "height": 2283
+        },
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/114-04-029.skull-spiders.webp"
+          },
+          "credit": "Wayne England",
+          "width": 1021,
+          "height": 1440
+        }
+      ]
+    }
+  ],
+  "subclassFluff": [
+    {
+      "name": "The Celestial",
+      "shortName": "Celestial",
+      "source": "XGE",
+      "className": "Warlock",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XGE/Celestial Warlock.webp"
+          },
+          "width": 658,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "The Hexblade",
+      "shortName": "Hexblade",
+      "source": "XGE",
+      "className": "Warlock",
+      "classSource": "PHB",
+      "entries": [
+        {
+          "type": "quote",
+          "entries": [
+            "Lâmina Hexagonal. Que nome legal! Então a sua espada é má ou amaldiçoada ou algo assim? Mas você é mau, né?... Ok, agora não gosto do nome. Nomes não são legais se não fizerem sentido. Como o meu: O Xanathar. Ver? É legal e faz sentido!"
+          ],
+          "by": "Xanathar"
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XGE/Hexblade Warlock.webp"
+          },
+          "width": 743,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "The Fathomless",
+      "shortName": "Fathomless",
+      "source": "TCE",
+      "className": "Warlock",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/TCE/Fathomless Warlock.webp"
+          },
+          "width": 800,
+          "height": 1290
+        }
+      ]
+    },
+    {
+      "name": "The Genie",
+      "shortName": "Genie",
+      "source": "TCE",
+      "className": "Warlock",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/TCE/Genie Warlock.webp"
+          },
+          "width": 1200,
+          "height": 802
+        }
+      ]
+    },
+    {
+      "name": "The Undead",
+      "shortName": "Undead",
+      "source": "VRGR",
+      "className": "Warlock",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/VRGR/Undead Warlock.webp"
+          },
+          "width": 800,
+          "height": 1470
+        }
+      ]
+    },
+    {
+      "name": "Archfey Patron",
+      "shortName": "Archfey",
+      "source": "XPHB",
+      "className": "Warlock",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Archfey Warlock.webp"
+          },
+          "credit": "Erion Makuo",
+          "width": 850,
+          "height": 2300
+        }
+      ]
+    },
+    {
+      "name": "Celestial Patron",
+      "shortName": "Celestial",
+      "source": "XPHB",
+      "className": "Warlock",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Celestial Warlock.webp"
+          },
+          "credit": "Ekaterina Burmak",
+          "width": 850,
+          "height": 2470
+        }
+      ]
+    },
+    {
+      "name": "Fiend Patron",
+      "shortName": "Fiend",
+      "source": "XPHB",
+      "className": "Warlock",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Fiend Warlock.webp"
+          },
+          "credit": "Jodie Muir",
+          "width": 850,
+          "height": 2486
+        }
+      ]
+    },
+    {
+      "name": "Great Old One Patron",
+      "shortName": "Great Old One",
+      "source": "XPHB",
+      "className": "Warlock",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Great Old One Warlock.webp"
+          },
+          "credit": "Magali Villeneuve",
+          "width": 850,
+          "height": 1995
+        }
+      ]
+    }
+  ]
 }

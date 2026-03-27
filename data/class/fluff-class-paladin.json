@@ -1,608 +1,608 @@
 {
-	"classFluff": [
-		{
-			"name": "Paladin",
-			"source": "PHB",
-			"entries": [
-				{
-					"name": "Paladin",
-					"type": "section",
-					"entries": [
-						"Clad in plate armor that gleams in the sunlight despite the dust and grime of long travel, a human lays down her sword and shield and places her hands on a mortally wounded man. Divine radiance shines from her hands, the man's wounds knit closed, and his eyes open wide with amazement.",
-						"A dwarf crouches behind an outcrop, his black cloak making him nearly invisible in the night, and watches an orc war band celebrating its recent victory. Silently, he stalks into their midst and whispers an oath, and two orcs are dead before they even realize he is there.",
-						"Silver hair shining in a shaft of light that seems to illuminate only him, an elf laughs with exultation. His spear flashes like his eyes as he jabs again and again at a twisted giant, until at last his light overcomes its hideous darkness.",
-						"Whatever their origin and their mission, paladins are united by their oaths to stand against the forces of evil. Whether sworn before a god's altar and the witness of a priest, in a sacred glade before nature spirits and fey beings, or in a moment of desperation and grief with the dead as the only witness, a paladin's oath is a powerful bond. It is a source of power that turns a devout warrior into a blessed champion.",
-						{
-							"type": "entries",
-							"name": "The Cause of Righteousness",
-							"entries": [
-								"A paladin swears to uphold justice and righteousness, to stand with the good things of the world against the encroaching darkness, and to hunt the forces of evil wherever they lurk. Different paladins focus on various aspects of the cause of righteousness, but all are bound by the oaths that grant them power to do their sacred work. Although many paladins are devoted to gods of good, a paladin's power comes as much from a commitment to justice itself as it does from a god.",
-								"Paladins train for years to learn the skills of combat, mastering a variety of weapons and armor. Even so, their martial skills are secondary to the magical power they wield: power to heal the sick and injured, to smite the wicked and the undead, and to protect the innocent and those who join them in the fight for justice."
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Beyond the Mundane Life",
-							"entries": [
-								"Almost by definition, the life of a paladin is an adventuring life. Unless a lasting injury has taken him or her away from adventuring for a time, every paladin lives on the front lines of the cosmic struggle against evil. Fighters are rare enough among the ranks of the militias and armies of the world, but even fewer people can claim the true calling of a paladin. When they do receive the call, these warriors turn from their former occupations and take up arms to fight evil. Sometimes their oaths lead them into the service of the crown as leaders of elite groups of knights, but even then their loyalty is first to the cause of righteousness, not to crown and country.",
-								"Adventuring paladins take their work seriously. A delve into an ancient ruin or dusty crypt can be a quest driven by a higher purpose than the acquisition of treasure. Evil lurks in dungeons and primeval forests, and even the smallest victory against it can tilt the cosmic balance away from oblivion."
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Creating a Paladin",
-							"entries": [
-								"The most important aspect of a paladin character is the nature of his or her holy quest. Although the class features related to your oath don't appear until you reach 3rd level, plan ahead for that choice by reading the oath descriptions at the end of the class. Are you a devoted servant of good, loyal to the gods of justice and honor, a holy knight in shining armor venturing forth to smite evil? Are you a glorious champion of the light, cherishing everything beautiful that stands against the shadow, a knight whose oath descends from traditions older than many of the gods? Or are you an embittered loner sworn to take vengeance on those who have done great evil, sent as an angel of death by the gods or driven by your need for revenge? Appendix B lists many deities worshiped by paladins throughout the multiverse, such as Torm, Tyr, Heironeous, Paladine, Kiri-Jolith, Dol Arrah, the Silver Flame, Bahamut, Athena, Re-Horakhty, and Heimdall.",
-								"How did you experience your call to serve as a paladin? Did you hear a whisper from an unseen god or angel while you were at prayer? Did another paladin sense the potential within you and decide to train you as a squire? Or did some terrible event\u2014the destruction of your home, perhaps\u2014drive you to your quests? Perhaps you stumbled into a sacred grove or a hidden elven enclave and found yourself called to protect all such refuges of goodness and beauty. Or you might have known from your earliest memories that the paladin's life was your calling, almost as if you had been sent into the world with that purpose stamped on your soul.",
-								"As guardians against the forces of wickedness, paladins are rarely of any evil alignment. Most of them walk the paths of charity and justice. Consider how your alignment colors the way you pursue your holy quest and the manner in which you conduct yourself before gods and mortals. Your oath and alignment might be in harmony, or your oath might represent standards of behavior that you have not yet attained.",
-								{
-									"type": "entries",
-									"name": "Quick Build",
-									"entries": [
-										"You can make a paladin quickly by following these suggestions. First, Strength should be your highest ability score, followed by Charisma. Second, choose the {@background noble} background."
-									]
-								}
-							]
-						}
-					],
-					"page": 82,
-					"source": "PHB"
-				},
-				{
-					"type": "section",
-					"entries": [
-						{
-							"type": "quote",
-							"entries": [
-								"The true worth of a paladin is measured not in foes defeated or dungeons plundered. It is measured in lives saved and hearts turned to the causes of mercy and justice."
-							],
-							"by": "Isteval"
-						},
-						"A paladin is a living embodiment of an oath\u2014a promise or a vow made manifest in the person of a holy warrior who has the skill and the determination to see the cause through to the end. Some paladins devote themselves expressly to protecting the innocent and spreading justice in the world, while others resolve to attain that goal by conquering those who stand defiant and bringing them under the rule of law.",
-						"Although no paladin in the world could be described as typical, a number of them are narrow-minded do-gooders who refuse to tolerate even the smallest deviation from their own outlook. Paladins who take up the adventuring life, however, rarely remain so rigid in their attitudes\u2014if only to keep from alienating their companions.",
-						"You can flesh out your paladin character by using the suggestions below. It's important to keep in mind that most paladins aren't robots. They have doubts and prejudices and harbor contradictory thoughts just as any other character does. Some are compelled by an internal motivation that might sometimes be at odds with the principles of their oaths.",
-						{
-							"type": "quote",
-							"entries": [
-								"Living up to an oath? That sounds ridiculous. Why would anyone ever do that? There's nothing wrong with making promises, but only suckers keep them."
-							],
-							"by": "Xanathar"
-						},
-						{
-							"type": "entries",
-							"name": "Personal Goal",
-							"entries": [
-								"The precepts of a paladin's oath provide purpose to the character and dictate an ultimate goal or an overall intent that the paladin abides by and advances. Aside from that, some paladins are driven by a personal goal that either complements or transcends the dictates of their oaths. Paladins who swear different oaths might have the same personal goal, differing only in how they apply that goal to their actions when upholding their oaths.",
-								"If your paladin character has a personal goal, it might be drawn from some life event and thus not directly tied to the oath.",
-								{
-									"type": "table",
-									"caption": "Personal Goal",
-									"colLabels": [
-										"{@dice d6}",
-										"Personal Goal"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"Peace. You fight so that future generations will not have to."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"Revenge. Your oath is the vehicle through which you will right an ancient wrong."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"Duty. You will live up to what you have sworn to do, or die trying."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"Leadership. You will win a great battle that bards will sing about, and in so doing, you will become an example to inspire others."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"Faith. You know your path is righteous, or else the gods would not have set you upon it."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"Glory. You will lead the world into a grand new era, one that will be branded with your name."
-										]
-									]
-								}
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Symbol",
-							"entries": [
-								"Paladins are mindful of the influence of symbols, and many of them adopt or design an artistic device that bears a distinctive image. Your symbol exemplifies the oath you have taken and communicates that message to those around you, friend and foe alike.",
-								"Your symbol might be displayed on a banner, a flag, or your clothing for all to see. Or it could be less obvious, such as a trinket or a token that you carry concealed on your person.",
-								{
-									"type": "table",
-									"caption": "Symbol",
-									"colLabels": [
-										"{@dice d6}",
-										"Symbol"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"A dragon, emblematic of your nobility in peace and your ferocity in combat"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"A clenched fist, because you are always ready to fight for your beliefs"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"An upraised open hand, indicating your preference for diplomacy over combat"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"A red heart, showing the world your commitment to justice"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"A black heart, signifying that emotions such as pity do not sway your dedication to your oath"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"An unblinking eye, meaning that you are ever alert to all threats against your cause"
-										]
-									]
-								}
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Nemesis",
-							"entries": [
-								"Their adherence to a sacred oath demands that paladins take an active stance in carrying their beliefs into the world. This activity naturally leads to conflict with creatures or entities that oppose those beliefs. Among those opponents, one often stands out as a paladin's most persistent or most formidable foe\u2014a nemesis whose presence or influence is a constant factor in a paladin's life.",
-								"Your paladin character might have an enemy that dates from the days before you took up your path. Or you could be a target because when you became a paladin, you immediately attracted the attention of those that would do you in. If you have a nemesis, who or what is it? Whom among your enemies do you consider to be the biggest threat to achieving your goals?",
-								{
-									"type": "table",
-									"caption": "Nemesis",
-									"colLabels": [
-										"{@dice d6}",
-										"Nemesis"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"A mighty orc war chief who threatens to overrun and destroy everything you hold sacred"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"A fiend or a celestial, the agent of a power of the Outer Planes, who has been charged with corrupting or redeeming you, as appropriate"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"A dragon whose servants dog your steps"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"A high priest who sees you as a misguided fool and wants you to abandon your religion"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"A rival paladin who trained with you but became an oath-breaker and holds you responsible"
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"A vampire who has sworn revenge against all paladins after being defeated by one"
-										]
-									]
-								}
-							]
-						},
-						{
-							"type": "entries",
-							"name": "Temptation",
-							"entries": [
-								"Although paladins are dedicated to their oaths, they are mortals, and thus they are flawed. Many of them exhibit a type of behavior or hold to an attitude that is not in keeping with the highest ideals of their calling.",
-								"What is the temptation that your character succumbs to or finds it difficult to resist?",
-								{
-									"type": "table",
-									"caption": "Temptation",
-									"colLabels": [
-										"{@dice d6}",
-										"Temptation"
-									],
-									"colStyles": [
-										"col-1 text-center",
-										"col-11"
-									],
-									"rows": [
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 1
-												}
-											},
-											"Fury. When your anger is roused, you have trouble thinking straight, and you fear you might do something you'll regret."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 2
-												}
-											},
-											"Pride. Your deeds are noteworthy, and no one takes note of them more often than you."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 3
-												}
-											},
-											"Lust. You can't resist an attractive face and a pleasant smile."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 4
-												}
-											},
-											"Envy. You are mindful of what some famous folk have accomplished, and you feel inadequate when your deeds don't compare to theirs."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 5
-												}
-											},
-											"Despair. You consider the great strength of the enemies you must defeat, and at times you see no way to achieve final victory."
-										],
-										[
-											{
-												"type": "cell",
-												"roll": {
-													"exact": 6
-												}
-											},
-											"Greed. Regardless of how much glory and treasure you amass, it's never enough for you."
-										]
-									]
-								}
-							]
-						}
-					],
-					"source": "XGE",
-					"page": 36
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/PHB/Paladin.webp"
-					},
-					"width": 845,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "Paladin",
-			"source": "XPHB",
-			"entries": [
-				{
-					"type": "section",
-					"name": "Paladin",
-					"source": "XPHB",
-					"page": 108,
-					"entries": [
-						"Paladins are united by their oaths to stand against the forces of annihilation and corruption. Whether sworn before a god's altar, in a sacred glade before nature spirits, or in a moment of desperation and grief with the dead as the only witnesses, a Paladin's oath is a powerful bond. It is a source of power that turns a devout warrior into a blessed champion.",
-						"Paladins train to learn the skills of combat, mastering a variety of weapons and armor. Even so, their martial skills are secondary to the magical power they wield: power to heal the injured, smite their foes, and protect the helpless and those who fight at their side.",
-						"Almost by definition, the life of a Paladin is an adventuring life, for every Paladin lives on the front lines of the cosmic struggle against annihilation. Fighters are rare enough among the ranks of a world's armies, but even fewer people can claim the calling of a Paladin. When they do receive the call, these blessed folk turn from their former occupations and take up arms and magic."
-					]
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Paladin.webp"
-					},
-					"credit": "Michael Broussard",
-					"width": 1700,
-					"height": 2176
-				}
-			]
-		}
-	],
-	"subclassFluff": [
-		{
-			"name": "Oath of Conquest",
-			"shortName": "Conquest",
-			"source": "XGE",
-			"className": "Paladin",
-			"classSource": "PHB",
-			"entries": [
-				{
-					"type": "quote",
-					"entries": [
-						"Conquest sounds cool. Do you have to leave your house for that? Because I've got a fish named Sylgar, and I can't be away for too long or he gets sad."
-					],
-					"by": "Xanathar"
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XGE/Conquest Paladin.webp"
-					},
-					"width": 714,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "Oath of Redemption",
-			"shortName": "Redemption",
-			"source": "XGE",
-			"className": "Paladin",
-			"classSource": "PHB",
-			"entries": [
-				{
-					"type": "quote",
-					"entries": [
-						"Redemption. So you feel bad about having done something, and then you have to do something to feel better? Why don't you just kill and eat someone? That always makes me feel better."
-					],
-					"by": "Xanathar"
-				}
-			],
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XGE/Redemption Paladin.webp"
-					},
-					"width": 769,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "Oath of Glory",
-			"shortName": "Glory",
-			"source": "TCE",
-			"className": "Paladin",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/TCE/Glory Paladin.webp"
-					},
-					"width": 800,
-					"height": 1320
-				}
-			]
-		},
-		{
-			"name": "Oath of the Watchers",
-			"shortName": "Watchers",
-			"source": "TCE",
-			"className": "Paladin",
-			"classSource": "PHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/TCE/Watchers Paladin.webp"
-					},
-					"width": 936,
-					"height": 1000
-				}
-			]
-		},
-		{
-			"name": "Oath of Devotion",
-			"shortName": "Devotion",
-			"source": "XPHB",
-			"className": "Paladin",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Devotion Paladin.webp"
-					},
-					"credit": "Katerina Ladon",
-					"width": 850,
-					"height": 1501
-				}
-			]
-		},
-		{
-			"name": "Oath of Glory",
-			"shortName": "Glory",
-			"source": "XPHB",
-			"className": "Paladin",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Glory Paladin.webp"
-					},
-					"credit": "Polar Engine",
-					"width": 850,
-					"height": 2293
-				}
-			]
-		},
-		{
-			"name": "Oath of the Ancients",
-			"shortName": "Ancients",
-			"source": "XPHB",
-			"className": "Paladin",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Ancients Paladin.webp"
-					},
-					"credit": "Polar Engine",
-					"width": 850,
-					"height": 2374
-				}
-			]
-		},
-		{
-			"name": "Oath of Vengeance",
-			"shortName": "Vengeance",
-			"source": "XPHB",
-			"className": "Paladin",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/XPHB/Vengeance Paladin.webp"
-					},
-					"credit": "Ignatius Budi",
-					"width": 850,
-					"height": 2372
-				}
-			]
-		},
-		{
-			"name": "Oath of the Noble Genies",
-			"shortName": "Noble Genies",
-			"source": "FRHoF",
-			"className": "Paladin",
-			"classSource": "XPHB",
-			"images": [
-				{
-					"type": "image",
-					"href": {
-						"type": "internal",
-						"path": "classes/FRHoF/Genie Paladin.webp"
-					},
-					"width": 850,
-					"height": 2437
-				}
-			]
-		}
-	]
+  "classFluff": [
+    {
+      "name": "Paladin",
+      "source": "PHB",
+      "entries": [
+        {
+          "name": "Paladin",
+          "type": "section",
+          "entries": [
+            "Vestida com uma armadura que brilha à luz do sol, apesar da poeira e da sujeira da longa viagem, uma humana depõe sua espada e escudo e coloca as mãos sobre um homem mortalmente ferido. O brilho divino brilha em suas mãos, as feridas do homem se fecham e seus olhos se arregalam de espanto.",
+            "Um anão se agacha atrás de um afloramento, sua capa preta o torna quase invisível durante a noite, e observa um bando de guerra orc celebrando sua recente vitória. Silenciosamente, ele se aproxima deles e sussurra um juramento, e dois orcs morrem antes mesmo de perceberem que ele está lá.",
+            "Cabelo prateado brilhando em um raio de luz que parece iluminar apenas ele, um elfo ri de exultação. Sua lança brilha como seus olhos enquanto ele ataca repetidamente um gigante retorcido, até que finalmente sua luz supera sua escuridão horrível.",
+            "Qualquer que seja sua origem e missão, os paladinos estão unidos por seus juramentos de enfrentar as forças do mal. Seja jurado diante do altar de um deus e diante do testemunho de um sacerdote, em uma clareira sagrada diante de espíritos da natureza e seres feéricos, ou em um momento de desespero e tristeza tendo os mortos como única testemunha, o juramento de um paladino é um vínculo poderoso. É uma fonte de poder que transforma um guerreiro devoto em um campeão abençoado.",
+            {
+              "type": "entries",
+              "name": "The Cause of Righteousness",
+              "entries": [
+                "Um paladino jura defender a justiça e a retidão, defender as coisas boas do mundo contra a escuridão invasora e caçar as forças do mal onde quer que elas se escondam. Diferentes paladinos se concentram em vários aspectos da causa da retidão, mas todos estão sujeitos a juramentos que lhes concedem poder para realizar seu trabalho sagrado. Embora muitos paladinos sejam devotados a deuses do bem, o poder de um paladino vem tanto de um compromisso com a própria justiça quanto de um deus.",
+                "Paladinos treinam durante anos para aprender habilidades de combate, dominando uma variedade de armas e armaduras. Mesmo assim, suas habilidades marciais são secundárias em relação ao poder mágico que exercem: poder para curar os doentes e feridos, para destruir os ímpios e os mortos-vivos e para proteger os inocentes e aqueles que se juntam a eles na luta pela justiça."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Beyond the Mundane Life",
+              "entries": [
+                "Quase por definição, a vida de um paladino é uma vida de aventura. A menos que um ferimento duradouro o tenha afastado das aventuras por um tempo, todo paladino vive na linha de frente da luta cósmica contra o mal. Os combatentes são bastante raros entre as fileiras das milícias e exércitos do mundo, mas ainda menos pessoas podem reivindicar a verdadeira vocação de paladino. Quando recebem o chamado, esses guerreiros abandonam suas ocupações anteriores e pegam em armas para combater o mal. Às vezes, seus juramentos os levam a servir a coroa como líderes de grupos de elite de cavaleiros, mas mesmo assim sua lealdade é primeiramente à causa da justiça, não à coroa e ao país.",
+                "Paladinos aventureiros levam seu trabalho a sério. Mergulhar em uma ruína antiga ou em uma cripta empoeirada pode ser uma busca motivada por um propósito maior do que a aquisição de tesouros. O mal espreita em masmorras e florestas primitivas, e mesmo a menor vitória contra ele pode desviar o equilíbrio cósmico do esquecimento."
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Creating a Paladin",
+              "entries": [
+                "O aspecto mais importante de um personagem paladino é a natureza de sua missão sagrada. Embora as características de classe relacionadas ao seu juramento não apareçam até você atingir o 3º nível, planeje essa escolha com antecedência lendo as descrições do juramento no final da aula. Você é um servo dedicado do bem, leal aos deuses da justiça e da honra, um cavaleiro sagrado de armadura brilhante aventurando-se para destruir o mal? Você é um glorioso campeão da luz, valorizando tudo o que há de belo contra a sombra, um cavaleiro cujo juramento descende de tradições mais antigas que muitos dos deuses? Ou você é um solitário amargurado que jurou vingar-se daqueles que cometeram um grande mal, enviado como um anjo da morte pelos deuses ou movido pela sua necessidade de vingança? O Apêndice B lista muitas divindades adoradas por paladinos em todo o multiverso, como Torm, Tyr, Heironeous, Paladine, Kiri-Jolith, Dol Arrah, a Chama Prateada, Bahamut, Athena, Re-Horakhty e Heimdall.",
+                "Como você vivenciou seu chamado para servir como paladino? Você ouviu um sussurro de um deus ou anjo invisível enquanto estava orando? Outro paladino sentiu o potencial dentro de você e decidiu treiná-lo como escudeiro? Ou será que algum acontecimento terrível – a destruição da sua casa, talvez – o levou às suas missões? Talvez você tenha tropeçado em um bosque sagrado ou em um enclave élfico oculto e tenha sido chamado para proteger todos esses refúgios de bondade e beleza. Ou você pode saber desde suas primeiras lembranças que a vida de paladino era sua vocação, quase como se você tivesse sido enviado ao mundo com esse propósito estampado em sua alma.",
+                "Como guardiões contra as forças da maldade, os paladinos raramente são de qualquer tendência maligna. A maioria deles trilha os caminhos da caridade e da justiça. Considere como seu alinhamento influencia a maneira como você persegue sua busca sagrada e a maneira como você se comporta diante de deuses e mortais. Seu juramento e alinhamento podem estar em harmonia, ou seu juramento pode representar padrões de comportamento que você ainda não alcançou.",
+                {
+                  "type": "entries",
+                  "name": "Quick Build",
+                  "entries": [
+                    "Você pode criar um paladino rapidamente seguindo estas sugestões. Primeiro, Força deve ser seu valor de habilidade mais alto, seguido por Carisma. Em segundo lugar, escolha o {@background noble} fundo."
+                  ]
+                }
+              ]
+            }
+          ],
+          "page": 82,
+          "source": "PHB"
+        },
+        {
+          "type": "section",
+          "entries": [
+            {
+              "type": "quote",
+              "entries": [
+                "O verdadeiro valor de um paladino não é medido em inimigos derrotados ou masmorras saqueadas. Mede-se em vidas salvas e corações voltados para as causas da misericórdia e da justiça."
+              ],
+              "by": "Isteval"
+            },
+            "Um paladino é a personificação viva de um juramento – uma promessa ou voto manifestado na pessoa de um guerreiro sagrado que tem a habilidade e a determinação para levar a causa até o fim. Alguns paladinos se dedicam expressamente a proteger os inocentes e a espalhar a justiça no mundo, enquanto outros resolvem atingir esse objetivo conquistando aqueles que permanecem desafiadores e colocando-os sob o estado de direito.",
+            "Embora nenhum paladino no mundo possa ser descrito como típico, vários deles são benfeitores de mente estreita que se recusam a tolerar até mesmo o menor desvio de sua própria perspectiva. Paladinos que adotam a vida de aventura, no entanto, raramente permanecem tão rígidos em suas atitudes – pelo menos para não alienar seus companheiros.",
+            "Você pode dar corpo ao seu personagem paladino usando as sugestões abaixo. É importante ter em mente que a maioria dos paladinos não são robôs. Eles têm dúvidas e preconceitos e abrigam pensamentos contraditórios, assim como qualquer outro personagem. Alguns são compelidos por uma motivação interna que às vezes pode estar em desacordo com os princípios dos seus juramentos.",
+            {
+              "type": "quote",
+              "entries": [
+                "Cumprindo um juramento? Isso parece ridículo. Por que alguém faria isso? Não há nada de errado em fazer promessas, mas apenas os idiotas as cumprem."
+              ],
+              "by": "Xanathar"
+            },
+            {
+              "type": "entries",
+              "name": "Personal Goal",
+              "entries": [
+                "Os preceitos do juramento de um paladino fornecem propósito ao personagem e ditam um objetivo final ou uma intenção geral que o paladino segue e avança. Além disso, alguns paladinos são movidos por um objetivo pessoal que complementa ou transcende os ditames de seus juramentos. Paladinos que fazem juramentos diferentes podem ter o mesmo objetivo pessoal, diferindo apenas na forma como aplicam esse objetivo às suas ações ao cumprirem seus juramentos.",
+                "Se o seu personagem paladino tiver um objetivo pessoal, ele pode ser extraído de algum evento de vida e, portanto, não estar diretamente ligado ao juramento.",
+                {
+                  "type": "table",
+                  "caption": "Personal Goal",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Personal Goal"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "Paz. Você luta para que as gerações futuras não precisem fazê-lo."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "Vingança. Seu juramento é o veículo através do qual você corrigirá um erro antigo."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Obrigação. Você cumprirá o que jurou fazer ou morrerá tentando."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Liderança. Você vencerá uma grande batalha sobre a qual os bardos cantarão e, ao fazê-lo, você se tornará um exemplo para inspirar outros."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Fé. Você sabe que seu caminho é justo, caso contrário os deuses não o teriam colocado nele."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Glória. Você conduzirá o mundo a uma grande nova era, que será marcada com o seu nome."
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Symbol",
+              "entries": [
+                "Paladinos estão atentos à influência dos símbolos e muitos deles adotam ou projetam um dispositivo artístico que carrega uma imagem distinta. Seu símbolo exemplifica o juramento que você fez e comunica essa mensagem às pessoas ao seu redor, amigos e inimigos.",
+                "Seu símbolo pode ser exibido em um banner, bandeira ou em suas roupas para que todos possam ver. Ou pode ser menos óbvio, como uma bugiganga ou uma ficha que você carrega escondida consigo.",
+                {
+                  "type": "table",
+                  "caption": "Symbol",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Symbol"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "Um dragão, emblemático da sua nobreza na paz e da sua ferocidade no combate"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "Punho cerrado, porque você está sempre pronto para lutar por suas crenças"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Uma mão aberta e erguida, indicando sua preferência pela diplomacia em vez do combate"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Um coração vermelho, mostrando ao mundo o seu compromisso com a justiça"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Um coração negro, significando que emoções como a pena não influenciam sua dedicação ao juramento"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Um olho que não pisca, o que significa que você está sempre alerta a todas as ameaças contra a sua causa"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Nemesis",
+              "entries": [
+                "Sua adesão a um juramento sagrado exige que os paladinos assumam uma postura ativa na transmissão de suas crenças ao mundo. Esta atividade leva naturalmente a conflitos com criaturas ou entidades que se opõem a essas crenças. Entre esses oponentes, um deles geralmente se destaca como o inimigo mais persistente ou mais formidável do paladino – um inimigo cuja presença ou influência é um fator constante na vida de um paladino.",
+                "Seu personagem paladino pode ter um inimigo que data de antes de você seguir seu caminho. Ou você poderia ser um alvo porque quando você se tornou um paladino, você imediatamente atraiu a atenção daqueles que queriam acabar com você. Se você tem um inimigo, quem ou o que é? Quem dentre seus inimigos você considera ser a maior ameaça para alcançar seus objetivos?",
+                {
+                  "type": "table",
+                  "caption": "Nemesis",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Nemesis"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "Um poderoso chefe de guerra orc que ameaça invadir e destruir tudo que você considera sagrado"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "Um demônio ou um celestial, o agente de um poder dos Planos Exteriores, que foi acusado de corromper ou redimir você, conforme apropriado"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Um dragão cujos servos perseguem seus passos"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Um sumo sacerdote que vê você como um tolo equivocado e quer que você abandone sua religião"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Um paladino rival que treinou com você, mas quebrou o juramento e o responsabiliza"
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Um vampiro que jurou vingança contra todos os paladinos após ser derrotado por um"
+                    ]
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "entries",
+              "name": "Temptation",
+              "entries": [
+                "Embora os paladinos sejam dedicados aos seus juramentos, eles são mortais e, portanto, têm falhas. Muitos deles exibem um tipo de comportamento ou mantêm uma atitude que não está de acordo com os mais elevados ideais de sua vocação.",
+                "Qual é a tentação à qual seu personagem sucumbe ou tem dificuldade em resistir?",
+                {
+                  "type": "table",
+                  "caption": "Temptation",
+                  "colLabels": [
+                    "{@dice d6}",
+                    "Temptation"
+                  ],
+                  "colStyles": [
+                    "col-1 text-center",
+                    "col-11"
+                  ],
+                  "rows": [
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 1
+                        }
+                      },
+                      "Fúria. Quando sua raiva é despertada, você tem dificuldade para pensar com clareza e teme fazer algo de que se arrependerá."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 2
+                        }
+                      },
+                      "Orgulho. Seus feitos são dignos de nota e ninguém os nota com mais frequência do que você."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 3
+                        }
+                      },
+                      "Luxúria. Você não consegue resistir a um rosto atraente e um sorriso agradável."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 4
+                        }
+                      },
+                      "Inveja. Você está ciente do que algumas pessoas famosas realizaram e se sente inadequado quando seus feitos não se comparam aos deles."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 5
+                        }
+                      },
+                      "Desespero. Você considera a grande força dos inimigos que deve derrotar e, às vezes, não vê nenhuma maneira de alcançar a vitória final."
+                    ],
+                    [
+                      {
+                        "type": "cell",
+                        "roll": {
+                          "exact": 6
+                        }
+                      },
+                      "Ambição. Independentemente de quanta glória e tesouro você acumule, nunca será suficiente para você."
+                    ]
+                  ]
+                }
+              ]
+            }
+          ],
+          "source": "XGE",
+          "page": 36
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/PHB/Paladin.webp"
+          },
+          "width": 845,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "Paladin",
+      "source": "XPHB",
+      "entries": [
+        {
+          "type": "section",
+          "name": "Paladin",
+          "source": "XPHB",
+          "page": 108,
+          "entries": [
+            "Os paladinos estão unidos por seus juramentos de enfrentar as forças de aniquilação e corrupção. Seja jurado diante do altar de um deus, em uma clareira sagrada diante dos espíritos da natureza, ou em um momento de desespero e tristeza tendo os mortos como únicas testemunhas, o juramento de um Paladino é um vínculo poderoso. É uma fonte de poder que transforma um guerreiro devoto em um campeão abençoado.",
+            "Paladinos treinam para aprender habilidades de combate, dominando uma variedade de armas e armaduras. Mesmo assim, suas habilidades marciais são secundárias em relação ao poder mágico que exercem: poder para curar os feridos, destruir seus inimigos e proteger os indefesos e aqueles que lutam ao seu lado.",
+            "Quase por definição, a vida de um Paladino é uma vida de aventuras, pois cada Paladino vive na linha de frente da luta cósmica contra a aniquilação. Os lutadores são bastante raros entre as fileiras dos exércitos mundiais, mas ainda menos pessoas podem reivindicar o chamado de Paladino. Quando recebem o chamado, essas pessoas abençoadas abandonam suas ocupações anteriores e pegam em armas e magia."
+          ]
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Paladin.webp"
+          },
+          "credit": "Michael Broussard",
+          "width": 1700,
+          "height": 2176
+        }
+      ]
+    }
+  ],
+  "subclassFluff": [
+    {
+      "name": "Oath of Conquest",
+      "shortName": "Conquest",
+      "source": "XGE",
+      "className": "Paladin",
+      "classSource": "PHB",
+      "entries": [
+        {
+          "type": "quote",
+          "entries": [
+            "Conquista parece legal. Você tem que sair de casa para isso? Porque eu tenho um peixe chamado Sylgar e não posso ficar longe por muito tempo ou ele fica triste."
+          ],
+          "by": "Xanathar"
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XGE/Conquest Paladin.webp"
+          },
+          "width": 714,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "Oath of Redemption",
+      "shortName": "Redemption",
+      "source": "XGE",
+      "className": "Paladin",
+      "classSource": "PHB",
+      "entries": [
+        {
+          "type": "quote",
+          "entries": [
+            "Redenção. Então você se sente mal por ter feito alguma coisa e depois precisa fazer alguma coisa para se sentir melhor? Por que você simplesmente não mata e come alguém? Isso sempre me faz sentir melhor."
+          ],
+          "by": "Xanathar"
+        }
+      ],
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XGE/Redemption Paladin.webp"
+          },
+          "width": 769,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "Oath of Glory",
+      "shortName": "Glory",
+      "source": "TCE",
+      "className": "Paladin",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/TCE/Glory Paladin.webp"
+          },
+          "width": 800,
+          "height": 1320
+        }
+      ]
+    },
+    {
+      "name": "Oath of the Watchers",
+      "shortName": "Watchers",
+      "source": "TCE",
+      "className": "Paladin",
+      "classSource": "PHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/TCE/Watchers Paladin.webp"
+          },
+          "width": 936,
+          "height": 1000
+        }
+      ]
+    },
+    {
+      "name": "Oath of Devotion",
+      "shortName": "Devotion",
+      "source": "XPHB",
+      "className": "Paladin",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Devotion Paladin.webp"
+          },
+          "credit": "Katerina Ladon",
+          "width": 850,
+          "height": 1501
+        }
+      ]
+    },
+    {
+      "name": "Oath of Glory",
+      "shortName": "Glory",
+      "source": "XPHB",
+      "className": "Paladin",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Glory Paladin.webp"
+          },
+          "credit": "Polar Engine",
+          "width": 850,
+          "height": 2293
+        }
+      ]
+    },
+    {
+      "name": "Oath of the Ancients",
+      "shortName": "Ancients",
+      "source": "XPHB",
+      "className": "Paladin",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Ancients Paladin.webp"
+          },
+          "credit": "Polar Engine",
+          "width": 850,
+          "height": 2374
+        }
+      ]
+    },
+    {
+      "name": "Oath of Vengeance",
+      "shortName": "Vengeance",
+      "source": "XPHB",
+      "className": "Paladin",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/XPHB/Vengeance Paladin.webp"
+          },
+          "credit": "Ignatius Budi",
+          "width": 850,
+          "height": 2372
+        }
+      ]
+    },
+    {
+      "name": "Oath of the Noble Genies",
+      "shortName": "Noble Genies",
+      "source": "FRHoF",
+      "className": "Paladin",
+      "classSource": "XPHB",
+      "images": [
+        {
+          "type": "image",
+          "href": {
+            "type": "internal",
+            "path": "classes/FRHoF/Genie Paladin.webp"
+          },
+          "width": 850,
+          "height": 2437
+        }
+      ]
+    }
+  ]
 }
